@@ -1,0 +1,66 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 1
+      name: "Warm-up"
+    - duration: 120
+      arrivalRate: 2
+      name: "Sustained traffic"
+    - duration: 60
+      arrivalRate: 3
+      name: "Peak burst"
+  defaults:
+    headers:
+      Accept: "application/json,text/html"
+      User-Agent: "Artillery Load Test"
+  plugins:
+    ensure: {}
+    apdex: {}
+    metrics-by-endpoint: {}
+  ensure:
+    thresholds:
+      - http.response_time.p95: 10000
+      - http.response_time.p99: 15000
+      - http.errors: 0
+
+scenarios:
+  - name: "Public site navigation"
+    flow:
+      # English site navigation
+      - get: { url: "/en", expect: { statusCode: 200 } }
+      - think: 2
+      - get: { url: "/en/services", expect: { statusCode: 200 } }
+      - think: 2
+      - get: { url: "/en/services/consulting", expect: { statusCode: 200 } }
+      - think: 2
+      - get: { url: "/en/solutions/ai-security", expect: { statusCode: 200 } }
+      - think: 2
+      - get: { url: "/en/case-studies", expect: { statusCode: 200 } }
+      - think: 2
+      - get: { url: "/en/blog", expect: { statusCode: 200 } }
+      - think: 2
+      - get: { url: "/en/contact", expect: { statusCode: 200 } }
+      - think: 1
+      
+      # Contact form submission with dynamic data
+      - post:
+          url: "/api/contact"
+          headers:
+            Content-Type: "application/json"
+          json:
+            name: "Load Tester {{ $randomString(8) }}"
+            email: "load{{ $randomNumber(1000, 9999) }}@tester.com"
+            phone: "+1-222-333-{{ $randomNumber(1000, 9999) }}"
+            subject: "general"
+            message: "Simulated message for load testing - ID: {{ $uuid }}"
+            locale: "en"
+          expect:
+            - statusCode: 200
+      
+      - think: 1
+      
+      # Arabic site navigation
+      - get: { url: "/ar", expect: { statusCode: 200 } }
+      - think: 2
+      - get: { url: "/ar/services", expect: { statusCode: 200 } }

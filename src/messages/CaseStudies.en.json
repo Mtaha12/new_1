@@ -1,0 +1,73 @@
+{
+  "heroTitle": "Outcomes that prove resilience",
+  "heroSubtitle": "See how hybrid enterprises modernize security operations, slash response times, and build trust with The SamurAI.",
+  "heroSupporting": "From school districts to pharmaceutical giants, our playbooks translate complex requirements into measurable wins without disrupting delivery.",
+  "featuredMetrics": [
+    {
+      "label": "Faster containment",
+      "value": "62%",
+      "description": "Average incident response acceleration across featured clients."
+    },
+    {
+      "label": "Automated workflows",
+      "value": "4x",
+      "description": "Increase in closed-loop playbooks replacing manual tasks."
+    },
+    {
+      "label": "Platform coverage",
+      "value": "12",
+      "description": "Critical environments secured across cloud, on-prem, and OT estates."
+    }
+  ],
+  "filtersLabel": "Browse by outcome",
+  "caseStudyList": [
+    {
+      "id": "marple-newtown-school-district",
+      "title": "Marple Newtown School District",
+      "industry": "Education",
+      "summary": "Unified endpoint protection and phishing defense for 5,000+ faculty and students with zero classroom downtime.",
+      "resultHeading": "Impact",
+      "results": [
+        "98% reduction in phishing dwell time",
+        "24/7 SOC coverage with automated escalation",
+        "Staff security awareness scores up 37%"
+      ],
+      "ctaLabel": "Book an education briefing",
+      "ctaHref": "contact?topic=case-study&ref=education"
+    },
+    {
+      "id": "alkem-laboratories",
+      "title": "Alkem Laboratories",
+      "industry": "Life Sciences",
+      "summary": "Harmonized DevSecOps pipelines to protect intellectual property across multi-region research hubs.",
+      "resultHeading": "Impact",
+      "results": [
+        "46% faster compliance evidence gathering",
+        "Zero critical vulnerabilities shipped across 9 releases",
+        "Executive-ready risk dashboards in under 6 weeks"
+      ],
+      "ctaLabel": "Talk to a pharma strategist",
+      "ctaHref": "contact?topic=case-study&ref=life-sciences"
+    },
+    {
+      "id": "city-of-kamloops",
+      "title": "City of Kamloops",
+      "industry": "Public Sector",
+      "summary": "Automated SaaS and collaboration security to serve 100,000 residents without service degradation.",
+      "resultHeading": "Impact",
+      "results": [
+        "Thousands of malicious emails blocked monthly",
+        "Unified identity governance across 40+ applications",
+        "Crisis response tabletop with 15 agencies in 30 days"
+      ],
+      "ctaLabel": "Modernize municipal security",
+      "ctaHref": "contact?topic=case-study&ref=public-sector"
+    }
+  ],
+  "ctaTitle": "Ready to create your next success story?",
+  "ctaSubtitle": "Partner with our strategists to scope a program that delivers measurable resilience from day one.",
+  "ctaPrimaryLabel": "Schedule a discovery call",
+  "ctaPrimaryHref": "contact?topic=case-study",
+  "ctaSecondaryLabel": "Explore recent insights",
+  "ctaSecondaryHref": "blog"
+}

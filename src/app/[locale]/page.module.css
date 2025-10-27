@@ -1,0 +1,478 @@
+/* src/app/[locale]/page.module.css */
+.container {
+  min-height: 100vh;
+}
+
+/* Common Styles */
+.sectionContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a365d;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  color: white;
+  padding: 120px 0 80px;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.heroTagline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e53e3e;
+}
+
+/* About Section */
+.about {
+  padding: 80px 0;
+  background: #f7fafc;
+}
+
+.aboutContent {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.aboutDescription {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #4a5568;
+}
+
+/* Partners Section */
+.partners {
+  padding: 60px 0;
+  background: white;
+}
+
+.partnersTitle {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #2d3748;
+}
+
+.partnersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+
+.partnerItem {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.partnerName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Cybersecurity Section */
+.cybersecurity {
+  padding: 80px 0;
+  background: #1a365d;
+  color: white;
+}
+
+.cybersecurityContent {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cybersecurity .sectionTitle {
+  color: white;
+}
+
+.cybersecurityDescription {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.cybersecurityDetail {
+  font-size: 1.125rem;
+  opacity: 0.9;
+}
+
+/* Consultation Section */
+.consultation {
+  padding: 80px 0;
+  background: #e53e3e;
+  color: white;
+  text-align: center;
+}
+
+.consultation .sectionTitle {
+  color: white;
+}
+
+.consultationDescription {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.consultationButton {
+  background: white;
+  color: #e53e3e;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.consultationButton:hover {
+  background: #f7fafc;
+  transform: translateY(-2px);
+}
+
+/* Solutions Section */
+.solutions {
+  padding: 80px 0;
+  background: #f7fafc;
+}
+
+.solutionsIntro {
+  font-size: 1.125rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #4a5568;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.solutionsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 2rem;
+}
+
+.solutionMain {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-left: 4px solid #e53e3e;
+}
+
+.solutionSub {
+  grid-column: 2 / 4;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.solutionItem {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.solutionMain h3 {
+  color: #e53e3e;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.solutionSub h4 {
+  color: #1a365d;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.solutionItem h4 {
+  color: #1a365d;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.solutionItem strong {
+  color: #e53e3e;
+  font-size: 1.1rem;
+}
+
+/* Services Section */
+.services {
+  padding: 80px 0;
+  background: white;
+}
+
+.servicesIntro {
+  font-size: 1.125rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #4a5568;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.serviceCard {
+  background: #f7fafc;
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid #1a365d;
+  transition: transform 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+}
+
+.serviceCard h3 {
+  color: #1a365d;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.serviceCard p {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* Values Section */
+.values {
+  padding: 80px 0;
+  background: #1a365d;
+  color: white;
+}
+
+.values .sectionTitle {
+  color: white;
+}
+
+.valuesContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.valueNumber {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #e53e3e;
+}
+
+.valueText {
+  flex: 1;
+}
+
+.valueText p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+/* Resources Section */
+.resources {
+  padding: 80px 0;
+  background: #f7fafc;
+}
+
+.resourcesIntro {
+  font-size: 1.125rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #4a5568;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.resourcesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.resourceCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.resourceCard h3 {
+  color: #1a365d;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+/* Footer Section */
+.footer {
+  padding: 80px 0 40px;
+  background: #2d3748;
+  color: white;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+}
+
+.footerMain h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #e53e3e;
+}
+
+.footerMain > p {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.companyInfo {
+  margin-bottom: 2rem;
+}
+
+.companyInfo h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.companyInfo h4 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.teamInfo p {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.readableSection {
+  margin-top: 2rem;
+}
+
+.readableSection h4 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #e53e3e;
+}
+
+.readableSection p {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.contactSection h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #e53e3e;
+}
+
+.contactInfo {
+  margin-bottom: 2rem;
+}
+
+.contactInfo p {
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.footerNote {
+  font-style: italic;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .solutionsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .solutionMain {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  
+  .solutionSub {
+    grid-column: 1;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .valuesContent {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .partnersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

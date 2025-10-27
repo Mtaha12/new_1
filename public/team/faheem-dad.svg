@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+  <defs>
+    <linearGradient id="fd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e3d" />
+      <stop offset="100%" stop-color="#69e8e1" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="320" rx="32" fill="url(#fd)" />
+  <text x="50%" y="52%" text-anchor="middle" fill="#ffffff" font-family="'Poppins', 'Segoe UI', Arial, sans-serif" font-size="120" font-weight="700">FD</text>
+</svg>
