@@ -1,7 +1,10 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { listBlogArticles, getBlogArticle, BlogLocale } from '@/data/blogPosts';
+import { locales } from '@/i18n';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -15,7 +18,16 @@ type ArticlePageProps = {
   };
 };
 
-export const revalidate = 0; // ensures NO static caching
+export function generateStaticParams() {
+  const articles = listBlogArticles();
+
+  return locales.flatMap((locale) =>
+    articles.map((article) => ({
+      slug: article.slug,
+      locale
+    }))
+  );
+}
 
 // Safe metadata generation
 export function generateMetadata({ params }: ArticlePageProps): Metadata {
@@ -45,12 +57,10 @@ export function generateMetadata({ params }: ArticlePageProps): Metadata {
 
 export default async function BlogArticlePage({ params }: ArticlePageProps) {
   let article;
-  
+
   try {
     article = getBlogArticle(params.slug);
-    console.log('Fetched article for slug:', params.slug, article ? 'found' : 'not found');
-  } catch (error) {
-    console.error('Error fetching article for slug:', params.slug, error);
+  } catch {
     notFound();
   }
 
@@ -63,7 +73,6 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
   
   // Validate content structure before rendering
   if (!content || typeof content !== 'object') {
-    console.error('Invalid content structure for article:', params.slug, content);
     notFound();
   }
 

@@ -1,12 +1,10 @@
-'use client';
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 type BlogPost = {
   id: number;
@@ -18,12 +16,11 @@ type BlogPost = {
   slug: string;
 };
 
-export default function BlogPage() {
-  const t = useTranslations('Blog');
-  const common = useTranslations('Common');
-  const pathname = usePathname();
-  const currentLocale = pathname.split('/')[1] || 'en';
-  const localePrefix = currentLocale === 'ar' ? '/ar' : '/en';
+export default async function BlogPage() {
+  const t = await getTranslations({ namespace: 'Blog' });
+  const common = await getTranslations({ namespace: 'Common' });
+  const locale = await getLocale();
+  const localePrefix = locale === 'ar' ? '/ar' : '/en';
 
   const featuredPosts = t.raw('featuredPosts') as BlogPost[];
   const latestPosts = t.raw('latestPosts') as BlogPost[];
