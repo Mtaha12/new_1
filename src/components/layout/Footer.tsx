@@ -9,7 +9,7 @@ export default function Footer() {
   const navT = useTranslations('Navigation');
   const commonT = useTranslations('Common');
   const pathname = usePathname();
-  const currentLocale = pathname.split('/')[1] || 'en';
+  const currentLocale = pathname?.split('/')[1] || 'en';
 
   const quickLinks = [
     { label: navT('home'), href: `/${currentLocale}` },
@@ -63,6 +63,7 @@ export default function Footer() {
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             {['F', 'T', 'L'].map((icon) => (
               <div
+                className="hover-lift"
                 key={icon}
                 style={{
                   width: '40px',
@@ -98,17 +99,12 @@ export default function Footer() {
                 key={href}
                 href={href}
                 prefetch={false}
+                className="hover-underline"
                 style={{
                   color: 'rgba(255,255,255,0.8)',
                   textDecoration: 'none',
                   fontSize: '0.95rem',
                   transition: 'color 0.3s ease'
-                }}
-                onMouseEnter={(event) => {
-                  event.currentTarget.style.color = '#69E8E1';
-                }}
-                onMouseLeave={(event) => {
-                  event.currentTarget.style.color = 'rgba(255,255,255,0.8)';
                 }}
               >
                 {label}
@@ -204,6 +200,7 @@ export default function Footer() {
           <Link
             href={`/${currentLocale}/contact`}
             prefetch={false}
+            className="hover-glow"
             style={{
               alignSelf: 'flex-start',
               background: '#69E8E1',
@@ -213,12 +210,6 @@ export default function Footer() {
               borderRadius: '999px',
               fontWeight: '600',
               transition: 'transform 0.3s ease'
-            }}
-            onMouseEnter={(event) => {
-              event.currentTarget.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(event) => {
-              event.currentTarget.style.transform = 'translateY(0)';
             }}
           >
             {navT('contact')}

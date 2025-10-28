@@ -23,7 +23,7 @@ interface FormErrors {
 export default function ContactForm() {
   const t = useTranslations('ContactForm');
   const pathname = usePathname();
-  const currentLocale = pathname.split('/')[1] || 'en';
+  const currentLocale = pathname?.split('/')[1] || 'en';
   
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -440,6 +440,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
+        className={!isSubmitting ? 'hover-glow' : ''}
         style={{
           width: '100%',
           marginTop: '2rem',
@@ -451,24 +452,13 @@ export default function ContactForm() {
           fontSize: 'clamp(1rem, 1.5vw, 1.1rem)',
           fontWeight: '700',
           cursor: isSubmitting ? 'not-allowed' : 'pointer',
-          transition: 'all 0.3s',
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease',
           boxShadow: '0 4px 12px rgba(0,188,212,0.3)'
-        }}
-        onMouseEnter={(e) => {
-          if (!isSubmitting) {
-            e.currentTarget.style.background = '#00a5b8';
-            e.currentTarget.style.transform = 'translateY(-2px)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!isSubmitting) {
-            e.currentTarget.style.background = '#00bcd4';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }
         }}
       >
         {isSubmitting ? t('submitting') : t('submit')}
       </button>
+
     </form>
   );
 }

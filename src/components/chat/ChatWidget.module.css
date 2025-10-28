@@ -19,20 +19,24 @@
   width: 360px;
   height: 560px;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-radius: 20px 20px 16px 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.18);
   display: flex;
   flex-direction: column;
   z-index: 9999;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .chat-header {
-  padding: 12px;
+  padding: 14px 16px;
   background: #0a0e3d;
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 20px 20px 0 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .chat-header .title-row {

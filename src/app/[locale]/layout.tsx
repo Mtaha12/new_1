@@ -5,8 +5,9 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
-import ChatWidget from '@/components/chat/ChatWidget';
+import DeferredChatWidget from '@/components/chat/DeferredChatWidget';
 import LocaleHtmlAttributes from '@/components/layout/LocaleHtmlAttributes';
+import ScrollToTopButton from '@/components/layout/ScrollToTopButton';
 import '../globals.css';
 import ScrollAnimator from '@/components/layout/ScrollAnimator';
 
@@ -100,7 +101,8 @@ export default async function LocaleLayout({
       >
         {children}
         <ScrollAnimator />
-        <ChatWidget />
+        <ScrollToTopButton />
+        <DeferredChatWidget />
       </div>
     </NextIntlClientProvider>
   );

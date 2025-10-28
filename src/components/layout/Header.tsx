@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, ChevronUp, User } from 'lucide-react';
@@ -45,19 +45,25 @@ interface HeaderProps {
   // Add any props that the Header component accepts here
 }
 
+const ADMIN_STORAGE_PREFIX = 'samurai-blog-admin-';
+
 export default function Header(props: HeaderProps) {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
-  const currentLocale = pathname.split('/')[1] || 'en';
+  const router = useRouter();
+  const resolvedPath = (pathname ?? '/').replace(/\/+$/, '') || '/';
+  const currentLocale = resolvedPath.split('/')[1] || 'en';
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [iconSize, setIconSize] = useState(24);
   const [userInitial, setUserInitial] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const mobileNavRef = useRef<HTMLDivElement>(null);
-  const hasUser = Boolean(userInitial);
+  const hasUser = Boolean(userEmail);
 
   // Navigation items data
   const navItems: NavItem[] = [
@@ -98,11 +104,11 @@ export default function Header(props: HeaderProps) {
       label: t('industries'),
       type: 'dropdown',
       children: [
-        { id: 'healthcare', label: t('industriesMenu.healthcare'), href: `/${currentLocale}/industries/healthcare` },
-        { id: 'finance', label: t('industriesMenu.finance'), href: `/${currentLocale}/industries/finance` },
-        { id: 'government', label: t('industriesMenu.government'), href: `/${currentLocale}/industries/government` },
-        { id: 'technology', label: t('industriesMenu.technology'), href: `/${currentLocale}/industries/technology` },
-        { id: 'retail', label: t('industriesMenu.retail'), href: `/${currentLocale}/industries/retail` }
+        { id: 'healthcare', label: t('industriesMenu.healthcare'), href: '#' },
+        { id: 'finance', label: t('industriesMenu.finance'), href: '#' },
+        { id: 'government', label: t('industriesMenu.government'), href: '#' },
+        { id: 'technology', label: t('industriesMenu.technology'), href: '#' },
+        { id: 'retail', label: t('industriesMenu.retail'), href: '#' }
       ]
     },
     {
@@ -163,18 +169,27 @@ export default function Header(props: HeaderProps) {
         const stored = window.localStorage.getItem('samuraiUser');
         if (!stored) {
           setUserInitial(null);
+          setUserEmail(null);
           return;
         }
         const parsed = JSON.parse(stored);
+        const emailValue =
+          parsed && typeof parsed === 'object' && typeof parsed.email === 'string'
+            ? parsed.email.trim()
+            : '';
+
+        setUserEmail(emailValue.length ? emailValue : null);
+
         if (parsed && typeof parsed === 'object' && typeof parsed.name === 'string' && parsed.name.trim().length) {
           setUserInitial(parsed.name.trim().charAt(0).toUpperCase());
-        } else if (parsed && typeof parsed.email === 'string' && parsed.email.trim().length) {
-          setUserInitial(parsed.email.trim().charAt(0).toUpperCase());
+        } else if (emailValue.length) {
+          setUserInitial(emailValue.charAt(0).toUpperCase());
         } else {
           setUserInitial(null);
         }
       } catch (error) {
         setUserInitial(null);
+        setUserEmail(null);
       }
     };
 
@@ -187,10 +202,17 @@ export default function Header(props: HeaderProps) {
       }
       const customEvent = event as CustomEvent<any>;
       const detail = customEvent.detail;
+      const emailValue =
+        detail && typeof detail === 'object' && typeof detail.email === 'string'
+          ? detail.email.trim()
+          : '';
+
+      setUserEmail(emailValue.length ? emailValue : null);
+
       if (detail && typeof detail === 'object' && typeof detail.name === 'string' && detail.name.trim().length) {
         setUserInitial(detail.name.trim().charAt(0).toUpperCase());
-      } else if (detail && typeof detail.email === 'string' && detail.email.trim().length) {
-        setUserInitial(detail.email.trim().charAt(0).toUpperCase());
+      } else if (emailValue.length) {
+        setUserInitial(emailValue.charAt(0).toUpperCase());
       } else {
         setUserInitial(null);
       }
@@ -286,6 +308,30 @@ export default function Header(props: HeaderProps) {
     }
   };
 
+  const handleLogout = () => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.localStorage.removeItem('samuraiUser');
+
+    const keysToRemove: string[] = [];
+    for (let index = 0; index < window.localStorage.length; index += 1) {
+      const key = window.localStorage.key(index);
+      if (key && key.startsWith(ADMIN_STORAGE_PREFIX)) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach((key) => window.localStorage.removeItem(key));
+
+    const authEvent = new CustomEvent('samurai-auth-changed', { detail: null });
+    window.dispatchEvent(authEvent);
+    setUserInitial(null);
+    setUserEmail(null);
+    closeMobileMenu();
+    router.push(`/${currentLocale}/auth/login`);
+  };
+
   const sectionMapping: Record<string, string> = {
     about: 'about',
     'about-us': 'about',
@@ -350,6 +396,7 @@ export default function Header(props: HeaderProps) {
         {/* Logo */}
         <Link 
           href={`/${currentLocale}`} 
+          className="hover-underline"
           style={{ 
             display: 'flex', 
             alignItems: 'center', 
@@ -382,8 +429,10 @@ export default function Header(props: HeaderProps) {
           }}
           className="desktop-nav"
         >
-          {navItems.map((item) => (
-            <div key={item.id} style={{ position: 'relative' }}>
+          {navItems
+            .filter((item) => !hasUser || (item.id !== 'login' && item.id !== 'signup'))
+            .map((item) => (
+              <div key={item.id} style={{ position: 'relative' }}>
               {item.type === 'dropdown' ? (
                 // Dropdown items
                 <div 
@@ -401,6 +450,7 @@ export default function Header(props: HeaderProps) {
                   style={{ position: 'relative' }}
                 >
                   <button 
+                    className="hover-underline"
                     style={{
                       color: '#fff',
                       fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)',
@@ -415,8 +465,6 @@ export default function Header(props: HeaderProps) {
                       transition: 'all 0.3s ease',
                       whiteSpace: 'nowrap'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#60a5fa'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}
                   >
                     {item.label} <ChevronDown size={16} />
                   </button>
@@ -437,6 +485,7 @@ export default function Header(props: HeaderProps) {
                     }}>
                       {item.children?.map((child, index) => (
                         <Link
+                          className="hover-underline"
                           key={child.id}
                           href={child.href}
                           style={{
@@ -448,14 +497,6 @@ export default function Header(props: HeaderProps) {
                             borderBottom: index < (item.children?.length || 0) - 1 ? '1px solid #f0f0f0' : 'none',
                             transition: 'background 0.2s, color 0.2s'
                           }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.background = '#f8f9fa';
-                            e.currentTarget.style.color = '#0066cc';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'transparent';
-                            e.currentTarget.style.color = '#001F3F';
-                          }}
                         >
                           {child.label}
                         </Link>
@@ -466,6 +507,7 @@ export default function Header(props: HeaderProps) {
               ) : (
                 item.type === 'link' ? (
                   <Link
+                    className="hover-underline"
                     href={item.href ?? '#'}
                     style={{
                       color: '#fff',
@@ -476,13 +518,12 @@ export default function Header(props: HeaderProps) {
                       transition: 'color 0.3s ease',
                       whiteSpace: 'nowrap'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#60a5fa'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}
                   >
                     {item.label}
                   </Link>
                 ) : (
                   <button
+                    className="hover-underline"
                     onClick={() => scrollToSection(item.scrollTarget ?? item.id)}
                     style={{
                       color: '#fff',
@@ -495,19 +536,18 @@ export default function Header(props: HeaderProps) {
                       whiteSpace: 'nowrap',
                       cursor: 'pointer'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#60a5fa'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}
                   >
                     {item.label}
                   </button>
                 )
               )}
-            </div>
-          ))}
+              </div>
+            ))}
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: '1rem' }}>
             <Link href={`/${currentLocale}/contact`} style={{ textDecoration: 'none' }}>
               <button 
+                className="hover-glow"
                 style={{
                   background: 'transparent',
                   color: '#fff',
@@ -520,20 +560,15 @@ export default function Header(props: HeaderProps) {
                   transition: 'all 0.3s ease',
                   whiteSpace: 'nowrap'
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#fff';
-                  e.currentTarget.style.color = '#001F3F';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = '#fff';
-                }}
               >
                 {t('contact')}
               </button>
             </Link>
-            <Link href={`/${currentLocale}/auth/signup`} style={{ textDecoration: 'none' }}>
+            {hasUser ? (
               <button
+                className="hover-glow"
+                type="button"
+                onClick={handleLogout}
                 style={{
                   background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
                   color: '#001F3F',
@@ -547,18 +582,31 @@ export default function Header(props: HeaderProps) {
                   whiteSpace: 'nowrap',
                   boxShadow: '0 10px 24px rgba(56, 189, 248, 0.3)'
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 14px 32px rgba(56, 189, 248, 0.4)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 10px 24px rgba(56, 189, 248, 0.3)';
-                }}
               >
-                {t('signup')}
+                Logout
               </button>
-            </Link>
+            ) : (
+              <Link href={`/${currentLocale}/auth/signup`} style={{ textDecoration: 'none' }}>
+                <button
+                  className="hover-glow"
+                  style={{
+                    background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
+                    color: '#001F3F',
+                    border: 'none',
+                    padding: 'clamp(0.5rem, 1.2vw, 0.6rem) clamp(1rem, 1.5vw, 1.5rem)',
+                    borderRadius: '25px',
+                    fontWeight: '700',
+                    cursor: 'pointer',
+                    fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 10px 24px rgba(56, 189, 248, 0.3)'
+                  }}
+                >
+                  {t('signup')}
+                </button>
+              </Link>
+            )}
           </div>
         </nav>
 
@@ -614,8 +662,6 @@ export default function Header(props: HeaderProps) {
               transition: 'color 0.3s ease'
             }}
             onClick={toggleMobileMenu}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#60a5fa'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}
           >
             {isMenuOpen ? (
               <X size={iconSize} />
@@ -726,28 +772,32 @@ export default function Header(props: HeaderProps) {
           display: 'flex', 
           flexDirection: 'column', 
           gap: '0.5rem',
-          marginTop: '3rem'
+          marginTop: '3rem',
+          alignItems: 'stretch'
         }}>
-          {navItems.map((item) => (
-            <div key={item.id}>
+          {navItems
+            .filter((item) => !hasUser || (item.id !== 'login' && item.id !== 'signup'))
+            .map((item) => (
+            <div key={item.id} style={{ width: '100%' }}>
               {item.type === 'dropdown' ? (
-                <div style={{ marginBottom: '1rem' }}>
+                <div style={{ marginBottom: '1rem', width: '100%' }}>
                   <button
                     onClick={() => handleMobileDropdown(item.id)}
                     style={{
                       color: '#fff',
                       background: 'transparent',
                       border: 'none',
-                      fontSize: '1.1rem',
+                      fontSize: '1.05rem',
                       fontWeight: '600',
                       cursor: 'pointer',
                       width: '100%',
                       textAlign: 'left',
-                      padding: '1rem 0.5rem',
+                      padding: '1rem 0',
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      borderBottom: '1px solid rgba(255,255,255,0.1)'
+                      borderBottom: '1px solid rgba(255,255,255,0.1)',
+                      gap: '0.75rem'
                     }}
                   >
                     {item.label} 
@@ -762,23 +812,22 @@ export default function Header(props: HeaderProps) {
                   {((item.id === 'services' && servicesOpen) ||
                     (item.id === 'solutions' && solutionsOpen) ||
                     (item.id === 'industries' && industriesOpen)) && (
-                    <div style={{ paddingLeft: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
+                    <div style={{ paddingLeft: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
                       {item.children.map((child) => (
                         <Link
                           key={child.id}
                           href={child.href}
                           style={{
                             display: 'block',
-                            padding: '0.875rem 1rem',
-                            color: '#ccc',
+                            width: '100%',
+                            padding: '0.85rem 0',
+                            color: '#d1d5db',
                             textDecoration: 'none',
-                            fontSize: '1rem',
-                            borderBottom: '1px solid rgba(255,255,255,0.05)',
+                            fontSize: '0.95rem',
+                            borderBottom: '1px solid rgba(255,255,255,0.08)',
                             transition: 'color 0.3s ease'
                           }}
                           onClick={closeMobileMenu}
-                          onMouseEnter={(e) => e.currentTarget.style.color = '#60a5fa'}
-                          onMouseLeave={(e) => e.currentTarget.style.color = '#ccc'}
                         >
                           {child.label}
                         </Link>
@@ -802,13 +851,12 @@ export default function Header(props: HeaderProps) {
                       display: 'block'
                     }}
                     onClick={closeMobileMenu}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#60a5fa'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}
                   >
                     {item.label}
                   </Link>
                 ) : (
                   <button
+                    className="hover-underline"
                     onClick={() => scrollToSection(item.scrollTarget ?? item.id)}
                     style={{
                       color: '#fff',
@@ -823,8 +871,6 @@ export default function Header(props: HeaderProps) {
                       textAlign: 'left',
                       cursor: 'pointer'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#60a5fa'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}
                   >
                     {item.label}
                   </button>
@@ -843,6 +889,7 @@ export default function Header(props: HeaderProps) {
             onClick={closeMobileMenu}
           >
             <button 
+              className="hover-glow"
               style={{
                 background: 'transparent',
                 color: '#fff',
@@ -855,53 +902,40 @@ export default function Header(props: HeaderProps) {
                 width: '100%',
                 transition: 'all 0.3s ease'
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#fff';
-                e.currentTarget.style.color = '#001F3F';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = '#fff';
-              }}
             >
               {t('contact')}
             </button>
           </Link>
 
-          <Link
-            href={`/${currentLocale}/auth/signup`}
-            style={{
-              textDecoration: 'none',
-              marginTop: '1rem'
-            }}
-            onClick={closeMobileMenu}
-          >
-            <button
+          {!hasUser && (
+            <Link
+              href={`/${currentLocale}/auth/signup`}
               style={{
-                background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
-                color: '#001F3F',
-                border: 'none',
-                padding: '1rem 2rem',
-                borderRadius: '25px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                fontSize: '1rem',
-                width: '100%',
-                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                boxShadow: '0 18px 36px rgba(56, 189, 248, 0.35)'
+                textDecoration: 'none',
+                marginTop: '1rem'
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 22px 40px rgba(56, 189, 248, 0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 18px 36px rgba(56, 189, 248, 0.35)';
-              }}
+              onClick={closeMobileMenu}
             >
-              {t('signup')}
-            </button>
-          </Link>
+              <button
+                className="hover-glow"
+                style={{
+                  background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
+                  color: '#001F3F',
+                  border: 'none',
+                  padding: '1rem 2rem',
+                  borderRadius: '25px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  width: '100%',
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                  boxShadow: '0 18px 36px rgba(56, 189, 248, 0.35)'
+                }}
+              >
+                {t('signup')}
+              </button>
+            </Link>
+          )}
         </nav>
       </div>
 

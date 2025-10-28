@@ -43,7 +43,7 @@ function buildLocalizedHref(href: string, locale: string) {
 export default function SolutionPage({ namespace }: SolutionPageProps) {
   const t = useTranslations(namespace);
   const pathname = usePathname();
-  const currentLocale = pathname.split('/')[1] || 'en';
+  const currentLocale = pathname?.split('/')[1] || 'en';
 
   const overviewParagraphs = (t.raw('overviewParagraphs') as string[]) || [];
   const highlights = (t.raw('highlights') as Highlight[]) || [];
@@ -118,6 +118,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
               <Link
                 href={primaryCtaHref}
                 prefetch={false}
+                className="hover-glow"
                 style={{
                   background: '#69E8E1',
                   color: '#0a0e3d',
@@ -134,6 +135,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
               <Link
                 href={secondaryCtaHref}
                 prefetch={false}
+                className="hover-outline"
                 style={{
                   background: 'transparent',
                   color: '#fff',
@@ -144,14 +146,6 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
                   fontSize: 'clamp(0.9rem, 1.5vw, 1rem)',
                   textDecoration: 'none',
                   transition: 'background 0.3s ease, color 0.3s ease'
-                }}
-                onMouseEnter={(event) => {
-                  event.currentTarget.style.background = 'rgba(255,255,255,0.12)';
-                  event.currentTarget.style.color = '#69E8E1';
-                }}
-                onMouseLeave={(event) => {
-                  event.currentTarget.style.background = 'transparent';
-                  event.currentTarget.style.color = '#fff';
                 }}
               >
                 {t('secondaryCta')}
@@ -222,7 +216,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
                 }}
               >
                 {highlights.map((highlight, index) => (
-                  <div key={index} style={cardStyles}>
+                  <div key={index} className="hover-lift" style={cardStyles}>
                     {highlight.icon && (
                       <div
                         style={{
@@ -295,6 +289,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
               >
                 {useCases.map((useCase, index) => (
                   <div
+                    className="hover-lift"
                     key={index}
                     style={{
                       borderRadius: '16px',
@@ -379,6 +374,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
             <Link
               href={primaryCtaHref}
               prefetch={false}
+              className="hover-glow"
               style={{
                 background: '#0a0e3d',
                 color: '#fff',

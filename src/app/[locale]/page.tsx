@@ -4,15 +4,15 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 export default function HomePage() {
   const t = useTranslations('HomePage');
   const common = useTranslations('Common');
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '/en';
   const currentLocale = pathname.split('/')[1] || 'en';
   const isArabic = currentLocale === 'ar';
   const heroPillars = (t.raw('heroPillars') as string[]) || [];
@@ -215,30 +215,6 @@ export default function HomePage() {
 
   const contactCtaHref = buildLocaleHref(t('contactBlock.ctaHref'));
   const gatedAssetFormId = 'gated-report-form';
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -10%'
-      }
-    );
-
-    const animatedElements = document.querySelectorAll('.fade-section, .tilt-card');
-    animatedElements.forEach((element) => observer.observe(element));
-
-    return () => {
-      animatedElements.forEach((element) => observer.unobserve(element));
-      observer.disconnect();
-    };
-  }, []);
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff' }}>

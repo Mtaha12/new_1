@@ -3,7 +3,7 @@
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { useTranslations } from 'next-intl';
-import { usePathname, useParams } from 'next/navigation';
+import { usePathname, useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 
@@ -11,12 +11,13 @@ export default function LoginPage() {
   const t = useTranslations('Auth');
   const pathname = usePathname();
   const params = useParams<{ locale?: string }>();
+  const router = useRouter();
   const localeFromParams = params?.locale;
   const currentLocale = useMemo(() => {
     if (Array.isArray(localeFromParams)) {
       return localeFromParams[0];
     }
-    return localeFromParams || pathname.split('/')[1] || 'en';
+    return localeFromParams || pathname?.split('/')[1] || 'en';
   }, [localeFromParams, pathname]);
   const localePrefix = `/${currentLocale}`;
   const isArabic = currentLocale === 'ar';
@@ -57,9 +58,21 @@ export default function LoginPage() {
     return () => window.clearTimeout(timer);
   }, [toast]);
 
-  const toastAlignment = isArabic
-    ? { left: 'clamp(1rem, 4vw, 2.5rem)', right: 'auto' }
-    : { right: 'clamp(1rem, 4vw, 2.5rem)', left: 'auto' };
+  const toastPlacement = useMemo(() => {
+    if (!toast) {
+      return {};
+    }
+
+    if (toast.type === 'success') {
+      return isArabic
+        ? { bottom: '2rem', left: 'calc(2rem + 70px)', right: 'auto', top: 'auto' }
+        : { bottom: '2rem', right: 'calc(2rem + 70px)', left: 'auto', top: 'auto' };
+    }
+
+    return isArabic
+      ? { top: 'clamp(1rem, 4vw, 2.5rem)', left: 'clamp(1rem, 4vw, 2.5rem)', right: 'auto', bottom: 'auto' }
+      : { top: 'clamp(1rem, 4vw, 2.5rem)', right: 'clamp(1rem, 4vw, 2.5rem)', left: 'auto', bottom: 'auto' };
+  }, [toast, isArabic]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -98,7 +111,7 @@ export default function LoginPage() {
     }
 
     setStatus('loading');
-    setMessage(t('formSubmitting'));
+    setMessage('');
 
     try {
       const response = await fetch('/api/auth/login', {
@@ -121,6 +134,9 @@ export default function LoginPage() {
         persistUser(data?.user ?? null);
         setToast({ message: data?.message || t('successLogin'), type: 'success' });
         setPassword('');
+        setTimeout(() => {
+          router.push(localePrefix);
+        }, 600);
       } else {
         setStatus('error');
         const errorMessage = data?.error || t('genericError');
@@ -143,7 +159,6 @@ export default function LoginPage() {
           className="toast-fixed"
           style={{
             position: 'fixed',
-            top: 'clamp(1rem, 4vw, 2.5rem)',
             zIndex: 1100,
             padding: '0.95rem 1.4rem',
             borderRadius: '18px',
@@ -159,7 +174,7 @@ export default function LoginPage() {
               ? '0 18px 32px rgba(16, 185, 129, 0.28)'
               : '0 18px 32px rgba(239, 68, 68, 0.28)',
             colorScheme: toast.type === 'success' ? 'light' : 'dark',
-            ...toastAlignment
+            ...toastPlacement
           }}
         >
           {toast.message}
@@ -327,7 +342,7 @@ export default function LoginPage() {
                 {status === 'loading' ? t('formSubmitting') : t('loginCta')}
               </button>
 
-              {message && (
+              {message && status !== 'loading' && (
                 <p
                   style={{
                     background: status === 'success' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(248, 113, 113, 0.15)',
