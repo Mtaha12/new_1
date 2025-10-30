@@ -8,6 +8,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import TrustBadges from '@/components/ui/TrustBadges';
 
 export default function HomePage() {
   const t = useTranslations('HomePage');
@@ -385,6 +386,11 @@ export default function HomePage() {
         >
           {t('heroPrimaryCtaNote')}
         </p>
+
+        {/* Trust Badges */}
+        <div style={{ position: 'relative', zIndex: 1, marginTop: '2rem' }}>
+          <TrustBadges />
+        </div>
       </section>
 
       {/* Partners Section */}

@@ -8,13 +8,16 @@ export default function Footer() {
   const t = useTranslations('Footer');
   const navT = useTranslations('Navigation');
   const commonT = useTranslations('Common');
+  const homeT = useTranslations('HomePage');
   const pathname = usePathname();
   const currentLocale = pathname?.split('/')[1] || 'en';
+  const trustBadges = homeT.raw('trustBadges') as Array<{ id: string; title: string; subtitle: string }>;
 
   const quickLinks = [
     { label: navT('home'), href: `/${currentLocale}` },
     { label: navT('about'), href: `/${currentLocale}#about` },
     { label: navT('services'), href: `/${currentLocale}/services` },
+    { label: navT('compliance'), href: `/${currentLocale}/compliance` },
     { label: navT('blog'), href: `/${currentLocale}/blog` },
     { label: navT('contact'), href: `/${currentLocale}/contact` },
     { label: navT('login'), href: `/${currentLocale}/auth/login` },
@@ -216,6 +219,18 @@ export default function Footer() {
           </Link>
         </div>
       </div>
+
+      {/* Trust Badges */}
+      {trustBadges && trustBadges.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', justifyContent: 'center', marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          {trustBadges.map((badge) => (
+            <div key={badge.id} style={{ background: 'rgba(105, 232, 225, 0.1)', border: '1px solid rgba(105, 232, 225, 0.2)', borderRadius: '12px', padding: '1.25rem 1.75rem', textAlign: 'center', minWidth: '240px' }}>
+              <div style={{ fontSize: '1rem', fontWeight: 700, color: '#69E8E1', marginBottom: '0.5rem' }}>{badge.title}</div>
+              <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{badge.subtitle}</div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div
         style={{

@@ -42,10 +42,6 @@ export default function ScrollToTopButton() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (!isVisible) {
-    return null;
-  }
-
   return (
     <button
       type="button"
@@ -53,21 +49,22 @@ export default function ScrollToTopButton() {
       aria-label="Scroll to top"
       className="hover-glow"
       style={{
-        position: 'fixed',
-        bottom: 'calc(2rem + 80px)',
-        right: '2rem',
-        zIndex: 1000,
-        width: '48px',
-        height: '48px',
-        borderRadius: '999px',
+        width: '56px',
+        height: '56px',
+        borderRadius: '9999px',
         background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 70%)',
-        color: '#fff',
+        color: '#ffffff',
         border: 'none',
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: '1.2rem',
-        boxShadow: '0 16px 32px rgba(10, 14, 61, 0.25)'
+        fontSize: '24px',
+        boxShadow: '0 8px 24px rgba(10, 14, 61, 0.25)',
+        cursor: isVisible ? 'pointer' : 'default',
+        transition: 'all 250ms ease',
+        opacity: isVisible ? 1 : 0,
+        pointerEvents: isVisible ? 'auto' : 'none',
+        transform: isVisible ? 'scale(1)' : 'scale(0.9)'
       }}
     >
       ↑

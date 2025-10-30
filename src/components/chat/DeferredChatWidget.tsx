@@ -24,13 +24,13 @@ export default function DeferredChatWidget() {
     };
 
     if (typeof anyWindow.requestIdleCallback === 'function') {
-      const idleHandle = anyWindow.requestIdleCallback(scheduleRender, { timeout: 2500 });
+      const idleHandle = anyWindow.requestIdleCallback(scheduleRender, { timeout: 500 });
       return () => {
         anyWindow.cancelIdleCallback?.(idleHandle);
       };
     }
 
-    const timeoutHandle = window.setTimeout(scheduleRender, 2000);
+    const timeoutHandle = window.setTimeout(scheduleRender, 500);
     return () => window.clearTimeout(timeoutHandle);
   }, []);
 

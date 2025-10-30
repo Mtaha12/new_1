@@ -50,7 +50,7 @@ const ContentSchema = new Schema({
   category: { 
     type: String, 
     required: [true, 'Category is required'],
-    enum: ['blog', 'service', 'page', 'faq'],
+    enum: ['blog', 'service', 'page', 'faq', 'regulation'],
     default: 'page'
   },
   isActive: { 

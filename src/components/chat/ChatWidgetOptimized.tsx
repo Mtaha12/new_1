@@ -226,8 +226,8 @@ export default function ChatWidgetOptimized() {
   // Memoized styles
   const chatButtonStyle = useMemo(() => ({
     position: 'fixed' as const,
-    bottom: '2rem',
-    right: '2rem',
+    bottom: '20px',
+    right: '32px',
     width: '60px',
     height: '60px',
     borderRadius: '50%',
@@ -267,8 +267,8 @@ export default function ChatWidgetOptimized() {
       {isOpen && (
         <div style={{
           position: 'fixed',
-          bottom: '2rem',
-          right: '2rem',
+          bottom: '20px',
+          right: '32px',
           width: 'min(400px, calc(100vw - 2rem))',
           height: 'min(600px, calc(100vh - 4rem))',
           background: '#fff',

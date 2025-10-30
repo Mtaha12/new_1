@@ -112,6 +112,12 @@ export default function Header(props: HeaderProps) {
       ]
     },
     {
+      id: 'compliance',
+      label: t('compliance'),
+      href: `/${currentLocale}/compliance`,
+      type: 'link'
+    },
+    {
       id: 'partners',
       label: t('partners'),
       type: 'scroll',

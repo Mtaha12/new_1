@@ -8,9 +8,41 @@
       "AI-Powered Systems",
       "Transformative Results"
     ],
-    "heroPrimaryCta": "Download Benchmark Report",
-    "heroPrimaryCtaNote": "Includes highlights from the Miercom 2024 Security Benchmark.",
+    "heroPrimaryCta": "Get BFSI Security Guide",
+    "heroPrimaryCtaNote": "Includes BFSI-specific control mappings plus highlights from the Miercom 2024 Security Benchmark.",
     "heroSecondaryCta": "Talk to a Security Strategist",
+    "heroSegmentedCtas": [
+      {
+        "id": "bfsi",
+        "label": "Get BFSI Security Guide",
+        "description": "Purpose-built checklist for banks and financial services.",
+        "href": "assets/bfsi-security-guide.pdf"
+      },
+      {
+        "id": "healthcare",
+        "label": "Get Healthcare Resilience Brief",
+        "description": "Incident readiness guide for hospitals and providers.",
+        "href": "case-studies?segment=healthcare"
+      },
+      {
+        "id": "public-sector",
+        "label": "Get Public Sector Playbook",
+        "description": "Modernization roadmap aligned to GCC regulations.",
+        "href": "case-studies?segment=government"
+      }
+    ],
+    "trustBadges": [
+      {
+        "id": "data-residency",
+        "title": "Data Residency Assured",
+        "subtitle": "Regional hosting in KSA & UAE with encrypted backups"
+      },
+      {
+        "id": "certifications",
+        "title": "Certification Ready",
+        "subtitle": "ISO 27001, SOC 2 Type II, and NCA ECC aligned"
+      }
+    ],
     "aboutTitle": "Who We Are Defenders Of Your Digital Realm",
     "aboutDescription": "At The SamurAI, we believe in more than just security. We believe in peace of mind, knowing your digital world is protected, your business is resilient, and your future is secure.",
     "partnersTitle": "Why SentinelOne?",
@@ -299,6 +331,111 @@
     "footerEmail": "info@thesamurai.com",
     "footerWebsite": "Discover how SamurAI secures enterprises worldwide.",
     "footerNote": "© 2025 The SamurAI. All rights reserved."
+  },
+  "CompliancePage": {
+    "hero": {
+      "title": "Stay audit-ready across MENA regulations",
+      "subtitle": "Map controls to NCA ECC, NIAF, and NISP frameworks with localized guidance and evidence checklists.",
+      "description": "Our compliance desk combines region-specific regulations, reusable evidence packs, and automation-ready playbooks so your teams keep momentum while satisfying auditors.",
+      "primaryCta": "Generate compliance checklist PDF",
+      "secondaryCta": "Talk to a compliance strategist",
+      "secondaryCtaHref": "contact?topic=compliance"
+    },
+    "countrySelector": {
+      "label": "Select your operating region",
+      "placeholder": "Choose a Gulf region",
+      "options": [
+        { "id": "ksa", "label": "Saudi Arabia", "badge": "NCA priority" },
+        { "id": "uae", "label": "United Arab Emirates", "badge": "Multi-zone" },
+        { "id": "bahrain", "label": "Bahrain", "badge": "CBB alignment" },
+        { "id": "oman", "label": "Oman", "badge": "SAS aligned" }
+      ]
+    },
+    "regulations": {
+      "title": "Featured Gulf regulations",
+      "cards": [
+        {
+          "slug": "nca-ecc",
+          "title": "NCA Essential Cybersecurity Controls (ECC)",
+          "summary": "Comprehensive control set mandated by the Saudi National Cybersecurity Authority for public and critical entities.",
+          "keyPoints": [
+            "114 controls mapped across five domains including governance, resilience, and third-party risk.",
+            "Mandatory for KSA government agencies and regulated private-sector operators.",
+            "Integrates with NCA cybersecurity strategy, maturity scoring, and continuous monitoring."
+          ],
+          "cmsSlug": "nca-ecc-overview"
+        },
+        {
+          "slug": "niaf",
+          "title": "NCA National Information Assurance Framework (NIAF)",
+          "summary": "Risk management methodology that aligns critical information assurance practices with national priorities.",
+          "keyPoints": [
+            "Lifecycle guidance covering classification, risk treatment, and accreditation.",
+            "Supports cross-entity data sharing while maintaining national security baselines.",
+            "Pairs with ECC controls to provide governance-to-operations traceability."
+          ],
+          "cmsSlug": "niaf-overview"
+        },
+        {
+          "slug": "nisp",
+          "title": "NCA National Industrial Security Programme (NISP)",
+          "summary": "Protects critical industrial facilities through unified standards for personnel, physical, and cyber protections.",
+          "keyPoints": [
+            "Mandates segmentation between IT and OT networks with continuous monitoring.",
+            "Requires joint drills with MoD, MOI, and strategic partners to validate response plans.",
+            "Introduces tiered certification for contractors handling sensitive assets."
+          ],
+          "cmsSlug": "nisp-overview"
+        }
+      ]
+    },
+    "checklist": {
+      "title": "Generate your readiness checklist",
+      "intro": "Select focus domains and receive a PDF summarizing evidence owners, cadence, and required artefacts.",
+      "domains": [
+        {
+          "id": "governance",
+          "label": "Governance & Risk",
+          "items": [
+            "Policy catalogue updated",
+            "Risk register reviewed",
+            "Board briefing scheduled"
+          ]
+        },
+        {
+          "id": "operations",
+          "label": "SecOps & Monitoring",
+          "items": [
+            "SOC runbooks validated",
+            "SIEM use cases tuned",
+            "Incident metrics distributed"
+          ]
+        },
+        {
+          "id": "resilience",
+          "label": "Resilience & Recovery",
+          "items": [
+            "Backup integrity tested",
+            "DR exercises executed",
+            "Vendor failover rehearsed"
+          ]
+        },
+        {
+          "id": "people",
+          "label": "People & Third Parties",
+          "items": [
+            "Awareness training delivered",
+            "Third-party reviews completed",
+            "Privilege audits documented"
+          ]
+        }
+      ],
+      "generate": "Download PDF",
+      "generating": "Building your checklist...",
+      "success": "Checklist generated successfully.",
+      "error": "We couldn't generate the PDF. Please try again.",
+      "localeLabel": "Language"
+    }
   },
   "CaseStudies": {
     "heroTitle": "Outcomes that prove resilience",
@@ -664,6 +801,7 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
+    "compliance": "Compliance",
     "contact": "Contact",
     "login": "Log in",
     "signup": "Sign up",
@@ -869,20 +1007,19 @@
   },
   "Stats": {
     "clients": "Happy Clients",
-    "projects": "Projects Completed",
-    "awards": "Awards Won",
-    "team": "Team Members"
+    "projects": "Projects Completed"
   },
-  "Footer": {
-    "company": "thesamurai",
-    "description": "Building innovative solutions for tomorrow",
-    "quickLinks": "Quick Links",
-    "rights": "All rights reserved.",
-    "contactUs": "Talk to our team",
-    "emailLabel": "Email",
-    "phoneLabel": "Phone",
-    "email": "hello@thesamurai.com",
-    "phone": "+1 (855) 425-8383"
+  "managedIT": {
+    "hero": "Managed IT",
+    "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Comprehensive managed IT services to keep your business running smoothly.",
+    "contactUs": "Contact Us",
+    "managedIT": "Managed IT"  
+  },
+  "devsecops": {
+    "hero": "DevSecOps Automation",
+    "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Streamline development, security, and operations with advanced automation.",
+    "learnMore": "Learn More",
+    "devsecops": "DevSecOps Automation"  
   },
   "ContactForm": {
     "title": "Get in touch",
@@ -945,5 +1082,16 @@
       "thanks": "You're welcome! Is there anything else I can help you with?",
       "default": "I understand. For more detailed assistance, please contact our support team or fill out the contact form. Is there anything else I can help with?"
     }
+  },
+  "Footer": {
+    "company": "The SamurAI",
+    "description": "Elite cybersecurity consulting and AI-powered defense systems for the digital age.",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "emailLabel": "Email",
+    "email": "info@thesamurai.com",
+    "phoneLabel": "Phone",
+    "phone": "+966 50 123 4567",
+    "rights": "All rights reserved"
   }
 }
