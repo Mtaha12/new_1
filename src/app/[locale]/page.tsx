@@ -173,7 +173,7 @@ export default function HomePage() {
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             poster="/img/bg1.jpg"
             aria-hidden
             style={{
@@ -182,7 +182,8 @@ export default function HomePage() {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              zIndex: 0
+              zIndex: 0,
+              willChange: 'opacity'
             }}
           />
         )}

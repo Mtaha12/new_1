@@ -81,30 +81,37 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <NextIntlClientProvider 
-      messages={messages}
-      locale={locale}
-    >
-      <LocaleHtmlAttributes locale={locale} />
-      <div
-        data-locale={locale}
-        dir={locale === 'ar' ? 'rtl' : 'ltr'}
-        style={{
-          margin: 0,
-          padding: 0,
-          width: '100%',
-          maxWidth: '100%',
-          overflowX: 'hidden',
-          WebkitTextSizeAdjust: '100%',
-          textSizeAdjust: '100%'
-        }}
-      >
-        {children}
-        <ScrollAnimator />
-        <ScrollToTopButton />
-        <DeferredChatWidget />
-      </div>
-    </NextIntlClientProvider>
+    <html lang={locale}>
+      <head>
+        <link rel="preload" href="/img/herosection.mp4" as="video" type="video/mp4" />
+      </head>
+      <body>
+        <NextIntlClientProvider 
+          messages={messages}
+          locale={locale}
+        >
+          <LocaleHtmlAttributes locale={locale} />
+          <div
+            data-locale={locale}
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
+            style={{
+              margin: 0,
+              padding: 0,
+              width: '100%',
+              maxWidth: '100%',
+              overflowX: 'hidden',
+              WebkitTextSizeAdjust: '100%',
+              textSizeAdjust: '100%'
+            }}
+          >
+            {children}
+            <ScrollAnimator />
+            <ScrollToTopButton />
+            <DeferredChatWidget />
+          </div>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
 
