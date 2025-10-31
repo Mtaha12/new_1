@@ -115,7 +115,7 @@ export default function Header(props: HeaderProps) {
       id: 'partners',
       label: t('partners'),
       type: 'scroll',
-      scrollTarget: 'industries'
+      scrollTarget: 'partners'
     },
     {
       id: 'blog',
@@ -127,7 +127,7 @@ export default function Header(props: HeaderProps) {
       id: 'about',
       label: t('aboutUs'),
       type: 'scroll',
-      scrollTarget: 'about'
+      scrollTarget: 'who-we-are'
     },
     {
       id: 'login',
@@ -333,10 +333,10 @@ export default function Header(props: HeaderProps) {
   };
 
   const sectionMapping: Record<string, string> = {
-    about: 'about',
-    'about-us': 'about',
+    about: 'who-we-are',
+    'about-us': 'who-we-are',
     services: 'services',
-    partners: 'industries',
+    partners: 'partners',
     industries: 'industries',
     resources: 'resources',
     careers: 'careers',

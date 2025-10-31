@@ -1,1190 +1,1018 @@
-// app/[locale]/page.tsx
 'use client';
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 export default function HomePage() {
   const t = useTranslations('HomePage');
-  const common = useTranslations('Common');
   const pathname = usePathname() ?? '/en';
   const currentLocale = pathname.split('/')[1] || 'en';
   const isArabic = currentLocale === 'ar';
-  const heroPillars = (t.raw('heroPillars') as string[]) || [];
-  type Testimonial = {
-    quote: string;
-    client: string;
-    role: string;
-    caseStudyLabel: string;
-    caseStudySlug: string;
-  };
-  const testimonials = (t.raw('testimonialsList') as Testimonial[]) || [];
-  const testimonialsCtaSlug = t('testimonialsCtaSlug');
-  const testimonialsCtaHref = testimonialsCtaSlug
-    ? `/${currentLocale}/${testimonialsCtaSlug}`
-    : `/${currentLocale}`;
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const activeTestimonialData = testimonials[activeTestimonial] ?? null;
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [currentBlogIndex, setCurrentBlogIndex] = useState(0);
+  const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
+  const [canUseHeroVideo, setCanUseHeroVideo] = useState(() => {
+    if (typeof window === 'undefined') {
+      return true;
+    }
+    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
+  const [isSmallViewport, setIsSmallViewport] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+    return window.innerWidth < 768;
+  });
+  const whoWeAreCards = [
+    { icon: '🔒', title: t('cybersecurityTitle'), desc: t('cybersecurityDescription') },
+    { icon: '💡', title: t('itConsultationTitle'), desc: t('itConsultationDescription') }
+  ];
+
+  const blogData = [
+    { text: 'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an un.' },
+    { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+    { text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' }
+  ];
+
+  const services = [
+    {
+      key: 'consulting',
+      title: t('services.consulting'),
+      desc: t('services.consultingDesc'),
+      href: `/${currentLocale}/services/consulting`,
+      icon: '🤝',
+      gradient: 'linear-gradient(135deg, #0a1f63 0%, #1346a3 50%, #0fd4e8 100%)'
+    },
+    {
+      key: 'infrastructure',
+      title: t('services.infrastructure'),
+      desc: t('services.infrastructureDesc'),
+      href: `/${currentLocale}/services/infrastructure`,
+      icon: '🧠',
+      gradient: 'linear-gradient(135deg, #101c62 0%, #372874 50%, #5ac3ff 100%)'
+    },
+    {
+      key: 'resourcing',
+      title: t('services.resourcing'),
+      desc: t('services.resourcingDesc'),
+      href: `/${currentLocale}/services/resourcing`,
+      icon: '🛡️',
+      gradient: 'linear-gradient(135deg, #0b2269 0%, #293c8a 45%, #2dd6c6 100%)'
+    },
+    {
+      key: 'training',
+      title: t('services.training'),
+      desc: t('services.trainingDesc'),
+      href: `/${currentLocale}/services/training`,
+      icon: '🧪',
+      gradient: 'linear-gradient(135deg, #052650 0%, #1b3f8a 55%, #66e0ff 100%)'
+    },
+    {
+      key: 'managed',
+      title: t('services.managed'),
+      desc: t('services.managedDesc'),
+      href: `/${currentLocale}/services/managed-it`,
+      icon: '🧰',
+      gradient: 'linear-gradient(135deg, #071f5b 0%, #2b2d74 50%, #3cd4e1 100%)'
+    },
+    {
+      key: 'devsecops',
+      title: t('services.devsecops'),
+      desc: t('services.devsecopsDesc'),
+      href: `/${currentLocale}/services/devsecops`,
+      icon: '⚙️',
+      gradient: 'linear-gradient(135deg, #0a1f60 0%, #3a2175 55%, #69e8e1 100%)'
+    }
+  ];
+
   useEffect(() => {
-    if (!testimonials.length) {
-      return;
+    const interval = setInterval(() => {
+      setCurrentBlogIndex((prev) => (prev + 1) % blogData.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
     }
 
-    const interval = window.setInterval(() => {
-      setActiveTestimonial((prev) =>
-        prev === testimonials.length - 1 ? 0 : prev + 1
-      );
-    }, 6000);
+    const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    return () => window.clearInterval(interval);
-  }, [testimonials.length]);
-  type TeamMember = {
-    name: string;
-    role: string;
-    bio: string;
-    photo?: string;
-  };
-  type TeamValue = {
-    title: string;
-    description: string;
-  };
-  const teamMembers = (t.raw('team.members') as TeamMember[]) || [];
-  const teamMissionTitle = t('team.missionTitle');
-  const teamMissionDescription = t('team.missionDescription');
-  const teamValues = (t.raw('team.values') as TeamValue[]) || [];
-  const gatedAssetPoints = (t.raw('gatedAsset.points') as string[]) || [];
-  const contactItems = (t.raw('contactBlock.items') as { label: string; value: string }[]) || [];
-  type ResourceCard = {
-    title: string;
-    description: string;
-    emoji: string;
-    slug: string;
-    cta: string;
-  };
-  const resourceCards = (t.raw('resourcesCards') as ResourceCard[]) || [];
+    const handleResize = () => {
+      setIsSmallViewport(window.innerWidth < 768);
+    };
 
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [newsletterMessage, setNewsletterMessage] = useState('');
-  const [gatedAssetStatus, setGatedAssetStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [gatedAssetMessage, setGatedAssetMessage] = useState('');
+    const handleMotionChange = () => {
+      setCanUseHeroVideo(!motionMedia.matches);
+    };
 
-  const handleNewsletterChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewsletterEmail(event.target.value);
-    if (newsletterStatus !== 'idle') {
-      setNewsletterStatus('idle');
-      setNewsletterMessage('');
-    }
-  };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    motionMedia.addEventListener?.('change', handleMotionChange);
 
-  const handleGatedAssetSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (gatedAssetStatus === 'loading') {
-      return;
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      motionMedia.removeEventListener?.('change', handleMotionChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
     }
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const name = (formData.get('name') as string | null)?.trim() || '';
-    const email = (formData.get('email') as string | null)?.trim() || '';
-    const company = (formData.get('company') as string | null)?.trim() || '';
-    const role = (formData.get('role') as string | null)?.trim() || '';
-
-    if (!name || !email) {
-      setGatedAssetStatus('error');
-      setGatedAssetMessage(t('gatedAsset.form.required'));
-      return;
+    if (!canUseHeroVideo) {
+      setShouldPlayHeroVideo(false);
+      return undefined;
     }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      setGatedAssetStatus('error');
-      setGatedAssetMessage(t('gatedAsset.form.invalidEmail'));
-      return;
-    }
+    const timeout = window.setTimeout(() => setShouldPlayHeroVideo(true), 250);
+    return () => window.clearTimeout(timeout);
+  }, [canUseHeroVideo]);
 
-    setGatedAssetStatus('loading');
-    setGatedAssetMessage(t('gatedAsset.form.loading'));
-
-    try {
-      const response = await fetch('/api/gated-asset', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          company: company || undefined,
-          role: role || undefined,
-          locale: currentLocale,
-          assetSlug: 'miercom-2024-security-benchmark',
-          assetTitle: t('gatedAsset.title')
-        })
-      });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (response.ok && data?.success) {
-        setGatedAssetStatus('success');
-        setGatedAssetMessage(data.message || t('gatedAsset.form.success'));
-        form.reset();
-
-        if (data.downloadUrl && typeof window !== 'undefined') {
-          window.open(data.downloadUrl, '_blank', 'noopener');
-        }
-        return;
-      }
-
-      setGatedAssetStatus('error');
-      setGatedAssetMessage(data?.error || t('gatedAsset.form.error'));
-    } catch (error) {
-      setGatedAssetStatus('error');
-      setGatedAssetMessage(t('gatedAsset.form.error'));
+  const scrollToCard = (direction: 'next' | 'prev') => {
+    if (direction === 'next') {
+      setCurrentCardIndex((prev) => (prev + 1) % whoWeAreCards.length);
+    } else {
+      setCurrentCardIndex((prev) => (prev - 1 + whoWeAreCards.length) % whoWeAreCards.length);
     }
   };
 
-  const handleNewsletterSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (newsletterStatus === 'loading') {
-      return;
-    }
-
-    const email = newsletterEmail.trim();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailPattern.test(email)) {
-      setNewsletterStatus('error');
-      setNewsletterMessage(t('newsletter.invalidEmail'));
-      return;
-    }
-
-    setNewsletterStatus('loading');
-    setNewsletterMessage('');
-
-    try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email,
-          locale: currentLocale,
-          source: 'homepage'
-        })
-      });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (response.ok && data?.success) {
-        setNewsletterStatus('success');
-        setNewsletterMessage(data.message || t('newsletter.success'));
-        setNewsletterEmail('');
-        return;
-      }
-
-      if (response.status === 409) {
-        setNewsletterStatus('success');
-        setNewsletterMessage(data.message || t('newsletter.existing'));
-        setNewsletterEmail('');
-        return;
-      }
-
-      setNewsletterStatus('error');
-      setNewsletterMessage(data?.error || t('newsletter.error'));
-    } catch (error) {
-      setNewsletterStatus('error');
-      setNewsletterMessage(t('newsletter.error'));
-    }
-  };
-
-  const buildLocaleHref = (href: string) => {
-    if (!href) return '#';
-    if (href.startsWith('#') || href.startsWith('http://') || href.startsWith('https://')) {
-      return href;
-    }
-    const normalized = href.startsWith('/') ? href.slice(1) : href;
-    return `/${currentLocale}/${normalized}`;
-  };
-
-  const contactCtaHref = buildLocaleHref(t('contactBlock.ctaHref'));
-  const gatedAssetFormId = 'gated-report-form';
+  const visibleCards = whoWeAreCards.length
+    ? Array.from({ length: Math.min(2, whoWeAreCards.length) }, (_, offset) =>
+        whoWeAreCards[(currentCardIndex + offset) % whoWeAreCards.length]
+      )
+    : [];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff' }}>
+    <div style={{ minHeight: '100vh', background: '#fff', direction: isArabic ? 'rtl' : 'ltr' }}>
       <Header />
 
       {/* Hero Section */}
       <section
-        className="parallax-wrap fade-section"
         style={{
-          background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 50%, #00bcd4 100%)',
-          padding: 'clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem)',
+          position: 'relative',
+          overflow: 'hidden',
+          padding: 'clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 3rem)',
           textAlign: 'center',
           color: '#fff',
-          position: 'relative',
-          overflow: 'hidden'
+          background: 'linear-gradient(135deg, #0a0e3d 0%, #1346a3 100%)',
+          minHeight: 'min(80vh, 720px)'
         }}
       >
+        {shouldPlayHeroVideo && (
+          <video
+            src="/img/herosection.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster="/img/bg1.jpg"
+            aria-hidden
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              zIndex: 0
+            }}
+          />
+        )}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(135deg, rgba(10, 14, 61, 0.92) 0%, rgba(19, 70, 163, 0.68) 100%)',
+            zIndex: 1
+          }}
+        />
+        <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+          <h1 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+            fontWeight: '700',
+            marginBottom: '1.5rem',
+            lineHeight: 1.2
+          }}>
+            {t('heroTitle')}
+          </h1>
+          <p style={{
+            fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+            maxWidth: '700px',
+            margin: '0 auto 2.5rem',
+            lineHeight: 1.7,
+            opacity: 0.9
+          }}>
+            {t('heroSubtitle')}
+          </p>
+          <Link
+            href={`/${currentLocale}/contact`}
+            style={{
+              display: 'inline-block',
+              background: '#00bcd4',
+              color: '#fff',
+              padding: '1rem 2.5rem',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: '600',
+              textDecoration: 'none',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 15px rgba(0, 188, 212, 0.3)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 188, 212, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 188, 212, 0.3)';
+            }}
+          >
+            {t('heroCta') || 'Get Started'}
+          </Link>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section
+        id="partners"
+        style={{
+          background: 'transparent',
+          padding: '1.5rem clamp(1rem, 4vw, 3rem) clamp(3rem, 8vw, 6.5rem)',
+          marginTop: '-6.5rem',
+          marginBottom: '3rem',
+          position: 'relative',
+          zIndex: 5
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 'min(1200px, 100%)',
+            margin: '0 auto',
+            position: 'relative',
+            zIndex: 6
+          }}
+        >
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #09153d 0%, #050b23 45%, #01030d 100%)',
+              borderRadius: '32px',
+              padding: 'clamp(2rem, 5vw, 3.5rem)',
+              boxShadow: '0 45px 75px rgba(5, 12, 40, 0.35)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 'clamp(1rem, 2.5vw, 2.5rem)',
+              flexWrap: 'wrap',
+              position: 'relative',
+              zIndex: 7
+            }}
+          >
+            <span
+              style={{
+                position: 'absolute',
+                left: 'clamp(0.75rem, 3vw, 1.5rem)',
+                color: 'rgba(255,255,255,0.35)',
+                fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
+                lineHeight: 1
+              }}
+              aria-hidden
+            >
+              ‹
+            </span>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'clamp(1rem, 2.5vw, 2.25rem)',
+                flex: '1 1 100%',
+                padding: '0 clamp(0.5rem, 3vw, 2rem)',
+                flexWrap: 'wrap',
+                rowGap: '1rem'
+              }}
+            >
+              {['ForgeRock', 'Microsoft Azure', 'SentinelOne', 'PingIdentity', 'THALES', 'okta'].map((partner, index) => (
+                <div
+                  key={partner}
+                  style={{
+                    color: '#ffffff',
+                    fontWeight: 600,
+                    fontSize: 'clamp(0.85rem, 1.6vw, 1.05rem)',
+                    letterSpacing: '0.06em',
+                    opacity: 0.9,
+                    transition: 'transform 0.3s ease, opacity 0.3s ease',
+                    animation: `fadeIn 0.5s ease-out ${index * 0.08}s backwards`
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-3px)';
+                    e.currentTarget.style.opacity = '1';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.opacity = '0.9';
+                  }}
+                >
+                  {partner}
+                </div>
+              ))}
+            </div>
+            <span
+              style={{
+                position: 'absolute',
+                right: 'clamp(0.75rem, 3vw, 1.5rem)',
+                color: 'rgba(255,255,255,0.35)',
+                fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
+                lineHeight: 1
+              }}
+              aria-hidden
+            >
+              ›
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Who We Are Section */}
+      <section id="who-we-are" style={{
+        padding: 'clamp(3rem, 7vw, 6.5rem) clamp(1.25rem, 5vw, 3.5rem)',
+        background: '#fff',
+        direction: isArabic ? 'rtl' : 'ltr'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: isSmallViewport ? '1fr' : 'minmax(0, 1fr) minmax(0, 1fr)',
+          gap: isSmallViewport ? '2.5rem' : 'clamp(2rem, 5vw, 4rem)',
+          alignItems: 'center'
+        }}>
+          <div>
+            <p style={{
+              color: '#55617d',
+              fontSize: 'clamp(0.85rem, 1.1vw, 1rem)',
+              marginBottom: '0.5rem',
+              textAlign: isArabic ? 'right' : 'left',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              fontWeight: 600
+            }}>
+              {t('whoWeAre') || 'Who We Are'}
+            </p>
+            <h2 style={{
+              fontSize: isSmallViewport ? 'clamp(2rem, 7vw, 2.8rem)' : 'clamp(2.4rem, 5vw, 3.4rem)',
+              fontWeight: 800,
+              color: '#0a0e3d',
+              lineHeight: 1.15,
+              marginBottom: '1.75rem'
+            }}>
+              {t('defendersTitle')}
+            </h2>
+            <div style={{
+              color: '#4d5566',
+              lineHeight: 1.8,
+              fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
+              textAlign: isArabic ? 'right' : 'left'
+            }}>
+              <p style={{ margin: 0 }}>{t('defendersDescription') || t('aboutDescription')}</p>
+            </div>
+          </div>
+
+          <div style={{ position: 'relative' }}>
+            <div style={{
+              display: 'flex',
+              gap: isSmallViewport ? '1.75rem' : 'clamp(1.5rem, 4vw, 2.5rem)',
+              justifyContent: 'center',
+              flexDirection: isSmallViewport ? 'column' : 'row',
+              alignItems: isSmallViewport ? 'stretch' : 'center'
+            }}>
+              {visibleCards.map((card, idx) => (
+                <div
+                  key={`${card.title}-${idx}`}
+                  style={{
+                    width: isSmallViewport ? '100%' : 'clamp(240px, 38vw, 320px)',
+                    background: '#fff',
+                    borderRadius: '18px',
+                    border: '1px solid #e6ecf5',
+                    padding: '2.25rem 2rem',
+                    boxShadow: '0 25px 40px rgba(10, 14, 61, 0.08)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1.25rem',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-6px)';
+                    e.currentTarget.style.boxShadow = '0 32px 60px rgba(10, 14, 61, 0.12)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 25px 40px rgba(10, 14, 61, 0.08)';
+                  }}
+                >
+                  <div style={{
+                    width: '56px',
+                    height: '56px',
+                    borderRadius: '18px',
+                    background: 'linear-gradient(135deg, #0a0e3d 0%, #1f3a85 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#69E8E1',
+                    fontSize: '1.7rem',
+                    alignSelf: isArabic ? 'flex-end' : 'flex-start'
+                  }}>
+                    {card.icon}
+                  </div>
+                  <div>
+                    <h3 style={{
+                      fontSize: 'clamp(1.2rem, 2.2vw, 1.4rem)',
+                      fontWeight: 700,
+                      color: '#0a0e3d',
+                      marginBottom: '0.75rem'
+                    }}>
+                      {card.title}
+                    </h3>
+                    <p style={{
+                      color: '#4d5566',
+                      lineHeight: 1.7,
+                      fontSize: 'clamp(0.9rem, 1.3vw, 1.05rem)',
+                      margin: 0
+                    }}>
+                      {card.desc}
+                    </p>
+                  </div>
+                  {!isSmallViewport && (
+                    <button
+                      onClick={() => scrollToCard('next')}
+                      style={{
+                        alignSelf: isArabic ? 'flex-start' : 'flex-end',
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#00bcd4',
+                        fontSize: '1.5rem',
+                        cursor: 'pointer'
+                      }}
+                      aria-label={t('heroCta') || 'Next'}
+                    >
+                      →
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: isSmallViewport ? 'auto' : (isArabic ? 'auto' : '-2rem'),
+              right: isSmallViewport ? 'auto' : (isArabic ? '-2rem' : 'auto'),
+              transform: 'translateY(-50%)',
+              display: !isSmallViewport && whoWeAreCards.length > 2 ? 'flex' : 'none',
+              gap: '1rem'
+            }}>
+              <button
+                onClick={() => scrollToCard('prev')}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  border: '1px solid rgba(10, 14, 61, 0.15)',
+                  background: '#fff',
+                  color: '#0a0e3d',
+                  cursor: 'pointer',
+                  boxShadow: '0 12px 20px rgba(10, 14, 61, 0.08)'
+                }}
+                aria-label="Previous"
+              >
+                {isArabic ? '→' : '←'}
+              </button>
+              <button
+                onClick={() => scrollToCard('next')}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  border: '1px solid rgba(10, 14, 61, 0.15)',
+                  background: '#fff',
+                  color: '#0a0e3d',
+                  cursor: 'pointer',
+                  boxShadow: '0 12px 20px rgba(10, 14, 61, 0.08)'
+                }}
+                aria-label="Next"
+              >
+                {isArabic ? '←' : '→'}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '0.65rem',
+          marginTop: '2.5rem'
+        }}>
+          {whoWeAreCards.map((_, index) => (
+            <div
+              key={index}
+              style={{
+                width: currentCardIndex === index ? '12px' : '10px',
+                height: currentCardIndex === index ? '12px' : '10px',
+                borderRadius: '50%',
+                background: currentCardIndex === index ? '#0a0e3d' : '#d2d8e3',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer'
+              }}
+              onClick={() => setCurrentCardIndex(index)}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Cybersecurity Solutions Section */}
+      <section style={{
+        padding: 'clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 2rem)',
+        background: 'linear-gradient(135deg, #0a0e3d 0%, #1a237e 100%)',
+        animation: 'fadeIn 1s ease-in'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))',
+          gap: 'clamp(2rem, 5vw, 4rem)',
+          alignItems: 'center'
+        }}>
+          <div>
+            <h2 style={{
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontWeight: '800',
+              color: '#fff',
+              lineHeight: '1.2',
+              marginBottom: '2rem'
+            }}>
+              {t('cybersecuritySolutionsTitle')}
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: '1.8', fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)', marginBottom: '2rem', textAlign: isArabic ? 'right' : 'left' }}>
+              {t('cybersecuritySolutionsDescription')}
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {[
+                { key: 'aiSecurity', name: 'AI Security For LLMs', highlight: true },
+                { key: 'identity', name: t('solutions.identity'), highlight: false },
+                { key: 'lorem', name: t('solutions.lorem'), highlight: false },
+                { key: 'zeroTrust', name: t('solutions.zeroTrust'), highlight: false },
+                { key: 'networkSecurity', name: t('solutions.networkSecurity'), highlight: false },
+                { key: 'cloudSecurity', name: t('solutions.cloudSecurity'), highlight: false },
+                { key: 'endpointSecurity', name: t('solutions.endpointSecurity'), highlight: false }
+              ].map((solution) => (
+                <div 
+                  key={solution.key} 
+                  style={{
+                    background: solution.highlight ? '#69E8E1' : 'rgba(255,255,255,0.05)',
+                    padding: '1rem 1.5rem',
+                    borderRadius: '8px',
+                    color: solution.highlight ? '#0a0e3d' : '#fff',
+                    fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
+                    fontWeight: solution.highlight ? '600' : '400',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!solution.highlight) {
+                      e.currentTarget.style.background = '#69E8E1';
+                      e.currentTarget.style.color = '#0a0e3d';
+                      e.currentTarget.style.fontWeight = '600';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!solution.highlight) {
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                      e.currentTarget.style.color = '#fff';
+                      e.currentTarget.style.fontWeight = '400';
+                    }
+                  }}
+                >
+                  {solution.name}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: '500px',
+            borderRadius: '16px',
+            overflow: 'hidden'
+          }}>
+            <Image
+              src="/img/cybersolution.jpg"
+              alt="Cybersecurity Solutions"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Our Services Section */}
+      <section style={{
+        padding: 'clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 2rem)',
+        background: 'linear-gradient(135deg, #0a0e3d 0%, #1a237e 100%)',
+        animation: 'fadeIn 1s ease-in',
+        position: 'relative'
+      }}>
         <div style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'radial-gradient(circle at 30% 50%, rgba(0, 188, 212, 0.2) 0%, transparent 50%)',
-          pointerEvents: 'none'
-        }}></div>
-        
-        <h1 style={{
-          fontSize: 'clamp(2rem, 6vw, 4rem)',
-          fontWeight: '800',
-          marginBottom: '1.25rem',
-          position: 'relative',
-          zIndex: 1,
-          lineHeight: 1.15
-        }}>
-          {t('heroTitle')}
-        </h1>
-
-        <p style={{
-          fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-          maxWidth: '760px',
-          margin: '0 auto 1.5rem',
-          lineHeight: 1.8,
-          opacity: 0.9,
-          position: 'relative',
-          zIndex: 1,
-          padding: '0 1rem'
-        }}>
-          {t('heroSubtitle')}
-        </p>
-
-        <p style={{
-          fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
-          maxWidth: '640px',
-          margin: '0 auto 2rem',
-          lineHeight: 1.7,
-          opacity: 0.85,
-          position: 'relative',
-          zIndex: 1,
-          padding: '0 1rem'
-        }}>
-          {t('heroSupporting')}
-        </p>
-
-        {heroPillars.length > 0 && (
-          <div
-            className="fade-section delay-1"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: '0.75rem',
-              marginBottom: '2.5rem',
-              position: 'relative',
-              zIndex: 1,
-              padding: '0 1rem'
-            }}
-          >
-            {heroPillars.map((pillar) => (
-              <span
-                key={pillar}
-                style={{
-                  padding: '0.55rem 1.4rem',
-                  borderRadius: '999px',
-                  background: 'rgba(105, 232, 225, 0.18)',
-                  color: '#69E8E1',
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
-                  letterSpacing: '0.03em'
-                }}
-              >
-                {pillar}
-              </span>
-            ))}
-          </div>
-        )}
-
-        <div
-          className="fade-section delay-2"
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '1rem',
-            position: 'relative',
-            zIndex: 1,
-            marginBottom: '1rem'
-          }}
-        >
-          <Link
-            className="glow-button ripple-button"
-            href={heroPillars.length ? '#miercom-report' : '#resources'}
-            prefetch={false}
-            style={{
-              background: '#0a0e3d',
-              color: '#fff',
-              border: 'none',
-              padding: 'clamp(0.75rem, 1.8vw, 0.9rem) clamp(1.8rem, 4vw, 2.6rem)',
-              borderRadius: '30px',
-              fontSize: 'clamp(0.9rem, 1.4vw, 1rem)',
-              fontWeight: 700,
-              cursor: 'pointer',
-              textDecoration: 'none',
-              boxShadow: '0 10px 30px rgba(10, 14, 61, 0.18)'
-            }}
-          >
-            {t('heroPrimaryCta')}
-          </Link>
-          <Link
-            href={`/${currentLocale}/contact`}
-            prefetch={false}
-            style={{
-              background: 'transparent',
-              color: '#fff',
-              border: '2px solid rgba(255,255,255,0.7)',
-              padding: 'clamp(0.75rem, 1.8vw, 0.9rem) clamp(1.8rem, 4vw, 2.6rem)',
-              borderRadius: '30px',
-              fontSize: 'clamp(0.9rem, 1.4vw, 1rem)',
-              fontWeight: 600,
-              cursor: 'pointer',
-              textDecoration: 'none',
-              transition: 'background 0.3s ease, color 0.3s ease'
-            }}
-            onMouseEnter={(event) => {
-              event.currentTarget.style.background = 'rgba(255,255,255,0.12)';
-              event.currentTarget.style.color = '#69E8E1';
-            }}
-            onMouseLeave={(event) => {
-              event.currentTarget.style.background = 'transparent';
-              event.currentTarget.style.color = '#fff';
-            }}
-          >
-            {t('heroSecondaryCta')}
-          </Link>
-        </div>
-
-        <p
-          style={{
-            fontSize: '0.85rem',
-            color: 'rgba(255,255,255,0.75)',
-            maxWidth: '520px',
-            margin: '0 auto',
-            lineHeight: 1.6,
-            position: 'relative',
-            zIndex: 1,
-            padding: '0 1rem'
-          }}
-        >
-          {t('heroPrimaryCtaNote')}
-        </p>
-      </section>
-
-      {/* Partners Section */}
-      <section
-        id="industries"
-        className="fade-section delay-1"
-        style={{
-          background: '#0a0e3d',
-          padding: 'clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem)'
-        }}
-      >
+          backgroundImage: 'url(/img/bg1.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.1,
+          zIndex: 0
+        }} />
         <div style={{
-          maxWidth: '1180px',
+          maxWidth: '1200px',
           margin: '0 auto',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 'clamp(1.5rem, 4vw, 2.5rem)'
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 1,
+          color: '#fff'
         }}>
-          <div style={{ textAlign: 'center' }}>
-            <h2 style={{
-              fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)',
-              fontWeight: 800,
-              color: '#fff',
-              marginBottom: '0.75rem'
-            }}>
-              {t('partnersHeadline')}
-            </h2>
-            <p style={{
-              color: 'rgba(255,255,255,0.75)',
-              maxWidth: '720px',
-              lineHeight: 1.7,
-              fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
-              margin: '0 auto'
-            }}>
-              {t('partnersSubheadline')}
-            </p>
-          </div>
-
-          <div
-            className="fade-section delay-2"
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: 'clamp(1rem, 3vw, 2.5rem)'
-            }}
-          >
-            {['ForgeRock', 'Microsoft Azure', 'SentinelOne', 'PingIdentity', 'THALES', 'okta'].map((partner) => (
-              <div
-                key={partner}
-                className="tilt-card subtle-card"
+          <h2 style={{
+            fontSize: 'clamp(2rem, 5vw, 3rem)',
+            fontWeight: '800',
+            color: '#fff',
+            lineHeight: '1.2',
+            marginBottom: '1rem'
+          }}>
+            {t('ourServicesTitle')}
+          </h2>
+          <p style={{
+            color: 'rgba(255,255,255,0.8)',
+            lineHeight: '1.8',
+            maxWidth: '800px',
+            margin: '0 auto 3rem',
+            fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)'
+          }}>
+            {t('ourServicesDescription')}
+          </p>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+            gap: '2.25rem'
+          }}>
+            {services.map((service) => (
+              <Link
+                key={service.key}
+                href={service.href}
+                prefetch={false}
                 style={{
+                  background: service.gradient,
+                  padding: '2.2rem',
+                  borderRadius: '22px',
                   color: '#fff',
-                  fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-                  fontWeight: '600',
-                  opacity: 0.85,
-                  letterSpacing: '0.04em',
-                  padding: '0.75rem 1.4rem'
-                }}
-              >
-                {partner}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {testimonials.length > 0 && activeTestimonialData && (
-        <section
-          className="fade-section delay-2"
-          style={{
-            background: '#f8f9fa',
-            padding: 'clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 6vw, 3.5rem)'
-          }}
-        >
-          <div
-            style={{
-              maxWidth: '1100px',
-              margin: '0 auto',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))',
-              gap: 'clamp(2rem, 5vw, 3rem)',
-              alignItems: 'center'
-            }}
-          >
-            <div className="fade-section delay-2 testimonial-card-frame" style={{ position: 'relative' }}>
-              <div
-                className="pulse-border"
-                style={{
-                  position: 'absolute',
-                  inset: '-18px',
-                  borderRadius: '32px',
-                  border: '1px solid rgba(10, 14, 61, 0.08)',
-                  opacity: 0.3,
-                  pointerEvents: 'none'
-                }}
-              ></div>
-              <p
-                style={{
-                  color: '#00bcd4',
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  marginBottom: '0.75rem'
-                }}
-              >
-                {t('testimonialsTitle')}
-              </p>
-              <h2
-                style={{
-                  fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-                  fontWeight: 800,
-                  color: '#0a0e3d',
-                  marginBottom: '1rem'
-                }}
-              >
-                {activeTestimonialData.client}
-              </h2>
-              <p
-                style={{
-                  color: '#555',
-                  lineHeight: 1.7,
-                  fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)',
-                  marginBottom: '0.75rem'
-                }}
-              >
-                {activeTestimonialData.role}
-              </p>
-              <p
-                style={{
-                  color: '#666',
-                  lineHeight: 1.8,
-                  fontSize: 'clamp(1.05rem, 1.9vw, 1.2rem)',
-                  fontStyle: 'italic',
-                  marginBottom: '2rem'
-                }}
-              >
-                “{activeTestimonialData.quote}”
-              </p>
-
-              <div
-                style={{
+                  boxShadow: '0 24px 45px rgba(4, 11, 38, 0.35)',
+                  position: 'relative',
+                  textDecoration: 'none',
                   display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '1rem',
-                  alignItems: 'center'
+                  flexDirection: 'column',
+                  gap: '1.5rem',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-10px)';
+                  e.currentTarget.style.boxShadow = '0 32px 60px rgba(4, 11, 38, 0.45)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 24px 45px rgba(4, 11, 38, 0.35)';
                 }}
               >
-                <Link
-                  className="glow-button ripple-button"
-                  href={testimonialsCtaHref}
-                  prefetch={false}
-                  style={{
-                    background: '#0a0e3d',
-                    color: '#fff',
-                    borderRadius: '30px',
-                    padding: '0.85rem 2.4rem',
-                    fontWeight: 700,
-                    fontSize: '0.95rem',
-                    textDecoration: 'none',
-                    boxShadow: '0 14px 32px rgba(10, 14, 61, 0.18)'
-                  }}
-                >
-                  {t('testimonialsCtaLabel')}
-                </Link>
-                <Link
-                  href={`/${currentLocale}/${activeTestimonialData.caseStudySlug}`}
-                  prefetch={false}
-                  style={{
-                    color: '#00bcd4',
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    fontSize: '0.95rem'
-                  }}
-                >
-                  {activeTestimonialData.caseStudyLabel}
-                </Link>
-              </div>
-            </div>
-
-            <div
-              className="tilt-card delay-3 testimonial-card-frame"
-              style={{
-                background: '#fff',
-                borderRadius: '24px',
-                padding: 'clamp(2.5rem, 6vw, 3.5rem)',
-                boxShadow: '0 20px 45px rgba(10, 14, 61, 0.08)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1.5rem',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-            >
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  top: '-80px',
-                  right: '-40px',
-                  width: '180px',
-                  height: '180px',
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(105, 232, 225, 0.25), transparent 60%)'
-                }}
-              ></span>
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  bottom: '-60px',
-                  left: '-30px',
-                  width: '140px',
-                  height: '140px',
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(10, 14, 61, 0.15), transparent 60%)'
-                }}
-              ></span>
-              <p
-                className="testimonial-quote-area"
-                style={{
-                  fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
-                  lineHeight: 1.8,
-                  color: '#0a0e3d'
-                }}
-              >
-                “{activeTestimonialData.quote}”
-              </p>
-
-              <div
-                style={{
+                <div style={{
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '22px',
+                  background: 'rgba(255,255,255,0.15)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '1rem'
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() =>
-                    setActiveTestimonial((prev) =>
-                      prev === 0 ? testimonials.length - 1 : prev - 1
-                    )
-                  }
-                  style={{
-                    background: '#0a0e3d',
-                    color: '#fff',
-                    border: 'none',
-                    width: '46px',
-                    height: '46px',
-                    borderRadius: '50%',
-                    cursor: 'pointer',
-                    fontSize: '1.2rem'
-                  }}
-                  aria-label="Previous testimonial"
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setActiveTestimonial((prev) =>
-                      prev === testimonials.length - 1 ? 0 : prev + 1
-                    )
-                  }
-                  style={{
-                    background: '#69E8E1',
-                    color: '#0a0e3d',
-                    border: 'none',
-                    width: '46px',
-                    height: '46px',
-                    borderRadius: '50%',
-                    cursor: 'pointer',
-                    fontSize: '1.2rem',
-                    boxShadow: '0 12px 26px rgba(105, 232, 225, 0.3)'
-                  }}
-                  aria-label="Next testimonial"
-                >
-                  ›
-                </button>
-              </div>
-
-              <div
-                style={{
+                  justifyContent: 'center',
+                  fontSize: '2rem',
+                  boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)'
+                }}>
+                  {service.icon}
+                </div>
+                <div>
+                  <h3 style={{
+                    fontSize: 'clamp(1.25rem, 2.4vw, 1.45rem)',
+                    fontWeight: 700,
+                    marginBottom: '0.75rem'
+                  }}>
+                    {service.title}
+                  </h3>
+                  <p style={{
+                    color: 'rgba(255,255,255,0.85)',
+                    lineHeight: 1.8,
+                    fontSize: 'clamp(0.92rem, 1.4vw, 1.05rem)'
+                  }}>
+                    {service.desc}
+                  </p>
+                </div>
+                <span style={{
+                  alignSelf: 'flex-end',
+                  marginTop: 'auto',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: 'rgba(255,255,255,0.18)',
                   display: 'flex',
-                  gap: '0.45rem'
-                }}
-              >
-                {testimonials.map((_, index) => (
-                  <span
-                    key={index}
-                    style={{
-                      width: '12px',
-                      height: '12px',
-                      borderRadius: '50%',
-                      background:
-                        index === activeTestimonial ? '#0a0e3d' : 'rgba(10,14,61,0.2)'
-                    }}
-                  />
-                ))}
-              </div>
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#69E8E1',
+                  fontSize: '1.2rem',
+                  boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)'
+                }}>
+                  {isArabic ? '←' : '→'}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values Section */}
+      <section style={{
+        background: '#fff',
+        animation: 'fadeIn 1s ease-in'
+      }}>
+        <div style={{
+          background: '#69E8E1',
+          padding: 'clamp(3rem, 20vw, 3rem) clamp(3rem, 20vw, 2rem)'
+        }}>
+          <div style={{
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontWeight: '800',
+              color: '#0a0e3d',
+              lineHeight: '3.2',
+              marginBottom: '0'
+            }}>
+              {t('coreValuesTitle')}
+            </h2>
+          </div>
+        </div>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: 'clamp(3rem, 5vw, 4rem) clamp(1rem, 5vw, 2rem)',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))',
+          gap: 'clamp(2rem, 5vw, 4rem)',
+          alignItems: 'center'
+        }}>
+          <div>
+            <div style={{
+              fontSize: 'clamp(3rem, 8vw, 5rem)',
+              fontWeight: '900',
+              color: '#0a0e3d',
+              lineHeight: '1',
+              marginBottom: '2rem'
+            }}>&ldquo;</div>
+            <p style={{ 
+              color: '#333', 
+              lineHeight: '1.8', 
+              fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)', 
+              textAlign: isArabic ? 'right' : 'left',
+              fontStyle: 'italic',
+              marginBottom: '2rem'
+            }}>
+              {blogData[currentBlogIndex].text}
+            </p>
+            <div style={{
+              background: '#f0f0f0',
+              padding: '1rem',
+              borderLeft: '3px solid #69E8E1',
+              marginBottom: '2rem'
+            }}>
+              <p style={{ 
+                color: '#666', 
+                fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)',
+                margin: 0,
+                fontStyle: 'italic'
+              }}>
+                Lorem ipsum is simply dummy text<br />of the printing and type
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              {blogData.map((_, index) => (
+                <div
+                  key={index}
+                  style={{
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%',
+                    background: currentBlogIndex === index ? '#69E8E1' : '#ccc',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onClick={() => setCurrentBlogIndex(index)}
+                />
+              ))}
             </div>
           </div>
-        </section>
-      )}
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: '500px',
+            borderRadius: '16px',
+            overflow: 'hidden'
+          }}>
+            <Image
+              src="/img/corevalue.jpg"
+              alt="Core Values"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      </section>
 
-      {/* Who We Are Section */}
-      <section id="about" style={{
+      {/* Resources Section */}
+      <section style={{
         padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
-        gap: 'clamp(2rem, 5vw, 4rem)',
-        maxWidth: '1400px',
-        margin: '0 auto'
+        background: '#fff',
+        direction: isArabic ? 'rtl' : 'ltr'
       }}>
-        <div>
-          <p style={{ color: '#666', fontSize: 'clamp(0.9rem, 1.2vw, 0.95rem)', marginBottom: '0.5rem' }}>Who We Are</p>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h2 style={{
             fontSize: 'clamp(2rem, 5vw, 3rem)',
             fontWeight: '800',
             color: '#0a0e3d',
             lineHeight: '1.2',
-            marginBottom: '2rem'
+            marginBottom: '1rem',
+            textAlign: 'center'
           }}>
-            Defenders Of<br />Your Digital Realm
+            Resources
           </h2>
-          <p style={{ color: '#666', lineHeight: '1.8', fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)' }}>
-            {t('aboutDescription')}
+          <p style={{
+            color: '#666',
+            lineHeight: '1.8',
+            maxWidth: '800px',
+            margin: '0 auto 3rem',
+            fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
+            textAlign: 'center'
+          }}>
+            Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.
           </p>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          {/* Cybersecurity Card */}
           <div style={{
-            background: '#fff',
-            border: '1px solid #e0e0e0',
-            borderRadius: '12px',
-            padding: '2rem',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+            gap: '2rem'
           }}>
-            <div style={{
-              width: '50px',
-              height: '50px',
-              background: '#0a0e3d',
-              borderRadius: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1rem',
-              color: '#00bcd4',
-              fontSize: '1.5rem'
-            }}>🔒</div>
-            <h3 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.3rem)', fontWeight: '700', color: '#0a0e3d', marginBottom: '0.75rem' }}>
-              {t('cybersecurityTitle')}
-            </h3>
-            <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '1rem', fontSize: 'clamp(0.9rem, 1.2vw, 1rem)' }}>
-              {t('cybersecurityDescription')}
-            </p>
-            <p style={{ color: '#666', lineHeight: '1.6', fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)' }}>
-              {t('cybersecurityDetail')}
-            </p>
-            <button style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#00bcd4',
-              fontSize: '2rem',
-              cursor: 'pointer',
-              marginTop: '1rem'
-            }}>→</button>
-          </div>
-
-          {/* IT Consultation Card */}
-          <div style={{
-            background: '#fff',
-            border: '1px solid #e0e0e0',
-            borderRadius: '12px',
-            padding: '2rem',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
-          }}>
-            <div style={{
-              width: '50px',
-              height: '50px',
-              background: '#0a0e3d',
-              borderRadius: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1rem',
-              color: '#00bcd4',
-              fontSize: '1.5rem'
-            }}>💡</div>
-            <h3 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.3rem)', fontWeight: '700', color: '#0a0e3d', marginBottom: '0.75rem' }}>
-              {t('consultationTitle')}
-            </h3>
-            <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '1rem', fontSize: 'clamp(0.9rem, 1.2vw, 1rem)' }}>
-              {t('consultationDescription')}
-            </p>
-            <p style={{ color: '#666', lineHeight: '1.6', fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)' }}>
-              {t('consultationButton')}
-            </p>
-            <button style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#00bcd4',
-              fontSize: '2rem',
-              cursor: 'pointer',
-              marginTop: '1rem'
-            }}>→</button>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      {(teamMembers.length > 0 || teamValues.length > 0) && (
-        <section
-          className="fade-section delay-2"
-          style={{
-            padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
-            background: '#f8f9fa'
-          }}
-        >
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h2
-              style={{
-                fontSize: 'clamp(1.9rem, 4vw, 2.7rem)',
-                fontWeight: 800,
-                color: '#0a0e3d',
-                textAlign: 'center',
-                marginBottom: '1rem'
-              }}
-            >
-              {t('team.title')}
-            </h2>
-            <p
-              style={{
-                color: '#555',
-                textAlign: 'center',
-                maxWidth: '820px',
-                margin: '0 auto clamp(2.5rem, 5vw, 3.5rem)',
-                lineHeight: 1.8,
-                fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)'
-              }}
-            >
-              {t('team.subtitle')}
-            </p>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-                gap: 'clamp(1.75rem, 4vw, 3rem)',
-                alignItems: 'start',
-                textAlign: isArabic ? 'right' : 'left'
-              }}
-            >
+            {[
+              { img: '/img/resource1.jpg', title: 'Top 10 Penetration Testing Tools Cybersecurity Experts Are Using Right Now', tag: 'Cybersecurity' },
+              { img: '/img/resource2.jpg', title: 'Top Cybersecurity Services Businesses Need in 2025', tag: 'Cybersecurity' },
+              { img: '/img/resource3.jpg', title: 'Black Hat USA 2025 Closes Out on a High Note in Las Vegas', tag: 'Black Hat' }
+            ].map((resource, index) => (
               <div
-                className="tilt-card"
+                key={index}
                 style={{
-                  background: '#fff',
-                  borderRadius: '24px',
-                  padding: 'clamp(2rem, 5vw, 2.6rem)',
-                  boxShadow: '0 18px 40px rgba(10, 14, 61, 0.08)',
-                  border: '1px solid rgba(10,14,61,0.06)',
-                  display: 'grid',
-                  gap: '1.6rem',
-                  textAlign: isArabic ? 'right' : 'left'
+                  background: '#0a0e3d',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-8px)';
+                  e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
                 }}
               >
-                <div>
-                  <h3
-                    style={{
-                      fontSize: 'clamp(1.4rem, 3vw, 1.85rem)',
-                      fontWeight: 800,
-                      color: '#0a0e3d',
-                      marginBottom: '0.75rem'
-                    }}
-                  >
-                    {teamMissionTitle}
-                  </h3>
-                  <p style={{ color: '#404060', lineHeight: 1.7, textAlign: isArabic ? 'right' : 'left' }}>{teamMissionDescription}</p>
-                </div>
-
-                {teamValues.length > 0 && (
-                  <div>
-                    <h4
-                      style={{
-                        fontSize: 'clamp(1.1rem, 2.4vw, 1.35rem)',
-                        fontWeight: 700,
-                        color: '#0a0e3d',
-                        marginBottom: '1rem'
-                      }}
-                    >
-                      {t('team.valuesTitle')}
-                    </h4>
-                    <div style={{ display: 'grid', gap: '1rem', textAlign: isArabic ? 'right' : 'left' }}>
-                      {teamValues.map((value, index) => (
-                        <div
-                          className={`tilt-card subtle-card delay-${index + 1}`}
-                          key={value.title}
-                          style={{
-                            border: '1px solid rgba(10,14,61,0.08)',
-                            borderRadius: '18px',
-                            padding: '1.2rem 1.4rem',
-                            background: '#f5f7ff',
-                            textAlign: isArabic ? 'right' : 'left'
-                          }}
-                        >
-                          <p
-                            style={{
-                              fontWeight: 700,
-                              color: '#0a0e3d',
-                              marginBottom: '0.35rem',
-                              fontSize: '1rem',
-                              textAlign: isArabic ? 'right' : 'left'
-                            }}
-                          >
-                            {value.title}
-                          </p>
-                          <p style={{ color: '#4c4c66', lineHeight: 1.6, textAlign: isArabic ? 'right' : 'left' }}>{value.description}</p>
-                        </div>
-                      ))}
-                    </div>
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '200px'
+                }}>
+                  <Image
+                    src={resource.img}
+                    alt={resource.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    left: '1rem',
+                    background: '#fff',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '6px',
+                    fontSize: '0.75rem',
+                    fontWeight: '600',
+                    color: '#0a0e3d'
+                  }}>
+                    {resource.tag}
                   </div>
-                )}
-              </div>
-
-              {teamMembers.length > 0 && (
-                <div
-                  className="team-grid"
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
-                    gap: 'clamp(1.4rem, 3vw, 2rem)',
-                    textAlign: isArabic ? 'right' : 'left'
-                  }}
-                >
-                  {teamMembers.map((member, index) => (
-                    <div
-                      className={`tilt-card delay-${index + 1}`}
-                      key={member.name}
-                      style={{
-                        background: '#fff',
-                        borderRadius: '20px',
-                        padding: '2rem',
-                        border: '1px solid rgba(10,14,61,0.08)',
-                        boxShadow: '0 16px 36px rgba(10, 14, 61, 0.08)',
-                        display: 'grid',
-                        gap: '0.9rem',
-                        textAlign: isArabic ? 'right' : 'left'
-                      }}
-                    >
-                      <div
-                        className="pulse-border"
-                        style={{
-                          width: '72px',
-                          height: '72px',
-                          borderRadius: '18px',
-                          overflow: 'hidden',
-                          background: '#0a0e3d',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          marginInline: isArabic ? '0 0 auto' : '0 auto 0'
-                        }}
-                      >
-                        {member.photo ? (
-                          <Image
-                            src={member.photo}
-                            alt={member.role ? `${member.name}, ${member.role}` : member.name}
-                            width={72}
-                            height={72}
-                            sizes="72px"
-                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                          />
-                        ) : (
-                          <span
-                            style={{
-                              color: '#69E8E1',
-                              fontWeight: 700,
-                              fontSize: '1.4rem'
-                            }}
-                          >
-                            {member.name
-                              .split(' ')
-                              .map((part) => part[0])
-                              .join('')
-                              .slice(0, 2)}
-                          </span>
-                        )}
-                      </div>
-                      <div>
-                        <p
-                          style={{
-                            fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
-                            fontWeight: 700,
-                            color: '#0a0e3d',
-                            textAlign: isArabic ? 'right' : 'left'
-                          }}
-                        >
-                          {member.name}
-                        </p>
-                        <p style={{ color: '#00bcd4', fontWeight: 600, marginBottom: '0.5rem', textAlign: isArabic ? 'right' : 'left' }}>
-                          {member.role}
-                        </p>
-                        <p style={{ color: '#4c4c66', lineHeight: 1.7, textAlign: isArabic ? 'right' : 'left' }}>{member.bio}</p>
-                      </div>
-                    </div>
-                  ))}
                 </div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Newsletter Section */}
-      <section
-        className="fade-section delay-3"
-        style={{
-          background: '#f5fbfb',
-          padding: 'clamp(3rem, 9vw, 5.5rem) clamp(1.5rem, 6vw, 3.5rem)'
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '900px',
-            margin: '0 auto',
-            background: '#fff',
-            borderRadius: '24px',
-            padding: 'clamp(2.2rem, 6vw, 3rem)',
-            boxShadow: '0 20px 40px rgba(10, 14, 61, 0.08)',
-            textAlign: isArabic ? 'right' : 'left'
-          }}
-        >
-          <h3
-            style={{
-              fontSize: 'clamp(1.8rem, 3.5vw, 2.3rem)',
-              fontWeight: 800,
-              color: '#0a0e3d',
-              marginBottom: '1rem',
-              transition: 'all 0.3s ease-in-out'
-            }}
-          >
-            {t('newsletter.title')}
-          </h3>
-          <p
-            style={{
-              color: '#555',
-              lineHeight: 1.8,
-              fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
-              marginBottom: '1.75rem',
-              transition: 'all 0.3s ease-in-out',
-              textAlign: isArabic ? 'right' : 'left'
-            }}
-          >
-            {t('newsletter.subtitle')}
-          </p>
-          <form
-            className="fade-section delay-3"
-            onSubmit={handleNewsletterSubmit}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '1rem',
-              alignItems: 'center',
-              direction: isArabic ? 'rtl' : 'ltr'
-            }}
-          >
-            <input
-              type="email"
-              name="newsletter-email"
-              value={newsletterEmail}
-              onChange={handleNewsletterChange}
-              placeholder={t('newsletter.emailPlaceholder')}
-              style={{
-                padding: '0.9rem 1.2rem',
-                borderRadius: '999px',
-                border: '1px solid #dce0f5',
-                fontSize: '0.95rem',
-                transition: 'all 0.3s ease-in-out',
-                textAlign: isArabic ? 'right' : 'left',
-                color: '#0a0e3d'
-              }}
-              required
-            />
-            <button
-              className="glow-button"
-              type="submit"
-              disabled={newsletterStatus === 'loading'}
-              style={{
-                background: '#00bcd4',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '999px',
-                padding: '0.9rem 2.5rem',
-                fontWeight: 700,
-                fontSize: '0.95rem',
-                cursor: newsletterStatus === 'loading' ? 'not-allowed' : 'pointer',
-                opacity: newsletterStatus === 'loading' ? 0.8 : 1,
-                transition: 'all 0.3s ease-in-out',
-                alignSelf: isArabic ? 'flex-end' : 'flex-start'
-              }}
-            >
-              {newsletterStatus === 'loading' ? t('newsletter.loading') : t('newsletter.cta')}
-            </button>
-          </form>
-          {newsletterStatus !== 'idle' && (
-            <div
-              role="status"
-              aria-live="polite"
-              style={{
-                minHeight: '1.5rem',
-                marginTop: '0.5rem',
-                color: newsletterStatus === 'success' ? '#0a8f44' : '#d03c3c',
-                fontSize: '0.85rem',
-                textAlign: isArabic ? 'right' : 'left'
-              }}
-            >
-              {newsletterMessage}
-            </div>
-          )}
-          <p style={{ color: '#888', fontSize: '0.85rem', marginTop: '1rem', textAlign: isArabic ? 'right' : 'left' }}>
-            {t('newsletter.privacy')}
-          </p>
-        </div>
-      </section>
-
-      {/* Contact Block */}
-      <section
-        style={{
-          padding: 'clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 6vw, 3.5rem)'
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '1100px',
-            margin: '0 auto',
-            background: '#0a0e3d',
-            borderRadius: '24px',
-            padding: 'clamp(2.5rem, 6vw, 3.5rem)',
-            color: '#fff',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-            gap: 'clamp(1.8rem, 5vw, 2.5rem)',
-            textAlign: isArabic ? 'right' : 'left'
-          }}
-        >
-          <div>
-            <h3
-              style={{
-                fontSize: 'clamp(1.7rem, 3.5vw, 2.3rem)',
-                fontWeight: 800,
-                marginBottom: '0.75rem',
-                textAlign: isArabic ? 'right' : 'left'
-              }}
-            >
-              {t('contactBlock.title')}
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.7 }}>
-              {t('contactBlock.subtitle')}
-            </p>
-          </div>
-
-          <div style={{ display: 'grid', gap: '0.75rem', direction: isArabic ? 'rtl' : 'ltr' }}>
-            {contactItems.map((item) => (
-              <div key={item.label} style={{ color: 'rgba(255,255,255,0.75)' }}>
-                <span style={{ color: '#69E8E1', fontWeight: 600 }}>{item.label}</span>
-                <br />
-                <span>{item.value}</span>
+                <div style={{ padding: '1.5rem' }}>
+                  <h3 style={{
+                    fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+                    fontWeight: '700',
+                    color: '#fff',
+                    lineHeight: '1.4',
+                    marginBottom: '0'
+                  }}>
+                    {resource.title}
+                  </h3>
+                </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              gap: '1.5rem',
-              alignItems: isArabic ? 'flex-end' : 'flex-start'
-            }}
-          >
+      {/* CTA Section */}
+      <section style={{
+        position: 'relative',
+        padding: '0 clamp(1.5rem, 5vw, 3rem)',
+        marginBottom: '-5rem',
+        zIndex: 10
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          <div style={{
+            background: '#fff',
+            borderRadius: '24px',
+            padding: 'clamp(3rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem)',
+            textAlign: 'center',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+              fontWeight: '800',
+              lineHeight: '1.2',
+              marginBottom: '1rem',
+              color: '#0a0e3d'
+            }}>
+              Lorem Ipsum Is Simply Dummy Text Of Printing
+            </h2>
+            <p style={{
+              fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
+              lineHeight: '1.6',
+              marginBottom: '2rem',
+              color: '#666',
+              maxWidth: '700px',
+              margin: '0 auto 2rem'
+            }}>
+              Lorem Ipsum Is Simply Dummy Text Of Printing
+            </p>
             <Link
-              href={contactCtaHref}
-              prefetch={false}
+              href={`/${currentLocale}/contact`}
               style={{
-                alignSelf: isArabic ? 'flex-end' : 'flex-start',
-                background: '#69E8E1',
-                color: '#0a0e3d',
-                padding: '0.95rem 2.6rem',
-                borderRadius: '30px',
-                fontWeight: 700,
-                textDecoration: 'none',
-                fontSize: '0.95rem'
+                display: 'inline-block',
+                background: '#1368ff',
+                color: '#fff',
+                border: 'none',
+                padding: 'clamp(0.8rem, 2vw, 1rem) clamp(2rem, 5vw, 3rem)',
+                fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
+                fontWeight: '600',
+                borderRadius: '999px',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 8px 20px rgba(19, 104, 255, 0.3)',
+                textDecoration: 'none'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px rgba(19, 104, 255, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(19, 104, 255, 0.3)';
               }}
             >
-              {t('contactBlock.ctaLabel')}
+              Lorem Ipsum
             </Link>
-            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>
-              {t('contactBlock.note')}
-            </p>
           </div>
         </div>
       </section>

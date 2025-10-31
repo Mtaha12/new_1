@@ -1,18 +1,81 @@
 {
   "HomePage": {
-    "heroTitle": "Expert Consulting. AI-Powered Systems. Transformative Results.",
-    "heroSubtitle": "In a digital world full of threats, The SamurAI stands guard with AI-driven security, real-world simulations, and seasoned strategists.",
+    "heroTitle": "Lorem Ipsum Is Simply",
+    "heroSubtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     "heroSupporting": "Elite expertise, AI precision—securing your future today.",
     "heroPillars": [
       "Expert Consulting",
       "AI-Powered Systems",
       "Transformative Results"
     ],
+    "heroCta": "Get Started",
     "heroPrimaryCta": "Download Benchmark Report",
     "heroPrimaryCtaNote": "Includes highlights from the Miercom 2024 Security Benchmark.",
     "heroSecondaryCta": "Talk to a Security Strategist",
-    "aboutTitle": "Who We Are Defenders Of Your Digital Realm",
-    "aboutDescription": "At The SamurAI, we believe in more than just security. We believe in peace of mind, knowing your digital world is protected, your business is resilient, and your future is secure.",
+    "whoWeAre": "Who We Are",
+    "defendersTitle": "Defenders Of Your Digital Realm",
+    "defendersDescription": "At The SamurAI, we believe in more than just security. We believe in peace of mind, knowing your digital world is protected, your business is resilient, and your future is secure.",
+    "cybersecurityTitle": "Cybersecurity, AI",
+    "cybersecurityDescription": "In today's ever-changing cyber threat landscape, AI-powered cybersecurity is essential.",
+    "itConsultationTitle": "IT Consultation",
+    "itConsultationDescription": "Improve your business technology with expert IT consultation services. Increase efficiency, security, and productivity with tailored solutions.",
+    "cybersecuritySolutionsTitle": "Cybersecurity Solutions",
+    "cybersecuritySolutionsDescription": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
+    "ourServicesTitle": "Our Services",
+    "ourServicesDescription": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
+    "coreValuesTitle": "Core Value Statements",
+    "coreValuesDescription1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "coreValuesDescription2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "resourcesTitle": "Resources",
+    "resourcesDescription": "Stay ahead with research, playbooks, and real-world insights curated by The SamurAI experts.",
+    "ctaTitle": "Lorem Ipsum Is Simply Dummy Text Of Printing",
+    "ctaDescription": "Lorem Ipsum Is Simply Dummy Text Of Printing",
+    "ctaButton": "Lorem Ipsum",
+    "services": {
+      "consulting": "Consulting Services",
+      "consultingDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "infrastructure": "Next Generation Infrastructure",
+      "infrastructureDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "resourcing": "Strategic Resourcing",
+      "resourcingDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "training": "Technology Labs & Training",
+      "trainingDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "managed": "Managed IT",
+      "managedDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "devsecops": "DevSecOps Automation",
+      "devsecopsDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
+    },
+    "solutions": {
+      "identity": "Identity And Access Management",
+      "lorem": "Lorem Ipsum",
+      "zeroTrust": "Zero-Trust",
+      "cloudSecurity": "Cloud Security",
+      "networkSecurity": "Network Security",
+      "endpointSecurity": "Endpoint Security"
+    },
+    "resourcesCards": [
+      {
+        "title": "Top 10 Penetration Testing Tools Cybersecurity Experts Are Using Right Now",
+        "description": "Benchmark the tooling stack trusted by elite red teams to stress-test enterprise defenses.",
+        "emoji": "🔐",
+        "slug": "blog/penetration-testing-tools-shaping-2025",
+        "cta": "Read Article"
+      },
+      {
+        "title": "Top Cybersecurity Services Businesses Need in 2025",
+        "description": "Prioritize the managed offerings that keep hybrid environments resilient and compliant.",
+        "emoji": "🛡️",
+        "slug": "blog/security-service-bundles-modern-enterprises-need",
+        "cta": "Explore Guide"
+      },
+      {
+        "title": "Black Hat USA 2025 Field Notes",
+        "description": "Review the top research, demos, and sessions shaping the second half of 2025.",
+        "emoji": "🎩",
+        "slug": "blog/black-hat-usa-2025-field-notes",
+        "cta": "View Recap"
+      }
+    ],
     "partnersTitle": "Why SentinelOne?",
     "partnersHeadline": "Trusted by global innovators and security leaders",
     "partnersSubheadline": "From AI-first scaleups to regulated enterprises, our alliances keep you ahead of every threat curve.",
@@ -232,15 +295,6 @@
     "consultationButton": "Contact us for professional consultation today",
     "solutionsTitle": "Cybersecurity Solutions",
     "solutionsIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
-    "solutions": {
-      "aiSecurity": "AI Security For LLMs",
-      "identity": "Identity And Access Management",
-      "lorem": "Lorem Ipsum",
-      "zeroTrust": "Zero-Trust",
-      "network": "Network Security",
-      "cloud": "Cloud Security",
-      "endpoint": "Endpoint Security"
-    },
     "servicesTitle": "Our Services",
     "servicesIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
     "services": {
@@ -855,35 +909,6 @@
     "managedIT": "Managed IT",
     "devsecops": "DevSecOps Automation"
   },
-  "Hero": {
-    "title": "Welcome to thesamurai",
-    "subtitle": "Building the future with innovative solutions",
-    "cta": "Get Started"
-  },
-  "Features": {
-    "title": "Our Features",
-    "feature1": "Fast Development",
-    "feature2": "Secure Platform",
-    "feature3": "24/7 Support",
-    "feature4": "Scalable Solutions"
-  },
-  "Stats": {
-    "clients": "Happy Clients",
-    "projects": "Projects Completed",
-    "awards": "Awards Won",
-    "team": "Team Members"
-  },
-  "Footer": {
-    "company": "thesamurai",
-    "description": "Building innovative solutions for tomorrow",
-    "quickLinks": "Quick Links",
-    "rights": "All rights reserved.",
-    "contactUs": "Talk to our team",
-    "emailLabel": "Email",
-    "phoneLabel": "Phone",
-    "email": "hello@thesamurai.com",
-    "phone": "+1 (855) 425-8383"
-  },
   "ContactForm": {
     "title": "Get in touch",
     "subtitle": "We're here to help with security assessments, incident response, and strategic advisory.",
@@ -944,6 +969,45 @@
       "contact": "You can reach us at info@thesamurai.com or call +1 (555) 123-4567. You can also fill out our contact form for detailed inquiries.",
       "thanks": "You're welcome! Is there anything else I can help you with?",
       "default": "I understand. For more detailed assistance, please contact our support team or fill out the contact form. Is there anything else I can help with?"
+    }
+  },
+  "Footer": {
+    "company": "thesamurai",
+    "description": "Building innovative solutions for tomorrow",
+    "quickLinks": "Quick Links",
+    "rights": "All rights reserved.",
+    "contactUs": "Talk to our team",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "email": "hello@thesamurai.com",
+    "phone": "+1 (855) 425-8383"
+  },
+  "FooterResources": {
+    "brand": "The SamurAI",
+    "title": "Resources",
+    "subtitle": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
+    "cards": {
+      "card1": {
+        "title": "Top 10 Penetration Testing Tools Cybersecurity Experts Are Using Right Now",
+        "description": "Benchmark the tooling stack trusted by elite red teams to stress-test enterprise defenses.",
+        "href": "/resources/top-penetration-testing-tools"
+      },
+      "card2": {
+        "title": "Top Cybersecurity Services Businesses Need in 2025",
+        "description": "Prioritize the managed offerings that keep hybrid environments resilient and compliant.",
+        "href": "/resources/cybersecurity-services-2025"
+      },
+      "card3": {
+        "title": "Black Hat USA 2025 Closes Out on a High Note in Las Vegas",
+        "description": "Catch the executive takeaways and threat intelligence reveals shaping next year's roadmap.",
+        "href": "/resources/black-hat-usa-2025-recap"
+      }
+    },
+    "cta": {
+      "title": "Lorem Ipsum Is Simply Dummy Text Of Printing",
+      "subtitle": "Lorem Ipsum Is Simply Dummy Text Of Printing",
+      "button": "Lorem Ipsum",
+      "href": "/contact"
     }
   }
 }
