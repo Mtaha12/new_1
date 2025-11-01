@@ -16,18 +16,8 @@ export default function HomePage() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [currentBlogIndex, setCurrentBlogIndex] = useState(0);
   const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
-  const [canUseHeroVideo, setCanUseHeroVideo] = useState(() => {
-    if (typeof window === 'undefined') {
-      return true;
-    }
-    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  });
-  const [isSmallViewport, setIsSmallViewport] = useState(() => {
-    if (typeof window === 'undefined') {
-      return false;
-    }
-    return window.innerWidth < 768;
-  });
+  const [canUseHeroVideo, setCanUseHeroVideo] = useState(false);
+  const [isSmallViewport, setIsSmallViewport] = useState(false);
   const whoWeAreCards = [
     { icon: '🔒', title: t('cybersecurityTitle'), desc: t('cybersecurityDescription') },
     { icon: '💡', title: t('itConsultationTitle'), desc: t('itConsultationDescription') }
@@ -38,6 +28,8 @@ export default function HomePage() {
     { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
     { text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' }
   ];
+
+  const MAX_CONTAINER_WIDTH = 'min(1140px, 100%)';
 
   const services = [
     {
@@ -113,6 +105,7 @@ export default function HomePage() {
     };
 
     handleResize();
+    handleMotionChange();
     window.addEventListener('resize', handleResize);
     motionMedia.addEventListener?.('change', handleMotionChange);
 
@@ -195,7 +188,7 @@ export default function HomePage() {
             zIndex: 1
           }}
         />
-        <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <h1 style={{
             fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
             fontWeight: '700',
@@ -215,6 +208,7 @@ export default function HomePage() {
           </p>
           <Link
             href={`/${currentLocale}/contact`}
+            className="glow-button hero-cta"
             style={{
               display: 'inline-block',
               background: '#00bcd4',
@@ -224,16 +218,7 @@ export default function HomePage() {
               fontSize: '1rem',
               fontWeight: '600',
               textDecoration: 'none',
-              transition: 'all 0.3s ease',
               boxShadow: '0 4px 15px rgba(0, 188, 212, 0.3)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-3px)';
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 188, 212, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 188, 212, 0.3)';
             }}
           >
             {t('heroCta') || 'Get Started'}
@@ -255,7 +240,7 @@ export default function HomePage() {
       >
         <div
           style={{
-            maxWidth: 'min(1200px, 100%)',
+            maxWidth: MAX_CONTAINER_WIDTH,
             margin: '0 auto',
             position: 'relative',
             zIndex: 6
@@ -303,22 +288,14 @@ export default function HomePage() {
               {['ForgeRock', 'Microsoft Azure', 'SentinelOne', 'PingIdentity', 'THALES', 'okta'].map((partner, index) => (
                 <div
                   key={partner}
+                  className={`partner-chip delay-${(index % 5) + 1}`}
                   style={{
                     color: '#ffffff',
                     fontWeight: 600,
                     fontSize: 'clamp(0.85rem, 1.6vw, 1.05rem)',
                     letterSpacing: '0.06em',
                     opacity: 0.9,
-                    transition: 'transform 0.3s ease, opacity 0.3s ease',
                     animation: `fadeIn 0.5s ease-out ${index * 0.08}s backwards`
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-3px)';
-                    e.currentTarget.style.opacity = '1';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.opacity = '0.9';
                   }}
                 >
                   {partner}
@@ -348,7 +325,7 @@ export default function HomePage() {
         direction: isArabic ? 'rtl' : 'ltr'
       }}>
         <div style={{
-          maxWidth: '1200px',
+          maxWidth: MAX_CONTAINER_WIDTH,
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: isSmallViewport ? '1fr' : 'minmax(0, 1fr) minmax(0, 1fr)',
@@ -397,6 +374,7 @@ export default function HomePage() {
               {visibleCards.map((card, idx) => (
                 <div
                   key={`${card.title}-${idx}`}
+                  className={`who-card tilt-card hover-glow delay-${(idx % 3) + 1}`}
                   style={{
                     width: isSmallViewport ? '100%' : 'clamp(240px, 38vw, 320px)',
                     background: '#fff',
@@ -406,16 +384,7 @@ export default function HomePage() {
                     boxShadow: '0 25px 40px rgba(10, 14, 61, 0.08)',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '1.25rem',
-                    transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-6px)';
-                    e.currentTarget.style.boxShadow = '0 32px 60px rgba(10, 14, 61, 0.12)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 25px 40px rgba(10, 14, 61, 0.08)';
+                    gap: '1.25rem'
                   }}
                 >
                   <div style={{
@@ -545,7 +514,7 @@ export default function HomePage() {
         animation: 'fadeIn 1s ease-in'
       }}>
         <div style={{
-          maxWidth: '1200px',
+          maxWidth: MAX_CONTAINER_WIDTH,
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))',
@@ -575,31 +544,16 @@ export default function HomePage() {
                 { key: 'cloudSecurity', name: t('solutions.cloudSecurity'), highlight: false },
                 { key: 'endpointSecurity', name: t('solutions.endpointSecurity'), highlight: false }
               ].map((solution) => (
-                <div 
-                  key={solution.key} 
+                <div
+                  key={solution.key}
+                  className={`solution-chip ${solution.highlight ? 'solution-chip--highlight' : ''}`}
                   style={{
                     background: solution.highlight ? '#69E8E1' : 'rgba(255,255,255,0.05)',
                     padding: '1rem 1.5rem',
                     borderRadius: '8px',
                     color: solution.highlight ? '#0a0e3d' : '#fff',
                     fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
-                    fontWeight: solution.highlight ? '600' : '400',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!solution.highlight) {
-                      e.currentTarget.style.background = '#69E8E1';
-                      e.currentTarget.style.color = '#0a0e3d';
-                      e.currentTarget.style.fontWeight = '600';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!solution.highlight) {
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                      e.currentTarget.style.color = '#fff';
-                      e.currentTarget.style.fontWeight = '400';
-                    }
+                    fontWeight: solution.highlight ? '600' : '400'
                   }}
                 >
                   {solution.name}
@@ -644,7 +598,7 @@ export default function HomePage() {
           zIndex: 0
         }} />
         <div style={{
-          maxWidth: '1200px',
+          maxWidth: MAX_CONTAINER_WIDTH,
           margin: '0 auto',
           textAlign: 'center',
           position: 'relative',
@@ -679,6 +633,7 @@ export default function HomePage() {
                 key={service.key}
                 href={service.href}
                 prefetch={false}
+                className="service-card service-card--home"
                 style={{
                   background: service.gradient,
                   padding: '2.2rem',
@@ -689,16 +644,7 @@ export default function HomePage() {
                   textDecoration: 'none',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '1.5rem',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px)';
-                  e.currentTarget.style.boxShadow = '0 32px 60px rgba(4, 11, 38, 0.45)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 24px 45px rgba(4, 11, 38, 0.35)';
+                  gap: '1.5rem'
                 }}
               >
                 <div style={{
@@ -762,7 +708,7 @@ export default function HomePage() {
           padding: 'clamp(3rem, 20vw, 3rem) clamp(3rem, 20vw, 2rem)'
         }}>
           <div style={{
-            maxWidth: '1200px',
+            maxWidth: MAX_CONTAINER_WIDTH,
             margin: '0 auto'
           }}>
             <h2 style={{
@@ -777,7 +723,7 @@ export default function HomePage() {
           </div>
         </div>
         <div style={{
-          maxWidth: '1200px',
+          maxWidth: MAX_CONTAINER_WIDTH,
           margin: '0 auto',
           padding: 'clamp(3rem, 5vw, 4rem) clamp(1rem, 5vw, 2rem)',
           display: 'grid',
@@ -858,7 +804,7 @@ export default function HomePage() {
         background: '#fff',
         direction: isArabic ? 'rtl' : 'ltr'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
           <h2 style={{
             fontSize: 'clamp(2rem, 5vw, 3rem)',
             fontWeight: '800',
@@ -891,21 +837,12 @@ export default function HomePage() {
             ].map((resource, index) => (
               <div
                 key={index}
+                className={`resource-card tilt-card delay-${(index % 3) + 1}`}
                 style={{
                   background: '#0a0e3d',
                   borderRadius: '16px',
                   overflow: 'hidden',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  transition: 'all 0.3s ease',
-                  cursor: 'pointer'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px)';
-                  e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
                 }}
               >
                 <div style={{
@@ -958,7 +895,7 @@ export default function HomePage() {
         zIndex: 10
       }}>
         <div style={{
-          maxWidth: '1200px',
+          maxWidth: MAX_CONTAINER_WIDTH,
           margin: '0 auto'
         }}>
           <div style={{

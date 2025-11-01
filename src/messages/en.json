@@ -706,7 +706,13 @@
     "ctaSecondary": "View client outcomes",
     "ctaSecondaryHref": "case-studies",
     "supportTitle": "Connected outcomes",
-    "supportSummary": "Our services interlock to deliver faster, measurable results across security, infrastructure, and operations."
+    "supportSummary": "Our services interlock to deliver faster, measurable results across security, infrastructure, and operations.",
+    "navigationTitle": "Explore our capabilities",
+    "navigationSubtitle": "Jump straight into the service that fits your initiative—each engagement combines advisory, delivery, and enablement.",
+    "viewServiceLabel": "View service",
+    "resourcesTitle": "Resources to accelerate your roadmap",
+    "resourcesSubtitle": "Hand-picked guides and case studies from our service teams to help you plan ahead.",
+    "resourcesCTA": "Read resource"
   },
   "Common": {
     "learnMore": "Learn More",
@@ -873,31 +879,81 @@
       "hero": "Next Generation Infrastructure",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Build cutting-edge infrastructure solutions that scale with your business needs.",
       "getStarted": "Get Started",
-      "infrastructure": "Next Generation Infrastructure"  
+      "infrastructure": "Next Generation Infrastructure",
+      "section1Title": "Modernize Your Core Systems",
+      "section1Para1": "Design hybrid and multi-cloud architectures that keep mission critical workloads performant, compliant, and resilient.",
+      "section1Para2": "From network segmentation to observability, we blueprint infrastructure foundations that accelerate transformation while managing risk.",
+      "section2Title": "Operate With Intelligence",
+      "section2Para1": "Automate day-two operations with infrastructure as code, proactive monitoring, and AI-enabled incident response playbooks.",
+      "section2Para2": "Our specialists embed with your teams to uplift capabilities, ensure knowledge transfer, and unlock continuous improvement.",
+      "resources": "Resources",
+      "resourcesIntro": "Explore briefs, templates, and playbooks to help your teams deliver scalable, secure infrastructure modernization initiatives.",
+      "ctaTitle": "Ready to accelerate your infrastructure evolution?",
+      "ctaDesc": "Partner with The SamurAI to design, deploy, and operate resilient platforms tailored to your growth goals."
     },
     "resourcing": {
       "hero": "Strategic Resourcing",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Access top-tier talent and strategic resources to power your digital initiatives.",
       "exploreSolutions": "Explore Solutions",
-      "resourcing": "Strategic Resourcing" 
+      "resourcing": "Strategic Resourcing",
+      "section1Title": "Build The Right Team Fast",
+      "section1Para1": "Tap into a curated bench of cybersecurity, cloud, and automation experts ready to embed within your programs.",
+      "section1Para2": "We align specialist talent to your delivery roadmap, ensuring velocity without compromising governance or quality.",
+      "section2Title": "Scale As Demands Shift",
+      "section2Para1": "Orchestrate elastic capacity across regions and time zones with outcome-based engagement models.",
+      "section2Para2": "Gain transparent performance dashboards, knowledge capture rituals, and succession plans for long-term resilience.",
+      "resources": "Resources",
+      "resourcesIntro": "Discover playbooks and insights that help talent leaders orchestrate high-performing, security-first delivery teams.",
+      "ctaTitle": "Need mission-ready experts on demand?",
+      "ctaDesc": "Let us assemble tailored squads that plug skill gaps, accelerate initiatives, and transfer capability to your teams."
     },
     "training": {
       "hero": "Technology Labs & Training",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empower your team with the knowledge and skills needed to succeed in the digital landscape.",
       "joinProgram": "Join Program",
-      "training": "Technology Labs & Training"
+      "training": "Technology Labs & Training",
+      "section1Title": "Experiential Learning Journeys",
+      "section1Para1": "Deliver instructor-led labs, cyber ranges, and simulation drills that mirror real-world threat landscapes.",
+      "section1Para2": "Participants gain hands-on mastery across zero trust, cloud security, SOC automation, and secure-by-design practices.",
+      "section2Title": "Upskill Teams At Scale",
+      "section2Para1": "Blend modular curricula, certifications, and mentorship frameworks that align to your capability roadmap.",
+      "section2Para2": "Our learning scientists track proficiency gains, personalize pathways, and embed reinforcement rituals for lasting impact.",
+      "resources": "Resources",
+      "resourcesIntro": "Access learning kits, lab guides, and readiness assessments to launch continuous enablement programs.",
+      "ctaTitle": "Ignite continuous learning across your teams",
+      "ctaDesc": "Co-design an enablement strategy with The SamurAI to evolve skills, retain talent, and outpace emerging threats."
     },
     "managedIT": {
       "hero": "Managed IT",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Comprehensive managed IT services to keep your business running smoothly.",
       "contactUs": "Contact Us",
-      "managedIT": "Managed IT"  
+      "managedIT": "Managed IT",
+      "section1Title": "Proactive Operations 24/7",
+      "section1Para1": "Stabilize mission-critical platforms with continuous monitoring, patch orchestration, and automated remediation.",
+      "section1Para2": "Our global command center blends AI insights with veteran engineers to resolve incidents before they impact users.",
+      "section2Title": "Optimize And Transform",
+      "section2Para1": "Leverage FinOps, platform engineering, and lifecycle management services aligned to business KPIs.",
+      "section2Para2": "We co-create modernization roadmaps, ensuring secure adoption of cloud, SaaS, and workplace innovations.",
+      "resources": "Resources",
+      "resourcesIntro": "Browse guides on managed services governance, SLA design, and operations modernization best practices.",
+      "ctaTitle": "Looking for a strategic managed services partner?",
+      "ctaDesc": "Partner with The SamurAI to elevate reliability, reduce TCO, and give your teams space to innovate."
     },
     "devsecops": {
       "hero": "DevSecOps Automation",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Streamline development, security, and operations with advanced automation.",
       "learnMore": "Learn More",
-      "devsecops": "DevSecOps Automation"  
+      "devsecops": "DevSecOps Automation",
+      "section1Title": "Ship Secure Software Faster",
+      "section1Para1": "Embed threat modeling, SAST/DAST, and IaC scanning into developer toolchains without slowing delivery.",
+      "section1Para2": "We help teams standardize guardrails that scale across microservices, APIs, and cloud-native workloads.",
+      "section2Title": "Automate Continuous Assurance",
+      "section2Para1": "Instrument policy as code, security observability, and automated compliance evidence collection.",
+      "section2Para2": "Our experts integrate platform engineering and SecOps to maintain a resilient, auditable SDLC.",
+      "resources": "Resources",
+      "resourcesIntro": "Dive into reference architectures and automation patterns that align Dev, Sec, and Ops teams.",
+      "ctaTitle": "Transform your software supply chain",
+      "ctaDesc": "Unlock speed and security with The SamurAI’s DevSecOps accelerators, coaching, and platform expertise."
     }
   },
   "Services": {
