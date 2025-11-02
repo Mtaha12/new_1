@@ -8,6 +8,14 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
+type HomeResourceCard = {
+  title: string;
+  description?: string;
+  slug?: string;
+  tag?: string;
+  image?: string;
+};
+
 export default function HomePage() {
   const t = useTranslations('HomePage');
   const pathname = usePathname() ?? '/en';
@@ -142,6 +150,16 @@ export default function HomePage() {
         whoWeAreCards[(currentCardIndex + offset) % whoWeAreCards.length]
       )
     : [];
+
+  const resourcesTitle = t('resourcesTitle');
+  const resourcesDescription = t('resourcesDescription');
+  const resourcesRaw = t.raw('resourcesCards');
+  const resourcesCards: HomeResourceCard[] = Array.isArray(resourcesRaw)
+    ? (resourcesRaw as HomeResourceCard[])
+    : [];
+  const ctaTitle = t('ctaTitle');
+  const ctaDescription = t('ctaDescription');
+  const ctaButton = t('ctaButton');
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff', direction: isArabic ? 'rtl' : 'ltr' }}>
@@ -813,7 +831,7 @@ export default function HomePage() {
             marginBottom: '1rem',
             textAlign: 'center'
           }}>
-            Resources
+            {resourcesTitle}
           </h2>
           <p style={{
             color: '#666',
@@ -823,18 +841,14 @@ export default function HomePage() {
             fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
             textAlign: 'center'
           }}>
-            Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.
+            {resourcesDescription}
           </p>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
             gap: '2rem'
           }}>
-            {[
-              { img: '/img/resource1.jpg', title: 'Top 10 Penetration Testing Tools Cybersecurity Experts Are Using Right Now', tag: 'Cybersecurity' },
-              { img: '/img/resource2.jpg', title: 'Top Cybersecurity Services Businesses Need in 2025', tag: 'Cybersecurity' },
-              { img: '/img/resource3.jpg', title: 'Black Hat USA 2025 Closes Out on a High Note in Las Vegas', tag: 'Black Hat' }
-            ].map((resource, index) => (
+            {resourcesCards.map((resource, index) => (
               <div
                 key={index}
                 className={`resource-card tilt-card delay-${(index % 3) + 1}`}
@@ -851,7 +865,7 @@ export default function HomePage() {
                   height: '200px'
                 }}>
                   <Image
-                    src={resource.img}
+                    src={resource.image || '/img/resource1.jpg'}
                     alt={resource.title}
                     fill
                     style={{ objectFit: 'cover' }}
@@ -859,7 +873,7 @@ export default function HomePage() {
                   <div style={{
                     position: 'absolute',
                     top: '1rem',
-                    left: '1rem',
+                    ...(isArabic ? { right: '1rem' } : { left: '1rem' }),
                     background: '#fff',
                     padding: '0.5rem 1rem',
                     borderRadius: '6px',
@@ -867,7 +881,7 @@ export default function HomePage() {
                     fontWeight: '600',
                     color: '#0a0e3d'
                   }}>
-                    {resource.tag}
+                    {resource.tag ?? ''}
                   </div>
                 </div>
                 <div style={{ padding: '1.5rem' }}>
@@ -876,10 +890,24 @@ export default function HomePage() {
                     fontWeight: '700',
                     color: '#fff',
                     lineHeight: '1.4',
-                    marginBottom: '0'
+                    marginBottom: resource.description ? '0.75rem' : '0',
+                    textAlign: isArabic ? 'right' : 'left'
                   }}>
                     {resource.title}
                   </h3>
+                  {resource.description && (
+                    <p
+                      style={{
+                        color: 'rgba(255,255,255,0.85)',
+                        lineHeight: 1.6,
+                        margin: 0,
+                        textAlign: isArabic ? 'right' : 'left',
+                        fontSize: '0.9rem'
+                      }}
+                    >
+                      {resource.description}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
@@ -912,7 +940,7 @@ export default function HomePage() {
               marginBottom: '1rem',
               color: '#0a0e3d'
             }}>
-              Lorem Ipsum Is Simply Dummy Text Of Printing
+              {ctaTitle}
             </h2>
             <p style={{
               fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
@@ -922,7 +950,7 @@ export default function HomePage() {
               maxWidth: '700px',
               margin: '0 auto 2rem'
             }}>
-              Lorem Ipsum Is Simply Dummy Text Of Printing
+              {ctaDescription}
             </p>
             <Link
               href={`/${currentLocale}/contact`}
@@ -949,7 +977,7 @@ export default function HomePage() {
                 e.currentTarget.style.boxShadow = '0 8px 20px rgba(19, 104, 255, 0.3)';
               }}
             >
-              Lorem Ipsum
+              {ctaButton}
             </Link>
           </div>
         </div>

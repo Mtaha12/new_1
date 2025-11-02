@@ -59,21 +59,27 @@
         "description": "Benchmark the tooling stack trusted by elite red teams to stress-test enterprise defenses.",
         "emoji": "🔐",
         "slug": "blog/penetration-testing-tools-shaping-2025",
-        "cta": "Read Article"
+        "cta": "Read Article",
+        "tag": "Cybersecurity",
+        "image": "/img/resource1.jpg"
       },
       {
         "title": "Top Cybersecurity Services Businesses Need in 2025",
         "description": "Prioritize the managed offerings that keep hybrid environments resilient and compliant.",
         "emoji": "🛡️",
         "slug": "blog/security-service-bundles-modern-enterprises-need",
-        "cta": "Explore Guide"
+        "cta": "Explore Guide",
+        "tag": "Cybersecurity",
+        "image": "/img/resource2.jpg"
       },
       {
         "title": "Black Hat USA 2025 Field Notes",
         "description": "Review the top research, demos, and sessions shaping the second half of 2025.",
         "emoji": "🎩",
         "slug": "blog/black-hat-usa-2025-field-notes",
-        "cta": "View Recap"
+        "cta": "View Recap",
+        "tag": "Black Hat",
+        "image": "/img/resource3.jpg"
       }
     ],
     "partnersTitle": "Why SentinelOne?",
@@ -432,36 +438,86 @@
       "heroTitle": "AI Security for LLMs",
       "heroSubtitle": "Shield large language models, prompts, and training pipelines from adversarial manipulation and data leakage.",
       "heroSupporting": "We combine offensive simulations with automated guardrails so your generative AI remains trusted and compliant.",
+      "heroGradient": "linear-gradient(135deg, #0a1f63 0%, #1346a3 45%, #0fd4e8 100%)",
       "primaryCta": "Schedule an AI threat simulation",
       "primaryCtaHref": "contact?topic=ai-security",
       "secondaryCta": "Download the AI security playbook",
       "secondaryCtaHref": "#ai-security-playbook",
       "overviewTitle": "Secure every stage of the model lifecycle",
-      "overviewParagraphs": [
-        "From data sourcing to in-production inference, The SamurAI hardens each point where attackers can poison prompts, exfiltrate data, or jailbreak controls.",
-        "Our red and blue teams operate as one fusion unit, delivering prioritized mitigations so you can innovate responsibly."
-      ],
+      "overviewParagraphs": [],
       "highlightsTitle": "Why organizations choose The SamurAI",
-      "highlights": [
-        { "icon": "🧠", "title": "AI-native expertise", "description": "Specialists in LLM red teaming, adversarial prompting, and safety evaluations." },
-        { "icon": "🛡️", "title": "Guardrail automation", "description": "Deploy policy-as-code to quarantine risky outputs before they reach users." },
-        { "icon": "⚖️", "title": "Compliance ready", "description": "Map every recommendation to evolving regulations and internal governance." }
-      ],
+      "highlights": [],
       "useCasesTitle": "Use cases we harden",
-      "useCases": [
-        { "icon": "💬", "title": "Customer copilots", "description": "Prevent prompt injection and sensitive data disclosure in chat experiences." },
-        { "icon": "🧾", "title": "Document summarization", "description": "Detect and block data poisoning attempts in ingestion pipelines." },
-        { "icon": "🔍", "title": "Search augmentation", "description": "Ensure retrieval-augmented generation respects entitlements and privacy." }
-      ],
+      "useCases": [],
       "ctaTitle": "Ready to secure your AI?",
       "ctaSubtitle": "Our fusion teams deliver prioritized remediation plans in two weeks or less.",
       "ctaButton": "Book a working session",
-      "ctaHref": "contact?topic=ai-security"
+      "ctaHref": "contact?topic=ai-security",
+      "sections": [
+        {
+          "title": "Secure every AI workflow",
+          "description": "Build confidence from data intake to inference with layered defenses wrapped around your LLM initiatives.",
+          "paragraphs": [
+            "Harden training pipelines against poisoning attempts and ensure guardrails catch prompt injection in real time.",
+            "Empower product and governance teams with shared playbooks so trusted AI outcomes move from ideation to launch faster."
+          ],
+          "image": { "src": "/img/s1.jpg", "alt": "Security specialists reviewing AI risk dashboards" }
+        },
+        {
+          "title": "Operationalize automated guardrails",
+          "description": "Blend adversarial testing, policy-as-code, and continuous monitoring to keep every deployment compliant across regions.",
+          "paragraphs": [
+            "We wire fusion-team findings directly into CI/CD pipelines to stop regressions before they leave the lab.",
+            "Automated evidence packs map every control to executive scorecards and regulatory reporting."
+          ],
+          "image": { "src": "/img/s2.jpg", "alt": "Team deploying AI guardrails in production" },
+          "reversed": true
+        }
+      ],
+      "otherSolutionsTitle": "Other Solutions",
+      "otherSolutions": [
+        {
+          "title": "Identity & Access Management",
+          "description": "Unify governance and adaptive controls to protect every identity interacting with your AI estate.",
+          "href": "solutions/identity-management"
+        },
+        {
+          "title": "Zero-Trust Security",
+          "description": "Continuously verify users, devices, and services powering AI workloads across hybrid environments.",
+          "href": "solutions/zero-trust"
+        },
+        {
+          "title": "Endpoint Security",
+          "description": "Extend autonomous detection and response across developer workstations and training infrastructure.",
+          "href": "solutions/endpoint-security"
+        }
+      ],
+      "resourcesTitle": "Resources to accelerate AI resilience",
+      "resourcesSubtitle": "Download playbooks and guides our fusion teams rely on to secure enterprise LLM programs.",
+      "resourcesCta": "Explore resource",
+      "resources": [
+        {
+          "title": "Enterprise LLM Risk Playbook",
+          "description": "Frameworks to evaluate prompt safety, data governance, and model monitoring.",
+          "href": "resources/enterprise-llm-risk-playbook"
+        },
+        {
+          "title": "Red Teaming Generative AI",
+          "description": "Run advanced attack simulations to expose jailbreaks and data exfiltration paths.",
+          "href": "resources/red-teaming-generative-ai"
+        },
+        {
+          "title": "AI Governance Checklist",
+          "description": "Align stakeholders on policies, approvals, and automated guardrails before launch.",
+          "href": "resources/ai-governance-checklist"
+        }
+      ]
     },
     "identityManagement": {
       "heroTitle": "Identity and Access Management",
       "heroSubtitle": "Unify governance, authentication, and privilege controls across cloud and legacy estates.",
       "heroSupporting": "We modernize IAM with adaptive policies that keep users productive while eliminating excess risk.",
+      "heroGradient": "linear-gradient(135deg, #10255f 0%, #1e3b8a 45%, #5cc6ff 100%)",
       "primaryCta": "Schedule an IAM architecture review",
       "primaryCtaHref": "contact?topic=identity",
       "secondaryCta": "Download the identity modernization checklist",
@@ -486,12 +542,64 @@
       "ctaTitle": "Unlock secure, seamless access",
       "ctaSubtitle": "Align identity strategy with business velocity and regulatory needs.",
       "ctaButton": "Talk with an identity strategist",
-      "ctaHref": "contact?topic=identity"
+      "ctaHref": "contact?topic=identity",
+      "sections": [
+        {
+          "title": "Modernize governance across the enterprise",
+          "description": "Map roles, entitlements, and approvals to a unified policy engine that scales from headquarters to remote teams.",
+          "image": { "src": "/img/s3.jpg", "alt": "Leaders collaborating on identity governance strategy" }
+        },
+        {
+          "title": "Deliver seamless, adaptive access",
+          "description": "Introduce contextual authentication and just-in-time privilege so users stay productive without increasing risk.",
+          "image": { "src": "/img/s4.jpg", "alt": "Professional signing in with adaptive MFA" },
+          "reversed": true
+        }
+      ],
+      "otherSolutionsTitle": "Other Solutions",
+      "otherSolutions": [
+        {
+          "title": "AI Security for LLMs",
+          "description": "Protect training data, prompts, and outputs with proactive guardrails.",
+          "href": "solutions/ai-security"
+        },
+        {
+          "title": "Zero-Trust Security",
+          "description": "Shrink the blast radius of compromised credentials with adaptive segmentation.",
+          "href": "solutions/zero-trust"
+        },
+        {
+          "title": "Network Security",
+          "description": "Maintain policy consistency across hybrid networks and SaaS ecosystems.",
+          "href": "solutions/network-security"
+        }
+      ],
+      "resourcesTitle": "Resources to advance IAM",
+      "resourcesSubtitle": "Blueprints and guides to streamline governance, compliance, and user experiences.",
+      "resourcesCta": "Explore resource",
+      "resources": [
+        {
+          "title": "IAM Operating Model Template",
+          "description": "Define accountable roles, escalation paths, and decision matrices.",
+          "href": "resources/iam-operating-model-template"
+        },
+        {
+          "title": "Adaptive MFA Buyer’s Guide",
+          "description": "Compare platforms that balance UX with strong risk signals.",
+          "href": "resources/adaptive-mfa-buyers-guide"
+        },
+        {
+          "title": "Compliance Audit Toolkit",
+          "description": "Automate evidence gathering and reporting across regions.",
+          "href": "resources/iam-compliance-audit-toolkit"
+        }
+      ]
     },
     "zeroTrust": {
       "heroTitle": "Zero-Trust Security",
       "heroSubtitle": "Continuously verify users, devices, and applications before granting access to critical assets.",
       "heroSupporting": "Our zero-trust architects design pragmatic roadmaps that deliver measurable risk reduction from day one.",
+      "heroGradient": "linear-gradient(135deg, #0e1c5c 0%, #1f2f86 40%, #00c8d2 100%)",
       "primaryCta": "Launch a zero-trust assessment",
       "primaryCtaHref": "contact?topic=zero-trust",
       "secondaryCta": "Download the zero-trust roadmap",
@@ -516,12 +624,64 @@
       "ctaTitle": "Make zero trust actionable",
       "ctaSubtitle": "Turn high-level frameworks into an execution-ready program.",
       "ctaButton": "Start your roadmap",
-      "ctaHref": "contact?topic=zero-trust"
+      "ctaHref": "contact?topic=zero-trust",
+      "sections": [
+        {
+          "title": "Sequence identity, device, and network controls",
+          "description": "Prioritize foundational capabilities that deliver quick wins while building toward full continuous verification.",
+          "image": { "src": "/img/s5.jpg", "alt": "Architect planning zero-trust roadmap" }
+        },
+        {
+          "title": "Operationalize automation everywhere",
+          "description": "Codify segmentation, telemetry, and policy updates so your program scales without manual effort.",
+          "image": { "src": "/img/s6.jpg", "alt": "Engineers enabling zero-trust automations" },
+          "reversed": true
+        }
+      ],
+      "otherSolutionsTitle": "Other Solutions",
+      "otherSolutions": [
+        {
+          "title": "Network Security",
+          "description": "Introduce adaptive segmentation and telemetry across hybrid environments.",
+          "href": "solutions/network-security"
+        },
+        {
+          "title": "Cloud Security",
+          "description": "Establish consistent guardrails across multi-cloud estates.",
+          "href": "solutions/cloud-security"
+        },
+        {
+          "title": "Identity & Access Management",
+          "description": "Align authentication and authorization with zero-trust policies.",
+          "href": "solutions/identity-management"
+        }
+      ],
+      "resourcesTitle": "Zero-trust resources",
+      "resourcesSubtitle": "Guides to help your teams move from theory to measurable implementation.",
+      "resourcesCta": "Explore resource",
+      "resources": [
+        {
+          "title": "Zero-Trust Roadmap Workbook",
+          "description": "Prioritize initiatives, timelines, and success metrics in a single plan.",
+          "href": "resources/zero-trust-roadmap-workbook"
+        },
+        {
+          "title": "Executive Zero-Trust Brief",
+          "description": "Communicate outcomes and investment needs to stakeholders.",
+          "href": "resources/executive-zero-trust-brief"
+        },
+        {
+          "title": "Automation Blueprint",
+          "description": "Implement policy-as-code and continuous monitoring pipelines.",
+          "href": "resources/zero-trust-automation-blueprint"
+        }
+      ]
     },
     "cloudSecurity": {
       "heroTitle": "Cloud Security",
       "heroSubtitle": "Gain continuous visibility and control across multi-cloud environments without slowing delivery.",
       "heroSupporting": "We operationalize CSPM, CWPP, and CIEM so teams can build fast while staying compliant.",
+      "heroGradient": "linear-gradient(135deg, #0a2557 0%, #164b8c 40%, #32d1ff 100%)",
       "primaryCta": "Book a cloud posture review",
       "primaryCtaHref": "contact?topic=cloud-security",
       "secondaryCta": "Download the cloud guardrail guide",
@@ -546,12 +706,64 @@
       "ctaTitle": "Accelerate cloud adoption securely",
       "ctaSubtitle": "Give builders confidence while maintaining governance.",
       "ctaButton": "Talk to a cloud strategist",
-      "ctaHref": "contact?topic=cloud-security"
+      "ctaHref": "contact?topic=cloud-security",
+      "sections": [
+        {
+          "title": "Build secure-by-design landing zones",
+          "description": "Codify identity, network, and workload baselines so teams launch compliant environments faster.",
+          "image": { "src": "/img/s7.jpg", "alt": "Cloud architects reviewing landing zone templates" }
+        },
+        {
+          "title": "Streamline continuous compliance",
+          "description": "Automate detections, remediation, and reporting for evolving frameworks across regions.",
+          "image": { "src": "/img/s8.jpg", "alt": "Security engineer monitoring multi-cloud compliance" },
+          "reversed": true
+        }
+      ],
+      "otherSolutionsTitle": "Other Solutions",
+      "otherSolutions": [
+        {
+          "title": "Zero-Trust Security",
+          "description": "Unify policies that span on-prem and cloud workloads.",
+          "href": "solutions/zero-trust"
+        },
+        {
+          "title": "Network Security",
+          "description": "Connect and protect hybrid networks that feed your cloud estate.",
+          "href": "solutions/network-security"
+        },
+        {
+          "title": "Endpoint Security",
+          "description": "Safeguard devices and workloads accessing cloud platforms.",
+          "href": "solutions/endpoint-security"
+        }
+      ],
+      "resourcesTitle": "Resources for modern cloud teams",
+      "resourcesSubtitle": "Templates, benchmarks, and best practices to uplift cloud resilience.",
+      "resourcesCta": "Explore resource",
+      "resources": [
+        {
+          "title": "Cloud Guardrail Reference Kit",
+          "description": "Pre-built policies for identity, networking, and workload protection.",
+          "href": "resources/cloud-guardrail-reference-kit"
+        },
+        {
+          "title": "CSPM Maturity Assessment",
+          "description": "Evaluate current posture and identify automation opportunities.",
+          "href": "resources/cspm-maturity-assessment"
+        },
+        {
+          "title": "Multi-Cloud Compliance Matrix",
+          "description": "Map global regulations to actionable technical controls.",
+          "href": "resources/multi-cloud-compliance-matrix"
+        }
+      ]
     },
     "networkSecurity": {
       "heroTitle": "Network Security",
       "heroSubtitle": "Protect hybrid networks with adaptive segmentation and real-time threat response.",
       "heroSupporting": "We converge visibility, analytics, and enforcement so security teams can outpace adversaries.",
+      "heroGradient": "linear-gradient(135deg, #081d4a 0%, #143571 45%, #2fb6f0 100%)",
       "primaryCta": "Book a network resilience workshop",
       "primaryCtaHref": "contact?topic=network-security",
       "secondaryCta": "Download the segmentation guide",
@@ -576,12 +788,64 @@
       "ctaTitle": "Strengthen your network posture",
       "ctaSubtitle": "Move from reactive firewalls to proactive, adaptive defense.",
       "ctaButton": "Plan your next step",
-      "ctaHref": "contact?topic=network-security"
+      "ctaHref": "contact?topic=network-security",
+      "sections": [
+        {
+          "title": "Unify telemetry across every segment",
+          "description": "Collect and correlate data from firewalls, switches, and endpoints to see threats sooner.",
+          "image": { "src": "/img/s9.jpg", "alt": "Network operations center tracking live telemetry" }
+        },
+        {
+          "title": "Automate containment workflows",
+          "description": "Trigger playbooks that isolate affected zones and restore operations in minutes.",
+          "image": { "src": "/img/s10.jpg", "alt": "Engineers collaborating during an incident response" },
+          "reversed": true
+        }
+      ],
+      "otherSolutionsTitle": "Other Solutions",
+      "otherSolutions": [
+        {
+          "title": "Zero-Trust Security",
+          "description": "Coordinate adaptive controls spanning users, devices, and applications.",
+          "href": "solutions/zero-trust"
+        },
+        {
+          "title": "Cloud Security",
+          "description": "Extend consistent protections into multi-cloud environments.",
+          "href": "solutions/cloud-security"
+        },
+        {
+          "title": "Endpoint Security",
+          "description": "Ensure every device connected to the network is resilient to modern threats.",
+          "href": "solutions/endpoint-security"
+        }
+      ],
+      "resourcesTitle": "Network resilience resources",
+      "resourcesSubtitle": "Boost visibility, response speed, and compliance across complex estates.",
+      "resourcesCta": "Explore resource",
+      "resources": [
+        {
+          "title": "Segmentation Strategy Guide",
+          "description": "Plan phased rollouts for microsegmentation and macro controls.",
+          "href": "resources/segmentation-strategy-guide"
+        },
+        {
+          "title": "Network Telemetry Workbook",
+          "description": "Identify data sources and analytics to fuel situational awareness.",
+          "href": "resources/network-telemetry-workbook"
+        },
+        {
+          "title": "Incident Response Runbooks",
+          "description": "Standardize playbooks for outages, intrusions, and lateral movement attempts.",
+          "href": "resources/network-incident-response-runbooks"
+        }
+      ]
     },
     "endpointSecurity": {
       "heroTitle": "Endpoint Security",
       "heroSubtitle": "Detect, prevent, and respond to threats across laptops, servers, and edge devices.",
       "heroSupporting": "We pair SentinelOne automation with proactive threat hunting to keep endpoints resilient.",
+      "heroGradient": "linear-gradient(135deg, #0a1d3f 0%, #203c74 45%, #65e6f4 100%)",
       "primaryCta": "Book an endpoint resilience review",
       "primaryCtaHref": "contact?topic=endpoint-security",
       "secondaryCta": "Download the EDR maturity checklist",
@@ -606,7 +870,58 @@
       "ctaTitle": "Keep every endpoint resilient",
       "ctaSubtitle": "Stop breaches faster with autonomous protection and expert oversight.",
       "ctaButton": "Talk with an endpoint specialist",
-      "ctaHref": "contact?topic=endpoint-security"
+      "ctaHref": "contact?topic=endpoint-security",
+      "sections": [
+        {
+          "title": "Achieve unified endpoint coverage",
+          "description": "Consolidate tooling and telemetry to manage laptops, servers, and edge devices from one console.",
+          "image": { "src": "/img/s11.jpg", "alt": "Security analyst monitoring endpoint dashboards" }
+        },
+        {
+          "title": "Accelerate response with automation",
+          "description": "Blend machine-speed detection with human-led investigations for decisive containment.",
+          "image": { "src": "/img/s12.jpg", "alt": "Threat hunters collaborating on incident response" },
+          "reversed": true
+        }
+      ],
+      "otherSolutionsTitle": "Other Solutions",
+      "otherSolutions": [
+        {
+          "title": "AI Security for LLMs",
+          "description": "Secure developer workstations powering AI research and delivery.",
+          "href": "solutions/ai-security"
+        },
+        {
+          "title": "Cloud Security",
+          "description": "Protect workloads as they move between on-prem and cloud environments.",
+          "href": "solutions/cloud-security"
+        },
+        {
+          "title": "Network Security",
+          "description": "Coordinate endpoint telemetry with adaptive network controls.",
+          "href": "solutions/network-security"
+        }
+      ],
+      "resourcesTitle": "Endpoint mastery resources",
+      "resourcesSubtitle": "Step-by-step guides to elevate endpoint detection, response, and hygiene.",
+      "resourcesCta": "Explore resource",
+      "resources": [
+        {
+          "title": "EDR Maturity Checklist",
+          "description": "Verify coverage, visibility, and playbooks across every device class.",
+          "href": "resources/edr-maturity-checklist"
+        },
+        {
+          "title": "Threat Hunting Runbook",
+          "description": "Codify proactive hunts, triage actions, and escalation workflows.",
+          "href": "resources/threat-hunting-runbook"
+        },
+        {
+          "title": "Endpoint Hygiene Guide",
+          "description": "Standardize patching, application control, and secure configurations.",
+          "href": "resources/endpoint-hygiene-guide"
+        }
+      ]
     }
   },
   "ServicesOverview": {
@@ -712,7 +1027,27 @@
     "viewServiceLabel": "View service",
     "resourcesTitle": "Resources to accelerate your roadmap",
     "resourcesSubtitle": "Hand-picked guides and case studies from our service teams to help you plan ahead.",
-    "resourcesCTA": "Read resource"
+    "resourcesCTA": "Read resource",
+    "resourcesCards": [
+      {
+        "title": "Building Zero-Trust Programs That Scale",
+        "tag": "Whitepaper",
+        "image": "/img/resource1.jpg",
+        "href": "/resources/zero-trust"
+      },
+      {
+        "title": "Cyber Workforce Readiness Playbook 2025",
+        "tag": "Playbook",
+        "image": "/img/resource2.jpg",
+        "href": "/resources/workforce"
+      },
+      {
+        "title": "Modernizing Managed SOC Operations",
+        "tag": "Case Study",
+        "image": "/img/resource3.jpg",
+        "href": "/resources/managed-soc"
+      }
+    ]
   },
   "Common": {
     "learnMore": "Learn More",
