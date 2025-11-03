@@ -15,6 +15,7 @@ export default function Footer() {
     { label: navT('home'), href: `/${currentLocale}` },
     { label: navT('about'), href: `/${currentLocale}#about` },
     { label: navT('services'), href: `/${currentLocale}/services` },
+    { label: navT('solutions'), href: `/${currentLocale}/solutions` },
     { label: navT('blog'), href: `/${currentLocale}/blog` },
     { label: navT('contact'), href: `/${currentLocale}/contact` },
     { label: navT('login'), href: `/${currentLocale}/auth/login` },

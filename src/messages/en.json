@@ -924,6 +924,176 @@
       ]
     }
   },
+  "SolutionsOverview": {
+    "heroTitle": "Solutions engineered for modern threats",
+    "heroSubtitle": "Align detection, response, and resilience with frameworks built for today's adversaries.",
+    "heroSupporting": "Our modular solution catalog combines offensive expertise, automation, and executive-ready reporting to strengthen every layer of your estate.",
+    "primaryCta": "Talk to a solution architect",
+    "primaryCtaHref": "contact?topic=solutions",
+    "secondaryCta": "View client outcomes",
+    "secondaryCtaHref": "case-studies",
+    "pillarsTitle": "Why teams choose The SamurAI",
+    "pillars": [
+      {
+        "icon": "🧩",
+        "title": "Modular building blocks",
+        "description": "Combine identity, network, endpoint, cloud, and AI solutions to close gaps fast."
+      },
+      {
+        "icon": "⚡",
+        "title": "Operational velocity",
+        "description": "Automation accelerates configuration, evidence collection, and handoffs to your teams."
+      },
+      {
+        "icon": "🛡️",
+        "title": "Proven resilience",
+        "description": "Battle-tested runbooks and purple-teamers adapt defenses as attackers evolve."
+      }
+    ],
+    "solutionsTitle": "Explore our flagship solutions",
+    "solutionsSubtitle": "Each solution layers assessments, engineering, and managed outcomes to match your program maturity.",
+    "solutions": [
+      {
+        "id": "ai-security",
+        "title": "AI Security for LLMs",
+        "summary": "Protect training data, prompts, and inference pipelines with continuous guardrails.",
+        "href": "solutions/ai-security",
+        "highlights": [
+          "Offensive simulations for model hardening",
+          "Policy-as-code for AI access controls",
+          "Regulatory-ready evidence packs"
+        ]
+      },
+      {
+        "id": "identity-management",
+        "title": "Identity & Access Management",
+        "summary": "Unify governance, adaptive controls, and privileged access for every workforce and machine identity.",
+        "href": "solutions/identity-management",
+        "highlights": [
+          "Modern identity proofing",
+          "Conditional access orchestration",
+          "Privileged access automation"
+        ]
+      },
+      {
+        "id": "zero-trust",
+        "title": "Zero-Trust Security",
+        "summary": "Continuously verify users, devices, and services powering hybrid operations.",
+        "href": "solutions/zero-trust",
+        "highlights": [
+          "Context-aware segmentation",
+          "Adaptive policy enforcement",
+          "Executive scorecards and KPIs"
+        ]
+      },
+      {
+        "id": "cloud-security",
+        "title": "Cloud Security",
+        "summary": "Secure multi-cloud workloads with automated guardrails across infrastructure and data layers.",
+        "href": "solutions/cloud-security",
+        "highlights": [
+          "Cloud posture hardening",
+          "Runtime threat detection",
+          "Infrastructure-as-code scanning"
+        ]
+      },
+      {
+        "id": "network-security",
+        "title": "Network Security",
+        "summary": "Modernize network defenses with SASE blueprints, microsegmentation, and resilient connectivity.",
+        "href": "solutions/network-security",
+        "highlights": [
+          "SASE and SSE deployment",
+          "Microsegmentation design",
+          "24/7 threat monitoring"
+        ]
+      },
+      {
+        "id": "endpoint-security",
+        "title": "Endpoint Security",
+        "summary": "Detect, respond, and remediate across endpoints with autonomous tooling and elite operators.",
+        "href": "solutions/endpoint-security",
+        "highlights": [
+          "Managed detection and response",
+          "Threat hunting sprints",
+          "Automated containment playbooks"
+        ]
+      }
+    ],
+    "approachTitle": "The SamurAI approach",
+    "approachSubtitle": "Every engagement follows a proven playbook anchored in measurable outcomes.",
+    "approachSteps": [
+      {
+        "icon": "🧭",
+        "title": "Frame the risk",
+        "description": "Rapid discovery workshops benchmark posture against regulatory and executive priorities."
+      },
+      {
+        "icon": "🧪",
+        "title": "Pressure test defenses",
+        "description": "Offensive specialists emulate adversaries to uncover exploitable gaps."
+      },
+      {
+        "icon": "🛠️",
+        "title": "Engineer guardrails",
+        "description": "Automation and orchestration scale resilient configurations across environments."
+      },
+      {
+        "icon": "📊",
+        "title": "Operationalize insight",
+        "description": "Dashboards, runbooks, and enablement keep your teams ready for what's next."
+      }
+    ],
+    "metricsTitle": "Impact at a glance",
+    "metricsSubtitle": "Transformation programs ship faster when the right guardrails, people, and automation come together.",
+    "metrics": [
+      {
+        "value": "72%",
+        "label": "Faster containment",
+        "description": "Average reduction in time-to-contain across recent solution rollouts."
+      },
+      {
+        "value": "40+",
+        "label": "Programs delivered",
+        "description": "Critical transformation initiatives executed for enterprise clients yearly."
+      },
+      {
+        "value": "2 weeks",
+        "label": "Remediation roadmap",
+        "description": "Typical timeline to deliver prioritized remediation guidance."
+      }
+    ],
+    "solutionCardCta": "Explore solution",
+    "ctaTitle": "Ready to activate the right solution?",
+    "ctaSubtitle": "Tell us where you need momentum and we’ll assemble the crew to deliver it.",
+    "ctaPrimary": "Schedule a working session",
+    "ctaPrimaryHref": "contact?topic=solutions",
+    "ctaSecondary": "Browse all services",
+    "ctaSecondaryHref": "services",
+    "resourcesTitle": "Resources to fast-track your roadmap",
+    "resourcesSubtitle": "Download playbooks and executive guides curated by our solution architects.",
+    "resourcesCTA": "Read resource",
+    "resourcesCards": [
+      {
+        "title": "Modern Zero-Trust Blueprint",
+        "tag": "Guide",
+        "image": "/img/resource1.jpg",
+        "href": "/resources/zero-trust"
+      },
+      {
+        "title": "LLM Security Field Manual",
+        "tag": "Playbook",
+        "image": "/img/resource2.jpg",
+        "href": "/resources/ai-security"
+      },
+      {
+        "title": "Cloud Posture Benchmark 2025",
+        "tag": "Report",
+        "image": "/img/resource3.jpg",
+        "href": "/resources/cloud-posture"
+      }
+    ]
+  },
   "ServicesOverview": {
     "heroTitle": "Services that span strategy, execution, and operations",
     "heroSubtitle": "From advisory engagements to managed programs, The SamurAI delivers measurable outcomes across cybersecurity and IT modernization.",
