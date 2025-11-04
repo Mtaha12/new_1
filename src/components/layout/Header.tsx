@@ -78,6 +78,7 @@ export default function Header(props: HeaderProps) {
       label: t('solutions'),
       type: 'dropdown',
       children: [
+        { id: 'solutions-overview', label: t('solutionsMenu.overview'), href: `/${currentLocale}/solutions` },
         { id: 'ai-security', label: t('aiSecurity'), href: `/${currentLocale}/solutions/ai-security` },
         { id: 'identity-management', label: t('identityManagement'), href: `/${currentLocale}/solutions/identity-management` },
         { id: 'zero-trust', label: t('zeroTrust'), href: `/${currentLocale}/solutions/zero-trust` },
@@ -91,6 +92,7 @@ export default function Header(props: HeaderProps) {
       label: t('services'),
       type: 'dropdown',
       children: [
+        { id: 'services-overview', label: t('servicesMenu.overview'), href: `/${currentLocale}/services` },
         { id: 'consulting', label: t('servicesMenu.consulting'), href: `/${currentLocale}/services/consulting` },
         { id: 'infrastructure', label: t('servicesMenu.infrastructure'), href: `/${currentLocale}/services/infrastructure` },
         { id: 'resourcing', label: t('servicesMenu.resourcing'), href: `/${currentLocale}/services/resourcing` },

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CSSProperties, FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
@@ -26,15 +27,47 @@ type BlogLandingProps = {
     categories: string;
     tags: string;
     tagsIntro: string;
-    newsletterTitle: string;
-    newsletterIntro: string;
     readMore: string;
-    getStarted: string;
+    resourcesTitle: string;
+    resourcesIntro: string;
+    ctaTitle: string;
+    ctaDescription: string;
+    ctaButton: string;
+    ctaHref: string;
   };
   categories: string[];
   featuredPosts: BlogPost[];
   latestPosts: BlogPost[];
+  resources: BlogResource[];
 };
+
+export type BlogResource = {
+  title: string;
+  tag: string;
+  image: string;
+  href?: string;
+};
+
+const DEFAULT_RESOURCES: BlogResource[] = [
+  {
+    title: 'Top 10 Penetration Testing Tools Cybersecurity Experts Are Using Right Now',
+    tag: 'Cybersecurity',
+    image: '/img/resource1.jpg',
+    href: '/resources/top-penetration-testing-tools'
+  },
+  {
+    title: 'Top Cybersecurity Services Businesses Need in 2025',
+    tag: 'Strategy',
+    image: '/img/resource2.jpg',
+    href: '/resources/cybersecurity-services-2025'
+  },
+  {
+    title: 'Black Hat USA 2025 Closes Out on a High Note in Las Vegas',
+    tag: 'Threat Intel',
+    image: '/img/resource3.jpg',
+    href: '/resources/black-hat-usa-2025-recap'
+  }
+];
 
 type BlogCollections = {
   featuredPosts: BlogPost[];
@@ -110,7 +143,8 @@ export default function BlogLanding({
   strings,
   categories,
   featuredPosts,
-  latestPosts
+  latestPosts,
+  resources = []
 }: BlogLandingProps) {
   const router = useRouter();
 
@@ -1176,50 +1210,180 @@ export default function BlogLanding({
         >
           <div
             style={{
-              maxWidth: '720px',
-              margin: '0 auto',
-              background: '#fff',
-              borderRadius: '24px',
-              padding: 'clamp(2rem, 6vw, 3rem)',
-              boxShadow: '0 20px 45px rgba(10, 14, 61, 0.1)'
+              maxWidth: '1200px',
+              margin: '0 auto'
             }}
           >
             <h3
               style={{
-                fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+                fontSize: 'clamp(1.9rem, 4vw, 2.6rem)',
                 fontWeight: 800,
                 color: '#0a0e3d',
+                textAlign: 'center',
                 marginBottom: '1rem'
               }}
             >
-              {strings.newsletterTitle}
+              {strings.resourcesTitle}
             </h3>
             <p
               style={{
-                color: '#666',
+                color: '#4d5566',
+                textAlign: 'center',
+                maxWidth: '760px',
+                margin: '0 auto clamp(2.5rem, 6vw, 3.5rem)',
                 lineHeight: 1.8,
-                fontSize: 'clamp(0.95rem, 1.4vw, 1.05rem)',
-                marginBottom: '2rem'
+                fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)'
               }}
             >
-              {strings.newsletterIntro}
+              {strings.resourcesIntro}
             </p>
-            <Link
-              href={`${localePrefix}/contact`}
-              className="glow-button hover-glow"
+            <div
               style={{
-                background: '#0a0e3d',
-                color: '#fff',
-                border: 'none',
-                padding: '0.85rem 2.5rem',
-                borderRadius: '30px',
-                fontWeight: 700,
-                textDecoration: 'none',
-                display: 'inline-block'
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+                gap: 'clamp(1.75rem, 4vw, 2.5rem)'
               }}
             >
-              {strings.getStarted}
-            </Link>
+              {(resources.length ? resources : DEFAULT_RESOURCES).map((resource, index) => {
+                const card = (
+                  <div
+                    key={`${resource.title}-${index}`}
+                    className="tilt-card resource-card"
+                    style={{
+                      background: '#0a0e3d',
+                      borderRadius: '18px',
+                      overflow: 'hidden',
+                      boxShadow: '0 20px 45px rgba(5, 12, 40, 0.24)',
+                      minHeight: '360px',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+                      <Image
+                        src={resource.image}
+                        alt={resource.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 320px"
+                        style={{ objectFit: 'cover' }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '1rem',
+                          left: '1rem',
+                          background: '#fff',
+                          color: '#0a0e3d',
+                          borderRadius: '999px',
+                          padding: '0.45rem 1.1rem',
+                          fontSize: '0.75rem',
+                          fontWeight: 600
+                        }}
+                      >
+                        {resource.tag}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        padding: 'clamp(1.5rem, 3vw, 2rem)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1rem',
+                        flex: 1
+                      }}
+                    >
+                      <h4
+                        style={{
+                          color: '#fff',
+                          fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
+                          fontWeight: 700,
+                          lineHeight: 1.4,
+                          margin: 0
+                        }}
+                      >
+                        {resource.title}
+                      </h4>
+                    </div>
+                  </div>
+                );
+
+                if (resource.href) {
+                  return (
+                    <Link key={resource.title} href={resource.href} style={{ textDecoration: 'none' }}>
+                      {card}
+                    </Link>
+                  );
+                }
+
+                return card;
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section
+          style={{
+            position: 'relative',
+            padding: '0 clamp(1.5rem, 5vw, 3rem)',
+            background: 'transparent',
+            marginBottom: '-5rem'
+          }}
+        >
+          <div
+            style={{
+              maxWidth: '1140px',
+              margin: '0 auto'
+            }}
+          >
+            <div
+              className="fade-section"
+              style={{
+                background: '#fff',
+                borderRadius: '28px',
+                padding: 'clamp(2.8rem, 6vw, 4rem) clamp(2rem, 6vw, 3.5rem)',
+                textAlign: 'center',
+                boxShadow: '0 30px 75px rgba(5, 12, 40, 0.25)'
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
+                  fontWeight: 800,
+                  color: '#0a0e3d',
+                  marginBottom: '1rem'
+                }}
+              >
+                {strings.ctaTitle}
+              </h3>
+              <p
+                style={{
+                  fontSize: 'clamp(0.95rem, 1.6vw, 1.1rem)',
+                  color: '#4d5566',
+                  lineHeight: 1.75,
+                  maxWidth: '760px',
+                  margin: '0 auto 2.2rem'
+                }}
+              >
+                {strings.ctaDescription}
+              </p>
+              <Link
+                href={strings.ctaHref}
+                className="glow-button"
+                style={{
+                  display: 'inline-block',
+                  background: '#1368ff',
+                  color: '#fff',
+                  padding: '0.85rem 2.8rem',
+                  borderRadius: '999px',
+                  fontWeight: 700,
+                  fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
+                  textDecoration: 'none',
+                  boxShadow: '0 16px 36px rgba(19, 104, 255, 0.35)'
+                }}
+              >
+                {strings.ctaButton}
+              </Link>
+            </div>
           </div>
         </section>
       </main>

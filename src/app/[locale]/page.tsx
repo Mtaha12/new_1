@@ -554,9 +554,8 @@ export default function HomePage() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
-                { key: 'aiSecurity', name: 'AI Security For LLMs', highlight: true },
+                { key: 'aiSecurity', name: t('solutions.aiSecurity'), highlight: true },
                 { key: 'identity', name: t('solutions.identity'), highlight: false },
-                { key: 'lorem', name: t('solutions.lorem'), highlight: false },
                 { key: 'zeroTrust', name: t('solutions.zeroTrust'), highlight: false },
                 { key: 'networkSecurity', name: t('solutions.networkSecurity'), highlight: false },
                 { key: 'cloudSecurity', name: t('solutions.cloudSecurity'), highlight: false },

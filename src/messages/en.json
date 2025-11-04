@@ -1,117 +1,131 @@
 {
   "HomePage": {
-    "heroTitle": "Lorem Ipsum Is Simply",
-    "heroSubtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "heroSupporting": "Elite expertise, AI precision—securing your future today.",
+    "heroTitle": "The SamurAI: Your Ally in a Turbulent Cyber World",
+    "heroSubtitle": "The threat landscape changes by the minute. Our fusion of seasoned consultants and adaptive AI keeps your critical systems resilient, compliant, and ready for what comes next.",
+    "heroSupporting": "Specialist advisors, adaptive AI defenses, measurable resilience.",
     "heroPillars": [
       "Expert Consulting",
       "AI-Powered Systems",
       "Transformative Results"
     ],
     "heroCta": "Get Started",
-    "heroPrimaryCta": "Download Benchmark Report",
-    "heroPrimaryCtaNote": "Includes highlights from the Miercom 2024 Security Benchmark.",
-    "heroSecondaryCta": "Talk to a Security Strategist",
+    "heroPrimaryCta": "Download the Security Benchmark Brief",
+    "heroPrimaryCtaNote": "See distilled insights from the 2024 Miercom Security Benchmark.",
+    "heroSecondaryCta": "Speak with a Security Strategist",
     "whoWeAre": "Who We Are",
-    "defendersTitle": "Defenders Of Your Digital Realm",
-    "defendersDescription": "At The SamurAI, we believe in more than just security. We believe in peace of mind, knowing your digital world is protected, your business is resilient, and your future is secure.",
+    "defendersTitle": "Champions of Your Digital Realm",
+    "defendersDescription": "We safeguard your data, teams, and mission with proactive strategy, continuous intelligence, and hands-on execution.",
     "cybersecurityTitle": "Cybersecurity, AI",
-    "cybersecurityDescription": "In today's ever-changing cyber threat landscape, AI-powered cybersecurity is essential.",
+    "cybersecurityDescription": "AI-accelerated analytics expose and eliminate threats before they interrupt your operations.",
     "itConsultationTitle": "IT Consultation",
-    "itConsultationDescription": "Improve your business technology with expert IT consultation services. Increase efficiency, security, and productivity with tailored solutions.",
+    "itConsultationDescription": "Modernize your technology estate with advisory squads that align infrastructure, automation, and security outcomes.",
     "cybersecuritySolutionsTitle": "Cybersecurity Solutions",
-    "cybersecuritySolutionsDescription": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
+    "cybersecuritySolutionsDescription": "From identity to incident response, our playbooks unite technology and talent to contain risk and prove resilience.",
     "ourServicesTitle": "Our Services",
-    "ourServicesDescription": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
-    "coreValuesTitle": "Core Value Statements",
-    "coreValuesDescription1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "coreValuesDescription2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "ourServicesDescription": "Engage multidisciplinary teams who design, engineer, and operate secure digital ecosystems built to scale with your business.",
+    "coreValuesTitle": "Core Values in Action",
+    "coreValuesDescription1": "We stand shoulder to shoulder with your teams, translating complex risk into confident decisions.",
+    "coreValuesDescription2": "Integrity, curiosity, and relentless improvement guide every engagement from design to daily operations.",
     "resourcesTitle": "Resources",
-    "resourcesDescription": "Stay ahead with research, playbooks, and real-world insights curated by The SamurAI experts.",
-    "ctaTitle": "Lorem Ipsum Is Simply Dummy Text Of Printing",
-    "ctaDescription": "Lorem Ipsum Is Simply Dummy Text Of Printing",
-    "ctaButton": "Lorem Ipsum",
+    "resourcesDescription": "Access research, playbooks, and threat intelligence shaped by The SamurAI practitioners.",
+    "ctaTitle": "Ready to Reclaim Control of Your Cyber Future?",
+    "ctaDescription": "Partner with specialists who orchestrate people, process, and platforms into one resilient defense.",
+    "ctaButton": "Plan a Strategy Session",
     "services": {
       "consulting": "Consulting Services",
-      "consultingDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "consultingDesc": "Strategy-first advisors who map risk, governance, and investment to business outcomes.",
       "infrastructure": "Next Generation Infrastructure",
-      "infrastructureDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "infrastructureDesc": "Architect and deploy resilient platforms infused with automation and zero-trust principles.",
       "resourcing": "Strategic Resourcing",
-      "resourcingDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "resourcingDesc": "Augment your teams with vetted experts who accelerate delivery without sacrificing security.",
       "training": "Technology Labs & Training",
-      "trainingDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "trainingDesc": "Immersive labs and exercises that transform staff into proactive defenders.",
       "managed": "Managed IT",
-      "managedDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "managedDesc": "Operate mission-critical environments with autonomous monitoring and 24/7 response.",
       "devsecops": "DevSecOps Automation",
-      "devsecopsDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
+      "devsecopsDesc": "Embed policy-as-code, automation, and guardrails directly into your pipelines."
     },
     "solutions": {
       "identity": "Identity And Access Management",
-      "lorem": "Lorem Ipsum",
-      "zeroTrust": "Zero-Trust",
+      "aiSecurity": "AI Security for LLMs",
+      "zeroTrust": "Zero-Trust Security",
       "cloudSecurity": "Cloud Security",
       "networkSecurity": "Network Security",
       "endpointSecurity": "Endpoint Security"
     },
     "resourcesCards": [
       {
-        "title": "Top 10 Penetration Testing Tools Cybersecurity Experts Are Using Right Now",
-        "description": "Benchmark the tooling stack trusted by elite red teams to stress-test enterprise defenses.",
-        "emoji": "🔐",
-        "slug": "blog/penetration-testing-tools-shaping-2025",
+        "title": "2025 Executive Guide to AI-Ready Security Operations",
+        "description": "Discover how leading SOC teams combine automation and human expertise to shrink dwell time.",
+        "emoji": "🛡️",
+        "slug": "blog/ai-ready-security-operations-guide",
         "cta": "Read Article",
         "tag": "Cybersecurity",
         "image": "/img/resource1.jpg"
       },
       {
-        "title": "Top Cybersecurity Services Businesses Need in 2025",
-        "description": "Prioritize the managed offerings that keep hybrid environments resilient and compliant.",
-        "emoji": "🛡️",
-        "slug": "blog/security-service-bundles-modern-enterprises-need",
+        "title": "Blueprint for Modern IT Consultation",
+        "description": "Align infrastructure, data, and collaboration platforms with a security-first mindset.",
+        "emoji": "🧭",
+        "slug": "blog/modern-it-consultation-blueprint",
         "cta": "Explore Guide",
-        "tag": "Cybersecurity",
+        "tag": "Strategy",
         "image": "/img/resource2.jpg"
       },
       {
-        "title": "Black Hat USA 2025 Field Notes",
-        "description": "Review the top research, demos, and sessions shaping the second half of 2025.",
-        "emoji": "🎩",
-        "slug": "blog/black-hat-usa-2025-field-notes",
+        "title": "Field Report: Lessons from Global Incident Simulations",
+        "description": "Learn the key playbooks and response metrics shaping enterprise resilience programs.",
+        "emoji": "📘",
+        "slug": "blog/global-incident-simulation-lessons",
         "cta": "View Recap",
-        "tag": "Black Hat",
+        "tag": "Incident Response",
         "image": "/img/resource3.jpg"
       }
     ],
-    "partnersTitle": "Why SentinelOne?",
-    "partnersHeadline": "Trusted by global innovators and security leaders",
-    "partnersSubheadline": "From AI-first scaleups to regulated enterprises, our alliances keep you ahead of every threat curve.",
+    "blogCarousel": {
+      "quotes": [
+        {
+          "text": "See how fusion teams choreograph AI incident response drills that compress dwell time and build executive confidence."
+        },
+        {
+          "text": "Discover zero-trust quick wins that harden legacy estates without derailing transformation roadmaps."
+        },
+        {
+          "text": "Learn how leaders operationalize governance dashboards that turn resilience metrics into board-level storytelling."
+        }
+      ],
+      "spotlight": "Explore the blog for fresh perspectives on automation, zero trust, and pragmatic resilience from The SamurAI field teams."
+    },
+    "partnersTitle": "Why Organizations Trust The SamurAI",
+    "partnersHeadline": "Chosen by innovators, regulators, and mission-critical teams worldwide.",
+    "partnersSubheadline": "We integrate seamlessly with your ecosystem to keep you ahead of emerging threats.",
     "partners": {
       "sentinelone": "SentinelOne",
       "pingidentity": "PingIdentity",
       "thales": "THALES",
       "okta": "okta"
     },
-    "testimonialsTitle": "Trusted outcomes, proven in the field",
-    "testimonialsSubtitle": "Organizations across education, government, and healthcare rely on The SamurAI to harden defenses and accelerate response times.",
+    "testimonialsTitle": "Outcomes Trusted Across Industries",
+    "testimonialsSubtitle": "Education, public sector, and life sciences leaders reinforce their defenses with The SamurAI partnership.",
     "testimonialsCtaLabel": "Explore more case studies",
     "testimonialsCtaSlug": "case-studies",
     "testimonialsList": [
       {
-        "quote": "The SamurAI gives us an all-in-one solution that enables us to take a holistic approach to security.",
+        "quote": "The SamurAI unified our ecosystem and unlocked a holistic, actionable security program.",
         "client": "Christopher Lee",
         "role": "Director of Technology, Marple Newtown School District",
-        "caseStudyLabel": "Read the Marple Newtown case study",
+        "caseStudyLabel": "See the Marple Newtown story",
         "caseStudySlug": "marple-newtown-school-district"
       },
       {
-        "quote": "With The SamurAI Harmony Email & Collaboration, we’re blocking thousands more emails each month.",
+        "quote": "Their Harmony platform now blocks thousands of malicious emails every month, keeping services running.",
         "client": "Piotr Baltakis",
         "role": "Manager of Infrastructure and Security, City of Kamloops",
-        "caseStudyLabel": "See how Kamloops automated email defense",
+        "caseStudyLabel": "Learn how Kamloops automated email defense",
         "caseStudySlug": "city-of-kamloops"
       },
       {
-        "quote": "The SamurAI gives me peace of mind, knowing that we have the best security solution to protect Alkem.",
+        "quote": "The SamurAI gives us confidence that our critical research stays protected around the clock.",
         "client": "Bijender Mishra",
         "role": "Chief Information Security Officer, Alkem Laboratories",
         "caseStudyLabel": "Discover the Alkem Laboratories results",
@@ -219,146 +233,7 @@
       "ctaLabel": "Talk to an expert",
       "ctaHref": "contact",
       "note": "Prefer a custom briefing? We’ll tailor an agenda for your stakeholders."
-    },
-    "CaseStudies": {
-      "heroTitle": "Outcomes that prove resilience",
-      "heroSubtitle": "See how hybrid enterprises modernize security operations, slash response times, and build trust with The SamurAI.",
-      "heroSupporting": "From school districts to pharmaceutical giants, our playbooks translate complex requirements into measurable wins without disrupting delivery.",
-      "featuredMetrics": [
-        {
-          "label": "Faster containment",
-          "value": "62%",
-          "description": "Average incident response acceleration across featured clients."
-        },
-        {
-          "label": "Automated workflows",
-          "value": "4x",
-          "description": "Increase in closed-loop playbooks replacing manual tasks."
-        },
-        {
-          "label": "Platform coverage",
-          "value": "12",
-          "description": "Critical environments secured across cloud, on-prem, and OT estates."
-        }
-      ],
-      "filtersLabel": "Browse by outcome",
-      "caseStudyList": [
-        {
-          "id": "marple-newtown-school-district",
-          "title": "Marple Newtown School District",
-          "industry": "Education",
-          "summary": "Unified endpoint protection and phishing defense for 5,000+ faculty and students with zero classroom downtime.",
-          "resultHeading": "Impact",
-          "results": [
-            "98% reduction in phishing dwell time",
-            "24/7 SOC coverage with automated escalation",
-            "Staff security awareness scores up 37%"
-          ],
-          "ctaLabel": "Book an education briefing",
-          "ctaHref": "contact?topic=case-study&ref=education"
-        },
-        {
-          "id": "alkem-laboratories",
-          "title": "Alkem Laboratories",
-          "industry": "Life Sciences",
-          "summary": "Harmonized DevSecOps pipelines to protect intellectual property across multi-region research hubs.",
-          "resultHeading": "Impact",
-          "results": [
-            "46% faster compliance evidence gathering",
-            "Zero critical vulnerabilities shipped across 9 releases",
-            "Executive-ready risk dashboards in under 6 weeks"
-          ],
-          "ctaLabel": "Talk to a pharma strategist",
-          "ctaHref": "contact?topic=case-study&ref=life-sciences"
-        },
-        {
-          "id": "city-of-kamloops",
-          "title": "City of Kamloops",
-          "industry": "Public Sector",
-          "summary": "Automated SaaS and collaboration security to serve 100,000 residents without service degradation.",
-          "resultHeading": "Impact",
-          "results": [
-            "Thousands of malicious emails blocked monthly",
-            "Unified identity governance across 40+ applications",
-            "Crisis response tabletop with 15 agencies in 30 days"
-          ],
-          "ctaLabel": "Modernize municipal security",
-          "ctaHref": "contact?topic=case-study&ref=public-sector"
-        }
-      ],
-      "ctaTitle": "Ready to create your next success story?",
-      "ctaSubtitle": "Partner with our strategists to scope a program that delivers measurable resilience from day one.",
-      "ctaPrimaryLabel": "Schedule a discovery call",
-      "ctaPrimaryHref": "contact?topic=case-study",
-      "ctaSecondaryLabel": "Explore recent insights",
-      "ctaSecondaryHref": "blog"
-    },
-    "cybersecurityTitle": "Cybersecurity, AI",
-    "cybersecurityDescription": "In today's ever-changing cyber threat landscape, AI-powered cybersecurity is essential.",
-    "cybersecurityDetail": "Our advanced system uses cutting-edge algorithms and machine learning for real-time.",
-    "consultationTitle": "IT Consultation",
-    "consultationDescription": "Improve your business technology with expert IT consultation services. Increase efficiency, security, and productivity with tailored solutions.",
-    "consultationButton": "Contact us for professional consultation today",
-    "solutionsTitle": "Cybersecurity Solutions",
-    "solutionsIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
-    "servicesTitle": "Our Services",
-    "servicesIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
-    "services": {
-      "consulting": "Consulting Services",
-      "consultingDesc": "Strategy, assessments, and roadmaps that align your security investments to the outcomes that matter most.",
-      "infrastructure": "Next-Generation Infrastructure",
-      "infrastructureDesc": "Design and deploy resilient, high-performance platforms with security woven into every layer.",
-      "resourcing": "Strategic Resourcing",
-      "resourcingDesc": "Access elite cybersecurity and cloud talent on demand to accelerate delivery.",
-      "training": "Technology Labs And Training",
-      "trainingDesc": "Immersive simulations and hands-on labs that uplevel skills across your organization.",
-      "managed": "Managed IT",
-      "managedDesc": "Operate business-critical environments with 24/7 coverage and automation-led support.",
-      "devsecops": "DevSecOps Automation",
-      "devsecopsDesc": "Embed security-by-design into your pipelines with policy-as-code and continuous assurance."
-    },
-    "valuesTitle": "Core Value Statements",
-    "valuesDescription1": "Integrity, curiosity, and relentless delivery define every engagement we lead.",
-    "valuesDescription2": "We build lasting partnerships by empowering teams, sharing knowledge, and staying ahead of emerging threats.",
-    "resourcesTitle": "Resources",
-    "resourcesIntro": "Stay ahead with research, playbooks, and real-world insights curated by The SamurAI experts.",
-    "resources": {
-      "penetration": "Top ID Penetration Testing Tools Cybersecurity Experts Are Using Right Now",
-      "cybersecurity": "Top CyberSecurity Services Businesses Need In 2025",
-      "blackhat": "Black Hat USA 2025 Closes Out on a High Node In Los Vegas"
-    },
-    "resourcesCards": [
-      {
-        "title": "2025 Pen Testing Toolkit",
-        "description": "Compare payload frameworks, breach simulators, and reporting utilities our red team deploys.",
-        "emoji": "🔐",
-        "slug": "blog/penetration-testing-tools-shaping-2025",
-        "cta": "Read article"
-      },
-      {
-        "title": "Security Services Buyers Guide",
-        "description": "Understand when to lean on MDR, advisory, or automation squads to fill capability gaps fast.",
-        "emoji": "🛡️",
-        "slug": "blog/security-service-bundles-modern-enterprises-need",
-        "cta": "Explore guide"
-      },
-      {
-        "title": "Black Hat USA 2025 Recap",
-        "description": "Walk through the hottest research, demos, and hallway tracks shaping the second half of 2025.",
-        "emoji": "🎩",
-        "slug": "blog/black-hat-usa-2025-field-notes",
-        "cta": "View recap"
-      }
-    ],
-    "footerTitle": "Ready to safeguard your next initiative?",
-    "footerTagline": "Partner with The SamurAI to secure, modernize, and accelerate your digital future.",
-    "footerTeam": "Global experts united by a mission to defend what matters most.",
-    "footerReadable": "We combine proven frameworks, resilient engineering, and AI-powered defenses to keep businesses confident in a changing threat landscape.",
-    "footerPhone1": "+1 (855) 425-8383",
-    "footerPhone2": "+1 (555) 987-6543",
-    "footerEmail": "info@thesamurai.com",
-    "footerWebsite": "Discover how SamurAI secures enterprises worldwide.",
-    "footerNote": "© 2025 The SamurAI. All rights reserved."
+    }
   },
   "CaseStudies": {
     "heroTitle": "Outcomes that prove resilience",
@@ -435,40 +310,75 @@
   },
   "SolutionsPages": {
     "aiSecurity": {
-      "heroTitle": "AI Security for LLMs",
-      "heroSubtitle": "Shield large language models, prompts, and training pipelines from adversarial manipulation and data leakage.",
-      "heroSupporting": "We combine offensive simulations with automated guardrails so your generative AI remains trusted and compliant.",
+      "heroTitle": "AI Security for Large Language Models",
+      "heroSubtitle": "Safeguarding Your Digital Realm",
+      "heroSupporting": "At The SamurAI, we deliver AI-powered defenses that fortify sensitive data, anticipate threats, and keep every experience secure—even as adversaries evolve.",
       "heroGradient": "linear-gradient(135deg, #0a1f63 0%, #1346a3 45%, #0fd4e8 100%)",
       "primaryCta": "Schedule an AI threat simulation",
       "primaryCtaHref": "contact?topic=ai-security",
       "secondaryCta": "Download the AI security playbook",
       "secondaryCtaHref": "#ai-security-playbook",
-      "overviewTitle": "Secure every stage of the model lifecycle",
-      "overviewParagraphs": [],
-      "highlightsTitle": "Why organizations choose The SamurAI",
-      "highlights": [],
-      "useCasesTitle": "Use cases we harden",
-      "useCases": [],
-      "ctaTitle": "Ready to secure your AI?",
-      "ctaSubtitle": "Our fusion teams deliver prioritized remediation plans in two weeks or less.",
-      "ctaButton": "Book a working session",
+      "overviewTitle": "Leverage Cutting-Edge AI Technology",
+      "overviewParagraphs": [
+        "Our state-of-the-art AI solution proactively protects your sensitive data, detects breaches before they land, and keeps every digital interaction secure.",
+        "By combining real-time analytics with machine learning, we anticipate vulnerabilities, repel cybercriminals, and give you the peace of mind to innovate with confidence."
+      ],
+      "highlightsTitle": "Key Features and Benefits",
+      "highlights": [
+        {
+          "icon": "🛡️",
+          "title": "Safeguard Sensitive Information",
+          "description": "Protect critical data from unauthorized access with AI-powered policies and adaptive controls."
+        },
+        {
+          "icon": "🚨",
+          "title": "Proactive Threat Detection",
+          "description": "Identify and neutralize emerging threats before they disrupt operations or compromise trust."
+        },
+        {
+          "icon": "🌐",
+          "title": "Secure Digital Presence",
+          "description": "Elevate your cybersecurity posture with continuous monitoring that adapts to an ever-changing landscape."
+        }
+      ],
+      "useCasesTitle": "What you can achieve",
+      "useCases": [
+        {
+          "icon": "🧱",
+          "title": "Fortify your defenses",
+          "description": "Strengthen protections around AI pipelines so only trusted interactions reach your business."
+        },
+        {
+          "icon": "🛰️",
+          "title": "Stay ahead of adversaries",
+          "description": "Detect potential breaches early with intelligent monitoring that evolves alongside attacker tactics."
+        },
+        {
+          "icon": "🚀",
+          "title": "Protect every experience",
+          "description": "Guarantee resilient digital services so customers and teams can operate with confidence."
+        }
+      ],
+      "ctaTitle": "Secure Your Digital Future with The SamurAI",
+      "ctaSubtitle": "Sign up for a briefing or connect with our strategists to see how AI-powered defenses elevate your cybersecurity posture.",
+      "ctaButton": "Connect with our team",
       "ctaHref": "contact?topic=ai-security",
       "sections": [
         {
-          "title": "Secure every AI workflow",
-          "description": "Build confidence from data intake to inference with layered defenses wrapped around your LLM initiatives.",
+          "title": "Experience the Unparalleled Power of AI",
+          "description": "In a landscape where cyber threats evolve daily, being vulnerable is not an option.",
           "paragraphs": [
-            "Harden training pipelines against poisoning attempts and ensure guardrails catch prompt injection in real time.",
-            "Empower product and governance teams with shared playbooks so trusted AI outcomes move from ideation to launch faster."
+            "Join forces with The SamurAI to harness intelligent tooling that safeguards sensitive information, detects risks, and fortifies every digital touchpoint.",
+            "Our AI-driven platform stays one step ahead of cybercriminals, enhancing your defenses without slowing the business."
           ],
           "image": { "src": "/img/s1.jpg", "alt": "Security specialists reviewing AI risk dashboards" }
         },
         {
-          "title": "Operationalize automated guardrails",
-          "description": "Blend adversarial testing, policy-as-code, and continuous monitoring to keep every deployment compliant across regions.",
+          "title": "Fortify Your Digital Realm",
+          "description": "Whether you need to harden defenses, detect threats, or ensure overall security, our AI-powered solution has you covered.",
           "paragraphs": [
-            "We wire fusion-team findings directly into CI/CD pipelines to stop regressions before they leave the lab.",
-            "Automated evidence packs map every control to executive scorecards and regulatory reporting."
+            "We weave automation, governance, and hands-on expertise into every engagement so guardrails stay resilient.",
+            "Let our incident responders and engineers tailor a roadmap that keeps your AI ambition both safe and scalable."
           ],
           "image": { "src": "/img/s2.jpg", "alt": "Team deploying AI guardrails in production" },
           "reversed": true
@@ -515,43 +425,43 @@
     },
     "identityManagement": {
       "heroTitle": "Identity and Access Management",
-      "heroSubtitle": "Unify governance, authentication, and privilege controls across cloud and legacy estates.",
-      "heroSupporting": "We modernize IAM with adaptive policies that keep users productive while eliminating excess risk.",
+      "heroSubtitle": "Streamline and secure every digital identity",
+      "heroSupporting": "The SamurAI delivers an IAM suite that centralizes control, enforces adaptive authorization, and shields organizations from evolving cyber threats while keeping users productive.",
       "heroGradient": "linear-gradient(135deg, #10255f 0%, #1e3b8a 45%, #5cc6ff 100%)",
       "primaryCta": "Schedule an IAM architecture review",
       "primaryCtaHref": "contact?topic=identity",
       "secondaryCta": "Download the identity modernization checklist",
       "secondaryCtaHref": "#iam-checklist",
-      "overviewTitle": "Identity is the new perimeter",
+      "overviewTitle": "Identity and Access Management, elevated",
       "overviewParagraphs": [
-        "We start by mapping your current governance model, then close visibility gaps with centralized policy management.",
-        "Our team orchestrates tooling from Okta, Ping, ForgeRock, and Microsoft to deliver a seamless, resilient IAM stack."
+        "We centralize identity controls across applications and platforms, delivering single sign-on, self-service credentials, and dynamic access that adapts the moment roles change.",
+        "Automated compliance tooling, detailed audit trails, and AI-driven anomaly detection ensure your identity program scales from small teams to global enterprises."
       ],
-      "highlightsTitle": "What you get",
+      "highlightsTitle": "Key Features and Benefits",
       "highlights": [
-        { "icon": "🗺️", "title": "Target operating model", "description": "Documented roles, responsibilities, and processes that scale." },
-        { "icon": "🔐", "title": "Least-privilege enforcement", "description": "Automated attestation campaigns and just-in-time access." },
-        { "icon": "⚙️", "title": "Platform engineering", "description": "Integration accelerators for HRIS, directories, and SaaS." }
+        { "icon": "🗂️", "title": "Unified Identity Management", "description": "Centralize accounts, credentials, and lifecycle workflows with SSO and self-service to ease IT load." },
+        { "icon": "🔐", "title": "Adaptive Access Control", "description": "Granular authorization, contextual MFA, and just-in-time privileges keep access aligned with responsibility." },
+        { "icon": "📊", "title": "Compliance & Threat Insight", "description": "Automated reporting, audit-ready evidence, and AI analytics surface risks before they escalate." }
       ],
-      "useCasesTitle": "Priority use cases",
+      "useCasesTitle": "Where IAM delivers impact",
       "useCases": [
-        { "icon": "🏢", "title": "Workforce IAM", "description": "Streamline joiner/mover/leaver flows with policy-as-code." },
-        { "icon": "🤝", "title": "Customer IAM", "description": "Deliver frictionless sign-in with progressive profiling and adaptive MFA." },
-        { "icon": "🔍", "title": "Regulatory readiness", "description": "Automate evidence collection for audits across regions." }
+        { "icon": "🏥", "title": "Healthcare", "description": "Protect patient data while ensuring clinicians access records exactly when needed." },
+        { "icon": "💳", "title": "Financial Services", "description": "Secure customer transactions, enforce regulations, and detect fraud in real time." },
+        { "icon": "🎓", "title": "Education", "description": "Manage diverse identities across campuses, students, and faculty with ease." }
       ],
-      "ctaTitle": "Unlock secure, seamless access",
-      "ctaSubtitle": "Align identity strategy with business velocity and regulatory needs.",
+      "ctaTitle": "Empower every identity",
+      "ctaSubtitle": "Reduce risk, delight users, and meet regulations with an IAM program tailored to your ambitions.",
       "ctaButton": "Talk with an identity strategist",
       "ctaHref": "contact?topic=identity",
       "sections": [
         {
-          "title": "Modernize governance across the enterprise",
-          "description": "Map roles, entitlements, and approvals to a unified policy engine that scales from headquarters to remote teams.",
+          "title": "Key features and benefits",
+          "description": "Every capability is designed to streamline access, accelerate operations, and harden defenses.",
           "image": { "src": "/img/s3.jpg", "alt": "Leaders collaborating on identity governance strategy" }
         },
         {
-          "title": "Deliver seamless, adaptive access",
-          "description": "Introduce contextual authentication and just-in-time privilege so users stay productive without increasing risk.",
+          "title": "From onboarding to insight",
+          "description": "Automated lifecycle management, MFA, and adaptive controls keep experiences seamless while safeguarding data.",
           "image": { "src": "/img/s4.jpg", "alt": "Professional signing in with adaptive MFA" },
           "reversed": true
         }
@@ -596,44 +506,44 @@
       ]
     },
     "zeroTrust": {
-      "heroTitle": "Zero-Trust Security",
-      "heroSubtitle": "Continuously verify users, devices, and applications before granting access to critical assets.",
-      "heroSupporting": "Our zero-trust architects design pragmatic roadmaps that deliver measurable risk reduction from day one.",
+      "heroTitle": "Zero-Trust Cybersecurity",
+      "heroSubtitle": "Unparalleled protection for your organization",
+      "heroSupporting": "The SamurAI embraces a proactive zero-trust model that minimizes attack surfaces, verifies every interaction, and keeps your data resilient against evolving threats.",
       "heroGradient": "linear-gradient(135deg, #0e1c5c 0%, #1f2f86 40%, #00c8d2 100%)",
       "primaryCta": "Launch a zero-trust assessment",
       "primaryCtaHref": "contact?topic=zero-trust",
       "secondaryCta": "Download the zero-trust roadmap",
       "secondaryCtaHref": "#zero-trust-roadmap",
-      "overviewTitle": "Break the attacker kill chain",
+      "overviewTitle": "Embracing the future of cybersecurity",
       "overviewParagraphs": [
-        "We align people, process, and technology to shrink the blast radius of any compromise.",
-        "Our methodology blends device trust, network segmentation, and adaptive authorization without slowing teams down."
+        "Zero trust assumes no user or device is safe until proven otherwise, dramatically shrinking the attack surface and elevating resilience.",
+        "Our consultative approach tailors zero-trust frameworks to your infrastructure so adoption is seamless and outcomes are measurable."
       ],
-      "highlightsTitle": "Key differentiators",
+      "highlightsTitle": "Key Features and Benefits",
       "highlights": [
-        { "icon": "🧭", "title": "Roadmaps rooted in reality", "description": "Prioritized workstreams mapped to existing investments." },
-        { "icon": "🔄", "title": "Automation-first", "description": "Infrastructure-as-code for policies, segmentation, and telemetry." },
-        { "icon": "📊", "title": "Executive-level metrics", "description": "Dashboards that communicate progress and ROI." }
+        { "icon": "🚫", "title": "Assumed No Trust", "description": "Every access request is verified and validated, inside or outside the perimeter." },
+        { "icon": "🛡️", "title": "Verification and Validation", "description": "Granular controls protect data, applications, and infrastructure from unauthorized access." },
+        { "icon": "🤝", "title": "Expert Guidance", "description": "Seasoned strategists design and manage roadmaps aligned to your goals and governance needs." }
       ],
-      "useCasesTitle": "Where we apply zero trust",
+      "useCasesTitle": "Where zero trust excels",
       "useCases": [
-        { "icon": "💼", "title": "Hybrid workforce", "description": "Secure access from any device with continuous assurance." },
-        { "icon": "🏭", "title": "Operational technology", "description": "Segment critical environments without disrupting production." },
-        { "icon": "☁️", "title": "Multi-cloud", "description": "Enforce consistent policies across AWS, Azure, and private clouds." }
+        { "icon": "🏢", "title": "Enterprise Operations", "description": "Continuously verify hybrid workforces across devices, locations, and roles." },
+        { "icon": "🏭", "title": "Critical Infrastructure", "description": "Segment high-value systems to minimize blast radius without halting production." },
+        { "icon": "☁️", "title": "Multi-Cloud Estates", "description": "Apply consistent policy-as-code across public, private, and hybrid clouds." }
       ],
-      "ctaTitle": "Make zero trust actionable",
-      "ctaSubtitle": "Turn high-level frameworks into an execution-ready program.",
+      "ctaTitle": "Secure your organization with zero trust",
+      "ctaSubtitle": "Partner with The SamurAI to modernize defenses, protect data, and stay ahead of cyber threats.",
       "ctaButton": "Start your roadmap",
       "ctaHref": "contact?topic=zero-trust",
       "sections": [
         {
-          "title": "Sequence identity, device, and network controls",
-          "description": "Prioritize foundational capabilities that deliver quick wins while building toward full continuous verification.",
+          "title": "Embracing the future of cybersecurity",
+          "description": "Safeguarding your organization is not optional—our zero-trust methodology brings proactive protection to every layer.",
           "image": { "src": "/img/s5.jpg", "alt": "Architect planning zero-trust roadmap" }
         },
         {
-          "title": "Operationalize automation everywhere",
-          "description": "Codify segmentation, telemetry, and policy updates so your program scales without manual effort.",
+          "title": "Why choose The SamurAI",
+          "description": "From strategy sessions to hands-on implementation, we align zero trust with your objectives and ensure ongoing success.",
           "image": { "src": "/img/s6.jpg", "alt": "Engineers enabling zero-trust automations" },
           "reversed": true
         }
@@ -679,193 +589,146 @@
     },
     "cloudSecurity": {
       "heroTitle": "Cloud Security",
-      "heroSubtitle": "Gain continuous visibility and control across multi-cloud environments without slowing delivery.",
-      "heroSupporting": "We operationalize CSPM, CWPP, and CIEM so teams can build fast while staying compliant.",
-      "heroGradient": "linear-gradient(135deg, #0a2557 0%, #164b8c 40%, #32d1ff 100%)",
-      "primaryCta": "Book a cloud posture review",
+      "heroSubtitle": "Secure multi-cloud, stay compliant, move faster",
+      "heroSupporting": "Modern cloud estates demand layered safeguards. The SamurAI reinforces every workload with intelligent guardrails so you can innovate without fear.",
+      "heroGradient": "linear-gradient(135deg, #072c5f 0%, #11519a 45%, #3fe4ff 100%)",
+      "primaryCta": "Book a cloud security workshop",
       "primaryCtaHref": "contact?topic=cloud-security",
       "secondaryCta": "Download the cloud guardrail guide",
       "secondaryCtaHref": "#cloud-guardrails",
-      "overviewTitle": "Build securely in every cloud",
+      "overviewTitle": "Unify protection across public and private clouds",
       "overviewParagraphs": [
-        "Our teams integrate security earlier in the pipeline while giving platform owners self-service guardrails.",
-        "We translate complex compliance mandates into codified controls across AWS, Azure, and GCP."
+        "Cloud security is more than a checklist—it is a living program that adapts to shifting regulations and emerging threats.",
+        "We deliver benchmarks, playbooks, and managed controls that keep your data resilient and compliant while teams move at full speed."
       ],
-      "highlightsTitle": "Program pillars",
+      "highlightsTitle": "Key Features and Benefits",
       "highlights": [
-        { "icon": "🌐", "title": "Unified visibility", "description": "Centralize findings from CSPM, CNAPP, and IaC scanning." },
-        { "icon": "🚀", "title": "Developer enablement", "description": "Golden templates and policy packs that accelerate delivery." },
-        { "icon": "📜", "title": "Compliance automation", "description": "Evidence collection and reporting tied to each control." }
+        { "icon": "🛡️", "title": "Layered Defense", "description": "Blend identity, network, and data protections across every provider." },
+        { "icon": "🧭", "title": "Program Guidance", "description": "Roadmaps and scorecards help you implement the right capabilities at the right time." },
+        { "icon": "📜", "title": "Compliance Confidence", "description": "Translate standards like GDPR, HIPAA, and PCI DSS into actionable guardrails." }
       ],
-      "useCasesTitle": "Key engagements",
+      "useCasesTitle": "Where we deliver impact",
       "useCases": [
-        { "icon": "🧪", "title": "Cloud landing zones", "description": "Design secure-by-default environments for new workloads." },
-        { "icon": "🔐", "title": "Data protection", "description": "Classify and safeguard data across storage and analytics services." },
-        { "icon": "🔄", "title": "DevSecOps integration", "description": "Embed guardrails into CI/CD with automated remediation." }
+        { "icon": "🏢", "title": "Enterprise Programs", "description": "Secure hybrid estates and regulated workloads without slowing delivery." },
+        { "icon": "🏥", "title": "Data Protection", "description": "Keep sensitive data encrypted, monitored, and governed end-to-end." },
+        { "icon": "🧾", "title": "Audit Readiness", "description": "Produce evidence packs and dashboards that satisfy auditors on demand." }
       ],
-      "ctaTitle": "Accelerate cloud adoption securely",
-      "ctaSubtitle": "Give builders confidence while maintaining governance.",
-      "ctaButton": "Talk to a cloud strategist",
+      "ctaTitle": "Guard every workload with The SamurAI",
+      "ctaSubtitle": "Modernize your defenses, automate compliance, and stay ahead of adversaries across every cloud.",
+      "ctaButton": "Talk with a cloud strategist",
       "ctaHref": "contact?topic=cloud-security",
       "sections": [
         {
-          "title": "Build secure-by-design landing zones",
-          "description": "Codify identity, network, and workload baselines so teams launch compliant environments faster.",
-          "image": { "src": "/img/s7.jpg", "alt": "Cloud architects reviewing landing zone templates" }
+          "title": "Stay ahead of cloud threats",
+          "description": "We continuously update guidance, patterns, and tooling so your teams operate confidently.",
+          "image": { "src": "/img/s7.jpg", "alt": "Cloud security dashboard" }
         },
         {
-          "title": "Streamline continuous compliance",
-          "description": "Automate detections, remediation, and reporting for evolving frameworks across regions.",
-          "image": { "src": "/img/s8.jpg", "alt": "Security engineer monitoring multi-cloud compliance" },
+          "title": "Deploy guardrails that scale",
+          "description": "Automate policies, reporting, and remediation across AWS, Azure, GCP, and sovereign clouds.",
+          "image": { "src": "/img/s8.jpg", "alt": "Security engineer monitoring dashboards" },
           "reversed": true
         }
       ],
       "otherSolutionsTitle": "Other Solutions",
       "otherSolutions": [
-        {
-          "title": "Zero-Trust Security",
-          "description": "Unify policies that span on-prem and cloud workloads.",
-          "href": "solutions/zero-trust"
-        },
-        {
-          "title": "Network Security",
-          "description": "Connect and protect hybrid networks that feed your cloud estate.",
-          "href": "solutions/network-security"
-        },
-        {
-          "title": "Endpoint Security",
-          "description": "Safeguard devices and workloads accessing cloud platforms.",
-          "href": "solutions/endpoint-security"
-        }
+        { "title": "Zero-Trust Security", "description": "Extend identity and device guardrails into every cloud segment.", "href": "solutions/zero-trust" },
+        { "title": "Network Security", "description": "Connect cloud and on-prem workloads with consistent protections.", "href": "solutions/network-security" },
+        { "title": "Endpoint Security", "description": "Safeguard the devices and workloads touching your cloud estate.", "href": "solutions/endpoint-security" }
       ],
-      "resourcesTitle": "Resources for modern cloud teams",
-      "resourcesSubtitle": "Templates, benchmarks, and best practices to uplift cloud resilience.",
+      "resourcesTitle": "Cloud resilience resources",
+      "resourcesSubtitle": "Blueprints and interviews that help teams govern, detect, and respond across clouds.",
       "resourcesCta": "Explore resource",
       "resources": [
-        {
-          "title": "Cloud Guardrail Reference Kit",
-          "description": "Pre-built policies for identity, networking, and workload protection.",
-          "href": "resources/cloud-guardrail-reference-kit"
-        },
-        {
-          "title": "CSPM Maturity Assessment",
-          "description": "Evaluate current posture and identify automation opportunities.",
-          "href": "resources/cspm-maturity-assessment"
-        },
-        {
-          "title": "Multi-Cloud Compliance Matrix",
-          "description": "Map global regulations to actionable technical controls.",
-          "href": "resources/multi-cloud-compliance-matrix"
-        }
+        { "title": "Cloud Guardrail Reference Kit", "description": "Deploy baseline policy packs covering identity, network, and workload.", "href": "resources/cloud-guardrail-reference-kit" },
+        { "title": "Provider Security Comparison Guide", "description": "Compare controls and telemetry across AWS, Azure, and GCP.", "href": "resources/cloud-provider-security-comparison" },
+        { "title": "Cloud Compliance Playbook", "description": "Map regulatory requirements to automated checks and evidence.", "href": "resources/cloud-compliance-playbook" }
       ]
     },
     "networkSecurity": {
       "heroTitle": "Network Security",
-      "heroSubtitle": "Protect hybrid networks with adaptive segmentation and real-time threat response.",
-      "heroSupporting": "We converge visibility, analytics, and enforcement so security teams can outpace adversaries.",
-      "heroGradient": "linear-gradient(135deg, #081d4a 0%, #143571 45%, #2fb6f0 100%)",
-      "primaryCta": "Book a network resilience workshop",
+      "heroSubtitle": "Visibility, control, and resilience for every connection",
+      "heroSupporting": "We architect high-performing networks that detect threats early, contain lateral movement, and keep mission-critical systems online.",
+      "heroGradient": "linear-gradient(135deg, #061e4d 0%, #123c78 45%, #2fccff 100%)",
+      "primaryCta": "Schedule a network posture review",
       "primaryCtaHref": "contact?topic=network-security",
-      "secondaryCta": "Download the segmentation guide",
-      "secondaryCtaHref": "#network-segmentation",
-      "overviewTitle": "Visibility plus control",
+      "secondaryCta": "Download the network modernization kit",
+      "secondaryCtaHref": "#network-modernization",
+      "overviewTitle": "Purpose-built security for dynamic networks",
       "overviewParagraphs": [
-        "Gain end-to-end insight across campus, data center, and cloud networks while enforcing adaptive policies.",
-        "We integrate partner technologies like SentinelOne, Cisco, and Palo Alto to deliver cohesive defense."
+        "Legacy perimeters no longer suffice. We deliver architectures that merge telemetry, segmentation, and automation to protect every segment.",
+        "From OT environments to SaaS connectivity, our teams design guardrails that scale with your business."
       ],
       "highlightsTitle": "Program pillars",
       "highlights": [
-        { "icon": "👁️", "title": "Deep visibility", "description": "Aggregate telemetry from firewalls, switches, and endpoints." },
-        { "icon": "🧱", "title": "Microsegmentation", "description": "Limit lateral movement with dynamic access controls." },
-        { "icon": "⚡", "title": "Automated response", "description": "Trigger playbooks that contain threats in minutes." }
+        { "icon": "👁️", "title": "Unified Visibility", "description": "Aggregate logs and flows across firewalls, switches, and endpoints." },
+        { "icon": "🧱", "title": "Adaptive Segmentation", "description": "Limit lateral movement with context-aware policies and micro-perimeters." },
+        { "icon": "⚡", "title": "Automated Response", "description": "Trigger playbooks that isolate suspicious activity before it spreads." },
+        { "icon": "🤝", "title": "Partner Ecosystem", "description": "Integrate best-of-breed platforms from Cisco, Palo Alto, SentinelOne, and more." }
       ],
-      "useCasesTitle": "Where we deliver",
+      "useCasesTitle": "Where we deliver impact",
       "useCases": [
-        { "icon": "🏥", "title": "Healthcare networks", "description": "Protect clinical systems while maintaining availability." },
-        { "icon": "🏦", "title": "Financial services", "description": "Meet stringent regulations with auditable controls." },
-        { "icon": "🏭", "title": "Manufacturing", "description": "Secure OT and IT convergence without disruption." }
+        { "icon": "🏥", "title": "Healthcare Networks", "description": "Protect clinical systems and patient data while maintaining uptime." },
+        { "icon": "🏦", "title": "Financial Services", "description": "Meet regulatory expectations with auditable controls and telemetry." },
+        { "icon": "🏭", "title": "Industrial & OT", "description": "Secure converged IT/OT environments without disrupting production." }
       ],
       "ctaTitle": "Strengthen your network posture",
-      "ctaSubtitle": "Move from reactive firewalls to proactive, adaptive defense.",
+      "ctaSubtitle": "Move from reactive firewalls to proactive, adaptive defense with The SamurAI at your side.",
       "ctaButton": "Plan your next step",
       "ctaHref": "contact?topic=network-security",
       "sections": [
         {
           "title": "Unify telemetry across every segment",
-          "description": "Collect and correlate data from firewalls, switches, and endpoints to see threats sooner.",
+          "description": "See inside every connection, from campus to cloud, with consolidated visibility and analytics.",
           "image": { "src": "/img/s9.jpg", "alt": "Network operations center tracking live telemetry" }
         },
         {
           "title": "Automate containment workflows",
-          "description": "Trigger playbooks that isolate affected zones and restore operations in minutes.",
-          "image": { "src": "/img/s10.jpg", "alt": "Engineers collaborating during an incident response" },
+          "description": "Respond with precision—shutting down lateral movement while keeping trusted traffic flowing.",
+          "image": { "src": "/img/s10.jpg", "alt": "Engineers collaborating during incident response" },
           "reversed": true
         }
       ],
       "otherSolutionsTitle": "Other Solutions",
       "otherSolutions": [
-        {
-          "title": "Zero-Trust Security",
-          "description": "Coordinate adaptive controls spanning users, devices, and applications.",
-          "href": "solutions/zero-trust"
-        },
-        {
-          "title": "Cloud Security",
-          "description": "Extend consistent protections into multi-cloud environments.",
-          "href": "solutions/cloud-security"
-        },
-        {
-          "title": "Endpoint Security",
-          "description": "Ensure every device connected to the network is resilient to modern threats.",
-          "href": "solutions/endpoint-security"
-        }
+        { "title": "Zero-Trust Security", "description": "Coordinate identity, endpoint, and network policies for end-to-end assurance.", "href": "solutions/zero-trust" },
+        { "title": "Cloud Security", "description": "Extend consistent guardrails into every cloud region and workload.", "href": "solutions/cloud-security" },
+        { "title": "Endpoint Security", "description": "Combine device telemetry with network analytics for faster detection.", "href": "solutions/endpoint-security" }
       ],
       "resourcesTitle": "Network resilience resources",
-      "resourcesSubtitle": "Boost visibility, response speed, and compliance across complex estates.",
+      "resourcesSubtitle": "Guides and playbooks that help your teams modernize, monitor, and respond.",
       "resourcesCta": "Explore resource",
       "resources": [
-        {
-          "title": "Segmentation Strategy Guide",
-          "description": "Plan phased rollouts for microsegmentation and macro controls.",
-          "href": "resources/segmentation-strategy-guide"
-        },
-        {
-          "title": "Network Telemetry Workbook",
-          "description": "Identify data sources and analytics to fuel situational awareness.",
-          "href": "resources/network-telemetry-workbook"
-        },
-        {
-          "title": "Incident Response Runbooks",
-          "description": "Standardize playbooks for outages, intrusions, and lateral movement attempts.",
-          "href": "resources/network-incident-response-runbooks"
-        }
+        { "title": "Segmentation Strategy Guide", "description": "Phase your microsegmentation rollout across complex estates.", "href": "resources/segmentation-strategy-guide" },
+        { "title": "Network Telemetry Workbook", "description": "Identify signal gaps and design dashboards for real-time insight.", "href": "resources/network-telemetry-workbook" },
+        { "title": "Incident Response Runbooks", "description": "Codify actions for outages, intrusions, and lateral movement attempts.", "href": "resources/network-incident-response-runbooks" }
       ]
     },
     "endpointSecurity": {
       "heroTitle": "Endpoint Security",
-      "heroSubtitle": "Detect, prevent, and respond to threats across laptops, servers, and edge devices.",
-      "heroSupporting": "We pair SentinelOne automation with proactive threat hunting to keep endpoints resilient.",
-      "heroGradient": "linear-gradient(135deg, #0a1d3f 0%, #203c74 45%, #65e6f4 100%)",
+      "heroSubtitle": "Every device defended, every incident contained",
+      "heroSupporting": "Endpoints power your business—and attackers know it. The SamurAI fuses automation with expert threat hunting to keep every asset resilient.",
+      "heroGradient": "linear-gradient(135deg, #08214f 0%, #1c417f 45%, #68f1ff 100%)",
       "primaryCta": "Book an endpoint resilience review",
       "primaryCtaHref": "contact?topic=endpoint-security",
       "secondaryCta": "Download the EDR maturity checklist",
       "secondaryCtaHref": "#edr-checklist",
       "overviewTitle": "All endpoints, always protected",
       "overviewParagraphs": [
-        "We unify EDR, XDR, and vulnerability management to reduce attack surface and speed response.",
-        "The SamurAI enables security teams with real-time telemetry and guided remediation playbooks."
+        "We unify EDR, XDR, and vulnerability management to reduce attack surface and accelerate response.",
+        "Security teams gain real-time telemetry, guided remediation playbooks, and expert operators ready to jump in."
       ],
       "highlightsTitle": "Why teams partner with us",
       "highlights": [
-        { "icon": "🤖", "title": "Autonomous protection", "description": "AI-driven detection and rollback for ransomware and fileless threats." },
-        { "icon": "🧑‍💻", "title": "Threat hunting", "description": "Experts who investigate anomalies and tune detections continually." },
-        { "icon": "📈", "title": "Program analytics", "description": "Dashboards showing coverage, response SLAs, and risk trends." }
+        { "icon": "🤖", "title": "Autonomous Protection", "description": "AI-driven detection, rollback, and containment for ransomware and advanced threats." },
+        { "icon": "🧑‍💻", "title": "Threat Hunting", "description": "Specialists investigate anomalies, tune detections, and remove guesswork." },
+        { "icon": "📈", "title": "Program Analytics", "description": "Dashboards show coverage, response SLAs, and risk trends across your fleet." }
       ],
-      "useCasesTitle": "Use cases",
+      "useCasesTitle": "Where endpoint security shines",
       "useCases": [
-        { "icon": "🛫", "title": "Global workforce", "description": "Protect remote and hybrid employees without sacrificing performance." },
-        { "icon": "🏢", "title": "Datacenter workloads", "description": "Secure Windows, Linux, and container hosts with unified controls." },
-        { "icon": "📱", "title": "Mobile and edge", "description": "Extend protections to tablets, kiosks, and IoT devices." }
+        { "icon": "🛫", "title": "Global Workforce", "description": "Protect remote and hybrid employees without sacrificing performance." },
+        { "icon": "🏢", "title": "Datacenter Workloads", "description": "Secure Windows, Linux, and container hosts with unified controls." },
+        { "icon": "📱", "title": "Mobile & Edge", "description": "Extend protections to tablets, kiosks, and IoT devices." }
       ],
       "ctaTitle": "Keep every endpoint resilient",
       "ctaSubtitle": "Stop breaches faster with autonomous protection and expert oversight.",
@@ -886,72 +749,48 @@
       ],
       "otherSolutionsTitle": "Other Solutions",
       "otherSolutions": [
-        {
-          "title": "AI Security for LLMs",
-          "description": "Secure developer workstations powering AI research and delivery.",
-          "href": "solutions/ai-security"
-        },
-        {
-          "title": "Cloud Security",
-          "description": "Protect workloads as they move between on-prem and cloud environments.",
-          "href": "solutions/cloud-security"
-        },
-        {
-          "title": "Network Security",
-          "description": "Coordinate endpoint telemetry with adaptive network controls.",
-          "href": "solutions/network-security"
-        }
+        { "title": "AI Security for LLMs", "description": "Secure developer workstations and inference infrastructure fueling AI programs.", "href": "solutions/ai-security" },
+        { "title": "Cloud Security", "description": "Protect workloads as they move between on-prem and cloud environments.", "href": "solutions/cloud-security" },
+        { "title": "Network Security", "description": "Coordinate endpoint telemetry with adaptive network controls for full fidelity.", "href": "solutions/network-security" }
       ],
       "resourcesTitle": "Endpoint mastery resources",
       "resourcesSubtitle": "Step-by-step guides to elevate endpoint detection, response, and hygiene.",
       "resourcesCta": "Explore resource",
       "resources": [
-        {
-          "title": "EDR Maturity Checklist",
-          "description": "Verify coverage, visibility, and playbooks across every device class.",
-          "href": "resources/edr-maturity-checklist"
-        },
-        {
-          "title": "Threat Hunting Runbook",
-          "description": "Codify proactive hunts, triage actions, and escalation workflows.",
-          "href": "resources/threat-hunting-runbook"
-        },
-        {
-          "title": "Endpoint Hygiene Guide",
-          "description": "Standardize patching, application control, and secure configurations.",
-          "href": "resources/endpoint-hygiene-guide"
-        }
+        { "title": "EDR Maturity Checklist", "description": "Verify coverage, visibility, and playbooks across every device class.", "href": "resources/edr-maturity-checklist" },
+        { "title": "Threat Hunting Runbook", "description": "Codify proactive hunts, triage actions, and escalation workflows.", "href": "resources/threat-hunting-runbook" },
+        { "title": "Endpoint Hygiene Guide", "description": "Standardize patching, application control, and secure configurations.", "href": "resources/endpoint-hygiene-guide" }
       ]
     }
   },
   "SolutionsOverview": {
-    "heroTitle": "Solutions engineered for modern threats",
-    "heroSubtitle": "Align detection, response, and resilience with frameworks built for today's adversaries.",
-    "heroSupporting": "Our modular solution catalog combines offensive expertise, automation, and executive-ready reporting to strengthen every layer of your estate.",
+    "heroTitle": "Our Solutions",
+    "heroSubtitle": "Transform Challenges Into Opportunities with Our Solutions",
+    "heroSupporting": "At The SamurAI, we understand what it feels like to be stuck, overwhelmed, or unsure of the next move. Whether you need to streamline operations, optimize costs, or navigate complex change, we partner with you every step of the way so your business can operate seamlessly, make data-driven decisions, and turn growth into reality.",
     "primaryCta": "Talk to a solution architect",
     "primaryCtaHref": "contact?topic=solutions",
     "secondaryCta": "View client outcomes",
     "secondaryCtaHref": "case-studies",
-    "pillarsTitle": "Why teams choose The SamurAI",
+    "pillarsTitle": "How Our AI-Powered Solutions Keep You Safe",
     "pillars": [
       {
-        "icon": "🧩",
-        "title": "Modular building blocks",
-        "description": "Combine identity, network, endpoint, cloud, and AI solutions to close gaps fast."
+        "icon": "🤖",
+        "title": "Proactive Defense",
+        "description": "We harness AI to continuously monitor, detect, and neutralize threats before they become problems."
       },
       {
-        "icon": "⚡",
-        "title": "Operational velocity",
-        "description": "Automation accelerates configuration, evidence collection, and handoffs to your teams."
+        "icon": "📡",
+        "title": "Real-Time Insight",
+        "description": "Machine learning uncovers patterns, predicts vulnerabilities, and keeps your teams focused on what matters."
       },
       {
-        "icon": "🛡️",
-        "title": "Proven resilience",
-        "description": "Battle-tested runbooks and purple-teamers adapt defenses as attackers evolve."
+        "icon": "🤝",
+        "title": "Security You Can Trust",
+        "description": "Your safety is our promise—we pair cutting-edge intelligence with human expertise to protect every mission."
       }
     ],
     "solutionsTitle": "Explore our flagship solutions",
-    "solutionsSubtitle": "Each solution layers assessments, engineering, and managed outcomes to match your program maturity.",
+    "solutionsSubtitle": "Every engagement blends automation, human expertise, and measurable outcomes so transformation actually sticks.",
     "solutions": [
       {
         "id": "ai-security",
@@ -1020,28 +859,23 @@
         ]
       }
     ],
-    "approachTitle": "The SamurAI approach",
-    "approachSubtitle": "Every engagement follows a proven playbook anchored in measurable outcomes.",
+    "approachTitle": "Why Choose Us?",
+    "approachSubtitle": "It is not just about finding a solution—it is about finding the right partner to share the journey.",
     "approachSteps": [
       {
         "icon": "🧭",
-        "title": "Frame the risk",
-        "description": "Rapid discovery workshops benchmark posture against regulatory and executive priorities."
+        "title": "Guidance at Every Step",
+        "description": "We help you navigate complexity with strategic counsel, playbooks, and hands-on expertise."
       },
       {
-        "icon": "🧪",
-        "title": "Pressure test defenses",
-        "description": "Offensive specialists emulate adversaries to uncover exploitable gaps."
+        "icon": "📈",
+        "title": "Data-Driven Confidence",
+        "description": "Your decisions stay grounded in real-time analytics, executive-ready reporting, and measurable outcomes."
       },
       {
-        "icon": "🛠️",
-        "title": "Engineer guardrails",
-        "description": "Automation and orchestration scale resilient configurations across environments."
-      },
-      {
-        "icon": "📊",
-        "title": "Operationalize insight",
-        "description": "Dashboards, runbooks, and enablement keep your teams ready for what's next."
+        "icon": "🤝",
+        "title": "Shared Success",
+        "description": "You are more than a client—we build trust, align to your goals, and celebrate wins together."
       }
     ],
     "metricsTitle": "Impact at a glance",
@@ -1250,12 +1084,16 @@
     "networkSecurity": "Network Security",
     "endpointSecurity": "Endpoint Security",
     "servicesMenu": {
+      "overview": "Services Overview",
       "consulting": "Consulting",
       "infrastructure": "Next-Gen Infrastructure",
       "resourcing": "Strategic Resourcing",
       "training": "Technology Labs & Training",
       "managed": "Managed IT",
       "devsecops": "DevSecOps Automation"
+    },
+    "solutionsMenu": {
+      "overview": "Solutions Overview"
     },
     "industriesMenu": {
       "healthcare": "Healthcare",
@@ -1300,8 +1138,32 @@
     "featuredStories": "Featured Stories",
     "featuredIntro": "Stay ahead with curated picks from our experts covering the latest in security, compliance, and innovation.",
     "tagsIntro": "Explore insights across Zero Trust, Automation, Governance, and more areas shaping modern cybersecurity.",
-    "newsletterTitle": "Stay Informed",
-    "newsletterIntro": "Sign up to receive the latest industry news, expert tips, and curated insights directly in your inbox.",
+    "resourcesTitle": "Resources to dive deeper",
+    "resourcesIntro": "Explore guides, playbooks, and executive briefs curated by The SamurAI team to keep your programs future ready.",
+    "resourcesCards": [
+      {
+        "title": "Top 10 Penetration Testing Tools Cybersecurity Experts Are Using Right Now",
+        "tag": "Cybersecurity",
+        "image": "/img/resource1.jpg",
+        "href": "/resources/top-penetration-testing-tools"
+      },
+      {
+        "title": "Top Cybersecurity Services Businesses Need in 2025",
+        "tag": "Strategy",
+        "image": "/img/resource2.jpg",
+        "href": "/resources/cybersecurity-services-2025"
+      },
+      {
+        "title": "Black Hat USA 2025 Closes Out on a High Note in Las Vegas",
+        "tag": "Threat Intel",
+        "image": "/img/resource3.jpg",
+        "href": "/resources/black-hat-usa-2025-recap"
+      }
+    ],
+    "ctaTitle": "Need a partner to accelerate your security roadmap?",
+    "ctaDescription": "Connect with The SamurAI strategists to align solutions, talent, and operations around measurable outcomes.",
+    "ctaButton": "Talk to our team",
+    "ctaHref": "/contact",
     "categoriesList": ["Security", "Services", "Events", "AI", "Cloud", "Compliance", "DevOps"],
     "featuredPosts": [
       {
@@ -1354,43 +1216,43 @@
     ]
   },
   "ServicesPage": {
-    "description": "We offer a comprehensive range of cybersecurity and IT services to protect your business",
+    "description": "Activate end-to-end cybersecurity and infrastructure expertise tailored to your organization.",
     "consulting": {
       "title": "Consulting Services",
       "hero": "Consulting Services",
-      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Our expert consulting services help you navigate complex IT challenges and drive digital transformation.",
+      "heroDesc": "Partner with executive advisors who turn bold security ambitions into board-ready roadmaps and executable programs.",
       "learnMore": "Learn More",
-      "section1Title": "Lorem Ipsum",
-      "section1Para1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "section1Para2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "section2Title": "Lorem Ipsum",
-      "section2Para1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-      "section2Para2": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+      "section1Title": "Comprehensive Assessments & Strategic Planning",
+      "section1Para1": "Our consulting services begin with a thorough assessment of your existing security practices and infrastructure. We analyze your systems, processes, and vulnerabilities to gain a comprehensive understanding of your cybersecurity landscape.",
+      "section1Para2": "Based on those findings, our consultants collaborate with your team to prioritize strategic roadmaps that align recommendations with your business objectives and risk tolerance.",
+      "section2Title": "Implementation and Ongoing Support",
+      "section2Para1": "With a focus on proactive defense, we help you design and implement secure architectures that mitigate potential threats and harden access controls across your estate.",
+      "section2Para2": "Our commitment continues after rollout with ongoing guidance that adapts to emerging threats, refines protocols, and keeps your security posture advancing forward.",
       "otherServices": "Other Services",
       "infrastructure": "Next Gen Infrastructure",
       "resourcing": "Strategic Resourcing",
       "training": "Technology Labs & Training",
       "managedIT": "Managed IT",
       "devsecops": "DevSecOps Automation",
-      "serviceDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "serviceDesc": "Advisory teams that align transformation strategy, governance, and execution.",
       "resources": "Resources",
-      "resourcesIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks.",
+      "resourcesIntro": "Access frameworks, scorecards, and best practices that underpin our consulting engagements.",
       "readMore": "Read More",
-      "ctaTitle": "Lorem Ipsum Is Simply Dummy Text Of Printing",
-      "ctaDesc": "Lorem Ipsum is Simply Dummy Text Of Printing",
+      "ctaTitle": "Ready to chart your next security chapter?",
+      "ctaDesc": "Co-create a transformation roadmap with The SamurAI consulting leaders and build the path forward.",
       "consulting": "Consulting Services"  
     },
     "infrastructure": {
       "hero": "Next Generation Infrastructure",
-      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Build cutting-edge infrastructure solutions that scale with your business needs.",
+      "heroDesc": "Engineer resilient, high-performance infrastructure with security and observability woven into every layer.",
       "getStarted": "Get Started",
       "infrastructure": "Next Generation Infrastructure",
-      "section1Title": "Modernize Your Core Systems",
-      "section1Para1": "Design hybrid and multi-cloud architectures that keep mission critical workloads performant, compliant, and resilient.",
-      "section1Para2": "From network segmentation to observability, we blueprint infrastructure foundations that accelerate transformation while managing risk.",
-      "section2Title": "Operate With Intelligence",
-      "section2Para1": "Automate day-two operations with infrastructure as code, proactive monitoring, and AI-enabled incident response playbooks.",
-      "section2Para2": "Our specialists embed with your teams to uplift capabilities, ensure knowledge transfer, and unlock continuous improvement.",
+      "section1Title": "Comprehensive Cybersecurity Services",
+      "section1Para1": "We take a holistic approach to cybersecurity with a suite of services tailored to your environment—from threat detection and response to vulnerability management and security analytics.",
+      "section1Para2": "Leveraging cutting-edge technology, we deploy advanced firewalls, intrusion detection, AI, and machine learning to keep adversaries at bay.",
+      "section2Title": "Real-Time Monitoring & Reliable Operations",
+      "section2Para1": "Our next-generation infrastructure delivers real-time monitoring and detection backed by sophisticated analytics that surface risks the moment they appear.",
+      "section2Para2": "Built for reliability, scalability, and cost efficiency, our experts tailor solutions to your requirements so critical systems stay available without compromising security.",
       "resources": "Resources",
       "resourcesIntro": "Explore briefs, templates, and playbooks to help your teams deliver scalable, secure infrastructure modernization initiatives.",
       "ctaTitle": "Ready to accelerate your infrastructure evolution?",
@@ -1398,15 +1260,15 @@
     },
     "resourcing": {
       "hero": "Strategic Resourcing",
-      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Access top-tier talent and strategic resources to power your digital initiatives.",
+      "heroDesc": "Augment your delivery squads with cleared, battle-tested specialists who integrate seamlessly with your culture.",
       "exploreSolutions": "Explore Solutions",
       "resourcing": "Strategic Resourcing",
-      "section1Title": "Build The Right Team Fast",
-      "section1Para1": "Tap into a curated bench of cybersecurity, cloud, and automation experts ready to embed within your programs.",
-      "section1Para2": "We align specialist talent to your delivery roadmap, ensuring velocity without compromising governance or quality.",
-      "section2Title": "Scale As Demands Shift",
-      "section2Para1": "Orchestrate elastic capacity across regions and time zones with outcome-based engagement models.",
-      "section2Para2": "Gain transparent performance dashboards, knowledge capture rituals, and succession plans for long-term resilience.",
+      "section1Title": "Customized Cybersecurity Expertise",
+      "section1Para1": "Every organization has unique cybersecurity needs, so we tailor strategic resourcing solutions to your assessments, risk analyses, incident response planning, and technology initiatives.",
+      "section1Para2": "Our specialists bring extensive experience identifying vulnerabilities and deploying proactive defenses that strengthen resilience across your programs.",
+      "section2Title": "Comprehensive Assessments & Response Planning",
+      "section2Para1": "We conduct deep security assessments to reveal weaknesses, evaluate risk exposure, and deliver actionable recommendations that elevate your defenses.",
+      "section2Para2": "Together we craft incident response plans and proactive strategies—backed by top-tier talent—that keep you ahead of threats and aligned with business goals.",
       "resources": "Resources",
       "resourcesIntro": "Discover playbooks and insights that help talent leaders orchestrate high-performing, security-first delivery teams.",
       "ctaTitle": "Need mission-ready experts on demand?",
@@ -1414,15 +1276,15 @@
     },
     "training": {
       "hero": "Technology Labs & Training",
-      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empower your team with the knowledge and skills needed to succeed in the digital landscape.",
+      "heroDesc": "Equip your workforce through immersive labs, cyber ranges, and enablement programs led by seasoned practitioners.",
       "joinProgram": "Join Program",
       "training": "Technology Labs & Training",
-      "section1Title": "Experiential Learning Journeys",
-      "section1Para1": "Deliver instructor-led labs, cyber ranges, and simulation drills that mirror real-world threat landscapes.",
-      "section1Para2": "Participants gain hands-on mastery across zero trust, cloud security, SOC automation, and secure-by-design practices.",
-      "section2Title": "Upskill Teams At Scale",
-      "section2Para1": "Blend modular curricula, certifications, and mentorship frameworks that align to your capability roadmap.",
-      "section2Para2": "Our learning scientists track proficiency gains, personalize pathways, and embed reinforcement rituals for lasting impact.",
+      "section1Title": "Holistic Cybersecurity Learning",
+      "section1Para1": "Our labs and training programs complement robust cybersecurity services with courses for every skill level, spanning foundational concepts to specialized disciplines.",
+      "section1Para2": "Learners gain hands-on experience through immersive labs led by industry experts who pair real-world insights with practical exercises.",
+      "section2Title": "Stay Ahead of Emerging Threats",
+      "section2Para1": "Curricula are refreshed to cover the latest attacker tactics and defensive techniques so your teams stay prepared for what’s next.",
+      "section2Para2": "We customize delivery—on-site or virtual—to align with your schedule, objectives, and evolving enablement roadmap.",
       "resources": "Resources",
       "resourcesIntro": "Access learning kits, lab guides, and readiness assessments to launch continuous enablement programs.",
       "ctaTitle": "Ignite continuous learning across your teams",
@@ -1430,15 +1292,15 @@
     },
     "managedIT": {
       "hero": "Managed IT",
-      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Comprehensive managed IT services to keep your business running smoothly.",
+      "heroDesc": "Operate mission-critical platforms with always-on monitoring, automation, and specialists who resolve issues before users notice.",
       "contactUs": "Contact Us",
       "managedIT": "Managed IT",
-      "section1Title": "Proactive Operations 24/7",
-      "section1Para1": "Stabilize mission-critical platforms with continuous monitoring, patch orchestration, and automated remediation.",
-      "section1Para2": "Our global command center blends AI insights with veteran engineers to resolve incidents before they impact users.",
-      "section2Title": "Optimize And Transform",
-      "section2Para1": "Leverage FinOps, platform engineering, and lifecycle management services aligned to business KPIs.",
-      "section2Para2": "We co-create modernization roadmaps, ensuring secure adoption of cloud, SaaS, and workplace innovations.",
+      "section1Title": "Tailored Strategy & Comprehensive Protection",
+      "section1Para1": "We partner with you to design security strategies that fit your objectives, industry, and operating model—no matter the size of your organization.",
+      "section1Para2": "From proactive threat monitoring to response and recovery, our managed services safeguard critical assets so your teams can stay focused on innovation.",
+      "section2Title": "Proactive Monitoring & Trusted Partnership",
+      "section2Para1": "Always-on monitoring uncovers vulnerabilities and incidents in real time, reducing disruption and preserving business continuity.",
+      "section2Para2": "You gain seasoned experts, reliable operations, scalable engagement models, and cost efficiencies that make long-term protection attainable.",
       "resources": "Resources",
       "resourcesIntro": "Browse guides on managed services governance, SLA design, and operations modernization best practices.",
       "ctaTitle": "Looking for a strategic managed services partner?",
@@ -1446,29 +1308,20 @@
     },
     "devsecops": {
       "hero": "DevSecOps Automation",
-      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Streamline development, security, and operations with advanced automation.",
+      "heroDesc": "Unify development, security, and operations with automation that keeps releases fast, compliant, and resilient.",
       "learnMore": "Learn More",
       "devsecops": "DevSecOps Automation",
-      "section1Title": "Ship Secure Software Faster",
-      "section1Para1": "Embed threat modeling, SAST/DAST, and IaC scanning into developer toolchains without slowing delivery.",
-      "section1Para2": "We help teams standardize guardrails that scale across microservices, APIs, and cloud-native workloads.",
-      "section2Title": "Automate Continuous Assurance",
-      "section2Para1": "Instrument policy as code, security observability, and automated compliance evidence collection.",
-      "section2Para2": "Our experts integrate platform engineering and SecOps to maintain a resilient, auditable SDLC.",
+      "section1Title": "Seamless Collaboration & Secure Delivery",
+      "section1Para1": "We break down silos so development, security, and operations teams collaborate across the lifecycle with shared visibility and goals.",
+      "section1Para2": "By embedding security into pipelines, you deliver software faster while mitigating vulnerabilities before they reach production.",
+      "section2Title": "Automated, Compliant, and Scalable Security",
+      "section2Para1": "Our DevSecOps automation covers security-as-code, compliance controls, and threat intelligence to address complex modernization challenges.",
+      "section2Para2": "With proactive security, continuous compliance, and scalable automation, you drive ongoing improvement while protecting every release.",
       "resources": "Resources",
       "resourcesIntro": "Dive into reference architectures and automation patterns that align Dev, Sec, and Ops teams.",
       "ctaTitle": "Transform your software supply chain",
       "ctaDesc": "Unlock speed and security with The SamurAI’s DevSecOps accelerators, coaching, and platform expertise."
     }
-  },
-  "Services": {
-    "title": "Our Services",
-    "consulting": "Consulting Services",
-    "infrastructure": "Next Gen Infrastructure",
-    "resourcing": "Strategic Resourcing",
-    "training": "Technology Labs & Training",
-    "managedIT": "Managed IT",
-    "devsecops": "DevSecOps Automation"
   },
   "ContactForm": {
     "title": "Get in touch",
@@ -1536,12 +1389,16 @@
     "company": "thesamurai",
     "description": "Building innovative solutions for tomorrow",
     "quickLinks": "Quick Links",
+    "supportLinks": "Support",
+    "contactLinks": "Contact",
     "rights": "All rights reserved.",
     "contactUs": "Talk to our team",
     "emailLabel": "Email",
     "phoneLabel": "Phone",
     "email": "hello@thesamurai.com",
-    "phone": "+1 (855) 425-8383"
+    "phone": "+1 (855) 425-8383",
+    "addressLabel": "Office",
+    "address": "100 Somerset Corporate Blvd, 2nd Floor, Bridgewater, NJ 08807"
   },
   "FooterResources": {
     "brand": "The SamurAI",
@@ -1565,9 +1422,9 @@
       }
     },
     "cta": {
-      "title": "Lorem Ipsum Is Simply Dummy Text Of Printing",
-      "subtitle": "Lorem Ipsum Is Simply Dummy Text Of Printing",
-      "button": "Lorem Ipsum",
+      "title": "Need a partner to accelerate your roadmap?",
+      "subtitle": "Connect with The SamurAI strategists to align solutions, talent, and operations around measurable results.",
+      "button": "Talk with our team",
       "href": "/contact"
     }
   }

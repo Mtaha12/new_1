@@ -22,6 +22,37 @@ export default function Footer() {
     { label: navT('signup'), href: `/${currentLocale}/auth/signup` }
   ];
 
+  const supportLinks = [
+    { label: navT('servicesMenu.consulting'), href: `/${currentLocale}/services/consulting` },
+    { label: navT('servicesMenu.devsecops'), href: `/${currentLocale}/services/devsecops` },
+    { label: navT('solutionsMenu.overview'), href: `/${currentLocale}/solutions` },
+    { label: navT('servicesMenu.managed'), href: `/${currentLocale}/services/managed-it` },
+    { label: navT('servicesMenu.infrastructure'), href: `/${currentLocale}/services/infrastructure` },
+    { label: navT('servicesMenu.resourcing'), href: `/${currentLocale}/services/resourcing` },
+    { label: navT('servicesMenu.training'), href: `/${currentLocale}/services/training` }
+  ];
+
+  const contactItems = [
+    {
+      icon: '☎️',
+      label: t('phoneLabel'),
+      value: t('phone'),
+      href: `tel:${t('phone').replace(/[^\d+]/g, '')}`
+    },
+    {
+      icon: '✉️',
+      label: t('emailLabel'),
+      value: t('email'),
+      href: `mailto:${t('email')}`
+    },
+    {
+      icon: '📍',
+      label: t('addressLabel'),
+      value: t('address'),
+      href: undefined
+    }
+  ];
+
   const socialLinks = [
     {
       label: 'Facebook',
@@ -187,108 +218,106 @@ export default function Footer() {
             </div>
           </div>
 
-          <div
-            style={{
-              background: '#1a1f71',
-              borderRadius: '16px',
-              padding: '2rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1.4rem'
-            }}
-          >
-            <div>
-              <h4
-                style={{
-                  fontSize: '1rem',
-                  fontWeight: '700',
-                  marginBottom: '0.85rem'
-                }}
-              >
-                {t('contactUs')}
-              </h4>
-              <div
-                style={{
-                  display: 'grid',
-                  gap: '0.85rem',
-                  color: 'rgba(255,255,255,0.9)',
-                  fontSize: '0.95rem'
-                }}
-              >
-                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                  <span
-                    aria-hidden
-                    style={{
-                      background: 'rgba(105, 232, 225, 0.2)',
-                      color: '#69E8E1',
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '1rem'
-                    }}
-                  >
-                    ✉️
-                  </span>
-                  <div style={{ display: 'grid', gap: '0.2rem' }}>
-                    <span style={{ opacity: 0.7 }}>{t('emailLabel')}</span>
-                    <Link
-                      href={`mailto:${t('email')}`}
-                      style={{ color: '#69E8E1', textDecoration: 'none', fontWeight: 600 }}
-                    >
-                      {t('email')}
-                    </Link>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                  <span
-                    aria-hidden
-                    style={{
-                      background: 'rgba(105, 232, 225, 0.2)',
-                      color: '#69E8E1',
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '1rem'
-                    }}
-                  >
-                    ☎️
-                  </span>
-                  <div style={{ display: 'grid', gap: '0.2rem' }}>
-                    <span style={{ opacity: 0.7 }}>{t('phoneLabel')}</span>
-                    <Link
-                      href={`tel:${t('phone').replace(/[^\d+]/g, '')}`}
-                      style={{ color: '#69E8E1', textDecoration: 'none', fontWeight: 600 }}
-                    >
-                      {t('phone')}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <Link
-              href={`/${currentLocale}/contact`}
-              prefetch={false}
-              className="hover-glow"
+          <div>
+            <h4
               style={{
-                alignSelf: 'flex-start',
-                background: '#69E8E1',
-                color: '#0a0e3d',
-                textDecoration: 'none',
-                padding: '0.75rem 1.75rem',
-                borderRadius: '999px',
-                fontWeight: '600',
-                transition: 'transform 0.3s ease'
+                fontSize: '1rem',
+                fontWeight: '700',
+                marginBottom: '1rem'
               }}
             >
-              {navT('contact')}
-            </Link>
+              {t('supportLinks')}
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {supportLinks.map(({ label, href }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  prefetch={false}
+                  className="hover-underline"
+                  style={{
+                    color: 'rgba(255,255,255,0.8)',
+                    textDecoration: 'none',
+                    fontSize: '0.95rem',
+                    transition: 'color 0.3s ease'
+                  }}
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
+
+          <div>
+            <h4
+              style={{
+                fontSize: '1rem',
+                fontWeight: '700',
+                marginBottom: '1rem'
+              }}
+            >
+              {t('contactLinks')}
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+              {contactItems.map(({ icon, label, value, href }) => {
+                const content = (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <span
+                      aria-hidden
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '50%',
+                        background: 'rgba(105, 232, 225, 0.15)',
+                        color: '#69E8E1',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '1rem'
+                      }}
+                    >
+                      {icon}
+                    </span>
+                    <div style={{ display: 'grid', gap: '0.2rem' }}>
+                      <span style={{ opacity: 0.7, fontSize: '0.85rem' }}>{label}</span>
+                      <span style={{ fontWeight: 600, color: '#fff', fontSize: '0.95rem' }}>{value}</span>
+                    </div>
+                  </div>
+                );
+
+                if (href) {
+                  return (
+                    <Link
+                      key={label}
+                      href={href}
+                      prefetch={false}
+                      style={{
+                        textDecoration: 'none',
+                        color: 'inherit',
+                        transition: 'transform 0.3s ease, color 0.3s ease'
+                      }}
+                      className="hover-underline"
+                    >
+                      {content}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
+                    key={label}
+                    style={{
+                      transition: 'transform 0.3s ease'
+                    }}
+                    className="hover-underline"
+                  >
+                    {content}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
         </div>
 
         <div

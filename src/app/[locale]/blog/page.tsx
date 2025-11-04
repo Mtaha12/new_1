@@ -1,6 +1,6 @@
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import BlogLanding from '@/components/blog/BlogLanding';
+import BlogLanding, { BlogResource } from '@/components/blog/BlogLanding';
 import { getTranslations } from 'next-intl/server';
 
 export const dynamic = 'force-static';
@@ -34,6 +34,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const featuredPosts = (t.raw('featuredPosts') as BlogPost[]) ?? [];
   const latestPosts = (t.raw('latestPosts') as BlogPost[]) ?? [];
   const categories = (t.raw('categoriesList') as string[]) ?? [];
+  const resources = (t.raw('resourcesCards') as BlogResource[]) ?? [];
 
   const strings = {
     title: t('title'),
@@ -44,10 +45,13 @@ export default async function BlogPage({ params }: BlogPageProps) {
     categories: t('categories'),
     tags: t('tags'),
     tagsIntro: t('tagsIntro'),
-    newsletterTitle: t('newsletterTitle'),
-    newsletterIntro: t('newsletterIntro'),
     readMore: common('readMore'),
-    getStarted: common('getStarted')
+    resourcesTitle: t('resourcesTitle'),
+    resourcesIntro: t('resourcesIntro'),
+    ctaTitle: t('ctaTitle'),
+    ctaDescription: t('ctaDescription'),
+    ctaButton: t('ctaButton'),
+    ctaHref: t('ctaHref')
   };
 
   return (
@@ -67,6 +71,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         categories={categories}
         featuredPosts={featuredPosts}
         latestPosts={latestPosts}
+        resources={resources}
       />
       <Footer />
     </div>
