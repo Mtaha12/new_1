@@ -103,6 +103,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
   const secondaryCtaHref = buildLocalizedHref(t('secondaryCtaHref'), currentLocale);
   const resourcesTitle = homeT('resourcesTitle');
   const resourcesSubtitle = homeT('resourcesDescription');
+  const resourcesCTA = homeT('resourcesCTA');
   const ctaTitle = homeT('ctaTitle');
   const ctaSubtitle = homeT('ctaDescription');
   const ctaButton = homeT('ctaButton');
@@ -441,76 +442,41 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
                 gap: 'clamp(1.5rem, 4vw, 2.5rem)'
               }}
             >
-              {localizedResourcesRaw.length > 0
-                ? localizedResourcesRaw.map((resource, index) => (
-                    <div
-                      key={`${resource.title}-${index}`}
-                      className={`tilt-card resource-card delay-${(index % 3) + 1}`}
-                      style={{
-                        borderRadius: '20px',
-                        boxShadow: '0 22px 45px rgba(10, 14, 61, 0.25)',
-                        background: '#0a0e3d'
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          paddingBottom: '65%',
-                          borderRadius: '20px',
-                          overflow: 'hidden'
-                        }}
-                      >
-                        <Image
-                          src={resource.image || '/img/resource1.jpg'}
-                          alt={resource.title}
-                          fill
-                          style={{ objectFit: 'cover' }}
-                        />
-                        {resource.tag && (
-                          <span
-                            style={{
-                              position: 'absolute',
-                              top: '1rem',
-                              ...(isArabic ? { right: '1rem' } : { left: '1rem' }),
-                              padding: '0.35rem 0.9rem',
-                              borderRadius: '999px',
-                              background: 'rgba(255,255,255,0.18)',
-                              color: '#fff',
-                              fontSize: '0.75rem',
-                              fontWeight: 600,
-                              letterSpacing: '0.04em'
-                            }}
-                          >
-                            {resource.tag}
-                          </span>
-                        )}
-                      </div>
+              {(localizedResourcesRaw.length > 0 ? localizedResourcesRaw : homepageResources).map((resource, index) => {
+                const imageSrc = (resource as HomepageResource).image ?? (resource as { img: string }).img ?? '/img/resource1.jpg';
+                const resourceTag = (resource as HomepageResource).tag ?? (resource as { tag?: string }).tag;
+                const resourceTitle = resource.title ?? '';
+                const resourceDescription = (resource as HomepageResource).description ?? '';
+
+                return (
+                  <div
+                    key={`${resourceTitle}-${index}`}
+                    className={`tilt-card resource-card ${isArabic ? 'resource-card--rtl' : ''} delay-${(index % 3) + 1}`}
+                    style={{
+                      borderRadius: '20px',
+                      boxShadow: '0 22px 45px rgba(10, 14, 61, 0.25)',
+                      background: '#0a0e3d',
+                      color: '#fff'
+                    }}
+                  >
+                    <div className="resource-card__media">
+                      <Image src={imageSrc} alt={resourceTitle} fill style={{ objectFit: 'cover' }} />
+                      {resourceTag && <span className="resource-card__tag">{resourceTag}</span>}
                     </div>
-                  ))
-                : homepageResources.map((resource, index) => (
-                    <div
-                      key={`${resource.title}-${index}`}
-                      className={`tilt-card resource-card delay-${(index % 3) + 1}`}
-                      style={{
-                        borderRadius: '20px',
-                        boxShadow: '0 22px 45px rgba(10, 14, 61, 0.25)',
-                        background: '#0a0e3d'
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          paddingBottom: '65%',
-                          borderRadius: '20px',
-                          overflow: 'hidden'
-                        }}
-                      >
-                        <Image src={resource.img} alt={resource.title} fill style={{ objectFit: 'cover' }} />
-                      </div>
+                    <div className="resource-card__body">
+                      <h3 className="resource-card__title" style={{ color: '#fff' }}>
+                        {resourceTitle}
+                      </h3>
+                      {resourceDescription && (
+                        <p style={{ margin: 0, color: 'rgba(255,255,255,0.82)', lineHeight: 1.6, fontSize: '0.95rem' }}>
+                          {resourceDescription}
+                        </p>
+                      )}
+                      <span className="resource-card__cta">{resourcesCTA}</span>
                     </div>
-                  ))}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

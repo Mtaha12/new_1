@@ -92,34 +92,49 @@ export default function SolutionsOverviewPage() {
 
   const solutionMedia: Record<string, { image: string; badge: string; accent: string }> = {
     'ai-security': {
-      image: '/img/s1.jpg',
+      image: '/img/ss7.jpg',
       badge: '🤖',
-      accent: 'linear-gradient(135deg, rgba(9, 31, 90, 0.8) 0%, rgba(13, 78, 176, 0.85) 100%)'
+      accent: 'linear-gradient(135deg, rgba(9, 31, 90, 0.82) 0%, rgba(20, 122, 220, 0.88) 100%)'
     },
     'identity-management': {
-      image: '/img/s4.jpg',
+      image: '/img/ss4.jpg',
       badge: '🪪',
       accent: 'linear-gradient(135deg, rgba(8, 25, 70, 0.82) 0%, rgba(16, 104, 160, 0.82) 100%)'
     },
     'zero-trust': {
-      image: '/img/s2.jpg',
+      image: '/img/ss2.jpg',
       badge: '🛡️',
       accent: 'linear-gradient(135deg, rgba(7, 31, 95, 0.85) 0%, rgba(52, 187, 197, 0.82) 100%)'
     },
     'cloud-security': {
-      image: '/img/s3.jpg',
+      image: '/img/ss3.jpg',
       badge: '☁️',
       accent: 'linear-gradient(135deg, rgba(6, 24, 84, 0.85) 0%, rgba(57, 135, 255, 0.82) 100%)'
     },
     'network-security': {
-      image: '/img/s10.jpg',
+      image: '/img/ss10.jpg',
       badge: '🌐',
       accent: 'linear-gradient(135deg, rgba(5, 20, 82, 0.82) 0%, rgba(105, 232, 225, 0.8) 100%)'
     },
     'endpoint-security': {
-      image: '/img/s6.jpg',
+      image: '/img/ss6.jpg',
       badge: '💻',
       accent: 'linear-gradient(135deg, rgba(4, 16, 66, 0.82) 0%, rgba(62, 169, 219, 0.82) 100%)'
+    },
+    'vulnerability-management': {
+      image: '/img/ss5.jpg',
+      badge: '⭐',
+      accent: 'linear-gradient(135deg, rgba(8, 28, 78, 0.82) 0%, rgba(55, 165, 245, 0.82) 100%)'
+    },
+    'policy-security-awareness': {
+      image: '/img/ss8.jpg',
+      badge: '📘',
+      accent: 'linear-gradient(135deg, rgba(10, 35, 90, 0.82) 0%, rgba(120, 145, 255, 0.82) 100%)'
+    },
+    'email-security-migrations': {
+      image: '/img/ss9.jpg',
+      badge: '✉️',
+      accent: 'linear-gradient(135deg, rgba(6, 32, 88, 0.82) 0%, rgba(74, 200, 230, 0.82) 100%)'
     }
   };
 
@@ -231,7 +246,7 @@ export default function SolutionsOverviewPage() {
                 className="tilt-card fade-section delay-2"
                 style={{ position: 'relative', minHeight: '320px', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 45px 75px rgba(5, 12, 40, 0.35)' }}
               >
-                <Image src="/img/s12.jpg" alt={heroTitle} fill priority sizes="(max-width: 768px) 100vw, 540px" style={{ objectFit: 'cover' }} />
+                <Image src="/img/ss12.jpg" alt={heroTitle} fill priority sizes="(max-width: 768px) 100vw, 540px" style={{ objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,12,40,0) 0%, rgba(4,12,40,0.65) 100%)' }} />
                 <div
                   style={{
@@ -356,7 +371,7 @@ export default function SolutionsOverviewPage() {
             >
               {solutions.map((solution, index) => {
                 const media = solutionMedia[solution.id] ?? {
-                  image: '/img/s2.jpg',
+                  image: '/img/ss2.jpg',
                   badge: '⭐',
                   accent: 'linear-gradient(135deg, rgba(10,15,70,0.85) 0%, rgba(14,58,120,0.8) 100%)'
                 };
@@ -577,16 +592,16 @@ export default function SolutionsOverviewPage() {
                   key={`${resource.title}-${index}`}
                   href={buildHref(resource.href)}
                   prefetch={false}
-                  className={`tilt-card resource-card delay-${(index % 3) + 1}`}
+                  className={`tilt-card resource-card ${isArabic ? 'resource-card--rtl' : ''} delay-${(index % 3) + 1}`}
                   style={{
                     borderRadius: '20px',
                     boxShadow: '0 22px 45px rgba(10, 14, 61, 0.22)',
                     background: '#0a0e3d',
-                    overflow: 'hidden',
+                    color: '#fff',
                     textDecoration: 'none'
                   }}
                 >
-                  <div style={{ position: 'relative', width: '100%', paddingBottom: '65%', overflow: 'hidden' }}>
+                  <div className="resource-card__media">
                     <Image
                       src={resource.image || '/img/resource1.jpg'}
                       alt={resource.title}
@@ -594,28 +609,13 @@ export default function SolutionsOverviewPage() {
                       sizes="(max-width: 768px) 100vw, 320px"
                       style={{ objectFit: 'cover' }}
                     />
-                    {resource.tag && (
-                      <span
-                        style={{
-                          position: 'absolute',
-                          top: '1rem',
-                          ...(isArabic ? { right: '1rem' } : { left: '1rem' }),
-                          padding: '0.35rem 0.9rem',
-                          borderRadius: '999px',
-                          background: 'rgba(255,255,255,0.18)',
-                          color: '#fff',
-                          fontSize: '0.75rem',
-                          fontWeight: 600,
-                          letterSpacing: '0.04em'
-                        }}
-                      >
-                        {resource.tag}
-                      </span>
-                    )}
+                    {resource.tag && <span className="resource-card__tag">{resource.tag}</span>}
                   </div>
-                  <div style={{ padding: '1.6rem', display: 'grid', gap: '0.75rem', color: '#fff' }}>
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0 }}>{resource.title}</h3>
-                    <span style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>{resourcesCTA}</span>
+                  <div className="resource-card__body">
+                    <h3 className="resource-card__title" style={{ color: '#fff' }}>
+                      {resource.title}
+                    </h3>
+                    <span className="resource-card__cta">{resourcesCTA}</span>
                   </div>
                 </Link>
               ))}
