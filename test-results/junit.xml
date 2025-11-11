@@ -1,1024 +1,1442 @@
-<testsuites id="" name="" tests="469" failures="0" skipped="0" errors="0" time="1005.033144">
-<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="chromium" tests="8" failures="0" skipped="0" time="33.965" errors="0">
-<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="3.545">
+<testsuites id="" name="" tests="238" failures="4" skipped="233" errors="0" time="92.39365099999999">
+<testsuite name="services.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="chromium" tests="14" failures="4" skipped="9" time="308.059" errors="0">
+<testcase name="Services experience › EN services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="77.004">
+<failure message="services.spec.ts:31:11 services overview renders hero, grid, and CTA content" type="FAILURE">
+<![CDATA[  [chromium] › services.spec.ts:31:11 › Services experience › EN services › services overview renders hero, grid, and CTA content 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('h1')
+    Expected substring: "OUR SERVICES"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('h1')
+
+
+      32 |         await page.goto(`${locale.basePath}/services`, { waitUntil: 'networkidle' });
+      33 |
+    > 34 |         await expect(page.locator('h1')).toContainText(servicesOverview.heroTitle);
+         |                                          ^
+      35 |         await expect(page.getByText(servicesOverview.heroSubtitle, { exact: false })).toBeVisible();
+      36 |
+      37 |         const serviceCards = Array.isArray(servicesOverview.services) ? servicesOverview.services : [];
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:34:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('h1')
+    Expected substring: "OUR SERVICES"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('h1')
+
+
+      32 |         await page.goto(`${locale.basePath}/services`, { waitUntil: 'networkidle' });
+      33 |
+    > 34 |         await expect(page.locator('h1')).toContainText(servicesOverview.heroTitle);
+         |                                          ^
+      35 |         await expect(page.getByText(servicesOverview.heroSubtitle, { exact: false })).toBeVisible();
+      36 |
+      37 |         const serviceCards = Array.isArray(servicesOverview.services) ? servicesOverview.services : [];
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:34:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\test-results\services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Test was interrupted.
+
+    Error: page.goto: Target page, context or browser has been closed
+    Call log:
+      - navigating to "http://localhost:3000/en/services", waiting until "networkidle"
+
+
+      30 |     test.describe(`${locale.code.toUpperCase()} services`, () => {
+      31 |       test('services overview renders hero, grid, and CTA content', async ({ page }) => {
+    > 32 |         await page.goto(`${locale.basePath}/services`, { waitUntil: 'networkidle' });
+         |                    ^
+      33 |
+      34 |         await expect(page.locator('h1')).toContainText(servicesOverview.heroTitle);
+      35 |         await expect(page.getByText(servicesOverview.heroSubtitle, { exact: false })).toBeVisible();
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:32:20
+
+    Error: browserContext.close: Target page, context or browser has been closed
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium\video.webm]]
+
+[[ATTACHMENT|services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium\error-context.md]]
+
+[[ATTACHMENT|services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\test-failed-1.png]]
+
+[[ATTACHMENT|services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\video.webm]]
+
+[[ATTACHMENT|services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\error-context.md]]
+
+[[ATTACHMENT|services-Services-experien-b7a44-s-hero-grid-and-CTA-content-chromium-retry1\trace.zip]]
+]]>
+</system-out>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="4.615">
+<testcase name="Services experience › EN services › service detail: consulting" classname="services.spec.ts" time="12.662">
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="3.464">
+<testcase name="Services experience › EN services › service detail: infrastructure" classname="services.spec.ts" time="77.093">
+<failure message="services.spec.ts:59:13 service detail: infrastructure" type="FAILURE">
+<![CDATA[  [chromium] › services.spec.ts:59:13 › Services experience › EN services › service detail: infrastructure 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('h1')
+    Expected substring: "Next Generation Infrastructure"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('h1')
+
+
+      61 |
+      62 |           if (serviceMessages.hero) {
+    > 63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+         |                                              ^
+      64 |           }
+      65 |
+      66 |           if (serviceMessages.heroDesc) {
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:63:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-691bc-rvice-detail-infrastructure-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-691bc-rvice-detail-infrastructure-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\services-Services-experien-691bc-rvice-detail-infrastructure-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('h1')
+    Expected substring: "Next Generation Infrastructure"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('h1')
+
+
+      61 |
+      62 |           if (serviceMessages.hero) {
+    > 63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+         |                                              ^
+      64 |           }
+      65 |
+      66 |           if (serviceMessages.heroDesc) {
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:63:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\test-results\services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Test was interrupted.
+
+    Error: page.goto: net::ERR_ABORTED at http://localhost:3000/en/services/infrastructure
+    Call log:
+      - navigating to "http://localhost:3000/en/services/infrastructure", waiting until "networkidle"
+
+
+      58 |         const serviceMessages = (servicesPage?.[definition.messageKey] ?? {}) as Record<string, any>;
+      59 |         test(`service detail: ${definition.slug}`, async ({ page }) => {
+    > 60 |           await page.goto(`${locale.basePath}/services/${definition.slug}`, { waitUntil: 'networkidle' });
+         |                      ^
+      61 |
+      62 |           if (serviceMessages.hero) {
+      63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:60:22
+
+    Error: browserContext.close: Target page, context or browser has been closed
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|services-Services-experien-691bc-rvice-detail-infrastructure-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|services-Services-experien-691bc-rvice-detail-infrastructure-chromium\video.webm]]
+
+[[ATTACHMENT|services-Services-experien-691bc-rvice-detail-infrastructure-chromium\error-context.md]]
+
+[[ATTACHMENT|services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\test-failed-1.png]]
+
+[[ATTACHMENT|services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\video.webm]]
+
+[[ATTACHMENT|services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\error-context.md]]
+
+[[ATTACHMENT|services-Services-experien-691bc-rvice-detail-infrastructure-chromium-retry1\trace.zip]]
+]]>
+</system-out>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="14.852">
+<testcase name="Services experience › EN services › service detail: resourcing" classname="services.spec.ts" time="77.035">
+<failure message="services.spec.ts:59:13 service detail: resourcing" type="FAILURE">
+<![CDATA[  [chromium] › services.spec.ts:59:13 › Services experience › EN services › service detail: resourcing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('h1')
+    Expected substring: "Strategic Resourcing"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('h1')
+
+
+      61 |
+      62 |           if (serviceMessages.hero) {
+    > 63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+         |                                              ^
+      64 |           }
+      65 |
+      66 |           if (serviceMessages.heroDesc) {
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:63:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-93ecc-s-service-detail-resourcing-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-93ecc-s-service-detail-resourcing-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\services-Services-experien-93ecc-s-service-detail-resourcing-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('h1')
+    Expected substring: "Strategic Resourcing"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('h1')
+
+
+      61 |
+      62 |           if (serviceMessages.hero) {
+    > 63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+         |                                              ^
+      64 |           }
+      65 |
+      66 |           if (serviceMessages.heroDesc) {
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:63:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\test-results\services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Test was interrupted.
+
+    Error: page.goto: net::ERR_ABORTED at http://localhost:3000/en/services/resourcing
+    Call log:
+      - navigating to "http://localhost:3000/en/services/resourcing", waiting until "networkidle"
+
+
+      58 |         const serviceMessages = (servicesPage?.[definition.messageKey] ?? {}) as Record<string, any>;
+      59 |         test(`service detail: ${definition.slug}`, async ({ page }) => {
+    > 60 |           await page.goto(`${locale.basePath}/services/${definition.slug}`, { waitUntil: 'networkidle' });
+         |                      ^
+      61 |
+      62 |           if (serviceMessages.hero) {
+      63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:60:22
+
+    Error: browserContext.close: Target page, context or browser has been closed
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|services-Services-experien-93ecc-s-service-detail-resourcing-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|services-Services-experien-93ecc-s-service-detail-resourcing-chromium\video.webm]]
+
+[[ATTACHMENT|services-Services-experien-93ecc-s-service-detail-resourcing-chromium\error-context.md]]
+
+[[ATTACHMENT|services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\test-failed-1.png]]
+
+[[ATTACHMENT|services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\video.webm]]
+
+[[ATTACHMENT|services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\error-context.md]]
+
+[[ATTACHMENT|services-Services-experien-93ecc-s-service-detail-resourcing-chromium-retry1\trace.zip]]
+]]>
+</system-out>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.478">
+<testcase name="Services experience › EN services › service detail: training" classname="services.spec.ts" time="64.265">
+<failure message="services.spec.ts:59:13 service detail: training" type="FAILURE">
+<![CDATA[  [chromium] › services.spec.ts:59:13 › Services experience › EN services › service detail: training 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('h1')
+    Expected substring: "Technology Labs & Training"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('h1')
+
+
+      61 |
+      62 |           if (serviceMessages.hero) {
+    > 63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+         |                                              ^
+      64 |           }
+      65 |
+      66 |           if (serviceMessages.heroDesc) {
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:63:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-482a8-ces-service-detail-training-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-482a8-ces-service-detail-training-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\services-Services-experien-482a8-ces-service-detail-training-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('h1')
+    Expected substring: "Technology Labs & Training"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('h1')
+
+
+      61 |
+      62 |           if (serviceMessages.hero) {
+    > 63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+         |                                              ^
+      64 |           }
+      65 |
+      66 |           if (serviceMessages.heroDesc) {
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:63:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\test-results\services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\test-results\services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Test was interrupted.
+
+    Error: page.goto: net::ERR_ABORTED at http://localhost:3000/en/services/training
+    Call log:
+      - navigating to "http://localhost:3000/en/services/training", waiting until "networkidle"
+
+
+      58 |         const serviceMessages = (servicesPage?.[definition.messageKey] ?? {}) as Record<string, any>;
+      59 |         test(`service detail: ${definition.slug}`, async ({ page }) => {
+    > 60 |           await page.goto(`${locale.basePath}/services/${definition.slug}`, { waitUntil: 'networkidle' });
+         |                      ^
+      61 |
+      62 |           if (serviceMessages.hero) {
+      63 |             await expect(page.locator('h1')).toContainText(serviceMessages.hero);
+        at C:\Users\HP\Desktop\internship\new_1\tests\services.spec.ts:60:22
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> C:\Users\HP\AppData\Local\ms-playwright\chromium_headless_shell-1194\chrome-win\headless_shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\HP\AppData\Local\Temp\playwright_chromiumdev_profile-CEFPHh --remote-debugging-pipe --no-startup-window
+    <launched> pid=24980
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|services-Services-experien-482a8-ces-service-detail-training-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|services-Services-experien-482a8-ces-service-detail-training-chromium\video.webm]]
+
+[[ATTACHMENT|services-Services-experien-482a8-ces-service-detail-training-chromium\error-context.md]]
+
+[[ATTACHMENT|services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\test-failed-1.png]]
+
+[[ATTACHMENT|services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\video.webm]]
+
+[[ATTACHMENT|services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\error-context.md]]
+
+[[ATTACHMENT|services-Services-experien-482a8-ces-service-detail-training-chromium-retry1\trace.zip]]
+]]>
+</system-out>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="6.562">
+<testcase name="Services experience › EN services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.397">
+<testcase name="Services experience › EN services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.052">
+<testcase name="Services experience › AR services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="chat-widget.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="chromium" tests="3" failures="0" skipped="0" time="11.171" errors="0">
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="3.645">
+<testsuite name="site-smoke.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="chromium" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Global experience smoke tests › EN locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="4.247">
+<testcase name="Global experience smoke tests › EN locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="3.279">
+<testcase name="Global experience smoke tests › EN locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="chromium" tests="3" failures="0" skipped="0" time="9.943" errors="0">
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="2.599">
+<testcase name="Global experience smoke tests › AR locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="4.438">
+<testcase name="Global experience smoke tests › AR locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="2.906">
-</testcase>
-</testsuite>
-<testsuite name="internationalization.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="chromium" tests="8" failures="0" skipped="0" time="52.06" errors="0">
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="2.819">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="6.309">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="6.426">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="6.242">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="5.366">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="8.77">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="8.321">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="7.807">
+<testcase name="Global experience smoke tests › AR locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="page-navigation.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="chromium" tests="7" failures="0" skipped="0" time="37.565" errors="0">
-<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="8.23">
+<testsuite name="solutions.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="chromium" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Solutions experience › EN solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="5.059">
+<testcase name="Solutions experience › EN solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="4.011">
+<testcase name="Solutions experience › EN solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="4.148">
+<testcase name="Solutions experience › EN solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="3.846">
+<testcase name="Solutions experience › EN solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="5.878">
+<testcase name="Solutions experience › EN solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="6.393">
+<testcase name="Solutions experience › EN solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="site-smoke.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="chromium" tests="38" failures="0" skipped="0" time="377.516" errors="0">
-<testcase name="EN locale › homepage renders core content" classname="site-smoke.spec.ts" time="6.485">
+<testcase name="Solutions experience › AR solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="4.668">
+<testcase name="Solutions experience › AR solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="12.357">
+<testcase name="Solutions experience › AR solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="11.683">
+<testcase name="Solutions experience › AR solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="10.341">
+<testcase name="Solutions experience › AR solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders training" classname="site-smoke.spec.ts" time="11.079">
+<testcase name="Solutions experience › AR solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="16.07">
-</testcase>
-<testcase name="EN locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="15.017">
-</testcase>
-<testcase name="EN locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="16.054">
-</testcase>
-<testcase name="EN locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="15.851">
-</testcase>
-<testcase name="EN locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="16.469">
-</testcase>
-<testcase name="EN locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="15.914">
-</testcase>
-<testcase name="EN locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="16.111">
-</testcase>
-<testcase name="EN locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="15.973">
-</testcase>
-<testcase name="EN locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="16.57">
-</testcase>
-<testcase name="EN locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="16.078">
-</testcase>
-<testcase name="EN locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="16.402">
-</testcase>
-<testcase name="EN locale › login page renders localized form" classname="site-smoke.spec.ts" time="17.055">
-</testcase>
-<testcase name="EN locale › signup page renders localized form" classname="site-smoke.spec.ts" time="6.901">
-</testcase>
-<testcase name="AR locale › homepage renders core content" classname="site-smoke.spec.ts" time="7.471">
-</testcase>
-<testcase name="AR locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="6.395">
-</testcase>
-<testcase name="AR locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="5.373">
-</testcase>
-<testcase name="AR locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="6.695">
-</testcase>
-<testcase name="AR locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="6.124">
-</testcase>
-<testcase name="AR locale › service detail page renders training" classname="site-smoke.spec.ts" time="6.243">
-</testcase>
-<testcase name="AR locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="5.877">
-</testcase>
-<testcase name="AR locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="6.888">
-</testcase>
-<testcase name="AR locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="6.944">
-</testcase>
-<testcase name="AR locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="6.854">
-</testcase>
-<testcase name="AR locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="6.767">
-</testcase>
-<testcase name="AR locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="6.739">
-</testcase>
-<testcase name="AR locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="6.084">
-</testcase>
-<testcase name="AR locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="5.996">
-</testcase>
-<testcase name="AR locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="6.573">
-</testcase>
-<testcase name="AR locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="6.012">
-</testcase>
-<testcase name="AR locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="6.265">
-</testcase>
-<testcase name="AR locale › login page renders localized form" classname="site-smoke.spec.ts" time="5.686">
-</testcase>
-<testcase name="AR locale › signup page renders localized form" classname="site-smoke.spec.ts" time="5.452">
+<testcase name="Solutions experience › AR solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="firefox" tests="8" failures="0" skipped="0" time="37.721" errors="0">
-<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="3.468">
+<testsuite name="services.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="firefox" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Services experience › EN services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="3.291">
+<testcase name="Services experience › EN services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="3.274">
+<testcase name="Services experience › EN services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="19.019">
+<testcase name="Services experience › EN services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.623">
+<testcase name="Services experience › EN services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="4.073">
+<testcase name="Services experience › EN services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="2.232">
+<testcase name="Services experience › EN services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="1.741">
+<testcase name="Services experience › AR services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="chat-widget.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="firefox" tests="3" failures="0" skipped="0" time="42.823" errors="0">
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="13.873">
+<testcase name="Services experience › AR services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="14.523">
+<testcase name="Services experience › AR services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="14.427">
+<testcase name="Services experience › AR services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="firefox" tests="3" failures="0" skipped="0" time="28.614" errors="0">
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="10.002">
+<testcase name="Services experience › AR services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="10.325">
+<testcase name="Services experience › AR services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="8.287">
-</testcase>
-</testsuite>
-<testsuite name="internationalization.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="firefox" tests="8" failures="0" skipped="0" time="79.458" errors="0">
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="7.435">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="10.691">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="10.361">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="10.131">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="7.529">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="11.914">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="10.441">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="10.956">
-</testcase>
-</testsuite>
-<testsuite name="page-navigation.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="firefox" tests="7" failures="0" skipped="0" time="49.885" errors="0">
-<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="11.193">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="7.213">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="6.004">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="5.357">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="5.387">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="7.304">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="7.427">
+<testcase name="Services experience › AR services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="site-smoke.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="firefox" tests="38" failures="0" skipped="0" time="373.814" errors="0">
-<testcase name="EN locale › homepage renders core content" classname="site-smoke.spec.ts" time="9.77">
+<testsuite name="site-smoke.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="firefox" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Global experience smoke tests › EN locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="7.652">
+<testcase name="Global experience smoke tests › EN locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="17.634">
+<testcase name="Global experience smoke tests › EN locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="15.388">
+<testcase name="Global experience smoke tests › AR locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="16.311">
+<testcase name="Global experience smoke tests › AR locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders training" classname="site-smoke.spec.ts" time="15.712">
-</testcase>
-<testcase name="EN locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="13.891">
-</testcase>
-<testcase name="EN locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="12.181">
-</testcase>
-<testcase name="EN locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="11.956">
-</testcase>
-<testcase name="EN locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="11.577">
-</testcase>
-<testcase name="EN locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="10.296">
-</testcase>
-<testcase name="EN locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="9.937">
-</testcase>
-<testcase name="EN locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="10.099">
-</testcase>
-<testcase name="EN locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="9.761">
-</testcase>
-<testcase name="EN locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="10.146">
-</testcase>
-<testcase name="EN locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="9.855">
-</testcase>
-<testcase name="EN locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="9.986">
-</testcase>
-<testcase name="EN locale › login page renders localized form" classname="site-smoke.spec.ts" time="9.938">
-</testcase>
-<testcase name="EN locale › signup page renders localized form" classname="site-smoke.spec.ts" time="7.871">
-</testcase>
-<testcase name="AR locale › homepage renders core content" classname="site-smoke.spec.ts" time="10.004">
-</testcase>
-<testcase name="AR locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="8.321">
-</testcase>
-<testcase name="AR locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="7.44">
-</testcase>
-<testcase name="AR locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="8.854">
-</testcase>
-<testcase name="AR locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="9.037">
-</testcase>
-<testcase name="AR locale › service detail page renders training" classname="site-smoke.spec.ts" time="8.218">
-</testcase>
-<testcase name="AR locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="6.884">
-</testcase>
-<testcase name="AR locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="8.809">
-</testcase>
-<testcase name="AR locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="8.843">
-</testcase>
-<testcase name="AR locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="8.778">
-</testcase>
-<testcase name="AR locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="8.585">
-</testcase>
-<testcase name="AR locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="7.401">
-</testcase>
-<testcase name="AR locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="7.184">
-</testcase>
-<testcase name="AR locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="7.167">
-</testcase>
-<testcase name="AR locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="7.22">
-</testcase>
-<testcase name="AR locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="7.959">
-</testcase>
-<testcase name="AR locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="7.643">
-</testcase>
-<testcase name="AR locale › login page renders localized form" classname="site-smoke.spec.ts" time="7.704">
-</testcase>
-<testcase name="AR locale › signup page renders localized form" classname="site-smoke.spec.ts" time="7.802">
+<testcase name="Global experience smoke tests › AR locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="webkit" tests="8" failures="0" skipped="0" time="40.014" errors="0">
-<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="4.574">
+<testsuite name="solutions.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="firefox" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Solutions experience › EN solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="4.96">
+<testcase name="Solutions experience › EN solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="5.714">
+<testcase name="Solutions experience › EN solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="16.613">
+<testcase name="Solutions experience › EN solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="3.082">
+<testcase name="Solutions experience › EN solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="4.042">
+<testcase name="Solutions experience › EN solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.98">
+<testcase name="Solutions experience › EN solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.049">
+<testcase name="Solutions experience › AR solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="chat-widget.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="webkit" tests="3" failures="0" skipped="0" time="16.988" errors="0">
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="6.038">
+<testcase name="Solutions experience › AR solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="6.73">
+<testcase name="Solutions experience › AR solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="4.22">
+<testcase name="Solutions experience › AR solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="webkit" tests="3" failures="0" skipped="0" time="18.87" errors="0">
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="6.198">
+<testcase name="Solutions experience › AR solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="7.135">
+<testcase name="Solutions experience › AR solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="5.537">
-</testcase>
-</testsuite>
-<testsuite name="internationalization.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="webkit" tests="8" failures="0" skipped="0" time="72.79" errors="0">
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="5.511">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="10.917">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="10.707">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="10.219">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="7.89">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="10.06">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="8.889">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="8.597">
-</testcase>
-</testsuite>
-<testsuite name="page-navigation.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="webkit" tests="7" failures="0" skipped="0" time="51.568" errors="0">
-<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="9.887">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="8.949">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="6.666">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="5.523">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="5.48">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="7.822">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="7.241">
+<testcase name="Solutions experience › AR solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="site-smoke.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="webkit" tests="38" failures="0" skipped="0" time="382.01" errors="0">
-<testcase name="EN locale › homepage renders core content" classname="site-smoke.spec.ts" time="9.865">
+<testsuite name="services.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="webkit" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Services experience › EN services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="5.851">
+<testcase name="Services experience › EN services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="17.065">
+<testcase name="Services experience › EN services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="17.671">
+<testcase name="Services experience › EN services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="17.455">
+<testcase name="Services experience › EN services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders training" classname="site-smoke.spec.ts" time="16.2">
+<testcase name="Services experience › EN services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="11.762">
+<testcase name="Services experience › EN services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="11.72">
+<testcase name="Services experience › AR services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="11.575">
+<testcase name="Services experience › AR services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="10.842">
+<testcase name="Services experience › AR services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="11.048">
+<testcase name="Services experience › AR services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="10.746">
+<testcase name="Services experience › AR services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="10.248">
+<testcase name="Services experience › AR services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="10.077">
-</testcase>
-<testcase name="EN locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="11.421">
-</testcase>
-<testcase name="EN locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="11.755">
-</testcase>
-<testcase name="EN locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="10.959">
-</testcase>
-<testcase name="EN locale › login page renders localized form" classname="site-smoke.spec.ts" time="11.36">
-</testcase>
-<testcase name="EN locale › signup page renders localized form" classname="site-smoke.spec.ts" time="8.264">
-</testcase>
-<testcase name="AR locale › homepage renders core content" classname="site-smoke.spec.ts" time="10.118">
-</testcase>
-<testcase name="AR locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="7.805">
-</testcase>
-<testcase name="AR locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="7.492">
-</testcase>
-<testcase name="AR locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="7.583">
-</testcase>
-<testcase name="AR locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="7.344">
-</testcase>
-<testcase name="AR locale › service detail page renders training" classname="site-smoke.spec.ts" time="7.572">
-</testcase>
-<testcase name="AR locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="5.621">
-</testcase>
-<testcase name="AR locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="7.841">
-</testcase>
-<testcase name="AR locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="8.341">
-</testcase>
-<testcase name="AR locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="8.103">
-</testcase>
-<testcase name="AR locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="7.924">
-</testcase>
-<testcase name="AR locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="8.81">
-</testcase>
-<testcase name="AR locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="8.841">
-</testcase>
-<testcase name="AR locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="8.735">
-</testcase>
-<testcase name="AR locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="7.946">
-</testcase>
-<testcase name="AR locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="9.13">
-</testcase>
-<testcase name="AR locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="8.677">
-</testcase>
-<testcase name="AR locale › login page renders localized form" classname="site-smoke.spec.ts" time="8.945">
-</testcase>
-<testcase name="AR locale › signup page renders localized form" classname="site-smoke.spec.ts" time="9.298">
+<testcase name="Services experience › AR services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Chrome" tests="8" failures="0" skipped="0" time="33.038" errors="0">
-<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="2.945">
+<testsuite name="site-smoke.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="webkit" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Global experience smoke tests › EN locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="2.577">
+<testcase name="Global experience smoke tests › EN locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="2.29">
+<testcase name="Global experience smoke tests › EN locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="14.387">
+<testcase name="Global experience smoke tests › AR locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.721">
+<testcase name="Global experience smoke tests › AR locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="5.977">
-</testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="2.402">
-</testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="1.739">
-</testcase>
-</testsuite>
-<testsuite name="chat-widget.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Chrome" tests="3" failures="0" skipped="0" time="12.719" errors="0">
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="3.326">
-</testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="4.993">
-</testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="4.4">
-</testcase>
-</testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Chrome" tests="3" failures="0" skipped="0" time="12.205" errors="0">
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="3.973">
-</testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="3.084">
-</testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="5.148">
+<testcase name="Global experience smoke tests › AR locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="internationalization.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Chrome" tests="8" failures="0" skipped="0" time="48.476" errors="0">
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="5.317">
+<testsuite name="solutions.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="webkit" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Solutions experience › EN solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="6.058">
+<testcase name="Solutions experience › EN solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="4.701">
+<testcase name="Solutions experience › EN solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="7.873">
+<testcase name="Solutions experience › EN solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="6.592">
+<testcase name="Solutions experience › EN solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="5.26">
+<testcase name="Solutions experience › EN solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="4.702">
+<testcase name="Solutions experience › EN solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="7.973">
+<testcase name="Solutions experience › AR solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="page-navigation.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Chrome" tests="7" failures="0" skipped="0" time="42.644" errors="0">
-<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="8.917">
+<testcase name="Solutions experience › AR solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="9.17">
+<testcase name="Solutions experience › AR solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="6.195">
+<testcase name="Solutions experience › AR solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="2.667">
+<testcase name="Solutions experience › AR solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="3.542">
+<testcase name="Solutions experience › AR solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="6.285">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="5.868">
-</testcase>
-</testsuite>
-<testsuite name="site-smoke.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Chrome" tests="38" failures="0" skipped="0" time="323.454" errors="0">
-<testcase name="EN locale › homepage renders core content" classname="site-smoke.spec.ts" time="6.286">
-</testcase>
-<testcase name="EN locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="5.481">
-</testcase>
-<testcase name="EN locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="11.93">
-</testcase>
-<testcase name="EN locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="12.671">
-</testcase>
-<testcase name="EN locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="13.346">
-</testcase>
-<testcase name="EN locale › service detail page renders training" classname="site-smoke.spec.ts" time="12.771">
-</testcase>
-<testcase name="EN locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="11.058">
-</testcase>
-<testcase name="EN locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="10.671">
-</testcase>
-<testcase name="EN locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="8.967">
-</testcase>
-<testcase name="EN locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="8.945">
-</testcase>
-<testcase name="EN locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="12.734">
-</testcase>
-<testcase name="EN locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="12.541">
-</testcase>
-<testcase name="EN locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="12.033">
-</testcase>
-<testcase name="EN locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="12.647">
-</testcase>
-<testcase name="EN locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="10.534">
-</testcase>
-<testcase name="EN locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="9.671">
-</testcase>
-<testcase name="EN locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="9.58">
-</testcase>
-<testcase name="EN locale › login page renders localized form" classname="site-smoke.spec.ts" time="9.338">
-</testcase>
-<testcase name="EN locale › signup page renders localized form" classname="site-smoke.spec.ts" time="7.144">
-</testcase>
-<testcase name="AR locale › homepage renders core content" classname="site-smoke.spec.ts" time="8.176">
-</testcase>
-<testcase name="AR locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="7.435">
-</testcase>
-<testcase name="AR locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="6.723">
-</testcase>
-<testcase name="AR locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="6.779">
-</testcase>
-<testcase name="AR locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="6.882">
-</testcase>
-<testcase name="AR locale › service detail page renders training" classname="site-smoke.spec.ts" time="6.444">
-</testcase>
-<testcase name="AR locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="6.059">
-</testcase>
-<testcase name="AR locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="6.338">
-</testcase>
-<testcase name="AR locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="6.615">
-</testcase>
-<testcase name="AR locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="6.318">
-</testcase>
-<testcase name="AR locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="6.212">
-</testcase>
-<testcase name="AR locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="7.551">
-</testcase>
-<testcase name="AR locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="7.255">
-</testcase>
-<testcase name="AR locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="6.931">
-</testcase>
-<testcase name="AR locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="6.504">
-</testcase>
-<testcase name="AR locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="5.946">
-</testcase>
-<testcase name="AR locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="5.793">
-</testcase>
-<testcase name="AR locale › login page renders localized form" classname="site-smoke.spec.ts" time="5.584">
-</testcase>
-<testcase name="AR locale › signup page renders localized form" classname="site-smoke.spec.ts" time="5.561">
+<testcase name="Solutions experience › AR solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Safari" tests="8" failures="0" skipped="0" time="33.66" errors="0">
-<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="2.738">
+<testsuite name="services.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Mobile Chrome" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Services experience › EN services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="2.722">
+<testcase name="Services experience › EN services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="2.523">
+<testcase name="Services experience › EN services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="15.604">
+<testcase name="Services experience › EN services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.385">
+<testcase name="Services experience › EN services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="4.988">
+<testcase name="Services experience › EN services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="2.467">
+<testcase name="Services experience › EN services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="2.233">
+<testcase name="Services experience › AR services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="chat-widget.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Safari" tests="3" failures="0" skipped="0" time="15.749" errors="0">
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="5.5">
+<testcase name="Services experience › AR services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="6.745">
+<testcase name="Services experience › AR services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="3.504">
+<testcase name="Services experience › AR services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Safari" tests="3" failures="0" skipped="0" time="13.334" errors="0">
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="4.551">
+<testcase name="Services experience › AR services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="5.193">
+<testcase name="Services experience › AR services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="3.59">
-</testcase>
-</testsuite>
-<testsuite name="internationalization.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Safari" tests="8" failures="0" skipped="0" time="66.489" errors="0">
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="7.372">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="9.943">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="8.718">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="9.36">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="5.138">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="9.688">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="8.216">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="8.054">
-</testcase>
-</testsuite>
-<testsuite name="page-navigation.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Safari" tests="7" failures="0" skipped="0" time="40.637" errors="0">
-<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="7.833">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="7.865">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="5.008">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="4.693">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="3.466">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="5.678">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="6.094">
+<testcase name="Services experience › AR services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="site-smoke.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Mobile Safari" tests="38" failures="0" skipped="0" time="246.323" errors="0">
-<testcase name="EN locale › homepage renders core content" classname="site-smoke.spec.ts" time="8.957">
+<testsuite name="site-smoke.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Mobile Chrome" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Global experience smoke tests › EN locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="4.304">
+<testcase name="Global experience smoke tests › EN locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="6.213">
+<testcase name="Global experience smoke tests › EN locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="6.314">
+<testcase name="Global experience smoke tests › AR locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="5.61">
+<testcase name="Global experience smoke tests › AR locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders training" classname="site-smoke.spec.ts" time="4.303">
-</testcase>
-<testcase name="EN locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="7.394">
-</testcase>
-<testcase name="EN locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="6.897">
-</testcase>
-<testcase name="EN locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="7.04">
-</testcase>
-<testcase name="EN locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="6.073">
-</testcase>
-<testcase name="EN locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="6.394">
-</testcase>
-<testcase name="EN locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="6.126">
-</testcase>
-<testcase name="EN locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="5.828">
-</testcase>
-<testcase name="EN locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="5.794">
-</testcase>
-<testcase name="EN locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="6.386">
-</testcase>
-<testcase name="EN locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="6.502">
-</testcase>
-<testcase name="EN locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="6.377">
-</testcase>
-<testcase name="EN locale › login page renders localized form" classname="site-smoke.spec.ts" time="6.735">
-</testcase>
-<testcase name="EN locale › signup page renders localized form" classname="site-smoke.spec.ts" time="7.326">
-</testcase>
-<testcase name="AR locale › homepage renders core content" classname="site-smoke.spec.ts" time="8.694">
-</testcase>
-<testcase name="AR locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="7.032">
-</testcase>
-<testcase name="AR locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="6.584">
-</testcase>
-<testcase name="AR locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="6.247">
-</testcase>
-<testcase name="AR locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="6.724">
-</testcase>
-<testcase name="AR locale › service detail page renders training" classname="site-smoke.spec.ts" time="6.844">
-</testcase>
-<testcase name="AR locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="5.743">
-</testcase>
-<testcase name="AR locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="6.223">
-</testcase>
-<testcase name="AR locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="7.147">
-</testcase>
-<testcase name="AR locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="7.01">
-</testcase>
-<testcase name="AR locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="5.676">
-</testcase>
-<testcase name="AR locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="7.582">
-</testcase>
-<testcase name="AR locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="6.737">
-</testcase>
-<testcase name="AR locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="6.287">
-</testcase>
-<testcase name="AR locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="5.702">
-</testcase>
-<testcase name="AR locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="6.433">
-</testcase>
-<testcase name="AR locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="6.257">
-</testcase>
-<testcase name="AR locale › login page renders localized form" classname="site-smoke.spec.ts" time="6.498">
-</testcase>
-<testcase name="AR locale › signup page renders localized form" classname="site-smoke.spec.ts" time="6.33">
+<testcase name="Global experience smoke tests › AR locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Microsoft Edge" tests="8" failures="0" skipped="0" time="19.099" errors="0">
-<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="0.291">
+<testsuite name="solutions.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Mobile Chrome" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Solutions experience › EN solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="0.526">
+<testcase name="Solutions experience › EN solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="0.267">
+<testcase name="Solutions experience › EN solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="15.652">
+<testcase name="Solutions experience › EN solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.318">
+<testcase name="Solutions experience › EN solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="1.832">
+<testcase name="Solutions experience › EN solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.083">
+<testcase name="Solutions experience › EN solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.13">
+<testcase name="Solutions experience › AR solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="chat-widget.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Microsoft Edge" tests="3" failures="0" skipped="0" time="21.452" errors="0">
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="8.154">
+<testcase name="Solutions experience › AR solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="8.219">
+<testcase name="Solutions experience › AR solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="5.079">
+<testcase name="Solutions experience › AR solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-</testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Microsoft Edge" tests="3" failures="0" skipped="0" time="41.484" errors="0">
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="14.696">
+<testcase name="Solutions experience › AR solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="13.428">
+<testcase name="Solutions experience › AR solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="13.36">
-</testcase>
-</testsuite>
-<testsuite name="internationalization.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Microsoft Edge" tests="8" failures="0" skipped="0" time="59.931" errors="0">
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="5.815">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="7.742">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="8.017">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="6.96">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="6.822">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="8.406">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="8.831">
-</testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="7.338">
-</testcase>
-</testsuite>
-<testsuite name="page-navigation.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Microsoft Edge" tests="7" failures="0" skipped="0" time="48.606" errors="0">
-<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="7.72">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="7.397">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="6.78">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="6.398">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="6.161">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="7.238">
-</testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="6.912">
+<testcase name="Solutions experience › AR solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="site-smoke.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Microsoft Edge" tests="38" failures="0" skipped="0" time="443.349" errors="0">
-<testcase name="EN locale › homepage renders core content" classname="site-smoke.spec.ts" time="7.631">
+<testsuite name="services.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Mobile Safari" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Services experience › EN services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="6.387">
+<testcase name="Services experience › EN services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="14.749">
+<testcase name="Services experience › EN services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="14.101">
+<testcase name="Services experience › EN services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="13.768">
+<testcase name="Services experience › EN services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders training" classname="site-smoke.spec.ts" time="14.509">
+<testcase name="Services experience › EN services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="18.702">
+<testcase name="Services experience › EN services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="18.416">
+<testcase name="Services experience › AR services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="17.745">
+<testcase name="Services experience › AR services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="17.133">
+<testcase name="Services experience › AR services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="18.122">
+<testcase name="Services experience › AR services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="17.857">
+<testcase name="Services experience › AR services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="17.512">
+<testcase name="Services experience › AR services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="17.467">
-</testcase>
-<testcase name="EN locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="14.926">
-</testcase>
-<testcase name="EN locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="16.043">
-</testcase>
-<testcase name="EN locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="16.732">
-</testcase>
-<testcase name="EN locale › login page renders localized form" classname="site-smoke.spec.ts" time="14.573">
-</testcase>
-<testcase name="EN locale › signup page renders localized form" classname="site-smoke.spec.ts" time="9.023">
-</testcase>
-<testcase name="AR locale › homepage renders core content" classname="site-smoke.spec.ts" time="9.395">
-</testcase>
-<testcase name="AR locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="7.623">
-</testcase>
-<testcase name="AR locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="6.884">
-</testcase>
-<testcase name="AR locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="7.952">
-</testcase>
-<testcase name="AR locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="7.989">
-</testcase>
-<testcase name="AR locale › service detail page renders training" classname="site-smoke.spec.ts" time="7.729">
-</testcase>
-<testcase name="AR locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="7.12">
-</testcase>
-<testcase name="AR locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="10.452">
-</testcase>
-<testcase name="AR locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="10.29">
-</testcase>
-<testcase name="AR locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="10.198">
-</testcase>
-<testcase name="AR locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="9.653">
-</testcase>
-<testcase name="AR locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="8.547">
-</testcase>
-<testcase name="AR locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="7.306">
-</testcase>
-<testcase name="AR locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="7.555">
-</testcase>
-<testcase name="AR locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="7.344">
-</testcase>
-<testcase name="AR locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="8.459">
-</testcase>
-<testcase name="AR locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="8.352">
-</testcase>
-<testcase name="AR locale › login page renders localized form" classname="site-smoke.spec.ts" time="7.769">
-</testcase>
-<testcase name="AR locale › signup page renders localized form" classname="site-smoke.spec.ts" time="7.336">
+<testcase name="Services experience › AR services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Google Chrome" tests="8" failures="0" skipped="0" time="47.069" errors="0">
-<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="4.55">
+<testsuite name="site-smoke.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Mobile Safari" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Global experience smoke tests › EN locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="6.089">
+<testcase name="Global experience smoke tests › EN locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="7.289">
+<testcase name="Global experience smoke tests › EN locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="19.537">
+<testcase name="Global experience smoke tests › AR locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="2.538">
+<testcase name="Global experience smoke tests › AR locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="6.28">
-</testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.746">
-</testcase>
-<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.04">
-</testcase>
-</testsuite>
-<testsuite name="chat-widget.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Google Chrome" tests="3" failures="0" skipped="0" time="16.153" errors="0">
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="5.012">
-</testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="5.342">
-</testcase>
-<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="5.799">
-</testcase>
-</testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Google Chrome" tests="3" failures="0" skipped="0" time="15.713" errors="0">
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="4.986">
-</testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="4.103">
-</testcase>
-<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="6.624">
+<testcase name="Global experience smoke tests › AR locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="internationalization.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Google Chrome" tests="8" failures="0" skipped="0" time="60.086" errors="0">
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="6.897">
+<testsuite name="solutions.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Mobile Safari" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Solutions experience › EN solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="7.204">
+<testcase name="Solutions experience › EN solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="6.85">
+<testcase name="Solutions experience › EN solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="7.056">
+<testcase name="Solutions experience › EN solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="5.729">
+<testcase name="Solutions experience › EN solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="5.809">
+<testcase name="Solutions experience › EN solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="5.415">
+<testcase name="Solutions experience › EN solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="15.126">
+<testcase name="Solutions experience › AR solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="page-navigation.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Google Chrome" tests="7" failures="0" skipped="0" time="71.844" errors="0">
-<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="15.694">
+<testsuite name="services.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Microsoft Edge" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Services experience › EN services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="14.631">
+<testcase name="Services experience › EN services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="12.571">
+<testcase name="Services experience › EN services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="3.648">
+<testcase name="Services experience › EN services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="9.173">
+<testcase name="Services experience › EN services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="7.928">
+<testcase name="Services experience › EN services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="8.199">
+<testcase name="Services experience › EN services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Services experience › AR services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
-<testsuite name="site-smoke.spec.ts" timestamp="2025-10-24T11:06:47.526Z" hostname="Google Chrome" tests="38" failures="0" skipped="0" time="444.821" errors="0">
-<testcase name="EN locale › homepage renders core content" classname="site-smoke.spec.ts" time="6.411">
+<testsuite name="site-smoke.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Microsoft Edge" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Global experience smoke tests › EN locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="10.354">
+<testcase name="Global experience smoke tests › EN locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="8.785">
+<testcase name="Global experience smoke tests › EN locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="9.086">
+<testcase name="Global experience smoke tests › AR locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="8.904">
+<testcase name="Global experience smoke tests › AR locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders training" classname="site-smoke.spec.ts" time="21.65">
+<testcase name="Global experience smoke tests › AR locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="22.428">
+</testsuite>
+<testsuite name="solutions.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Microsoft Edge" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Solutions experience › EN solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="22.002">
+<testcase name="Solutions experience › EN solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="20.888">
+<testcase name="Solutions experience › EN solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="16.681">
+<testcase name="Solutions experience › EN solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="16.329">
+<testcase name="Solutions experience › EN solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="15.756">
+<testcase name="Solutions experience › EN solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="15.129">
+<testcase name="Solutions experience › EN solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="15.943">
+<testcase name="Solutions experience › AR solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="15.083">
+<testcase name="Solutions experience › AR solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="15.022">
+<testcase name="Solutions experience › AR solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="14.882">
+<testcase name="Solutions experience › AR solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › login page renders localized form" classname="site-smoke.spec.ts" time="14.404">
+<testcase name="Solutions experience › AR solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="EN locale › signup page renders localized form" classname="site-smoke.spec.ts" time="14.574">
+<testcase name="Solutions experience › AR solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › homepage renders core content" classname="site-smoke.spec.ts" time="15.627">
+<testcase name="Solutions experience › AR solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › services overview highlights key offerings" classname="site-smoke.spec.ts" time="14.197">
+</testsuite>
+<testsuite name="services.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Google Chrome" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Services experience › EN services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › service detail page renders consulting" classname="site-smoke.spec.ts" time="7.328">
+<testcase name="Services experience › EN services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › service detail page renders infrastructure" classname="site-smoke.spec.ts" time="7.027">
+<testcase name="Services experience › EN services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › service detail page renders resourcing" classname="site-smoke.spec.ts" time="6.973">
+<testcase name="Services experience › EN services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › service detail page renders training" classname="site-smoke.spec.ts" time="5.662">
+<testcase name="Services experience › EN services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › service detail page renders managed-it" classname="site-smoke.spec.ts" time="8.58">
+<testcase name="Services experience › EN services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › service detail page renders devsecops" classname="site-smoke.spec.ts" time="8.215">
+<testcase name="Services experience › EN services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › solution detail page renders ai-security" classname="site-smoke.spec.ts" time="8.432">
+<testcase name="Services experience › AR services › services overview renders hero, grid, and CTA content" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › solution detail page renders identity-management" classname="site-smoke.spec.ts" time="8.046">
+<testcase name="Services experience › AR services › service detail: consulting" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › solution detail page renders zero-trust" classname="site-smoke.spec.ts" time="8.747">
+<testcase name="Services experience › AR services › service detail: infrastructure" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › solution detail page renders cloud-security" classname="site-smoke.spec.ts" time="8.674">
+<testcase name="Services experience › AR services › service detail: resourcing" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › solution detail page renders network-security" classname="site-smoke.spec.ts" time="8.781">
+<testcase name="Services experience › AR services › service detail: training" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › solution detail page renders endpoint-security" classname="site-smoke.spec.ts" time="9.243">
+<testcase name="Services experience › AR services › service detail: managed-it" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › case studies index displays hero content" classname="site-smoke.spec.ts" time="8.45">
+<testcase name="Services experience › AR services › service detail: devsecops" classname="services.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › blog landing page shows featured content" classname="site-smoke.spec.ts" time="8.687">
+</testsuite>
+<testsuite name="site-smoke.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Google Chrome" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Global experience smoke tests › EN locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › contact page exposes form and information" classname="site-smoke.spec.ts" time="8.135">
+<testcase name="Global experience smoke tests › EN locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › login page renders localized form" classname="site-smoke.spec.ts" time="6.839">
+<testcase name="Global experience smoke tests › EN locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="AR locale › signup page renders localized form" classname="site-smoke.spec.ts" time="2.867">
+<testcase name="Global experience smoke tests › AR locale › homepage renders hero, CTAs, and key navigation" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Global experience smoke tests › AR locale › footer content is reachable and localized" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Global experience smoke tests › AR locale › language switcher toggles locale" classname="site-smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="solutions.spec.ts" timestamp="2025-11-11T08:57:27.772Z" hostname="Google Chrome" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Solutions experience › EN solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › EN solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › EN solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › EN solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › EN solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › EN solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › EN solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solutions overview renders hero and key sections" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: ai-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: identity-management" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: zero-trust" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: cloud-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: network-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Solutions experience › AR solutions › solution detail: endpoint-security" classname="solutions.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
 </testsuites>

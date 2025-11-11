@@ -6,12 +6,15 @@ export default cn;
 
 export async function fetchContentBySlug(slug: string): Promise<any | null> {
   try {
-    const base = process.env.NEXT_PUBLIC_BASE_URL || '';
-    const res = await fetch(`${base}/api/content/${slug}`, { cache: 'no-store' });
-    if (!res.ok) return null;
+    const res = await fetch(`/api/content/${slug}`, { cache: 'no-store' });
+    if (!res.ok) {
+      return null;
+    }
+
     const data = await res.json();
     return data.item ?? null;
-  } catch {
+  } catch (error) {
+    console.warn(`Failed to fetch content for slug "${slug}":`, error);
     return null;
   }
 }

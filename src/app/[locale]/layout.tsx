@@ -1,8 +1,7 @@
 // app/[locale]/layout.tsx
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { routing } from '@/i18n';
+import { getMessagesForLocale, routing } from '@/i18n';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import DeferredChatWidget from '@/components/chat/DeferredChatWidget';
@@ -66,7 +65,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  
+
   console.log('📍 Layout processing for locale:', locale);
 
   // Ensure the locale is supported
@@ -75,15 +74,14 @@ export default async function LocaleLayout({
   }
 
   // Set the locale for this request - this tells next-intl which locale to use
-  setRequestLocale(locale);
-  
-  // Get messages from next-intl (it will use the locale we just set)
-  const messages = await getMessages({ locale });
+  const { locale: resolvedLocale, messages } = getMessagesForLocale(locale);
+
+  setRequestLocale(resolvedLocale);
 
   return (
-    <NextIntlClientProvider 
+    <NextIntlClientProvider
       messages={messages}
-      locale={locale}
+      locale={resolvedLocale}
     >
       <LocaleHtmlAttributes locale={locale} />
       <div

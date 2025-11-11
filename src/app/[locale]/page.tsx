@@ -26,6 +26,7 @@ export default function HomePage() {
   const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
   const [canUseHeroVideo, setCanUseHeroVideo] = useState(false);
   const [isSmallViewport, setIsSmallViewport] = useState(false);
+  const [isDocumentVisible, setIsDocumentVisible] = useState(true);
   const whoWeAreCards = [
     { icon: '🔒', title: t('cybersecurityTitle'), desc: t('cybersecurityDescription') },
     { icon: '💡', title: t('itConsultationTitle'), desc: t('itConsultationDescription') }
@@ -124,18 +125,33 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    if (typeof document === 'undefined') {
+      return undefined;
+    }
+
+    const handleVisibilityChange = () => {
+      setIsDocumentVisible(document.visibilityState === 'visible');
+    };
+
+    handleVisibilityChange();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
+  useEffect(() => {
     if (typeof window === 'undefined') {
       return undefined;
     }
 
-    if (!canUseHeroVideo) {
+    if (!canUseHeroVideo || isSmallViewport || !isDocumentVisible) {
       setShouldPlayHeroVideo(false);
       return undefined;
     }
 
     const timeout = window.setTimeout(() => setShouldPlayHeroVideo(true), 250);
     return () => window.clearTimeout(timeout);
-  }, [canUseHeroVideo]);
+  }, [canUseHeroVideo, isSmallViewport, isDocumentVisible]);
 
   const scrollToCard = (direction: 'next' | 'prev') => {
     if (direction === 'next') {
@@ -184,7 +200,7 @@ export default function HomePage() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/img/bg1.jpg"
             aria-hidden
             style={{
