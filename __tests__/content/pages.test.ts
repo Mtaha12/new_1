@@ -11,6 +11,39 @@ type Messages = typeof enMessages & typeof arMessages;
 
 type LocaleKey = keyof Omit<Messages, 'Navigation' | 'Footer' | 'ChatWidget'> | 'Navigation' | 'Footer' | 'ChatWidget';
 
+const expectLocaleStructuresToMatch = (enSection: unknown, arSection: unknown) => {
+  expect(arSection).toBeDefined();
+
+  if (Array.isArray(enSection)) {
+    expect(Array.isArray(arSection)).toBe(true);
+    const enArray = enSection as unknown[];
+    const arArray = arSection as unknown[];
+    expect(arArray.length).toBe(enArray.length);
+    enArray.forEach((item, index) => {
+      expectLocaleStructuresToMatch(item, arArray[index]);
+    });
+    return;
+  }
+
+  if (enSection !== null && typeof enSection === 'object') {
+    expect(arSection).not.toBeNull();
+    expect(typeof arSection).toBe('object');
+    const enKeys = Object.keys(enSection as Record<string, unknown>);
+    const arKeys = Object.keys((arSection as Record<string, unknown>) ?? {});
+    expect(arKeys).toEqual(expect.arrayContaining(enKeys));
+    expect(enKeys).toEqual(expect.arrayContaining(arKeys));
+    enKeys.forEach((key) => {
+      expectLocaleStructuresToMatch(
+        (enSection as Record<string, unknown>)[key],
+        (arSection as Record<string, unknown>)[key]
+      );
+    });
+    return;
+  }
+
+  expect(arSection).not.toBeUndefined();
+};
+
 describe('Localized content parity', () => {
   const sections: LocaleKey[] = [
     'HomePage',
@@ -36,6 +69,96 @@ describe('Localized content parity', () => {
 
       expect(arKeys).toEqual(expect.arrayContaining(enKeys));
       expect(enKeys).toEqual(expect.arrayContaining(arKeys));
+    });
+  });
+});
+
+describe('TC-104 to TC-168: Locale dictionary parity', () => {
+  it('TC-104: Verify case studies dictionary match across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.CaseStudies, arMessages.CaseStudies);
+  });
+
+  it('TC-105: Verify common dictionary parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.Common, arMessages.Common);
+  });
+
+  it('TC-106: Verify navigation dictionary parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.Navigation, arMessages.Navigation);
+  });
+
+  it('TC-107: Verify auth dictionary parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.Auth, arMessages.Auth);
+  });
+
+  it('TC-108: Verify contact form parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.ContactForm, arMessages.ContactForm);
+  });
+
+  it('TC-109: Verify services page parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.ServicesPage, arMessages.ServicesPage);
+  });
+
+  it('TC-110: Verify solutions pages parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.SolutionsPages, arMessages.SolutionsPages);
+  });
+
+  it('TC-159: Verify homepage parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.HomePage, arMessages.HomePage);
+  });
+
+  it('TC-160: Verify case studies parity across locales', () => {
+    const enCaseStudies = enMessages.CaseStudies;
+    const arCaseStudies = arMessages.CaseStudies;
+
+    expectLocaleStructuresToMatch(enCaseStudies.caseStudyList, arCaseStudies.caseStudyList);
+    expectLocaleStructuresToMatch(enCaseStudies.featuredMetrics, arCaseStudies.featuredMetrics);
+  });
+
+  it('TC-161: Verify blog parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.Blog, arMessages.Blog);
+  });
+
+  it('TC-162: Verify footer parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.Footer, arMessages.Footer);
+  });
+
+  it('TC-163: Verify footer resources parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.FooterResources, arMessages.FooterResources);
+  });
+
+  it('TC-164: Verify chat dictionary parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.Chat, arMessages.Chat);
+  });
+
+  it('TC-165: Verify contact block parity across locales', () => {
+    const enContactBlock = (enMessages.HomePage as any).contactBlock;
+    const arContactBlock = (arMessages.HomePage as any).contactBlock;
+    expectLocaleStructuresToMatch(enContactBlock, arContactBlock);
+  });
+
+  it('TC-166: Verify services overview parity across locales', () => {
+    expectLocaleStructuresToMatch(enMessages.ServicesOverview, arMessages.ServicesOverview);
+  });
+
+  it('TC-167: Verify services page parity across all slugs', () => {
+    const enServices = enMessages.ServicesPage as Record<string, unknown>;
+    const arServices = arMessages.ServicesPage as Record<string, unknown>;
+
+    const serviceSlugs = Object.keys(enServices);
+    expect(Object.keys(arServices)).toEqual(expect.arrayContaining(serviceSlugs));
+    serviceSlugs.forEach((slug) => {
+      expectLocaleStructuresToMatch(enServices[slug], arServices[slug]);
+    });
+  });
+
+  it('TC-168: Verify solutions pages parity across all slugs', () => {
+    const enSolutions = enMessages.SolutionsPages as Record<string, unknown>;
+    const arSolutions = arMessages.SolutionsPages as Record<string, unknown>;
+
+    const solutionSlugs = Object.keys(enSolutions);
+    expect(Object.keys(arSolutions)).toEqual(expect.arrayContaining(solutionSlugs));
+    solutionSlugs.forEach((slug) => {
+      expectLocaleStructuresToMatch(enSolutions[slug], arSolutions[slug]);
     });
   });
 });
