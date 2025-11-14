@@ -105,7 +105,7 @@ export default function Footer() {
     <>
       <footer
         style={{
-          background: '#0a0e3d',
+          background: 'linear-gradient(180deg, #050a24 0%, #0a1b48 45%, #153d8a 75%, #1c6fc4 100%)',
           color: '#fff',
           padding: 'clamp(8rem, 12vw, 10rem) clamp(1.5rem, 5vw, 3rem) clamp(2rem, 5vw, 3rem)'
         }}

@@ -66,7 +66,7 @@ export default function ServicesPage() {
 		resourcing: { image: '/img/s8.jpg', badge: '🛡️', accent: 'linear-gradient(135deg, rgba(7, 31, 95, 0.85) 0%, rgba(45, 214, 198, 0.8) 100%)' },
 		training: { image: '/img/s6.jpg', badge: '🧪', accent: 'linear-gradient(135deg, rgba(5, 20, 82, 0.85) 0%, rgba(102, 224, 255, 0.8) 100%)' },
 		'managed-it': { image: '/img/s9.jpg', badge: '🧰', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' },
-		devsecops: { image: '/img/s11.jpg', badge: '⚙️', accent: 'linear-gradient(135deg, rgba(11, 31, 96, 0.85) 0%, rgba(105, 232, 225, 0.78) 100%)' },
+		devsecops: { image: '/img/s11.jpg', badge: '⚙️', accent: 'linear-gradient(135deg, rgba(11, 31, 96, 0.65) 0%, rgba(105, 232, 225, 0.4) 100%)' },
 		managed: { image: '/img/s9.jpg', badge: '🧰', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' },
 		managedIt: { image: '/img/s9.jpg', badge: '🧰', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' }
 	};

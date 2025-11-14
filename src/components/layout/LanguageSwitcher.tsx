@@ -1,52 +1,87 @@
 // src/components/LanguageSwitcher.tsx
+'use client';
+
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
+import { usePathname } from 'next/navigation';
+import { useMemo } from 'react';
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  size?: number;
+}
+
+export default function LanguageSwitcher({ size = 16 }: LanguageSwitcherProps) {
   const locale = useLocale();
+  const pathname = usePathname();
+  
+  // Function to generate the target path with the new locale
+  const getLocalizedPath = (newLocale: string) => {
+    if (!pathname) return `/${newLocale}`;
+    const segments = pathname.split('/');
+    segments[1] = newLocale; // Replace the locale segment
+    return segments.join('/');
+  };
+
+  const buttonStyle = useMemo(() => ({
+    padding: '0.25rem 0.5rem',
+    fontSize: `${size * 0.7}px`,
+    minWidth: `${size * 1.5}px`,
+    height: `${size * 1.5}px`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '4px',
+    transition: 'all 0.2s ease',
+    textDecoration: 'none',
+    fontWeight: 500,
+    lineHeight: 1,
+  }), [size]);
+
+  const activeStyle = {
+    ...buttonStyle,
+    backgroundColor: 'rgba(105, 232, 225, 0.2)',
+    color: '#69E8E1',
+  };
+
+  const inactiveStyle: React.CSSProperties = {
+    ...buttonStyle,
+    color: '#94a3b8',
+  };
+  
+  const inactiveHoverStyle: React.CSSProperties = {
+    color: '#69E8E1',
+    backgroundColor: 'rgba(105, 232, 225, 0.1)',
+  };
 
   return (
     <div style={{
       display: 'flex',
       alignItems: 'center',
-      gap: '0.5rem',
-      background: '#f7fafc',
-      padding: '0.5rem',
-      borderRadius: '8px',
-      border: '1px solid #e2e8f0'
+      gap: '2px',
+      background: 'rgba(255, 255, 255, 0.1)',
+      padding: '2px',
+      borderRadius: '6px',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+      height: `${size * 1.5}px`,
     }}>
       <Link 
-        href="/en"
+        href={getLocalizedPath('en')}
         style={{
-          padding: '0.5rem 1rem',
-          background: locale === 'en' ? '#69E8E1' : 'transparent',
-          color: locale === 'en' ? '#333A3C' : '#4a5568',
-          border: 'none',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          fontWeight: '500',
-          transition: 'all 0.3s ease',
-          textDecoration: 'none',
-          display: 'block'
-        }}
+          ...(locale === 'en' ? activeStyle : inactiveStyle),
+          ...(locale !== 'en' ? { ':hover': inactiveHoverStyle } : {})
+        } as React.CSSProperties}
+        onClick={(e) => locale === 'en' && e.preventDefault()}
       >
         EN
       </Link>
-      <span style={{ color: '#cbd5e0' }}>|</span>
+      <span style={{ color: 'rgba(255, 255, 255, 0.2)' }}>|</span>
       <Link 
-        href="/ar"
+        href={getLocalizedPath('ar')}
         style={{
-          padding: '0.5rem 1rem',
-          background: locale === 'ar' ? '#69E8E1' : 'transparent',
-          color: locale === 'ar' ? '#333A3C' : '#4a5568',
-          border: 'none',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          fontWeight: '500',
-          transition: 'all 0.3s ease',
-          textDecoration: 'none',
-          display: 'block'
-        }}
+          ...(locale === 'ar' ? activeStyle : inactiveStyle),
+          ...(locale !== 'ar' ? { ':hover': inactiveHoverStyle } : {})
+        } as React.CSSProperties}
+        onClick={(e) => locale === 'ar' && e.preventDefault()}
       >
         AR
       </Link>

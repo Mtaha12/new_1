@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, ChevronUp, User } from 'lucide-react';
+import { LoginButton, SignupButton } from '@/components/ui/AuthButtons';
 import Image from 'next/image';
 
 // Helper function for responsive values
@@ -58,11 +59,17 @@ export default function Header(props: HeaderProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
-  const [iconSize, setIconSize] = useState(24);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
+  const [iconSize, setIconSize] = useState(20);
   const [userInitial, setUserInitial] = useState<string | null>(null);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>('user@example.com');
   const [isMounted, setIsMounted] = useState(false);
   const mobileNavRef = useRef<HTMLDivElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const solutionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const industriesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hasUser = Boolean(userEmail);
 
   // Navigation items data
@@ -131,18 +138,6 @@ export default function Header(props: HeaderProps) {
       type: 'scroll',
       scrollTarget: 'who-we-are'
     },
-    {
-      id: 'login',
-      label: t('login'),
-      href: `/${currentLocale}/auth/login`,
-      type: 'link'
-    },
-    {
-      id: 'signup',
-      label: t('signup'),
-      href: `/${currentLocale}/auth/signup`,
-      type: 'link'
-    }
   ];
 
   // Handle responsive icon size
@@ -238,17 +233,33 @@ export default function Header(props: HeaderProps) {
 
   // Close mobile menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileNavRef.current && !mobileNavRef.current.contains(event.target as Node)) {
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+      
+      // Close mobile menu
+      if (mobileNavRef.current && !mobileNavRef.current.contains(target)) {
         setIsMenuOpen(false);
+      }
+      
+      // Close user menu
+      if (userMenuRef.current && !userMenuRef.current.contains(target)) {
+        setUserMenuOpen(false);
+      }
+      
+      // Close all dropdowns when clicking outside
+      if (!(target as HTMLElement).closest('.nav-dropdown')) {
         setServicesOpen(false);
         setSolutionsOpen(false);
-        setIndustriesOpen(false);
+      }
+      if (!(target as HTMLElement).closest('.avatar-menu') && !(target as HTMLElement).closest('.avatar-button')) {
+        setAvatarMenuOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   // Close mobile menu when route changes
@@ -432,24 +443,43 @@ export default function Header(props: HeaderProps) {
           className="desktop-nav"
         >
           {navItems
-            .filter((item) => !hasUser || (item.id !== 'login' && item.id !== 'signup'))
+            .filter((item) => !['login', 'signup'].includes(item.id))
             .map((item) => (
               <div key={item.id} style={{ position: 'relative' }}>
               {item.type === 'dropdown' ? (
                 // Dropdown items
                 <div 
+                  className="nav-dropdown"
                   onMouseEnter={() => {
-                    handleMobileDropdown(item.id);
-                    setServicesOpen(item.id === 'services' ? true : servicesOpen);
-                    setSolutionsOpen(item.id === 'solutions' ? true : solutionsOpen);
-                    setIndustriesOpen(item.id === 'industries' ? true : industriesOpen);
+                    // Clear any pending timeouts
+                    if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
+                    if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
+                    if (industriesTimeoutRef.current) clearTimeout(industriesTimeoutRef.current);
+                    
+                    // Close all dropdowns first
+                    setServicesOpen(false);
+                    setSolutionsOpen(false);
+                    setIndustriesOpen(false);
+                    
+                    // Open the current dropdown
+                    if (item.id === 'services') {
+                      setServicesOpen(true);
+                    } else if (item.id === 'solutions') {
+                      setSolutionsOpen(true);
+                    } else if (item.id === 'industries') {
+                      setIndustriesOpen(true);
+                    }
                   }}
                   onMouseLeave={() => {
-                    if (item.id === 'services') setServicesOpen(false);
-                    if (item.id === 'solutions') setSolutionsOpen(false);
-                    if (item.id === 'industries') setIndustriesOpen(false);
+                    // Set timeout to close the current dropdown
+                    if (item.id === 'services') {
+                      servicesTimeoutRef.current = setTimeout(() => setServicesOpen(false), 200);
+                    } else if (item.id === 'solutions') {
+                      solutionsTimeoutRef.current = setTimeout(() => setSolutionsOpen(false), 200);
+                    } else if (item.id === 'industries') {
+                      industriesTimeoutRef.current = setTimeout(() => setIndustriesOpen(false), 200);
+                    }
                   }}
-                  style={{ position: 'relative' }}
                 >
                   <button 
                     className="hover-underline"
@@ -467,12 +497,36 @@ export default function Header(props: HeaderProps) {
                       transition: 'all 0.3s ease',
                       whiteSpace: 'nowrap'
                     }}
+                    onClick={() => {
+                      if (item.id === 'services') {
+                        setServicesOpen(!servicesOpen);
+                        setSolutionsOpen(false);
+                        setIndustriesOpen(false);
+                      } else if (item.id === 'solutions') {
+                        setSolutionsOpen(!solutionsOpen);
+                        setServicesOpen(false);
+                        setIndustriesOpen(false);
+                      } else if (item.id === 'industries') {
+                        setIndustriesOpen(!industriesOpen);
+                        setServicesOpen(false);
+                        setSolutionsOpen(false);
+                      }
+                    }}
                   >
-                    {item.label} <ChevronDown size={16} />
+                    {item.label} 
+                    {item.id === 'services' ? (
+                      servicesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+                    ) : item.id === 'solutions' ? (
+                      solutionsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+                    ) : (
+                      industriesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+                    )}
                   </button>
                   
                   {/* Dropdown Menu */}
-                  {isDropdownOpen(item.id) && (
+                  {((item.id === 'services' && servicesOpen) || 
+                    (item.id === 'solutions' && solutionsOpen) ||
+                    (item.id === 'industries' && industriesOpen)) && (
                     <div style={{
                       position: 'absolute',
                       top: '100%',
@@ -566,104 +620,125 @@ export default function Header(props: HeaderProps) {
                 {t('contact')}
               </button>
             </Link>
-            {hasUser ? (
-              <button
-                className="hover-glow"
-                type="button"
-                onClick={handleLogout}
-                style={{
-                  background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
-                  color: '#001F3F',
-                  border: 'none',
-                  padding: 'clamp(0.5rem, 1.2vw, 0.6rem) clamp(1rem, 1.5vw, 1.5rem)',
-                  borderRadius: '25px',
-                  fontWeight: '700',
-                  cursor: 'pointer',
-                  fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                  whiteSpace: 'nowrap',
-                  boxShadow: '0 10px 24px rgba(56, 189, 248, 0.3)'
-                }}
-              >
-                Logout
-              </button>
-            ) : (
-              <Link href={`/${currentLocale}/auth/signup`} style={{ textDecoration: 'none' }}>
+            <div className="hidden md:flex items-center gap-3">
+              {hasUser ? (
                 <button
                   className="hover-glow"
+                  type="button"
+                  onClick={handleLogout}
                   style={{
                     background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
                     color: '#001F3F',
                     border: 'none',
-                    padding: 'clamp(0.5rem, 1.2vw, 0.6rem) clamp(1rem, 1.5vw, 1.5rem)',
+                    padding: '0.5rem 1.25rem',
                     borderRadius: '25px',
-                    fontWeight: '700',
+                    fontWeight: '600',
                     cursor: 'pointer',
-                    fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
-                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    fontSize: '0.9rem',
+                    transition: 'all 0.2s ease',
                     whiteSpace: 'nowrap',
-                    boxShadow: '0 10px 24px rgba(56, 189, 248, 0.3)'
+                    boxShadow: '0 4px 14px rgba(56, 189, 248, 0.3)'
                   }}
                 >
-                  {t('signup')}
+                  Logout
                 </button>
-              </Link>
-            )}
+              ) : (
+                <>
+                  <LoginButton className="px-4 py-2 text-sm font-medium" />
+                  <SignupButton className="px-4 py-2 text-sm font-medium" />
+                </>
+              )}
+            </div>
           </div>
         </nav>
 
-        {/* Right Section - Language Switcher and Mobile Menu */}
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: 'clamp(0.75rem, 2vw, 1rem)',
-          zIndex: 1001
-        }}>
-          <LanguageSwitcher />
-
-          <div
-            className="header-avatar-shell"
-            aria-label={isMounted && hasUser ? t('welcomeBack') : t('login')}
-            style={{
-              width: 'clamp(38px, 4vw, 44px)',
-              height: 'clamp(38px, 4vw, 44px)',
-              borderRadius: '14px',
-              background: 'linear-gradient(135deg, rgba(105, 232, 225, 0.4) 0%, rgba(56, 189, 248, 0.65) 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 700,
-              fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)',
-              color: '#001F3F',
-              boxShadow: '0 12px 26px rgba(56, 189, 248, 0.28)'
-            }}
-          >
-            {isMounted && hasUser ? (
-              userInitial
-            ) : (
-              <User
-                size={Math.min(Math.max(iconSize - 6, 18), 26)}
-                strokeWidth={2.1}
-                color="#001F3F"
-              />
+        {/* Right Section - Language Switcher and Avatar */}
+        <div className="flex items-center z-50" style={{ gap: '3rem' }}>
+          <div className="flex-shrink-0">
+            <LanguageSwitcher />
+          </div>
+          
+          {/* Avatar with Dropdown Menu */}
+          <div className="relative">
+            <button 
+              className={`w-10 h-10 rounded-full flex items-center justify-center focus:outline-none transition-colors ${
+                hasUser 
+                  ? 'bg-gradient-to-r from-[#69E8E1] to-[#38bdf8] text-white' 
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-600'
+              }`}
+              title={hasUser ? userEmail || 'User' : 'Not logged in'}
+              onClick={() => setAvatarMenuOpen(!avatarMenuOpen)}
+              aria-expanded={avatarMenuOpen}
+              aria-haspopup="true"
+            >
+              {hasUser ? (userInitial || 'U') : (
+                <svg 
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                >
+                  <path 
+                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" 
+                    fill="currentColor"
+                  />
+                  <path 
+                    d="M12 14.5C6.99 14.5 3 18.49 3 23.5C3 23.78 3.22 24 3.5 24H20.5C20.78 24 21 23.78 21 23.5C21 18.49 17.01 14.5 12 14.5Z" 
+                    fill="currentColor"
+                  />
+                </svg>
+              )}
+            </button>
+            
+            {/* Dropdown Menu */}
+            {avatarMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                <div className="py-1">
+                  {hasUser ? (
+                    <>
+                      <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
+                        <p className="font-medium truncate">{userEmail || 'User'}</p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setAvatarMenuOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link 
+                        href={`/${currentLocale}/auth/login`}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                        onClick={() => setAvatarMenuOpen(false)}
+                      >
+                        Login
+                      </Link>
+                      <Link 
+                        href={`/${currentLocale}/auth/signup`}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                        onClick={() => setAvatarMenuOpen(false)}
+                      >
+                        Sign Up
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
             )}
           </div>
 
           {/* Mobile menu button */}
           <button
-            className="mobile-menu-btn"
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#fff',
-              cursor: 'pointer',
-              padding: '0.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'color 0.3s ease'
-            }}
+            className="p-2 text-white hover:text-gray-300 transition-colors md:hidden"
             onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? (
               <X size={iconSize} />
@@ -764,9 +839,6 @@ export default function Header(props: HeaderProps) {
               />
             )}
           </div>
-          <span style={{ color: '#e2e8f0', fontSize: '1rem', fontWeight: 600 }}>
-            {isMounted && hasUser ? t('welcomeBack') : t('login')}
-          </span>
         </div>
 
         {/* Mobile Navigation Links */}
@@ -778,7 +850,7 @@ export default function Header(props: HeaderProps) {
           alignItems: 'stretch'
         }}>
           {navItems
-            .filter((item) => !hasUser || (item.id !== 'login' && item.id !== 'signup'))
+            .filter((item) => !['login', 'signup'].includes(item.id))
             .map((item) => (
             <div key={item.id} style={{ width: '100%' }}>
               {item.type === 'dropdown' ? (
@@ -910,33 +982,12 @@ export default function Header(props: HeaderProps) {
           </Link>
 
           {!hasUser && (
-            <Link
-              href={`/${currentLocale}/auth/signup`}
-              style={{
-                textDecoration: 'none',
-                marginTop: '1rem'
-              }}
-              onClick={closeMobileMenu}
-            >
-              <button
-                className="hover-glow"
-                style={{
-                  background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
-                  color: '#001F3F',
-                  border: 'none',
-                  padding: '1rem 2rem',
-                  borderRadius: '25px',
-                  fontWeight: '700',
-                  cursor: 'pointer',
-                  fontSize: '1rem',
-                  width: '100%',
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                  boxShadow: '0 18px 36px rgba(56, 189, 248, 0.35)'
-                }}
-              >
-                {t('signup')}
-              </button>
-            </Link>
+            <div className="w-full px-4 mt-4 space-y-3">
+              <div className="flex flex-col gap-3">
+                <LoginButton variant="minimal" className="w-full justify-center" />
+                <SignupButton className="w-full justify-center" />
+              </div>
+            </div>
           )}
         </nav>
       </div>

@@ -47,7 +47,7 @@ export default function HomePage() {
       desc: t('services.consultingDesc'),
       href: `/${currentLocale}/services/consulting`,
       icon: '🤝',
-      gradient: 'linear-gradient(135deg, #0a1f63 0%, #1346a3 50%, #0fd4e8 100%)'
+      gradient: 'linear-gradient(150deg, #030b2c 0%, #0b2b63 55%, #0fa1c6 100%)'
     },
     {
       key: 'infrastructure',
@@ -55,7 +55,7 @@ export default function HomePage() {
       desc: t('services.infrastructureDesc'),
       href: `/${currentLocale}/services/infrastructure`,
       icon: '🧠',
-      gradient: 'linear-gradient(135deg, #101c62 0%, #372874 50%, #5ac3ff 100%)'
+      gradient: 'linear-gradient(150deg, #040b33 0%, #1c1b6f 50%, #601cbe 100%)'
     },
     {
       key: 'resourcing',
@@ -63,7 +63,7 @@ export default function HomePage() {
       desc: t('services.resourcingDesc'),
       href: `/${currentLocale}/services/resourcing`,
       icon: '🛡️',
-      gradient: 'linear-gradient(135deg, #0b2269 0%, #293c8a 45%, #2dd6c6 100%)'
+      gradient: 'linear-gradient(150deg, #02102f 0%, #0d3870 55%, #0fa68b 100%)'
     },
     {
       key: 'training',
@@ -71,7 +71,7 @@ export default function HomePage() {
       desc: t('services.trainingDesc'),
       href: `/${currentLocale}/services/training`,
       icon: '🧪',
-      gradient: 'linear-gradient(135deg, #052650 0%, #1b3f8a 55%, #66e0ff 100%)'
+      gradient: 'linear-gradient(150deg, #040d30 0%, #122d6a 55%, #7b1f9d 100%)'
     },
     {
       key: 'managed',
@@ -79,7 +79,7 @@ export default function HomePage() {
       desc: t('services.managedDesc'),
       href: `/${currentLocale}/services/managed-it`,
       icon: '🧰',
-      gradient: 'linear-gradient(135deg, #071f5b 0%, #2b2d74 50%, #3cd4e1 100%)'
+      gradient: 'linear-gradient(150deg, #020824 0%, #172a5a 50%, #f5b642 100%)'
     },
     {
       key: 'devsecops',
@@ -87,7 +87,7 @@ export default function HomePage() {
       desc: t('services.devsecopsDesc'),
       href: `/${currentLocale}/services/devsecops`,
       icon: '⚙️',
-      gradient: 'linear-gradient(135deg, #0a1f60 0%, #3a2175 55%, #69e8e1 100%)'
+      gradient: 'linear-gradient(150deg, #030b33 0%, #1b1b72 55%, #3db4f4 100%)'
     }
   ];
 
