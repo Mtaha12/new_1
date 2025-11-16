@@ -670,27 +670,6 @@ html {
   background: #a8a8a8;
 }
 
-/* Responsive Utility Classes */
-@media (max-width: 768px) {
-  .md\:flex {
-    display: flex !important;
-  }
-  
-  .md\:hidden {
-    display: none !important;
-  }
-}
-
-@media (min-width: 769px) {
-  .md\:flex {
-    display: flex !important;
-  }
-  
-  .md\:hidden {
-    display: none !important;
-  }
-}
-
 /* Professional Animations for Home Page */
 @keyframes fadeIn {
   from {

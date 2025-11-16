@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
-import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, ChevronUp, User } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { LoginButton, SignupButton } from '@/components/ui/AuthButtons';
 import Image from 'next/image';
 
@@ -42,13 +42,27 @@ type ScrollNavItem = {
 
 type NavItem = LinkNavItem | DropdownNavItem | ScrollNavItem;
 
-interface HeaderProps {
-  // Add any props that the Header component accepts here
-}
-
 const ADMIN_STORAGE_PREFIX = 'samurai-blog-admin-';
 
-export default function Header(props: HeaderProps) {
+type SamuraiAuthDetail = {
+  email?: string;
+  name?: string;
+} | null;
+
+function isSamuraiAuthEvent(event: Event): event is CustomEvent<SamuraiAuthDetail> {
+  return 'detail' in event;
+}
+
+function findDropdownNavItem(
+  items: NavItem[],
+  id: 'services' | 'solutions' | 'industries'
+): DropdownNavItem | undefined {
+  return items.find(
+    (item): item is DropdownNavItem => item.type === 'dropdown' && item.id === id
+  );
+}
+
+export default function Header() {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
   const router = useRouter();
@@ -59,18 +73,25 @@ export default function Header(props: HeaderProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [quickNavOpen, setQuickNavOpen] = useState(false);
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [iconSize, setIconSize] = useState(20);
   const [userInitial, setUserInitial] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>('user@example.com');
-  const [isMounted, setIsMounted] = useState(false);
-  const mobileNavRef = useRef<HTMLDivElement>(null);
-  const userMenuRef = useRef<HTMLDivElement>(null);
-  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const solutionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const industriesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const servicesTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const solutionsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const industriesTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasUser = Boolean(userEmail);
+
+  const updateHeaderHeight = useCallback(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+  }, []);
 
   // Navigation items data
   const navItems: NavItem[] = [
@@ -138,7 +159,17 @@ export default function Header(props: HeaderProps) {
       type: 'scroll',
       scrollTarget: 'who-we-are'
     },
+    {
+      id: 'connect',
+      label: 'Connect',
+      type: 'scroll',
+      scrollTarget: 'contact'
+    },
   ];
+
+  const servicesDropdown = findDropdownNavItem(navItems, 'services');
+  const solutionsDropdown = findDropdownNavItem(navItems, 'solutions');
+  const industriesDropdown = findDropdownNavItem(navItems, 'industries');
 
   // Handle responsive icon size
   useEffect(() => {
@@ -150,10 +181,6 @@ export default function Header(props: HeaderProps) {
     window.addEventListener('resize', updateIconSize);
 
     return () => window.removeEventListener('resize', updateIconSize);
-  }, []);
-
-  useEffect(() => {
-    setIsMounted(true);
   }, []);
 
   useEffect(() => {
@@ -184,7 +211,7 @@ export default function Header(props: HeaderProps) {
         } else {
           setUserInitial(null);
         }
-      } catch (error) {
+      } catch {
         setUserInitial(null);
         setUserEmail(null);
       }
@@ -193,21 +220,18 @@ export default function Header(props: HeaderProps) {
     loadUser();
 
     const handleAuthChange = (event: Event) => {
-      if (!('detail' in event)) {
+      if (!isSamuraiAuthEvent(event)) {
         loadUser();
         return;
       }
-      const customEvent = event as CustomEvent<any>;
-      const detail = customEvent.detail;
-      const emailValue =
-        detail && typeof detail === 'object' && typeof detail.email === 'string'
-          ? detail.email.trim()
-          : '';
+      const detail = event.detail;
+      const emailValue = detail?.email ? detail.email.trim() : '';
+      const nameValue = detail?.name ? detail.name.trim() : '';
 
       setUserEmail(emailValue.length ? emailValue : null);
 
-      if (detail && typeof detail === 'object' && typeof detail.name === 'string' && detail.name.trim().length) {
-        setUserInitial(detail.name.trim().charAt(0).toUpperCase());
+      if (nameValue.length) {
+        setUserInitial(nameValue.charAt(0).toUpperCase());
       } else if (emailValue.length) {
         setUserInitial(emailValue.charAt(0).toUpperCase());
       } else {
@@ -231,74 +255,105 @@ export default function Header(props: HeaderProps) {
     };
   }, []);
 
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      const target = event.target as Node;
-      
-      // Close mobile menu
-      if (mobileNavRef.current && !mobileNavRef.current.contains(target)) {
-        setIsMenuOpen(false);
+  const closeMobileMenu = useCallback(() => {
+    setIsMenuOpen(false);
+    setServicesOpen(false);
+    setSolutionsOpen(false);
+    setIndustriesOpen(false);
+
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'auto';
+      document.body.classList.remove('menu-open');
+    }
+  }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMenuOpen((previous) => {
+      const nextState = !previous;
+
+      if (typeof document !== 'undefined') {
+        if (nextState) {
+          document.body.style.overflow = 'hidden';
+          document.body.classList.add('menu-open');
+        } else {
+          document.body.style.overflow = 'auto';
+          document.body.classList.remove('menu-open');
+        }
       }
-      
-      // Close user menu
-      if (userMenuRef.current && !userMenuRef.current.contains(target)) {
-        setUserMenuOpen(false);
-      }
-      
-      // Close all dropdowns when clicking outside
-      if (!(target as HTMLElement).closest('.nav-dropdown')) {
+
+      if (!nextState) {
         setServicesOpen(false);
         setSolutionsOpen(false);
+        setIndustriesOpen(false);
       }
-      if (!(target as HTMLElement).closest('.avatar-menu') && !(target as HTMLElement).closest('.avatar-button')) {
-        setAvatarMenuOpen(false);
+
+      return nextState;
+    });
+  }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      const isClickInsideMenu = mobileMenuRef.current?.contains(target);
+      const isToggleButton = menuToggleRef.current?.contains(target as Node);
+
+      if (!isClickInsideMenu && !isToggleButton) {
+        closeMobileMenu();
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, [closeMobileMenu]);
+
+  useEffect(() => {
+    closeMobileMenu();
+  }, [closeMobileMenu, pathname]);
+
+  useEffect(() => {
+    updateHeaderHeight();
+
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.addEventListener('resize', updateHeaderHeight);
+    return () => window.removeEventListener('resize', updateHeaderHeight);
+  }, [updateHeaderHeight]);
+
+  useEffect(() => {
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = 'auto';
+        document.body.classList.remove('menu-open');
+      }
+    };
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
-    setIsMenuOpen(false);
-    setServicesOpen(false);
-    setSolutionsOpen(false);
-    setIndustriesOpen(false);
-  }, [pathname]);
+    // Close menu when route changes triggered by browser history
+    const handleRouteChange = () => {
+      closeMobileMenu();
+    };
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
+    window.addEventListener('popstate', handleRouteChange);
 
-    return () => document.body.classList.remove('no-scroll');
-  }, [isMenuOpen]);
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = 'auto';
+        document.body.classList.remove('menu-open');
+      }
+    };
+  }, [closeMobileMenu]);
 
-  const toggleMobileMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    if (!isMenuOpen) {
-      setServicesOpen(false);
-      setSolutionsOpen(false);
-      setIndustriesOpen(false);
-    }
-  };
-
-  const closeMobileMenu = () => {
-    setIsMenuOpen(false);
-    setServicesOpen(false);
-    setSolutionsOpen(false);
-    setIndustriesOpen(false);
-  };
-
-  const handleMobileDropdown = (itemId: string) => {
-    switch (itemId) {
+  // Handle dropdown toggle for mobile
+  const toggleMobileDropdown = (menu: 'services' | 'solutions' | 'industries') => {
+    switch (menu) {
       case 'services':
         setServicesOpen(!servicesOpen);
         setSolutionsOpen(false);
@@ -353,7 +408,8 @@ export default function Header(props: HeaderProps) {
     industries: 'industries',
     resources: 'resources',
     careers: 'careers',
-    contact: 'contact'
+    contact: 'contact',
+    connect: 'contact'
   };
 
   const scrollToSection = (rawSection: string) => {
@@ -369,27 +425,23 @@ export default function Header(props: HeaderProps) {
       } else {
         window.location.hash = targetSection;
       }
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = 'auto';
+        document.body.classList.remove('menu-open');
+      }
     }
-    closeMobileMenu();
   };
 
-  // Helper function to check if dropdown should be open
-  const isDropdownOpen = (itemId: string) => {
-    switch (itemId) {
-      case 'services':
-        return servicesOpen;
-      case 'solutions':
-        return solutionsOpen;
-      case 'industries':
-        return industriesOpen;
-      default:
-        return false;
-    }
-  };
+  const avatarClassName = [
+    'w-10 h-10 rounded-full flex items-center justify-center focus:outline-none transition-colors',
+    hasUser
+      ? 'bg-gradient-to-r from-[#69E8E1] to-[#38bdf8] text-white shadow-sm hover:shadow-lg'
+      : 'bg-white/10 text-white hover:bg-white/20'
+  ].join(' ');
 
   return (
-    <header 
-      ref={mobileNavRef}
+    <header
+      ref={headerRef}
       style={{
         background: 'linear-gradient(135deg, #001F3F 0%, #000814 100%)',
         padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1rem, 4vw, 3rem)',
@@ -399,228 +451,188 @@ export default function Header(props: HeaderProps) {
         boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
       }}
     >
-      <div style={{
-        maxWidth: '1600px',
-        margin: '0 auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        {/* Logo */}
-        <Link 
-          href={`/${currentLocale}`} 
-          className="hover-underline"
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '0.75rem', 
-            textDecoration: 'none',
-            zIndex: 1001
-          }}
-          onClick={closeMobileMenu}
-        >
-          <Image 
-            src="/logo.png" 
-            alt="The SamurAI Logo" 
-            width={60} 
-            height={60}
-            style={{ 
-              objectFit: 'contain',
-              width: 'clamp(40px, 8vw, 60px)',
-              height: 'clamp(40px, 8vw, 60px)'
-            }}
-          />
-        </Link>
+      <div
+        style={{
+          maxWidth: '1600px',
+          margin: '0 auto',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'clamp(0.75rem, 2.5vw, 1.5rem)'
+        }}
+      >
+        <div className="flex w-full items-center justify-between gap-3 md:gap-4">
+          <div className="flex min-w-0 items-center gap-2 md:gap-3">
+            <button
+              ref={menuToggleRef}
+              className="p-2 text-white transition-colors hover:text-slate-200 md:hidden"
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? <X size={iconSize} /> : <Menu size={iconSize} />}
+            </button>
 
-        {/* Desktop Navigation */}
-        <nav 
-          style={{
-            display: 'flex',
-            gap: 'clamp(0.5rem, 1.5vw, 2rem)',
-            alignItems: 'center',
-            color: '#fff'
-          }}
-          className="desktop-nav"
-        >
-          {navItems
-            .filter((item) => !['login', 'signup'].includes(item.id))
-            .map((item) => (
-              <div key={item.id} style={{ position: 'relative' }}>
-              {item.type === 'dropdown' ? (
-                // Dropdown items
-                <div 
-                  className="nav-dropdown"
-                  onMouseEnter={() => {
-                    // Clear any pending timeouts
-                    if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
-                    if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
-                    if (industriesTimeoutRef.current) clearTimeout(industriesTimeoutRef.current);
-                    
-                    // Close all dropdowns first
-                    setServicesOpen(false);
-                    setSolutionsOpen(false);
-                    setIndustriesOpen(false);
-                    
-                    // Open the current dropdown
-                    if (item.id === 'services') {
-                      setServicesOpen(true);
-                    } else if (item.id === 'solutions') {
-                      setSolutionsOpen(true);
-                    } else if (item.id === 'industries') {
-                      setIndustriesOpen(true);
-                    }
-                  }}
-                  onMouseLeave={() => {
-                    // Set timeout to close the current dropdown
-                    if (item.id === 'services') {
-                      servicesTimeoutRef.current = setTimeout(() => setServicesOpen(false), 200);
-                    } else if (item.id === 'solutions') {
-                      solutionsTimeoutRef.current = setTimeout(() => setSolutionsOpen(false), 200);
-                    } else if (item.id === 'industries') {
-                      industriesTimeoutRef.current = setTimeout(() => setIndustriesOpen(false), 200);
-                    }
-                  }}
-                >
-                  <button 
-                    className="hover-underline"
-                    style={{
-                      color: '#fff',
-                      fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)',
-                      fontWeight: '500',
-                      background: 'transparent',
-                      border: 'none',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.25rem',
-                      padding: '0.75rem 0.5rem',
-                      transition: 'all 0.3s ease',
-                      whiteSpace: 'nowrap'
-                    }}
-                    onClick={() => {
-                      if (item.id === 'services') {
-                        setServicesOpen(!servicesOpen);
-                        setSolutionsOpen(false);
-                        setIndustriesOpen(false);
-                      } else if (item.id === 'solutions') {
-                        setSolutionsOpen(!solutionsOpen);
-                        setServicesOpen(false);
-                        setIndustriesOpen(false);
-                      } else if (item.id === 'industries') {
-                        setIndustriesOpen(!industriesOpen);
+            <Link
+              href={`/${currentLocale}`}
+              className="hover-underline"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                textDecoration: 'none'
+              }}
+              onClick={closeMobileMenu}
+            >
+              <Image
+                src="/logo.png"
+                alt="The SamurAI Logo"
+                width={60}
+                height={60}
+                style={{
+                  objectFit: 'contain',
+                  width: 'clamp(40px, 8vw, 60px)',
+                  height: 'clamp(40px, 8vw, 60px)'
+                }}
+              />
+            </Link>
+          </div>
+
+          <nav className="desktop-nav hidden flex-1 items-center justify-center gap-6 text-white md:flex">
+            {navItems
+              .filter((item) => !['login', 'signup'].includes(item.id))
+              .map((item) => {
+                if (item.type === 'dropdown') {
+                  const isServices = item.id === 'services';
+                  const isSolutions = item.id === 'solutions';
+                  const isIndustries = item.id === 'industries';
+                  const isOpen =
+                    (isServices && servicesOpen) ||
+                    (isSolutions && solutionsOpen) ||
+                    (isIndustries && industriesOpen);
+
+                  return (
+                    <div
+                      key={item.id}
+                      className="relative"
+                      onMouseEnter={() => {
+                        if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
+                        if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
+                        if (industriesTimeoutRef.current) clearTimeout(industriesTimeoutRef.current);
+
                         setServicesOpen(false);
                         setSolutionsOpen(false);
-                      }
-                    }}
-                  >
-                    {item.label} 
-                    {item.id === 'services' ? (
-                      servicesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
-                    ) : item.id === 'solutions' ? (
-                      solutionsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
-                    ) : (
-                      industriesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
-                    )}
-                  </button>
-                  
-                  {/* Dropdown Menu */}
-                  {((item.id === 'services' && servicesOpen) || 
-                    (item.id === 'solutions' && solutionsOpen) ||
-                    (item.id === 'industries' && industriesOpen)) && (
-                    <div style={{
-                      position: 'absolute',
-                      top: '100%',
-                      left: 0,
-                      background: '#fff',
-                      borderRadius: '8px',
-                      boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-                      minWidth: '220px',
-                      marginTop: '0.5rem',
-                      overflow: 'hidden',
-                      zIndex: 1002
-                    }}>
-                      {item.children?.map((child, index) => (
-                        <Link
-                          className="hover-underline"
-                          key={child.id}
-                          href={child.href}
+                        setIndustriesOpen(false);
+
+                        if (isServices) {
+                          setServicesOpen(true);
+                        } else if (isSolutions) {
+                          setSolutionsOpen(true);
+                        } else if (isIndustries) {
+                          setIndustriesOpen(true);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (isServices) {
+                          servicesTimeoutRef.current = setTimeout(() => setServicesOpen(false), 200);
+                        } else if (isSolutions) {
+                          solutionsTimeoutRef.current = setTimeout(() => setSolutionsOpen(false), 200);
+                        } else if (isIndustries) {
+                          industriesTimeoutRef.current = setTimeout(() => setIndustriesOpen(false), 200);
+                        }
+                      }}
+                    >
+                      <button
+                        className="hover-underline flex items-center gap-1 whitespace-nowrap px-2 py-3 text-sm font-medium"
+                        style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer' }}
+                        onClick={() => {
+                          if (isServices) {
+                            setServicesOpen(!servicesOpen);
+                            setSolutionsOpen(false);
+                            setIndustriesOpen(false);
+                          } else if (isSolutions) {
+                            setSolutionsOpen(!solutionsOpen);
+                            setServicesOpen(false);
+                            setIndustriesOpen(false);
+                          } else if (isIndustries) {
+                            setIndustriesOpen(!industriesOpen);
+                            setServicesOpen(false);
+                            setSolutionsOpen(false);
+                          }
+                        }}
+                      >
+                        {item.label}
+                        {isServices ? (
+                          servicesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+                        ) : isSolutions ? (
+                          solutionsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+                        ) : (
+                          industriesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+                        )}
+                      </button>
+
+                      {isOpen && (
+                        <div
                           style={{
-                            display: 'block',
-                            padding: '0.75rem 1.25rem',
-                            color: '#001F3F',
-                            textDecoration: 'none',
-                            fontSize: '0.9rem',
-                            borderBottom: index < (item.children?.length || 0) - 1 ? '1px solid #f0f0f0' : 'none',
-                            transition: 'background 0.2s, color 0.2s'
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            background: '#fff',
+                            borderRadius: '8px',
+                            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                            minWidth: '220px',
+                            marginTop: '0.5rem',
+                            overflow: 'hidden',
+                            zIndex: 1002
                           }}
                         >
-                          {child.label}
-                        </Link>
-                      ))}
+                          {item.children?.map((child, index) => (
+                            <Link
+                              key={child.id}
+                              href={child.href}
+                              className="block px-5 py-3 text-sm text-[#001F3F] hover:bg-[#f0f4f8]"
+                              style={{
+                                borderBottom:
+                                  index < (item.children?.length || 0) - 1 ? '1px solid #f0f0f0' : 'none'
+                              }}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              ) : (
-                item.type === 'link' ? (
-                  <Link
-                    className="hover-underline"
-                    href={item.href ?? '#'}
-                    style={{
-                      color: '#fff',
-                      textDecoration: 'none',
-                      fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)',
-                      fontWeight: '500',
-                      padding: '0.75rem 0.5rem',
-                      transition: 'color 0.3s ease',
-                      whiteSpace: 'nowrap'
-                    }}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
+                  );
+                }
+
+                if (item.type === 'link') {
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      className="hover-underline whitespace-nowrap px-2 py-3 text-sm font-medium text-white"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+
+                return (
                   <button
-                    className="hover-underline"
-                    onClick={() => scrollToSection(item.scrollTarget ?? item.id)}
-                    style={{
-                      color: '#fff',
-                      background: 'transparent',
-                      border: 'none',
-                      fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)',
-                      fontWeight: '500',
-                      padding: '0.75rem 0.5rem',
-                      transition: 'color 0.3s ease',
-                      whiteSpace: 'nowrap',
-                      cursor: 'pointer'
-                    }}
+                    key={item.id}
+                    className="hover-underline whitespace-nowrap px-2 py-3 text-sm font-medium text-white"
+                    style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
+                    onClick={() => scrollToSection(item.scrollTarget)}
                   >
                     {item.label}
                   </button>
-                )
-              )}
-              </div>
-            ))}
-          
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: '1rem' }}>
-            <Link href={`/${currentLocale}/contact`} style={{ textDecoration: 'none' }}>
-              <button 
-                className="hover-glow"
-                style={{
-                  background: 'transparent',
-                  color: '#fff',
-                  border: '2px solid #fff',
-                  padding: 'clamp(0.5rem, 1.2vw, 0.6rem) clamp(1rem, 1.5vw, 1.5rem)',
-                  borderRadius: '25px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
-                  transition: 'all 0.3s ease',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                {t('contact')}
-              </button>
-            </Link>
-            <div className="hidden md:flex items-center gap-3">
+                );
+              })}
+          </nav>
+
+          <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3 md:gap-4">
+            <div className="hidden items-center gap-3 lg:flex">
               {hasUser ? (
                 <button
                   className="hover-glow"
@@ -630,7 +642,7 @@ export default function Header(props: HeaderProps) {
                     background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
                     color: '#001F3F',
                     border: 'none',
-                    padding: '0.5rem 1.25rem',
+                    padding: '0.55rem 1.5rem',
                     borderRadius: '25px',
                     fontWeight: '600',
                     cursor: 'pointer',
@@ -648,394 +660,437 @@ export default function Header(props: HeaderProps) {
                   <SignupButton className="px-4 py-2 text-sm font-medium" />
                 </>
               )}
-            </div>
-          </div>
-        </nav>
 
-        {/* Right Section - Language Switcher and Avatar */}
-        <div className="flex items-center z-50" style={{ gap: '3rem' }}>
-          <div className="flex-shrink-0">
-            <LanguageSwitcher />
-          </div>
-          
-          {/* Avatar with Dropdown Menu */}
-          <div className="relative">
-            <button 
-              className={`w-10 h-10 rounded-full flex items-center justify-center focus:outline-none transition-colors ${
-                hasUser 
-                  ? 'bg-gradient-to-r from-[#69E8E1] to-[#38bdf8] text-white' 
-                  : 'bg-gray-200 hover:bg-gray-300 text-gray-600'
-              }`}
-              title={hasUser ? userEmail || 'User' : 'Not logged in'}
-              onClick={() => setAvatarMenuOpen(!avatarMenuOpen)}
-              aria-expanded={avatarMenuOpen}
-              aria-haspopup="true"
-            >
-              {hasUser ? (userInitial || 'U') : (
-                <svg 
-                  width="20" 
-                  height="20" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5"
+              <Link href={`/${currentLocale}/contact`} style={{ textDecoration: 'none' }}>
+                <button
+                  className="hover-glow"
+                  style={{
+                    background: 'transparent',
+                    color: '#fff',
+                    border: '2px solid #fff',
+                    padding: '0.55rem 1.6rem',
+                    borderRadius: '25px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    fontSize: '0.9rem',
+                    transition: 'all 0.3s ease',
+                    whiteSpace: 'nowrap'
+                  }}
                 >
-                  <path 
-                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" 
-                    fill="currentColor"
-                  />
-                  <path 
-                    d="M12 14.5C6.99 14.5 3 18.49 3 23.5C3 23.78 3.22 24 3.5 24H20.5C20.78 24 21 23.78 21 23.5C21 18.49 17.01 14.5 12 14.5Z" 
-                    fill="currentColor"
-                  />
-                </svg>
-              )}
-            </button>
-            
-            {/* Dropdown Menu */}
-            {avatarMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
-                <div className="py-1">
-                  {hasUser ? (
-                    <>
-                      <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
-                        <p className="font-medium truncate">{userEmail || 'User'}</p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          handleLogout();
-                          setAvatarMenuOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                      >
-                        Logout
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <Link 
-                        href={`/${currentLocale}/auth/login`}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        onClick={() => setAvatarMenuOpen(false)}
-                      >
-                        Login
-                      </Link>
-                      <Link 
-                        href={`/${currentLocale}/auth/signup`}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        onClick={() => setAvatarMenuOpen(false)}
-                      >
-                        Sign Up
-                      </Link>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
+                  {t('contact')}
+                </button>
+              </Link>
+            </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="p-2 text-white hover:text-gray-300 transition-colors md:hidden"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? (
-              <X size={iconSize} />
-            ) : (
-              <Menu size={iconSize} />
-            )}
-          </button>
-        </div>
-      </div>
+            <LanguageSwitcher />
 
-      {/* Mobile Navigation Overlay */}
-      {isMenuOpen && (
-        <div 
-          className="mobile-nav-overlay"
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 999
-          }}
-          onClick={closeMobileMenu}
-        />
-      )}
-
-      {/* Mobile Navigation Menu */}
-      <div 
-        className="mobile-nav"
-        style={{
-          position: 'fixed',
-          top: 0,
-          right: isMenuOpen ? 0 : '-100%',
-          width: 'min(400px, 85vw)',
-          height: '100vh',
-          background: 'linear-gradient(135deg, #001F3F 0%, #000814 100%)',
-          zIndex: 1000,
-          transition: 'right 0.3s ease-in-out',
-          overflowY: 'auto',
-          padding: '2rem 1.5rem',
-          boxShadow: '-4px 0 20px rgba(0,0,0,0.3)'
-        }}
-      >
-        {/* Close Button */}
-        <button
-          style={{
-            position: 'absolute',
-            top: '1.5rem',
-            right: '1.5rem',
-            background: 'transparent',
-            border: 'none',
-            color: '#fff',
-            cursor: 'pointer',
-            padding: '0.5rem'
-          }}
-          onClick={closeMobileMenu}
-        >
-          <X size={24} />
-        </button>
-
-        <div
-          className="header-avatar-shell"
-          style={{
-            marginTop: '4.5rem',
-            marginBottom: '2rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem',
-            padding: '1.25rem 1rem',
-            borderRadius: '18px',
-            background: 'linear-gradient(135deg, rgba(105, 232, 225, 0.15) 0%, rgba(56, 189, 248, 0.2) 100%)',
-            border: '1px solid rgba(105, 232, 225, 0.35)'
-          }}
-        >
-          <div
-            style={{
-              width: '52px',
-              height: '52px',
-              borderRadius: '18px',
-              background: 'linear-gradient(135deg, rgba(105, 232, 225, 0.45) 0%, rgba(56, 189, 248, 0.7) 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 700,
-              fontSize: '1.1rem',
-              color: '#001F3F',
-              boxShadow: '0 16px 32px rgba(56, 189, 248, 0.22)'
-            }}
-          >
-            {hasUser ? (
-              userInitial
-            ) : (
-              <User
-                size={26}
-                strokeWidth={2.1}
-                color="#001F3F"
-              />
-            )}
-          </div>
-        </div>
-
-        {/* Mobile Navigation Links */}
-        <nav style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          gap: '0.5rem',
-          marginTop: '3rem',
-          alignItems: 'stretch'
-        }}>
-          {navItems
-            .filter((item) => !['login', 'signup'].includes(item.id))
-            .map((item) => (
-            <div key={item.id} style={{ width: '100%' }}>
-              {item.type === 'dropdown' ? (
-                <div style={{ marginBottom: '1rem', width: '100%' }}>
-                  <button
-                    onClick={() => handleMobileDropdown(item.id)}
-                    style={{
-                      color: '#fff',
-                      background: 'transparent',
-                      border: 'none',
-                      fontSize: '1.05rem',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      width: '100%',
-                      textAlign: 'left',
-                      padding: '1rem 0',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      borderBottom: '1px solid rgba(255,255,255,0.1)',
-                      gap: '0.75rem'
-                    }}
+            <div className="relative">
+              <button
+                className={avatarClassName}
+                title={hasUser ? userEmail || 'User' : 'Not logged in'}
+                onClick={() => setAvatarMenuOpen(!avatarMenuOpen)}
+                aria-expanded={avatarMenuOpen}
+                aria-haspopup="true"
+              >
+                {hasUser ? (userInitial || 'U') : (
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
                   >
-                    {item.label} 
-                    {isDropdownOpen(item.id) ? (
-                      <ChevronUp size={20} />
-                    ) : (
-                      <ChevronDown size={20} />
-                    )}
-                  </button>
-                  
-                  {/* Mobile Dropdown Content */}
-                  {((item.id === 'services' && servicesOpen) ||
-                    (item.id === 'solutions' && solutionsOpen) ||
-                    (item.id === 'industries' && industriesOpen)) && (
-                    <div style={{ paddingLeft: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.id}
-                          href={child.href}
-                          style={{
-                            display: 'block',
-                            width: '100%',
-                            padding: '0.85rem 0',
-                            color: '#d1d5db',
-                            textDecoration: 'none',
-                            fontSize: '0.95rem',
-                            borderBottom: '1px solid rgba(255,255,255,0.08)',
-                            transition: 'color 0.3s ease'
+                    <path
+                      d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M12 14.5C6.99 14.5 3 18.49 3 23.5C3 23.78 3.22 24 3.5 24H20.5C20.78 24 21 23.78 21 23.5C21 18.49 17.01 14.5 12 14.5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                )}
+              </button>
+
+              {avatarMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                  <div className="py-1">
+                    {hasUser ? (
+                      <>
+                        <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
+                          <p className="font-medium truncate">{userEmail || 'User'}</p>
+                        </div>
+                        <button
+                          onClick={() => {
+                            handleLogout();
+                            setAvatarMenuOpen(false);
                           }}
-                          onClick={closeMobileMenu}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
                         >
-                          {child.label}
+                          Logout
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          href={`/${currentLocale}/auth/login`}
+                          className="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+                          onClick={() => setAvatarMenuOpen(false)}
+                        >
+                          Login
                         </Link>
-                      ))}
-                    </div>
-                  )}
+                        <Link
+                          href={`/${currentLocale}/auth/signup`}
+                          className="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+                          onClick={() => setAvatarMenuOpen(false)}
+                        >
+                          Sign Up
+                        </Link>
+                      </>
+                    )}
+                  </div>
                 </div>
-              ) : (
-                // Mobile regular links
-                item.type === 'link' ? (
-                  <Link
-                    href={item.href ?? '#'}
-                    style={{
-                      color: '#fff',
-                      textDecoration: 'none',
-                      fontSize: '1.1rem',
-                      fontWeight: '600',
-                      padding: '1rem 0.5rem',
-                      borderBottom: '1px solid rgba(255,255,255,0.1)',
-                      transition: 'color 0.3s ease',
-                      display: 'block'
-                    }}
-                    onClick={closeMobileMenu}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <button
-                    className="hover-underline"
-                    onClick={() => scrollToSection(item.scrollTarget ?? item.id)}
-                    style={{
-                      color: '#fff',
-                      background: 'transparent',
-                      border: 'none',
-                      fontSize: '1.1rem',
-                      fontWeight: '600',
-                      padding: '1rem 0.5rem',
-                      borderBottom: '1px solid rgba(255,255,255,0.1)',
-                      transition: 'color 0.3s ease',
-                      width: '100%',
-                      textAlign: 'left',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {item.label}
-                  </button>
-                )
               )}
             </div>
-          ))}
-          
-          {/* Mobile Contact Button */}
-          <Link 
-            href={`/${currentLocale}/contact`} 
-            style={{ 
-              textDecoration: 'none',
-              marginTop: '1.5rem'
-            }} 
-            onClick={closeMobileMenu}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3 md:hidden">
+          <button
+            type="button"
+            onClick={() => {
+              setQuickNavOpen((previous) => {
+                const next = !previous;
+                if (!next) {
+                  setServicesOpen(false);
+                  setSolutionsOpen(false);
+                  setIndustriesOpen(false);
+                }
+                return next;
+              });
+            }}
+            className="flex items-center justify-between rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+            aria-expanded={quickNavOpen}
+            aria-controls="mobile-quick-nav"
           >
-            <button 
-              className="hover-glow"
+            <span>Navigation</span>
+            {quickNavOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+          </button>
+
+          {quickNavOpen && (
+            <div id="mobile-quick-nav" className="space-y-2 rounded-2xl bg-white/5 p-3">
+              {navItems
+                .filter((item) => !['login', 'signup'].includes(item.id))
+                .map((item) => {
+                  if (item.type === 'dropdown') {
+                    const isServices = item.id === 'services';
+                    const isSolutions = item.id === 'solutions';
+                    const isIndustries = item.id === 'industries';
+                    const isOpen =
+                      (isServices && servicesOpen) ||
+                      (isSolutions && solutionsOpen) ||
+                      (isIndustries && industriesOpen);
+
+                    const children = isServices
+                      ? servicesDropdown?.children
+                      : isSolutions
+                      ? solutionsDropdown?.children
+                      : industriesDropdown?.children;
+
+                    return (
+                      <div key={item.id} className="space-y-2">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            toggleMobileDropdown(item.id as 'services' | 'solutions' | 'industries')
+                          }
+                          className="flex w-full items-center justify-between rounded-xl bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
+                          aria-expanded={isOpen}
+                        >
+                          {item.label}
+                          {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                        </button>
+
+                        {isOpen && children && (
+                          <div className="space-y-2 pl-3">
+                            {children.map((child) => (
+                              <Link
+                                key={child.id}
+                                href={child.href}
+                                onClick={closeMobileMenu}
+                                className="block rounded-lg bg-white/10 px-3 py-2 text-sm text-white transition-colors hover:bg-white/20"
+                                style={{ textDecoration: 'none' }}
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+
+                  if (item.type === 'link') {
+                    return (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        onClick={closeMobileMenu}
+                        className="block rounded-xl bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  }
+
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => {
+                        scrollToSection(item.scrollTarget);
+                        closeMobileMenu();
+                      }}
+                      className="block w-full rounded-xl bg-white/10 px-3 py-2 text-left text-sm font-medium text-white transition-colors hover:bg-white/20"
+                    >
+                      {item.label}
+                    </button>
+                  );
+                })}
+            </div>
+          )}
+
+          {!hasUser && (
+            <div className="flex gap-2">
+              <LoginButton className="flex-1 justify-center" />
+              <SignupButton className="flex-1 justify-center" />
+            </div>
+          )}
+
+          <Link
+            href={`/${currentLocale}/contact`}
+            onClick={closeMobileMenu}
+            style={{ textDecoration: 'none' }}
+          >
+            <button
+              className="hover-glow w-full"
               style={{
-                background: 'transparent',
-                color: '#fff',
-                border: '2px solid #fff',
-                padding: '1rem 2rem',
+                background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
+                color: '#001F3F',
+                border: 'none',
+                padding: '0.65rem 1.25rem',
                 borderRadius: '25px',
                 fontWeight: '600',
                 cursor: 'pointer',
-                fontSize: '1rem',
-                width: '100%',
+                fontSize: '0.95rem',
                 transition: 'all 0.3s ease'
               }}
             >
               {t('contact')}
             </button>
           </Link>
-
-          {!hasUser && (
-            <div className="w-full px-4 mt-4 space-y-3">
-              <div className="flex flex-col gap-3">
-                <LoginButton variant="minimal" className="w-full justify-center" />
-                <SignupButton className="w-full justify-center" />
-              </div>
-            </div>
-          )}
-        </nav>
+        </div>
       </div>
 
-      {/* Responsive Styles */}
+      {isMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40 overflow-hidden transition-opacity duration-300"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+          onClick={closeMobileMenu}
+        >
+          <div
+            ref={mobileMenuRef}
+            className="absolute top-0 right-0 h-full w-full max-w-sm bg-[#001F3F] shadow-2xl transition-transform duration-300 translate-x-0"
+            style={{ paddingTop: headerHeight }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex h-full flex-col overflow-y-auto">
+              <div className="flex items-center justify-between border-b border-[#1a3a5a] p-4">
+                <Link href={`/${currentLocale}`} onClick={closeMobileMenu}>
+                  <div className="flex items-center">
+                    <Image
+                      src="/logo.svg"
+                      alt="Logo"
+                      width={120}
+                      height={40}
+                      className="h-8 w-auto"
+                    />
+                  </div>
+                </Link>
+                <button
+                  onClick={closeMobileMenu}
+                  className="rounded-full p-2 text-white transition-colors hover:bg-[#1a3a5a]"
+                  aria-label="Close menu"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <nav className="flex-1 space-y-1 p-4">
+                {navItems
+                  .filter((item) => !['login', 'signup'].includes(item.id))
+                  .map((item) => {
+                    switch (item.type) {
+                      case 'dropdown': {
+                        const isServices = item.id === 'services';
+                        const isSolutions = item.id === 'solutions';
+                        const isIndustries = item.id === 'industries';
+                        const isOpen =
+                          (isServices && servicesOpen) ||
+                          (isSolutions && solutionsOpen) ||
+                          (isIndustries && industriesOpen);
+
+                        return (
+                          <div key={item.id} className="border-b border-[#1a3a5a] last:border-0">
+                            <button
+                              onClick={() => toggleMobileDropdown(item.id as 'services' | 'solutions' | 'industries')}
+                              className="flex w-full items-center justify-between py-4 px-2 text-left text-white transition-colors hover:text-[#69E8E1]"
+                            >
+                              <span className="font-medium">{item.label}</span>
+                              {isServices ? (
+                                servicesOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />
+                              ) : isSolutions ? (
+                                solutionsOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />
+                              ) : (
+                                industriesOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />
+                              )}
+                            </button>
+
+                            {isOpen && (
+                              <div className="space-y-2 pb-2 pl-4">
+                                {item.children.map((child) => (
+                                  <Link
+                                    key={child.id}
+                                    href={child.href}
+                                    onClick={closeMobileMenu}
+                                    className="block rounded py-2 px-2 text-sm text-gray-300 transition-colors hover:bg-[#1a3a5a] hover:text-white"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      }
+                      case 'link':
+                        return (
+                          <div key={item.id} className="border-b border-[#1a3a5a] last:border-0">
+                            <Link
+                              href={item.href}
+                              onClick={closeMobileMenu}
+                              className="block py-4 px-2 text-white transition-colors hover:text-[#69E8E1]"
+                            >
+                              {item.label}
+                            </Link>
+                          </div>
+                        );
+                      case 'scroll':
+                        return (
+                          <div key={item.id} className="border-b border-[#1a3a5a] last:border-0">
+                            <button
+                              onClick={() => scrollToSection(item.scrollTarget)}
+                              className="w-full py-4 px-2 text-left text-white transition-colors hover:text-[#69E8E1]"
+                            >
+                              {item.label}
+                            </button>
+                          </div>
+                        );
+                      default:
+                        return null;
+                    }
+                  })}
+
+                <div className="mt-6 space-y-3">
+                  <Link
+                    href={`/${currentLocale}/contact`}
+                    style={{ textDecoration: 'none' }}
+                    onClick={closeMobileMenu}
+                  >
+                    <button
+                      className="hover-glow w-full"
+                      style={{
+                        background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
+                        color: '#001F3F',
+                        border: 'none',
+                        padding: '1rem 2rem',
+                        borderRadius: '25px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        fontSize: '1rem',
+                        transition: 'all 0.3s ease'
+                      }}
+                    >
+                      {t('contact')}
+                    </button>
+                  </Link>
+
+                  {!hasUser && (
+                    <div className="flex flex-col gap-3">
+                      <LoginButton className="w-full justify-center" />
+                      <SignupButton className="w-full justify-center" />
+                    </div>
+                  )}
+
+                  {hasUser && (
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="w-full rounded-full bg-white/10 px-4 py-2 text-white transition hover:bg-white/20"
+                    >
+                      Logout
+                    </button>
+                  )}
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      )}
+
       <style jsx global>{`
-        /* Desktop styles */
-        @media (min-width: 1025px) {
-          .desktop-nav {
-            display: flex !important;
-          }
-          .mobile-menu-btn {
-            display: none !important;
-          }
-          .mobile-nav-overlay {
-            display: none !important;
-          }
+        body.menu-open {
+          overflow: hidden;
         }
-        
-        /* Tablet and Mobile styles */
+
+        .hover-underline {
+          position: relative;
+        }
+
+        .hover-underline::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.2s ease;
+        }
+
+        .hover-underline:hover::after,
+        .hover-underline:focus-visible::after,
+        .hover-underline.active::after {
+          transform: scaleX(1);
+        }
+
+        .hover-glow {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-glow:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 8px 25px rgba(105, 232, 225, 0.35);
+        }
+
         @media (max-width: 1024px) {
           .desktop-nav {
             display: none !important;
           }
-          .mobile-menu-btn {
-            display: flex !important;
-          }
-        }
-
-        /* Mobile-specific adjustments */
-        @media (max-width: 480px) {
-          .mobile-nav {
-            width: 100vw !important;
-            right: -100vw !important;
-          }
-          .mobile-nav[style*="right: 0"] {
-            right: 0 !important;
-          }
-        }
-
-        /* Smooth scrolling */
-        html {
-          scroll-behavior: smooth;
-        }
-
-        /* Prevent body scroll when mobile menu is open */
-        body.no-scroll {
-          overflow: hidden;
         }
       `}</style>
     </header>
