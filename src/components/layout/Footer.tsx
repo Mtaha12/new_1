@@ -133,11 +133,11 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt={t('company')}
-                width={72}
-                height={72}
+                width={96}
+                height={96}
                 style={{
-                  width: 'clamp(48px, 8vw, 72px)',
-                  height: 'clamp(48px, 8vw, 72px)',
+                  width: 'clamp(64px, 10vw, 96px)',
+                  height: 'clamp(64px, 10vw, 96px)',
                   objectFit: 'contain'
                 }}
               />

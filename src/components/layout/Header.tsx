@@ -55,7 +55,7 @@ function isSamuraiAuthEvent(event: Event): event is CustomEvent<SamuraiAuthDetai
 
 function findDropdownNavItem(
   items: NavItem[],
-  id: 'services' | 'solutions' | 'industries'
+  id: 'services' | 'solutions'
 ): DropdownNavItem | undefined {
   return items.find(
     (item): item is DropdownNavItem => item.type === 'dropdown' && item.id === id
@@ -72,7 +72,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const [industriesOpen, setIndustriesOpen] = useState(false);
   const [quickNavOpen, setQuickNavOpen] = useState(false);
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [iconSize, setIconSize] = useState(20);
@@ -84,7 +83,6 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const servicesTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const solutionsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const industriesTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasUser = Boolean(userEmail);
 
   const updateHeaderHeight = useCallback(() => {
@@ -132,14 +130,8 @@ export default function Header() {
     {
       id: 'industries',
       label: t('industries'),
-      type: 'dropdown',
-      children: [
-        { id: 'healthcare', label: t('industriesMenu.healthcare'), href: '#' },
-        { id: 'finance', label: t('industriesMenu.finance'), href: '#' },
-        { id: 'government', label: t('industriesMenu.government'), href: '#' },
-        { id: 'technology', label: t('industriesMenu.technology'), href: '#' },
-        { id: 'retail', label: t('industriesMenu.retail'), href: '#' }
-      ]
+      href: `/${currentLocale}/industries`,
+      type: 'link'
     },
     {
       id: 'partners',
@@ -161,7 +153,7 @@ export default function Header() {
     },
     {
       id: 'connect',
-      label: 'Connect',
+      label: t('connect'),
       type: 'scroll',
       scrollTarget: 'contact'
     },
@@ -169,7 +161,6 @@ export default function Header() {
 
   const servicesDropdown = findDropdownNavItem(navItems, 'services');
   const solutionsDropdown = findDropdownNavItem(navItems, 'solutions');
-  const industriesDropdown = findDropdownNavItem(navItems, 'industries');
 
   // Handle responsive icon size
   useEffect(() => {
@@ -259,8 +250,7 @@ export default function Header() {
     setIsMenuOpen(false);
     setServicesOpen(false);
     setSolutionsOpen(false);
-    setIndustriesOpen(false);
-
+    
     if (typeof document !== 'undefined') {
       document.body.style.overflow = 'auto';
       document.body.classList.remove('menu-open');
@@ -284,12 +274,37 @@ export default function Header() {
       if (!nextState) {
         setServicesOpen(false);
         setSolutionsOpen(false);
-        setIndustriesOpen(false);
-      }
+              }
 
       return nextState;
     });
   }, []);
+
+  // Nuclear option: Force mobile menu to highest z-index
+  useEffect(() => {
+    if (isMenuOpen && typeof document !== 'undefined') {
+      // Force mobile menu to highest z-index
+      const mobileMenu = document.querySelector('[class*="lg:hidden"]');
+      if (mobileMenu) {
+        (mobileMenu as HTMLElement).style.zIndex = '2147483647';
+      }
+      
+      // Force all other content to lower z-index
+      const allElements = document.querySelectorAll('body > *:not(header):not([class*="lg:hidden"])');
+      allElements.forEach(el => {
+        if (el !== mobileMenu) {
+          (el as HTMLElement).style.zIndex = '1';
+        }
+      });
+
+      return () => {
+        // Reset when menu closes
+        allElements.forEach(el => {
+          (el as HTMLElement).style.zIndex = '';
+        });
+      };
+    }
+  }, [isMenuOpen]);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -352,27 +367,19 @@ export default function Header() {
   }, [closeMobileMenu]);
 
   // Handle dropdown toggle for mobile
-  const toggleMobileDropdown = (menu: 'services' | 'solutions' | 'industries') => {
+  const toggleMobileDropdown = (menu: 'services' | 'solutions') => {
     switch (menu) {
       case 'services':
         setServicesOpen(!servicesOpen);
         setSolutionsOpen(false);
-        setIndustriesOpen(false);
         break;
       case 'solutions':
         setSolutionsOpen(!solutionsOpen);
         setServicesOpen(false);
-        setIndustriesOpen(false);
-        break;
-      case 'industries':
-        setIndustriesOpen(!industriesOpen);
-        setServicesOpen(false);
-        setSolutionsOpen(false);
         break;
       default:
         setServicesOpen(false);
         setSolutionsOpen(false);
-        setIndustriesOpen(false);
     }
   };
 
@@ -443,12 +450,15 @@ export default function Header() {
     <header
       ref={headerRef}
       style={{
-        background: 'linear-gradient(135deg, #001F3F 0%, #000814 100%)',
+        background: 'rgba(0, 31, 63, 0.95)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
         padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1rem, 4vw, 3rem)',
         position: 'sticky',
         top: 0,
         zIndex: 1000,
-        boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
+        boxShadow: 'none',
+        border: '1px solid rgba(255, 255, 255, 0.1)'
       }}
     >
       <div
@@ -465,12 +475,21 @@ export default function Header() {
           <div className="flex min-w-0 items-center gap-2 md:gap-3">
             <button
               ref={menuToggleRef}
-              className="p-2 text-white transition-colors hover:text-slate-200 md:hidden"
+              className="p-2 text-white transition-colors hover:text-slate-200 lg:hidden flex items-center justify-center"
+              style={{ 
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                borderRadius: '0.375rem',
+                minWidth: '44px',
+                minHeight: '44px',
+                zIndex: 1001
+              }}
               onClick={toggleMobileMenu}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? <X size={iconSize} /> : <Menu size={iconSize} />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
             <Link
@@ -487,120 +506,66 @@ export default function Header() {
               <Image
                 src="/logo.png"
                 alt="The SamurAI Logo"
-                width={60}
-                height={60}
+                width={80}
+                height={80}
                 style={{
                   objectFit: 'contain',
-                  width: 'clamp(40px, 8vw, 60px)',
-                  height: 'clamp(40px, 8vw, 60px)'
+                  width: 'clamp(60px, 12vw, 100px)',
+                  height: 'clamp(60px, 12vw, 100px)'
                 }}
               />
             </Link>
           </div>
 
-          <nav className="desktop-nav hidden flex-1 items-center justify-center gap-6 text-white md:flex">
+          <nav className="desktop-nav hidden flex-1 items-center justify-center gap-6 text-white lg:flex">
             {navItems
-              .filter((item) => !['login', 'signup'].includes(item.id))
               .map((item) => {
                 if (item.type === 'dropdown') {
                   const isServices = item.id === 'services';
                   const isSolutions = item.id === 'solutions';
-                  const isIndustries = item.id === 'industries';
-                  const isOpen =
-                    (isServices && servicesOpen) ||
-                    (isSolutions && solutionsOpen) ||
-                    (isIndustries && industriesOpen);
 
                   return (
                     <div
                       key={item.id}
-                      className="relative"
-                      onMouseEnter={() => {
-                        if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
-                        if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
-                        if (industriesTimeoutRef.current) clearTimeout(industriesTimeoutRef.current);
-
-                        setServicesOpen(false);
-                        setSolutionsOpen(false);
-                        setIndustriesOpen(false);
-
-                        if (isServices) {
-                          setServicesOpen(true);
-                        } else if (isSolutions) {
-                          setSolutionsOpen(true);
-                        } else if (isIndustries) {
-                          setIndustriesOpen(true);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (isServices) {
-                          servicesTimeoutRef.current = setTimeout(() => setServicesOpen(false), 200);
-                        } else if (isSolutions) {
-                          solutionsTimeoutRef.current = setTimeout(() => setSolutionsOpen(false), 200);
-                        } else if (isIndustries) {
-                          industriesTimeoutRef.current = setTimeout(() => setIndustriesOpen(false), 200);
-                        }
-                      }}
+                      className="relative group"
                     >
                       <button
                         className="hover-underline flex items-center gap-1 whitespace-nowrap px-2 py-3 text-sm font-medium"
                         style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer' }}
-                        onClick={() => {
-                          if (isServices) {
-                            setServicesOpen(!servicesOpen);
-                            setSolutionsOpen(false);
-                            setIndustriesOpen(false);
-                          } else if (isSolutions) {
-                            setSolutionsOpen(!solutionsOpen);
-                            setServicesOpen(false);
-                            setIndustriesOpen(false);
-                          } else if (isIndustries) {
-                            setIndustriesOpen(!industriesOpen);
-                            setServicesOpen(false);
-                            setSolutionsOpen(false);
-                          }
-                        }}
                       >
                         {item.label}
                         {isServices ? (
-                          servicesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+                          <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
                         ) : isSolutions ? (
-                          solutionsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
-                        ) : (
-                          industriesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />
-                        )}
+                          <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
+                        ) : null}
                       </button>
 
-                      {isOpen && (
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: '100%',
-                            left: 0,
-                            background: '#fff',
-                            borderRadius: '8px',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-                            minWidth: '220px',
-                            marginTop: '0.5rem',
-                            overflow: 'hidden',
-                            zIndex: 1002
-                          }}
-                        >
-                          {item.children?.map((child, index) => (
-                            <Link
-                              key={child.id}
-                              href={child.href}
-                              className="block px-5 py-3 text-sm text-[#001F3F] hover:bg-[#f0f4f8]"
-                              style={{
-                                borderBottom:
-                                  index < (item.children?.length || 0) - 1 ? '1px solid #f0f0f0' : 'none'
-                              }}
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
+                      <div
+                        className="absolute top-full left-0 rounded-lg min-w-[220px] mt-2 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+                        style={{
+                          transform: 'translateY(-10px)',
+                          transition: 'opacity 0.2s, visibility 0.2s, transform 0.2s',
+                          background: 'rgba(0, 31, 63, 0.95)',
+                          backdropFilter: 'blur(10px)',
+                          WebkitBackdropFilter: 'blur(10px)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)'
+                        }}
+                      >
+                        {item.children?.map((child, index) => (
+                          <Link
+                            key={child.id}
+                            href={child.href}
+                            className="block w-full px-5 py-3 text-sm text-white hover:bg-white/10 transition-colors"
+                            style={{
+                              borderBottom: index < (item.children?.length || 0) - 1 ? '1px solid rgba(255, 255, 255, 0.2)' : 'none',
+                              textDecoration: 'none'
+                            }}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   );
                 }
@@ -714,11 +679,11 @@ export default function Header() {
               </button>
 
               {avatarMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg ring-1 ring-white/20 focus:outline-none z-50" style={{ background: 'rgba(0, 31, 63, 0.95)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
                   <div className="py-1">
                     {hasUser ? (
                       <>
-                        <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
+                        <div className="px-4 py-2 text-sm text-white border-b border-white/20">
                           <p className="font-medium truncate">{userEmail || 'User'}</p>
                         </div>
                         <button
@@ -726,7 +691,7 @@ export default function Header() {
                             handleLogout();
                             setAvatarMenuOpen(false);
                           }}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+                          className="w-full text-left px-4 py-2 text-sm text-white transition-colors hover:bg-white/10"
                         >
                           Logout
                         </button>
@@ -735,14 +700,14 @@ export default function Header() {
                       <>
                         <Link
                           href={`/${currentLocale}/auth/login`}
-                          className="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+                          className="block px-4 py-2 text-sm text-white transition-colors hover:bg-white/10"
                           onClick={() => setAvatarMenuOpen(false)}
                         >
                           Login
                         </Link>
                         <Link
                           href={`/${currentLocale}/auth/signup`}
-                          className="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+                          className="block px-4 py-2 text-sm text-white transition-colors hover:bg-white/10"
                           onClick={() => setAvatarMenuOpen(false)}
                         >
                           Sign Up
@@ -756,162 +721,29 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 md:hidden">
-          <button
-            type="button"
-            onClick={() => {
-              setQuickNavOpen((previous) => {
-                const next = !previous;
-                if (!next) {
-                  setServicesOpen(false);
-                  setSolutionsOpen(false);
-                  setIndustriesOpen(false);
-                }
-                return next;
-              });
-            }}
-            className="flex items-center justify-between rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20"
-            aria-expanded={quickNavOpen}
-            aria-controls="mobile-quick-nav"
-          >
-            <span>Navigation</span>
-            {quickNavOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          </button>
-
-          {quickNavOpen && (
-            <div id="mobile-quick-nav" className="space-y-2 rounded-2xl bg-white/5 p-3">
-              {navItems
-                .filter((item) => !['login', 'signup'].includes(item.id))
-                .map((item) => {
-                  if (item.type === 'dropdown') {
-                    const isServices = item.id === 'services';
-                    const isSolutions = item.id === 'solutions';
-                    const isIndustries = item.id === 'industries';
-                    const isOpen =
-                      (isServices && servicesOpen) ||
-                      (isSolutions && solutionsOpen) ||
-                      (isIndustries && industriesOpen);
-
-                    const children = isServices
-                      ? servicesDropdown?.children
-                      : isSolutions
-                      ? solutionsDropdown?.children
-                      : industriesDropdown?.children;
-
-                    return (
-                      <div key={item.id} className="space-y-2">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            toggleMobileDropdown(item.id as 'services' | 'solutions' | 'industries')
-                          }
-                          className="flex w-full items-center justify-between rounded-xl bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
-                          aria-expanded={isOpen}
-                        >
-                          {item.label}
-                          {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                        </button>
-
-                        {isOpen && children && (
-                          <div className="space-y-2 pl-3">
-                            {children.map((child) => (
-                              <Link
-                                key={child.id}
-                                href={child.href}
-                                onClick={closeMobileMenu}
-                                className="block rounded-lg bg-white/10 px-3 py-2 text-sm text-white transition-colors hover:bg-white/20"
-                                style={{ textDecoration: 'none' }}
-                              >
-                                {child.label}
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  }
-
-                  if (item.type === 'link') {
-                    return (
-                      <Link
-                        key={item.id}
-                        href={item.href}
-                        onClick={closeMobileMenu}
-                        className="block rounded-xl bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
-                        style={{ textDecoration: 'none' }}
-                      >
-                        {item.label}
-                      </Link>
-                    );
-                  }
-
-                  return (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => {
-                        scrollToSection(item.scrollTarget);
-                        closeMobileMenu();
-                      }}
-                      className="block w-full rounded-xl bg-white/10 px-3 py-2 text-left text-sm font-medium text-white transition-colors hover:bg-white/20"
-                    >
-                      {item.label}
-                    </button>
-                  );
-                })}
-            </div>
-          )}
-
-          {!hasUser && (
-            <div className="flex gap-2">
-              <LoginButton className="flex-1 justify-center" />
-              <SignupButton className="flex-1 justify-center" />
-            </div>
-          )}
-
-          <Link
-            href={`/${currentLocale}/contact`}
-            onClick={closeMobileMenu}
-            style={{ textDecoration: 'none' }}
-          >
-            <button
-              className="hover-glow w-full"
-              style={{
-                background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
-                color: '#001F3F',
-                border: 'none',
-                padding: '0.65rem 1.25rem',
-                borderRadius: '25px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                fontSize: '0.95rem',
-                transition: 'all 0.3s ease'
-              }}
-            >
-              {t('contact')}
-            </button>
-          </Link>
-        </div>
-      </div>
-
       {isMenuOpen && (
-        <div
-          className="md:hidden fixed inset-0 z-40 overflow-hidden transition-opacity duration-300"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-          onClick={closeMobileMenu}
-        >
+        <div className="lg:hidden" style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-70"
+            onClick={closeMobileMenu}
+            style={{ zIndex: 9999 }}
+          />
+          
+          {/* Mobile Menu Panel */}
           <div
             ref={mobileMenuRef}
-            className="absolute top-0 right-0 h-full w-full max-w-sm bg-[#001F3F] shadow-2xl transition-transform duration-300 translate-x-0"
-            style={{ paddingTop: headerHeight }}
-            onClick={(event) => event.stopPropagation()}
+            className="absolute top-0 right-0 h-full w-80 bg-[#001F3F] shadow-2xl overflow-y-auto"
+            style={{ zIndex: 10000 }}
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex h-full flex-col overflow-y-auto">
-              <div className="flex items-center justify-between border-b border-[#1a3a5a] p-4">
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-white/20 bg-[#001F3F] sticky top-0">
                 <Link href={`/${currentLocale}`} onClick={closeMobileMenu}>
                   <div className="flex items-center">
                     <Image
-                      src="/logo.svg"
+                      src="/logo.png"
                       alt="Logo"
                       width={120}
                       height={40}
@@ -921,138 +753,143 @@ export default function Header() {
                 </Link>
                 <button
                   onClick={closeMobileMenu}
-                  className="rounded-full p-2 text-white transition-colors hover:bg-[#1a3a5a]"
+                  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                   aria-label="Close menu"
                 >
-                  <X size={24} />
+                  <X size={20} />
                 </button>
               </div>
 
-              <nav className="flex-1 space-y-1 p-4">
-                {navItems
-                  .filter((item) => !['login', 'signup'].includes(item.id))
-                  .map((item) => {
-                    switch (item.type) {
-                      case 'dropdown': {
-                        const isServices = item.id === 'services';
-                        const isSolutions = item.id === 'solutions';
-                        const isIndustries = item.id === 'industries';
-                        const isOpen =
-                          (isServices && servicesOpen) ||
-                          (isSolutions && solutionsOpen) ||
-                          (isIndustries && industriesOpen);
-
-                        return (
-                          <div key={item.id} className="border-b border-[#1a3a5a] last:border-0">
-                            <button
-                              onClick={() => toggleMobileDropdown(item.id as 'services' | 'solutions' | 'industries')}
-                              className="flex w-full items-center justify-between py-4 px-2 text-left text-white transition-colors hover:text-[#69E8E1]"
-                            >
-                              <span className="font-medium">{item.label}</span>
-                              {isServices ? (
-                                servicesOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />
-                              ) : isSolutions ? (
-                                solutionsOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />
-                              ) : (
-                                industriesOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />
-                              )}
-                            </button>
-
-                            {isOpen && (
-                              <div className="space-y-2 pb-2 pl-4">
-                                {item.children.map((child) => (
-                                  <Link
-                                    key={child.id}
-                                    href={child.href}
-                                    onClick={closeMobileMenu}
-                                    className="block rounded py-2 px-2 text-sm text-gray-300 transition-colors hover:bg-[#1a3a5a] hover:text-white"
-                                  >
-                                    {child.label}
-                                  </Link>
-                                ))}
-                              </div>
+              {/* Navigation Items */}
+              <div className="flex-1 p-4 bg-[#001F3F]">
+                <nav className="space-y-0">
+                  {navItems.map((item) => (
+                    <div key={item.id} className="border-b border-white/10 last:border-b-0">
+                      {item.type === 'dropdown' ? (
+                        <div>
+                          <button
+                            onClick={() => toggleMobileDropdown(item.id as 'services' | 'solutions')}
+                            className="flex w-full items-center justify-between py-4 px-2 text-white hover:text-[#69E8E1] transition-colors text-left"
+                          >
+                            <span className="font-medium">{item.label}</span>
+                            {(item.id === 'services' && servicesOpen) || (item.id === 'solutions' && solutionsOpen) ? (
+                              <ChevronUp size={18} />
+                            ) : (
+                              <ChevronDown size={18} />
                             )}
-                          </div>
-                        );
-                      }
-                      case 'link':
-                        return (
-                          <div key={item.id} className="border-b border-[#1a3a5a] last:border-0">
-                            <Link
-                              href={item.href}
-                              onClick={closeMobileMenu}
-                              className="block py-4 px-2 text-white transition-colors hover:text-[#69E8E1]"
-                            >
-                              {item.label}
-                            </Link>
-                          </div>
-                        );
-                      case 'scroll':
-                        return (
-                          <div key={item.id} className="border-b border-[#1a3a5a] last:border-0">
-                            <button
-                              onClick={() => scrollToSection(item.scrollTarget)}
-                              className="w-full py-4 px-2 text-left text-white transition-colors hover:text-[#69E8E1]"
-                            >
-                              {item.label}
-                            </button>
-                          </div>
-                        );
-                      default:
-                        return null;
-                    }
-                  })}
+                          </button>
+                          
+                          {(item.id === 'services' && servicesOpen) || (item.id === 'solutions' && solutionsOpen) ? (
+                            <div className="pb-2 pl-4 space-y-2 bg-[#001a33] rounded-lg mt-2">
+                              {item.children.map((child) => (
+                                <Link
+                                  key={child.id}
+                                  href={child.href}
+                                  onClick={closeMobileMenu}
+                                  className="block py-3 px-2 text-white/90 hover:text-[#69E8E1] hover:bg-white/5 transition-colors text-sm rounded"
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          ) : null}
+                        </div>
+                      ) : item.type === 'link' ? (
+                        <Link
+                          href={item.href}
+                          onClick={closeMobileMenu}
+                          className="block py-4 px-2 text-white hover:text-[#69E8E1] transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            scrollToSection(item.scrollTarget);
+                            closeMobileMenu();
+                          }}
+                          className="w-full py-4 px-2 text-left text-white hover:text-[#69E8E1] transition-colors"
+                        >
+                          {item.label}
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </nav>
 
-                <div className="mt-6 space-y-3">
+                {/* Auth Buttons */}
+                <div className="mt-8 space-y-4">
                   <Link
                     href={`/${currentLocale}/contact`}
-                    style={{ textDecoration: 'none' }}
                     onClick={closeMobileMenu}
+                    className="block"
                   >
                     <button
-                      className="hover-glow w-full"
-                      style={{
-                        background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
-                        color: '#001F3F',
-                        border: 'none',
-                        padding: '1rem 2rem',
-                        borderRadius: '25px',
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                        fontSize: '1rem',
-                        transition: 'all 0.3s ease'
-                      }}
+                      className="w-full py-3 px-4 bg-gradient-to-r from-[#69E8E1] to-[#38bdf8] text-[#001F3F] font-semibold rounded-full hover:shadow-lg transition-all shadow-lg"
                     >
                       {t('contact')}
                     </button>
                   </Link>
 
-                  {!hasUser && (
+                  {!hasUser ? (
                     <div className="flex flex-col gap-3">
-                      <LoginButton className="w-full justify-center" />
-                      <SignupButton className="w-full justify-center" />
+                      <LoginButton className="w-full justify-center py-3" />
+                      <SignupButton className="w-full justify-center py-3" />
                     </div>
-                  )}
-
-                  {hasUser && (
+                  ) : (
                     <button
-                      type="button"
                       onClick={handleLogout}
-                      className="w-full rounded-full bg-white/10 px-4 py-2 text-white transition hover:bg-white/20"
+                      className="w-full py-3 px-4 bg-white/10 text-white rounded-full hover:bg-white/20 transition-colors border border-white/20"
                     >
                       Logout
                     </button>
                   )}
                 </div>
-              </nav>
+              </div>
             </div>
           </div>
         </div>
       )}
 
+      </div>
+
       <style jsx global>{`
+        /* Force mobile menu to be on top of EVERYTHING */
         body.menu-open {
           overflow: hidden;
+          position: relative;
+        }
+
+        body.menu-open * {
+          position: relative !important;
+        }
+
+        /* Mobile menu container - highest priority */
+        .lg\\:hidden.fixed {
+          position: fixed !important;
+          z-index: 2147483647 !important; /* Maximum z-index */
+        }
+
+        /* Mobile menu backdrop */
+        .lg\\:hidden .absolute.inset-0 {
+          position: fixed !important;
+          z-index: 2147483646 !important;
+        }
+
+        /* Mobile menu panel */
+        .lg\\:hidden .absolute.top-0.right-0 {
+          position: fixed !important;
+          z-index: 2147483647 !important;
+        }
+
+        /* Ensure all other content stays behind */
+        main, section, div, header, footer {
+          z-index: 1 !important;
+        }
+
+        /* Header should be above normal content but below mobile menu */
+        header {
+          z-index: 1000 !important;
         }
 
         .hover-underline {

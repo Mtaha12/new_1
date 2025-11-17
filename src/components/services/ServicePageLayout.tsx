@@ -116,8 +116,10 @@ const ServicePageLayout = ({
       {/* Hero */}
       <section
         style={{
-          background:
-            'linear-gradient(135deg, rgba(5, 12, 40, 0.94) 0%, rgba(12, 47, 108, 0.88) 45%, rgba(9, 60, 120, 0.92) 100%)',
+          background: 'linear-gradient(rgba(5, 12, 40, 0.85), rgba(12, 47, 108, 0.85)), url("/img/servicehero.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
           color: '#fff',
           padding: 'clamp(4rem, 10vw, 7rem) clamp(1.5rem, 6vw, 3.5rem)',
           textAlign: 'center',

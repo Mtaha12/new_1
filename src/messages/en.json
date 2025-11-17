@@ -314,7 +314,7 @@
       "heroTitle": "AI Security for Large Language Models",
       "heroSubtitle": "Safeguarding Your Digital Realm",
       "heroSupporting": "At The SamurAI, we bring you a state-of-the-art AI solution designed to fortify your digital world and safeguard every experience.",
-      "heroGradient": "linear-gradient(135deg, #0a1f63 0%, #1346a3 45%, #0fd4e8 100%)",
+      "heroGradient": "linear-gradient(rgba(26, 31, 113, 0.85), rgba(10, 14, 61, 0.85)), url('/img/solutionhero.jpg')",
       "primaryCta": "Schedule an AI threat simulation",
       "primaryCtaHref": "contact?topic=ai-security",
       "secondaryCta": "Download the AI security playbook",
@@ -428,7 +428,7 @@
       "heroTitle": "Identity and Access Management",
       "heroSubtitle": "Streamline and secure every digital identity",
       "heroSupporting": "The SamurAI offers a robust, innovative IAM suite that streamlines and secures every digital identity across your organization.",
-      "heroGradient": "linear-gradient(135deg, #10255f 0%, #1e3b8a 45%, #5cc6ff 100%)",
+      "heroGradient": "linear-gradient(rgba(26, 31, 113, 0.85), rgba(10, 14, 61, 0.85)), url('/img/solutionhero.jpg')",
       "primaryCta": "Schedule an IAM architecture review",
       "primaryCtaHref": "contact?topic=identity",
       "secondaryCta": "Download the identity modernization checklist",
@@ -521,7 +521,7 @@
       "heroTitle": "Zero-Trust Cybersecurity",
       "heroSubtitle": "Unparalleled protection for your organization",
       "heroSupporting": "Safeguarding your organization from cyber threats is paramount. The SamurAI delivers a zero-trust framework that fortifies your data and systems with uncompromising protection.",
-      "heroGradient": "linear-gradient(135deg, #0e1c5c 0%, #1f2f86 40%, #00c8d2 100%)",
+      "heroGradient": "linear-gradient(rgba(26, 31, 113, 0.85), rgba(10, 14, 61, 0.85)), url('/img/solutionhero.jpg')",
       "primaryCta": "Launch a zero-trust assessment",
       "primaryCtaHref": "contact?topic=zero-trust",
       "secondaryCta": "Download the zero-trust roadmap",
@@ -612,7 +612,7 @@
       "heroTitle": "Cloud Security",
       "heroSubtitle": "Comprehensive protection for every cloud environment",
       "heroSupporting": "Our cloud security solutions safeguard the confidentiality, integrity, and availability of your data while giving you the insight to choose the right controls for every workload.",
-      "heroGradient": "linear-gradient(135deg, #072c5f 0%, #11519a 45%, #3fe4ff 100%)",
+      "heroGradient": "linear-gradient(rgba(26, 31, 113, 0.85), rgba(10, 14, 61, 0.85)), url('/img/solutionhero.jpg')",
       "primaryCta": "Book a cloud security workshop",
       "primaryCtaHref": "contact?topic=cloud-security",
       "secondaryCta": "Download the cloud guardrail guide",
@@ -680,7 +680,7 @@
       "heroTitle": "Network Security",
       "heroSubtitle": "Elevate your business protection",
       "heroSupporting": "Safeguarding your business from cyber threats hinges on the strength of your network. The SamurAI delivers robust, scalable solutions that keep performance high and risks low.",
-      "heroGradient": "linear-gradient(135deg, #061e4d 0%, #123c78 45%, #2fccff 100%)",
+      "heroGradient": "linear-gradient(rgba(26, 31, 113, 0.85), rgba(10, 14, 61, 0.85)), url('/img/solutionhero.jpg')",
       "primaryCta": "Schedule a network posture review",
       "primaryCtaHref": "contact?topic=network-security",
       "secondaryCta": "Download the network modernization kit",
@@ -748,7 +748,7 @@
       "heroTitle": "Endpoint Security",
       "heroSubtitle": "Comprehensive protection for every device",
       "heroSupporting": "Endpoints are prime targets for adversaries. The SamurAI shields laptops, servers, and mobile devices with layered defenses that keep data and users secure.",
-      "heroGradient": "linear-gradient(135deg, #08214f 0%, #1c417f 45%, #68f1ff 100%)",
+      "heroGradient": "linear-gradient(rgba(26, 31, 113, 0.85), rgba(10, 14, 61, 0.85)), url('/img/solutionhero.jpg')",
       "primaryCta": "Book an endpoint resilience review",
       "primaryCtaHref": "contact?topic=endpoint-security",
       "secondaryCta": "Download the EDR maturity checklist",
@@ -1164,6 +1164,7 @@
     "resources": "Resources",
     "careers": "Careers",
     "aboutUs": "About Us",
+    "connect": "Connect",
     "getInTouch": "Get in touch",
     "projects": "Projects",
     "blog": "Blog",
@@ -1518,6 +1519,116 @@
       "subtitle": "Connect with The SamurAI strategists to align solutions, talent, and operations around measurable results.",
       "button": "Talk with our team",
       "href": "/contact"
+    }
+  },
+  "Industries": {
+    "title": "Industries We Serve",
+    "subtitle": "Specialized cybersecurity solutions tailored to your industry's unique challenges and regulatory requirements",
+    "intro": {
+      "paragraph1": "In today's digital landscape, every industry faces unique cybersecurity challenges. From financial services to healthcare, retail to manufacturing, organizations require specialized security solutions that address their specific regulatory requirements, operational constraints, and threat vectors.",
+      "paragraph2": "The SamurAI brings deep industry expertise combined with cutting-edge security technologies to deliver tailored solutions that protect critical assets, ensure compliance, and enable digital transformation. Our team understands the nuances of each sector, allowing us to design and implement security programs that align with your business objectives.",
+      "paragraph3": "Explore how we serve diverse industries with customized cybersecurity approaches that address specific pain points, regulatory demands, and emerging threats unique to your sector."
+    },
+    "whyChooseTitle": "Why Choose The SamurAI",
+    "learnMore": "Learn More",
+    "ctaButton": "Learn More",
+    "focusedSolutions": {
+      "title": "Industry-Focused Solutions",
+      "description": "Our industry-specific cybersecurity solutions are designed to address the unique challenges and regulatory requirements of each sector, providing comprehensive protection tailored to your business needs.",
+      "point1": {
+        "title": "Regulatory Compliance",
+        "description": "Ensure adherence to industry-specific regulations and standards with our compliance-focused security frameworks."
+      },
+      "point2": {
+        "title": "Threat Intelligence",
+        "description": "Leverage advanced threat detection and prevention capabilities tailored to your industry's specific risk landscape."
+      },
+      "point3": {
+        "title": "Scalable Protection",
+        "description": "Deploy security solutions that grow with your business and adapt to evolving industry challenges."
+      }
+    },
+    "financialServices": {
+      "title": "Financial Services",
+      "description": "Comprehensive security solutions for banks, insurance companies, and financial institutions that protect sensitive financial data, ensure regulatory compliance, and maintain customer trust.",
+      "reasons": {
+        "transactionIntegrity": "Secure transaction processing and fraud prevention",
+        "dataSecurity": "Advanced encryption and data protection for financial records",
+        "reputationAssurance": "Maintain customer confidence with robust security posture"
+      }
+    },
+    "healthcareLifeSciences": {
+      "title": "Healthcare & Life Sciences",
+      "description": "Specialized cybersecurity for hospitals, pharmaceutical companies, and research organizations that protects patient data, ensures HIPAA compliance, and safeguards critical healthcare infrastructure.",
+      "reasons": {
+        "patientDataProtection": "HIPAA-compliant protection of sensitive patient information",
+        "regulatoryCompliance": "Navigate complex healthcare regulations with confidence",
+        "empowerHealthcareProfessionals": "Secure systems that enable quality patient care"
+      }
+    },
+    "retail": {
+      "title": "Retail",
+      "description": "End-to-end security for retail operations including payment processing, customer data protection, and supply chain security that enables seamless shopping experiences while preventing fraud.",
+      "reasons": {
+        "iotOtExpertise": "Secure IoT devices and operational technology in retail environments",
+        "uninterruptedOperations": "Maintain business continuity with resilient security systems",
+        "digitalPhysicalSecurityIntegration": "Integrated security for online and physical stores"
+      }
+    },
+    "manufacturingCpg": {
+      "title": "Manufacturing & CPG",
+      "description": "Industrial cybersecurity solutions that protect manufacturing processes, intellectual property, and supply chains while ensuring operational continuity and safety.",
+      "reasons": {
+        "threatDetectionPrevention": "Advanced threat detection for industrial control systems",
+        "secureProductDevelopment": "Protect intellectual property and manufacturing secrets"
+      }
+    },
+    "accommodationsFood": {
+      "title": "Accommodations & Food Services",
+      "description": "Comprehensive security for hospitality and food service businesses that protects customer data, payment systems, and brand reputation while ensuring seamless guest experiences.",
+      "reasons": {
+        "networkSecurity": "Secure Wi-Fi and network infrastructure for guest and business operations",
+        "dataEncryption": "Protect customer reservations and payment information",
+        "mobileDeviceSecurity": "Secure mobile apps and ordering systems"
+      }
+    },
+    "utilitiesEnergy": {
+      "title": "Utilities & Energy",
+      "description": "Critical infrastructure protection for power generation, water treatment, and energy companies that ensures operational resilience and regulatory compliance in essential services.",
+      "reasons": {
+        "infrastructureResilience": "Protect critical infrastructure from cyber threats",
+        "operationalContinuity": "Ensure uninterrupted utility services with robust security",
+        "complianceAssurance": "Meet stringent energy sector regulations"
+      }
+    },
+    "legalProfessional": {
+      "title": "Legal & Professional Services",
+      "description": "Specialized security for law firms, consulting companies, and professional service providers that protects client confidentiality, maintains privilege, and ensures regulatory compliance.",
+      "reasons": {
+        "expertise": "Deep understanding of professional services security requirements",
+        "comprehensiveServices": "End-to-end security solutions for professional environments"
+      }
+    },
+    "governmentEducation": {
+      "title": "Government & Education",
+      "description": "Tailored cybersecurity solutions for public sector institutions and educational organizations that protect sensitive data, ensure compliance, and enable secure learning environments.",
+      "reasons": {
+        "criticalInfrastructureProtection": "Protect essential government and educational systems",
+        "secureLearningEnvironment": "Create safe digital spaces for students and staff",
+        "continuousServiceAssurance": "Maintain uninterrupted public and educational services"
+      }
+    },
+    "supplyChainLogistics": {
+      "title": "Supply Chain & Logistics",
+      "description": "Comprehensive security for transportation, warehousing, and logistics operations that protects cargo, ensures supply chain visibility, and prevents disruptions.",
+      "reasons": {
+        "supplyChainRiskAssessment": "Identify and mitigate supply chain security risks"
+      }
+    },
+    "cta": {
+      "title": "Secure Your Industry-Specific Challenges",
+      "description": "Partner with our industry experts to develop a cybersecurity strategy that addresses your unique challenges and regulatory requirements while enabling business growth.",
+      "button": "Schedule Industry Consultation"
     }
   }
 }

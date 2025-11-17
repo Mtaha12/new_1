@@ -97,7 +97,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
   const localizedResourcesRaw = toArray<HomepageResource>(homeT.raw('resourcesCards'));
   const heroGradient = typeof t.raw('heroGradient') === 'string'
     ? (t.raw('heroGradient') as string)
-    : 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 50%, #00bcd4 100%)';
+    : 'linear-gradient(rgba(26, 31, 113, 0.85), rgba(10, 14, 61, 0.85)), url("/img/solutionhero.jpg")';
 
   const primaryCtaHref = buildLocalizedHref(t('primaryCtaHref'), currentLocale);
   const secondaryCtaHref = buildLocalizedHref(t('secondaryCtaHref'), currentLocale);
@@ -116,6 +116,9 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
         <section
           style={{
             background: heroGradient,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
             padding: 'clamp(6rem, 12vw, 8.5rem) clamp(1.5rem, 6vw, 3.5rem) clamp(4rem, 10vw, 7rem)',
             color: '#fff',
             textAlign: 'center',

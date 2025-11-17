@@ -410,7 +410,8 @@ export default function HomePage() {
                   key={`${card.title}-${idx}`}
                   className={`who-card tilt-card hover-glow delay-${(idx % 3) + 1}`}
                   style={{
-                    width: isSmallViewport ? '100%' : 'clamp(240px, 38vw, 320px)',
+                    width: isSmallViewport ? '100%' : '280px',
+                    minHeight: isSmallViewport ? 'auto' : '300px',
                     background: '#fff',
                     borderRadius: '18px',
                     border: '1px solid #e6ecf5',
@@ -435,7 +436,11 @@ export default function HomePage() {
                   }}>
                     {card.icon}
                   </div>
-                  <div>
+                  <div style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}>
                     <h3 style={{
                       fontSize: 'clamp(1.2rem, 2.2vw, 1.4rem)',
                       fontWeight: 700,
@@ -448,7 +453,8 @@ export default function HomePage() {
                       color: '#4d5566',
                       lineHeight: 1.7,
                       fontSize: 'clamp(0.9rem, 1.3vw, 1.05rem)',
-                      margin: 0
+                      margin: 0,
+                      flex: 1
                     }}>
                       {card.desc}
                     </p>
