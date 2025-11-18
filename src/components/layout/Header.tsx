@@ -136,8 +136,8 @@ export default function Header() {
     {
       id: 'partners',
       label: t('partners'),
-      type: 'scroll',
-      scrollTarget: 'partners'
+      href: `/${currentLocale}/partners`,
+      type: 'link'
     },
     {
       id: 'blog',
@@ -148,14 +148,8 @@ export default function Header() {
     {
       id: 'about',
       label: t('aboutUs'),
-      type: 'scroll',
-      scrollTarget: 'who-we-are'
-    },
-    {
-      id: 'connect',
-      label: t('connect'),
-      type: 'scroll',
-      scrollTarget: 'contact'
+      href: `/${currentLocale}/about`,
+      type: 'link'
     },
   ];
 
@@ -517,7 +511,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <nav className="desktop-nav hidden flex-1 items-center justify-center gap-6 text-white lg:flex">
+          <nav className="desktop-nav hidden flex-1 items-center justify-between text-white lg:flex" style={{ padding: '0 2rem' }}>
             {navItems
               .map((item) => {
                 if (item.type === 'dropdown') {
@@ -733,35 +727,35 @@ export default function Header() {
           {/* Mobile Menu Panel */}
           <div
             ref={mobileMenuRef}
-            className="absolute top-0 right-0 h-full w-80 bg-[#001F3F] shadow-2xl overflow-y-auto"
+            className="absolute top-0 right-0 h-full w-80 bg-[#001F3F] shadow-2xl overflow-hidden flex flex-col"
             style={{ zIndex: 10000 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex flex-col h-full">
-              {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-white/20 bg-[#001F3F] sticky top-0">
-                <Link href={`/${currentLocale}`} onClick={closeMobileMenu}>
-                  <div className="flex items-center">
-                    <Image
-                      src="/logo.png"
-                      alt="Logo"
-                      width={120}
-                      height={40}
-                      className="h-8 w-auto"
-                    />
-                  </div>
-                </Link>
-                <button
-                  onClick={closeMobileMenu}
-                  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
-                  aria-label="Close menu"
-                >
-                  <X size={20} />
-                </button>
-              </div>
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-white/20 bg-[#001F3F] flex-shrink-0">
+              <Link href={`/${currentLocale}`} onClick={closeMobileMenu}>
+                <div className="flex items-center">
+                  <Image
+                    src="/logo.png"
+                    alt="Logo"
+                    width={120}
+                    height={40}
+                    className="h-8 w-auto"
+                  />
+                </div>
+              </Link>
+              <button
+                onClick={closeMobileMenu}
+                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
-              {/* Navigation Items */}
-              <div className="flex-1 p-4 bg-[#001F3F]">
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto bg-[#001F3F]" style={{ maxHeight: 'calc(100vh - 80px)' }}>
+              <div className="p-4">
                 <nav className="space-y-0">
                   {navItems.map((item) => (
                     <div key={item.id} className="border-b border-white/10 last:border-b-0">
@@ -818,7 +812,7 @@ export default function Header() {
                 </nav>
 
                 {/* Auth Buttons */}
-                <div className="mt-8 space-y-4">
+                <div className="mt-8 space-y-4 pb-4">
                   <Link
                     href={`/${currentLocale}/contact`}
                     onClick={closeMobileMenu}
@@ -880,6 +874,13 @@ export default function Header() {
         .lg\\:hidden .absolute.top-0.right-0 {
           position: fixed !important;
           z-index: 2147483647 !important;
+        }
+
+        /* Ensure mobile menu content can scroll */
+        .lg\\:hidden .overflow-y-auto {
+          overflow-y: auto !important;
+          position: relative !important;
+          -webkit-overflow-scrolling: touch !important;
         }
 
         /* Ensure all other content stays behind */

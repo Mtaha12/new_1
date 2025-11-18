@@ -27,6 +27,7 @@ export default function HomePage() {
   const [canUseHeroVideo, setCanUseHeroVideo] = useState(false);
   const [isSmallViewport, setIsSmallViewport] = useState(false);
   const [isDocumentVisible, setIsDocumentVisible] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const whoWeAreCards = [
     { icon: '🔒', title: t('cybersecurityTitle'), desc: t('cybersecurityDescription') },
     { icon: '💡', title: t('itConsultationTitle'), desc: t('itConsultationDescription') }
@@ -92,6 +93,7 @@ export default function HomePage() {
   ];
 
   useEffect(() => {
+    setMounted(true);
     const interval = setInterval(() => {
       setCurrentBlogIndex((prev) => (prev + 1) % blogData.length);
     }, 10000);
@@ -160,6 +162,20 @@ export default function HomePage() {
       setCurrentCardIndex((prev) => (prev - 1 + whoWeAreCards.length) % whoWeAreCards.length);
     }
   };
+
+  if (!mounted) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#fff', direction: isArabic ? 'rtl' : 'ltr' }}>
+        <Header />
+        <div style={{ padding: '2rem' }}>
+          <div style={{ textAlign: 'center', padding: '4rem 0' }}>
+            <h2>Loading...</h2>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   const visibleCards = whoWeAreCards.length
     ? Array.from({ length: Math.min(2, whoWeAreCards.length) }, (_, offset) =>
@@ -883,52 +899,16 @@ export default function HomePage() {
                 <div style={{
                   position: 'relative',
                   width: '100%',
-                  height: '200px'
+                  height: '250px'
                 }}>
                   <Image
                     src={resource.image || '/img/resource1.jpg'}
-                    alt={resource.title}
+                    alt={resource.title || 'Resource'}
                     fill
+                    sizes="(max-width: 768px) 100vw, 320px"
                     style={{ objectFit: 'cover' }}
+                    priority={index < 3}
                   />
-                  <div style={{
-                    position: 'absolute',
-                    top: '1rem',
-                    ...(isArabic ? { right: '1rem' } : { left: '1rem' }),
-                    background: '#fff',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
-                    fontSize: '0.75rem',
-                    fontWeight: '600',
-                    color: '#0a0e3d'
-                  }}>
-                    {resource.tag ?? ''}
-                  </div>
-                </div>
-                <div style={{ padding: '1.5rem' }}>
-                  <h3 style={{
-                    fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-                    fontWeight: '700',
-                    color: '#fff',
-                    lineHeight: '1.4',
-                    marginBottom: resource.description ? '0.75rem' : '0',
-                    textAlign: isArabic ? 'right' : 'left'
-                  }}>
-                    {resource.title}
-                  </h3>
-                  {resource.description && (
-                    <p
-                      style={{
-                        color: 'rgba(255,255,255,0.85)',
-                        lineHeight: 1.6,
-                        margin: 0,
-                        textAlign: isArabic ? 'right' : 'left',
-                        fontSize: '0.9rem'
-                      }}
-                    >
-                      {resource.description}
-                    </p>
-                  )}
                 </div>
               </div>
             ))}

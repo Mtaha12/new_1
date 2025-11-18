@@ -1630,5 +1630,159 @@
       "description": "Partner with our industry experts to develop a cybersecurity strategy that addresses your unique challenges and regulatory requirements while enabling business growth.",
       "button": "Schedule Industry Consultation"
     }
+  },
+  "PartnersPage": {
+    "title": "Partners",
+    "subtitle": "Collaborative Excellence in Cybersecurity",
+    "collaborativeTitle": "Partners Collaborative Excellence in Cybersecurity",
+    "collaborativeDescription": "At The SamurAI, we understand that having well-vetted IT partners operating within a dynamic ecosystem is essential for staying at the forefront of cybersecurity. It is a testament to our commitment to fostering collaborations that strengthen our capabilities in safeguarding your digital assets. This approach allows us to tap into a diverse yet congruent pool of expertise and innovative technologies, fostering a collaborative environment that enhances our cybersecurity solutions. Our partners are meticulously chosen for their proven track records in security and technology, ensuring that our ecosystem not only aligns with our stringent security standards but also enriches our capacity to address evolving cyber threats with agility and precision.",
+    "collaborativeStatement": "Our partners are meticulously chosen for their proven track records in security and technology, ensuring that our ecosystem not only aligns with our stringent security standards but also enriches our capacity to address evolving cyber threats with agility and precision.",
+    "whyPartnershipsTitle": "Why Partnerships Matter",
+    "diverseExpertiseTitle": "Diverse Expertise",
+    "diverseExpertiseDescription": "This approach allows us to tap into a diverse yet congruent pool of expertise and innovative technologies, fostering a collaborative environment that enhances our cybersecurity solutions. Our partners are meticulously chosen for their proven track records in security and technology, ensuring that our ecosystem not only aligns with our stringent security standards but also enriches our capacity to address evolving cyber threats with agility and precision.",
+    "innovativeTechnologiesTitle": "Innovative Technologies",
+    "innovativeTechnologiesDescription": "We collaborate with partners at the forefront of technological innovation. This ensures that our cybersecurity solutions are equipped with the latest tools and technologies, staying one step ahead of cyber threats.",
+    "agilityPrecisionTitle": "Agility and Precision",
+    "agilityPrecisionDescription": "The collaborative environment enables us to respond to emerging threats with agility and precision. Through shared insights and resources, we can adapt quickly to the ever-changing cybersecurity landscape.",
+    "joinUsTitle": "Join Us in Strengthening Cybersecurity",
+    "joinUsDescription": "Our commitment to excellence extends beyond our internal capabilities. By forging strong partnerships, we create a unified front against cyber threats. Explore the profiles of our esteemed partners on this page and understand how these collaborations contribute to our mission of providing robust and innovative cybersecurity solutions.",
+    "togetherStatement": "Together, with our partners, we are shaping the future of cybersecurity.",
+    "resourcesTitle": "Resources",
+    "resourcesDescription": "Access research, playbooks, and threat intelligence shaped by The SamurAI practitioners.",
+    "resource1Category": "Cybersecurity",
+    "resource1Title": "2025 Executive Guide to AI-Ready Security Operations",
+    "resource1Description": "Discover how leading SOC teams combine automation and human expertise to shrink dwell time.",
+    "resource2Category": "Strategy",
+    "resource2Title": "Blueprint for Modern IT Consultation",
+    "resource2Description": "Align infrastructure, data, and collaboration platforms with a security-first mindset.",
+    "resource3Category": "Incident Response",
+    "resource3Title": "Field Report: Lessons from Global Incident Simulations",
+    "resource3Description": "Learn the key playbooks and response metrics shaping enterprise resilience programs.",
+    "readMore": "Read more",
+    "ctaTitle": "Ready to Reclaim Control of Your Cyber Future?",
+    "ctaDescription": "Partner with specialists who orchestrate people, process, and platforms into one resilient defense.",
+    "ctaButton": "Plan a Strategy Session"
+  },
+  "AboutPage": {
+    "hero": {
+      "title": "About The SamurAI",
+      "subtitle": "Leading the Future of Cybersecurity with AI-Powered Excellence"
+    },
+    "whoWeAre": {
+      "title": "Who We Are",
+      "description": "Defenders of Your Digital Realm\n\nWe live in an era of unending digital battles. Hackers lurk like bandits, and your data is the gold they crave. We are \"The SamurAI,\" and we are at the intersection of where time-honored virtues meet the modern AI-driven age of Cyberdefense and IT observability. We serve to protect organizations, just like the Samurai protected those who commissioned them. Our team is about sticking to the code of discipline, respect, loyalty and bravery – enabling us to anticipate and not merely defend.\n\nWith a comprehensive approach, our experts can engage on many different aspects of IT advisory and Cyberdefense. We invest in research to work with only industry leaders. What we possess is the samurai code but in digital form – a set of rules that keep the bad guys away from your business. We're not just about stopping cyber threats; we're genuine, courageous, and consistent. Let us be the cyber samurais that guard your business 24/7.",
+      "statement": "Your trusted partner in cybersecurity excellence."
+    },
+    "whatWeDo": {
+      "title": "What Do We Do",
+      "subtitle": "We're not just vendors, we're your strategic partners. We've seen the struggle. We understand the complex landscape of cybersecurity tools. We take pride in our proficiency with top-notch industry solutions and a discerning ability to find the perfect match for your specific requirements. With our help, you can streamline your cyber defense strategies, and craft a unified front against cyber threats. No more battling compatibility issues or drowning in ambiguous data when you're faced with a purchasing decision. Your business is at risk every year as new cybersecurity threats emerge. There is no immunity in the world of security breaches",
+      "services": [
+        {
+          "title": "Strategic Resourcing",
+          "description": "We assess your needs, recommend the right tools, and optimize your security budget, ensuring you get the best value for every penny you spend."
+        },
+        {
+          "title": "Installation Negotiation",
+          "description": "Beyond just selling, our team helps install products and negotiates with businesses for the best use of cybersecurity solutions."
+        },
+        {
+          "title": "Expert Guidance",
+          "description": "SamurAI cybersecurity gurus are your trusted advisors, helping you navigate the ever-changing threat landscape and choose the best defense strategies."
+        },
+        {
+          "title": "And what about ROI",
+          "description": "We're all about quantifiable results. Our integrated approach doesn't just make your security posture stronger – it makes your business better. Reduced downtime, faster incident response, and optimized resource allocation translate to tangible cost savings and improved operational efficiency. Just ask our previous customers who've already ditched the tool fragmentation trap and saved millions."
+        },
+        {
+          "title": "License Management",
+          "description": "We handle software licenses, making sure you follow rules and get the most from your cybersecurity investments."
+        },
+        {
+          "title": "Why Choose Us",
+          "description": "Every recommendation, every integration, and every strategic move that we make is driven by one objective: MAXIMIZING YOUR SECURITY ROI. You're not just investing in tools, you're investing in peace of mind. We don't sell our software, so our focus is solely on your success."
+        },
+        {
+          "title": "Seamless Supply Chain",
+          "description": "Use a just-in-time system for cybersecurity solutions, making sure they arrive on time and don't cost you a fortune"
+        }
+      ]
+    },
+    "vision": {
+      "title": "Our Vision & Mission",
+      "description": "Our vision is to create a world where organizations can operate with confidence in their digital security, knowing they are protected by the most advanced AI-powered cybersecurity solutions available.",
+      "services": [
+        {
+          "title": "AI-Driven Security",
+          "description": "Leveraging artificial intelligence to predict, prevent, and respond to cyber threats with unprecedented speed and accuracy."
+        },
+        {
+          "title": "Strategic Consulting",
+          "description": "Providing expert guidance to align security initiatives with business objectives and regulatory requirements."
+        },
+        {
+          "title": "Continuous Innovation",
+          "description": "Constantly researching and developing new approaches to stay ahead of emerging threats and technological challenges."
+        }
+      ]
+    },
+    "whyChooseUs": {
+      "title": "Why Choose The SamurAI",
+      "description": "We combine cutting-edge AI technology with human expertise to deliver cybersecurity solutions that are both powerful and practical.",
+      "roi": {
+        "title": "Maximum ROI on Security Investment",
+        "description": "Our solutions are designed to deliver measurable value by reducing risk, improving compliance, and enabling business growth through enhanced security posture."
+      }
+    },
+    "howWeDoIt": {
+      "title": "How We Do It",
+      "description": "Our approach combines advanced technology, proven methodologies, and expert human oversight to deliver comprehensive cybersecurity protection.",
+      "steps": [
+        {
+          "title": "Assessment",
+          "description": "We conduct thorough security assessments to identify vulnerabilities and understand your unique risk profile."
+        },
+        {
+          "title": "Strategy",
+          "description": "Our experts develop customized security strategies that align with your business goals and regulatory requirements."
+        },
+        {
+          "title": "Implementation",
+          "description": "We deploy advanced AI-powered security solutions with minimal disruption to your operations."
+        },
+        {
+          "title": "Monitoring",
+          "description": "Continuous monitoring and threat detection ensure proactive protection against emerging cyber threats."
+        }
+      ]
+    },
+    "resourcesTitle": "Resources",
+    "resourcesDescription": "Access research, playbooks, and threat intelligence shaped by The SamurAI practitioners.",
+    "resourcesCards": [
+      {
+        "category": "Cybersecurity",
+        "title": "2025 Executive Guide to AI-Ready Security Operations",
+        "description": "Discover how leading SOC teams combine automation and human expertise to shrink dwell time.",
+        "image": "/img/resource1.jpg",
+        "link": "/resources/ai-ready-security-operations"
+      },
+      {
+        "category": "Strategy",
+        "title": "Blueprint for Modern IT Consultation",
+        "description": "Align infrastructure, data, and collaboration platforms with a security-first mindset.",
+        "image": "/img/resource2.jpg",
+        "link": "/resources/it-consultation-blueprint"
+      },
+      {
+        "category": "Incident Response",
+        "title": "Field Report: Lessons from Global Incident Simulations",
+        "description": "Learn the key playbooks and response metrics shaping enterprise resilience programs.",
+        "image": "/img/resource3.jpg",
+        "link": "/resources/incident-response-lessons"
+      }
+    ],
+    "readMore": "Read more",
+    "ctaTitle": "Ready to Strengthen Your Cybersecurity?",
+    "ctaDescription": "Partner with specialists who orchestrate people, process, and platforms into one resilient defense.",
+    "ctaButton": "Plan a Strategy Session"
   }
 }

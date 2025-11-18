@@ -1254,12 +1254,10 @@ export default function BlogLanding({
                       borderRadius: '18px',
                       overflow: 'hidden',
                       boxShadow: '0 20px 45px rgba(5, 12, 40, 0.24)',
-                      minHeight: '360px',
-                      display: 'flex',
-                      flexDirection: 'column'
+                      height: '250px'
                     }}
                   >
-                    <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                       <Image
                         src={resource.image}
                         alt={resource.title}
@@ -1267,42 +1265,6 @@ export default function BlogLanding({
                         sizes="(max-width: 768px) 100vw, 320px"
                         style={{ objectFit: 'cover' }}
                       />
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '1rem',
-                          left: '1rem',
-                          background: '#fff',
-                          color: '#0a0e3d',
-                          borderRadius: '999px',
-                          padding: '0.45rem 1.1rem',
-                          fontSize: '0.75rem',
-                          fontWeight: 600
-                        }}
-                      >
-                        {resource.tag}
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        padding: 'clamp(1.5rem, 3vw, 2rem)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '1rem',
-                        flex: 1
-                      }}
-                    >
-                      <h4
-                        style={{
-                          color: '#fff',
-                          fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
-                          fontWeight: 700,
-                          lineHeight: 1.4,
-                          margin: 0
-                        }}
-                      >
-                        {resource.title}
-                      </h4>
                     </div>
                   </div>
                 );

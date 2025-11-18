@@ -8,6 +8,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
 
+const MAX_CONTAINER_WIDTH = 'min(1140px, 100%)';
+
 type HomeResourceCard = {
   title: string;
   description?: string;
@@ -137,6 +139,7 @@ export default function IndustriesPage() {
       
       {/* Hero Section */}
       <section 
+        className="fade-section"
         style={{
           background: 'linear-gradient(rgba(10, 14, 61, 0.85), rgba(19, 70, 163, 0.85)), url("/img/ihero.jpg")',
           backgroundSize: 'cover',
@@ -147,7 +150,7 @@ export default function IndustriesPage() {
           textAlign: 'center'
         }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto', padding: '0 1.5rem' }}>
           <h1 style={{ 
             fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', 
             fontWeight: '700', 
@@ -169,8 +172,10 @@ export default function IndustriesPage() {
       </section>
 
       {/* Introduction Section */}
-      <section style={{ padding: 'clamp(3rem, 8vw, 5rem) 0', backgroundColor: '#f8fafc' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <section 
+        className="fade-section delay-1"
+        style={{ padding: 'clamp(3rem, 8vw, 5rem) 0', backgroundColor: '#f8fafc' }}>
+        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto', padding: '0 1.5rem' }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: isArabic ? '1fr 1fr' : '1fr 1fr',
@@ -222,12 +227,14 @@ export default function IndustriesPage() {
       </section>
 
       {/* Industries Grid */}
-      <section style={{ 
-        padding: 'clamp(3rem, 8vw, 5rem) 0',
-        backgroundColor: '#0a0e3d',
-        color: '#fff'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <section 
+        className="fade-section delay-2"
+        style={{ 
+          padding: 'clamp(3rem, 8vw, 5rem) 0',
+          backgroundColor: '#0a0e3d',
+          color: '#fff'
+        }}>
+        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto', padding: '0 1.5rem' }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
@@ -236,6 +243,7 @@ export default function IndustriesPage() {
             {industries.map((industry) => (
               <div
                 key={industry.id}
+                className={`tilt-card delay-${(industries.indexOf(industry) % 5) + 1}`}
                 style={{
                   background: 'rgba(255, 255, 255, 0.1)',
                   backdropFilter: 'blur(10px)',
@@ -520,7 +528,7 @@ export default function IndustriesPage() {
         background: '#fff',
         direction: isArabic ? 'rtl' : 'ltr'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
           <h2 style={{
             fontSize: 'clamp(2rem, 5vw, 3rem)',
             fontWeight: '800',
@@ -560,7 +568,7 @@ export default function IndustriesPage() {
                 <div style={{
                   position: 'relative',
                   width: '100%',
-                  height: '200px'
+                  height: '250px'
                 }}>
                   <Image
                     src={resource.image || '/img/resource1.jpg'}
@@ -568,44 +576,6 @@ export default function IndustriesPage() {
                     fill
                     style={{ objectFit: 'cover' }}
                   />
-                  <div style={{
-                    position: 'absolute',
-                    top: '1rem',
-                    ...(isArabic ? { right: '1rem' } : { left: '1rem' }),
-                    background: '#fff',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
-                    fontSize: '0.75rem',
-                    fontWeight: '600',
-                    color: '#0a0e3d'
-                  }}>
-                    {resource.tag ?? ''}
-                  </div>
-                </div>
-                <div style={{ padding: '1.5rem' }}>
-                  <h3 style={{
-                    fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-                    fontWeight: '700',
-                    color: '#fff',
-                    lineHeight: '1.4',
-                    marginBottom: resource.description ? '0.75rem' : '0',
-                    textAlign: isArabic ? 'right' : 'left'
-                  }}>
-                    {resource.title}
-                  </h3>
-                  {resource.description && (
-                    <p
-                      style={{
-                        color: 'rgba(255,255,255,0.85)',
-                        lineHeight: 1.6,
-                        margin: 0,
-                        textAlign: isArabic ? 'right' : 'left',
-                        fontSize: '0.9rem'
-                      }}
-                    >
-                      {resource.description}
-                    </p>
-                  )}
                 </div>
               </div>
             ))}

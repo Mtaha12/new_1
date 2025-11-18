@@ -588,20 +588,23 @@ export default function SolutionsOverviewPage() {
               }}
             >
               {resources.map((resource, index) => (
-                <Link
+                <div
                   key={`${resource.title}-${index}`}
-                  href={buildHref(resource.href)}
-                  prefetch={false}
                   className={`tilt-card resource-card ${isArabic ? 'resource-card--rtl' : ''} delay-${(index % 3) + 1}`}
                   style={{
                     borderRadius: '20px',
                     boxShadow: '0 22px 45px rgba(10, 14, 61, 0.22)',
                     background: '#0a0e3d',
                     color: '#fff',
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    overflow: 'hidden'
                   }}
                 >
-                  <div className="resource-card__media">
+                  <div style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '250px'
+                  }}>
                     <Image
                       src={resource.image || '/img/resource1.jpg'}
                       alt={resource.title}
@@ -609,102 +612,80 @@ export default function SolutionsOverviewPage() {
                       sizes="(max-width: 768px) 100vw, 320px"
                       style={{ objectFit: 'cover' }}
                     />
-                    {resource.tag && <span className="resource-card__tag">{resource.tag}</span>}
                   </div>
-                  <div className="resource-card__body">
-                    <h3 className="resource-card__title" style={{ color: '#fff' }}>
-                      {resource.title}
-                    </h3>
-                    <span className="resource-card__cta">{resourcesCTA}</span>
-                  </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section
-          className="fade-section delay-3"
-          style={{
-            background: 'linear-gradient(180deg, #f4f7ff 0%, #f4f7ff 52%, #050b3d 52%, #050b3d 100%)',
-            padding: 'clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem) clamp(7rem, 11vw, 9rem)',
-            direction: isArabic ? 'rtl' : 'ltr'
-          }}
-        >
-          <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-            <div
+        {/* CTA Section */}
+      <section style={{
+        position: 'relative',
+        padding: '0 clamp(1.5rem, 5vw, 3rem)',
+        marginBottom: '-5rem',
+        zIndex: 10
+      }}>
+        <div style={{
+          maxWidth: MAX_CONTAINER_WIDTH,
+          margin: '0 auto'
+        }}>
+          <div style={{
+            background: '#fff',
+            borderRadius: '24px',
+            padding: 'clamp(3rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem)',
+            textAlign: 'center',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+              fontWeight: '800',
+              lineHeight: '1.2',
+              marginBottom: '1rem',
+              color: '#0a0e3d'
+            }}>
+              {ctaTitle}
+            </h2>
+            <p style={{
+              fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
+              lineHeight: '1.6',
+              marginBottom: '2rem',
+              color: '#666',
+              maxWidth: '700px',
+              margin: '0 auto 2rem'
+            }}>
+              {ctaSubtitle}
+            </p>
+            <Link
+              href={`/${currentLocale}/contact`}
               style={{
-                background: '#fff',
-                borderRadius: '26px',
-                padding: 'clamp(3rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem)',
-                textAlign: 'center',
-                boxShadow: '0 35px 65px rgba(0, 0, 0, 0.25)',
-                transform: 'translateY(-18%)',
-                margin: '0 auto'
+                display: 'inline-block',
+                background: '#1368ff',
+                color: '#fff',
+                border: 'none',
+                padding: 'clamp(0.8rem, 2vw, 1rem) clamp(2rem, 5vw, 3rem)',
+                fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
+                fontWeight: '600',
+                borderRadius: '999px',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 8px 20px rgba(19, 104, 255, 0.3)',
+                textDecoration: 'none'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px rgba(19, 104, 255, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(19, 104, 255, 0.3)';
               }}
             >
-              <h2
-                style={{
-                  fontSize: 'clamp(1.9rem, 4vw, 2.6rem)',
-                  fontWeight: 800,
-                  color: '#0a0e3d',
-                  marginBottom: '1rem'
-                }}
-              >
-                {ctaTitle}
-              </h2>
-              <p
-                style={{
-                  fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
-                  lineHeight: 1.6,
-                  marginBottom: '2rem',
-                  color: '#55617d',
-                  maxWidth: '640px',
-                  margin: '0 auto 2rem'
-                }}
-              >
-                {ctaSubtitle}
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
-                <Link
-                  href={buildHref(ctaPrimaryHref)}
-                  prefetch={false}
-                  className="hover-glow"
-                  style={{
-                    display: 'inline-block',
-                    background: 'linear-gradient(135deg, #0a53ff 0%, #3e8bff 100%)',
-                    color: '#fff',
-                    padding: 'clamp(0.9rem, 2vw, 1.1rem) clamp(2.4rem, 5vw, 3.2rem)',
-                    fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-                    fontWeight: 600,
-                    borderRadius: '999px',
-                    textDecoration: 'none'
-                  }}
-                >
-                  {ctaPrimary}
-                </Link>
-                <Link
-                  href={buildHref(ctaSecondaryHref)}
-                  prefetch={false}
-                  className="hover-outline"
-                  style={{
-                    display: 'inline-block',
-                    background: 'transparent',
-                    border: '2px solid rgba(10,83,255,0.25)',
-                    color: '#0a53ff',
-                    padding: 'clamp(0.9rem, 2vw, 1.1rem) clamp(2.4rem, 5vw, 3.2rem)',
-                    fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-                    fontWeight: 600,
-                    borderRadius: '999px',
-                    textDecoration: 'none'
-                  }}
-                >
-                  {ctaSecondary}
-                </Link>
-              </div>
-            </div>
+              {ctaPrimary}
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
       </main>
       <Footer />
     </div>
