@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import FloatingCTA from '@/components/ui/FloatingCTA';
 
 const MAX_CONTAINER_WIDTH = 'min(1140px, 100%)';
 
@@ -619,73 +620,14 @@ export default function SolutionsOverviewPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-      <section style={{
-        position: 'relative',
-        padding: '0 clamp(1.5rem, 5vw, 3rem)',
-        marginBottom: '-5rem',
-        zIndex: 10
-      }}>
-        <div style={{
-          maxWidth: MAX_CONTAINER_WIDTH,
-          margin: '0 auto'
-        }}>
-          <div style={{
-            background: '#fff',
-            borderRadius: '24px',
-            padding: 'clamp(3rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem)',
-            textAlign: 'center',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
-          }}>
-            <h2 style={{
-              fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-              fontWeight: '800',
-              lineHeight: '1.2',
-              marginBottom: '1rem',
-              color: '#0a0e3d'
-            }}>
-              {ctaTitle}
-            </h2>
-            <p style={{
-              fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
-              lineHeight: '1.6',
-              marginBottom: '2rem',
-              color: '#666',
-              maxWidth: '700px',
-              margin: '0 auto 2rem'
-            }}>
-              {ctaSubtitle}
-            </p>
-            <Link
-              href={`/${currentLocale}/contact`}
-              style={{
-                display: 'inline-block',
-                background: '#1368ff',
-                color: '#fff',
-                border: 'none',
-                padding: 'clamp(0.8rem, 2vw, 1rem) clamp(2rem, 5vw, 3rem)',
-                fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-                fontWeight: '600',
-                borderRadius: '999px',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 8px 20px rgba(19, 104, 255, 0.3)',
-                textDecoration: 'none'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 12px 28px rgba(19, 104, 255, 0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 20px rgba(19, 104, 255, 0.3)';
-              }}
-            >
-              {ctaPrimary}
-            </Link>
-          </div>
-        </div>
-      </section>
+        <FloatingCTA
+          title={ctaTitle}
+          description={ctaSubtitle}
+          primaryLabel={ctaPrimary}
+          primaryHref={`/${currentLocale}/contact`}
+          direction={isArabic ? 'rtl' : 'ltr'}
+          backgroundGradient="linear-gradient(180deg, #f4f7ff 0%, #f4f7ff 60%, #050b3d 60%, #050b3d 100%)"
+        />
       </main>
       <Footer />
     </div>

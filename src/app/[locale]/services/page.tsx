@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { usePathname, useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import FloatingCTA from '@/components/ui/FloatingCTA';
 
 type Pillar = {
 	icon?: string;
@@ -491,6 +492,14 @@ export default function ServicesPage() {
 					</div>
 				</div>
 			</section>
+
+			<FloatingCTA
+				title={ctaTitle}
+				description={ctaSubtitle}
+				primaryLabel={ctaPrimary}
+				primaryHref={buildHref(ctaPrimaryHref)}
+				backgroundGradient="linear-gradient(180deg, #f8f9fa 0%, #f8f9fa 60%, #050b3d 60%, #050b3d 100%)"
+			/>
 
 			</main>
 			<Footer />

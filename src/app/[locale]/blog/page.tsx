@@ -17,13 +17,15 @@ type BlogPost = {
 };
 
 type BlogPageProps = {
-  params: {
-    locale: string;
-  };
+  params: Promise<{
+    locale?: string;
+  }>;
 };
 
+const MAX_CONTAINER_WIDTH = 'min(1140px, 100%)';
+
 export default async function BlogPage({ params }: BlogPageProps) {
-  const locale = params.locale ?? 'en';
+  const { locale = 'en' } = await params;
   const localePrefix = `/${locale}`;
 
   const [t, common] = await Promise.all([

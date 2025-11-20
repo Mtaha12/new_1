@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CSSProperties, FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import FloatingCTA from '@/components/ui/FloatingCTA';
 
 type BlogPost = {
   id: number;
@@ -1282,73 +1283,17 @@ export default function BlogLanding({
             </div>
           </div>
         </section>
+</main>
+        <FloatingCTA
+          title={strings.ctaTitle}
+          description={strings.ctaDescription}
+          primaryLabel={strings.ctaButton}
+          primaryHref={strings.ctaHref || `${localePrefix}/contact`}
+          direction={localeIsArabic ? 'rtl' : 'ltr'}
+          backgroundGradient="linear-gradient(180deg, #f8f9fa 0%, #f8f9fa 60%, #050b3d 60%, #050b3d 100%)"
+        />
 
-        <section
-          style={{
-            position: 'relative',
-            padding: '0 clamp(1.5rem, 5vw, 3rem)',
-            background: 'transparent',
-            marginBottom: '-5rem'
-          }}
-        >
-          <div
-            style={{
-              maxWidth: '1140px',
-              margin: '0 auto'
-            }}
-          >
-            <div
-              className="fade-section"
-              style={{
-                background: '#fff',
-                borderRadius: '28px',
-                padding: 'clamp(2.8rem, 6vw, 4rem) clamp(2rem, 6vw, 3.5rem)',
-                textAlign: 'center',
-                boxShadow: '0 30px 75px rgba(5, 12, 40, 0.25)'
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-                  fontWeight: 800,
-                  color: '#0a0e3d',
-                  marginBottom: '1rem'
-                }}
-              >
-                {strings.ctaTitle}
-              </h3>
-              <p
-                style={{
-                  fontSize: 'clamp(0.95rem, 1.6vw, 1.1rem)',
-                  color: '#4d5566',
-                  lineHeight: 1.75,
-                  maxWidth: '760px',
-                  margin: '0 auto 2.2rem'
-                }}
-              >
-                {strings.ctaDescription}
-              </p>
-              <Link
-                href={strings.ctaHref}
-                className="glow-button"
-                style={{
-                  display: 'inline-block',
-                  background: '#1368ff',
-                  color: '#fff',
-                  padding: '0.85rem 2.8rem',
-                  borderRadius: '999px',
-                  fontWeight: 700,
-                  fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-                  textDecoration: 'none',
-                  boxShadow: '0 16px 36px rgba(19, 104, 255, 0.35)'
-                }}
-              >
-                {strings.ctaButton}
-              </Link>
-            </div>
-          </div>
-        </section>
-      </main>
+      
     </>
   );
 }

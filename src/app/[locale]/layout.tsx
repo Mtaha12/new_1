@@ -4,11 +4,9 @@ import { notFound } from 'next/navigation';
 import { getMessagesForLocale, routing } from '@/i18n';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
-import DeferredChatWidget from '@/components/chat/DeferredChatWidget';
 import LocaleHtmlAttributes from '@/components/layout/LocaleHtmlAttributes';
-import ScrollToTopButton from '@/components/layout/ScrollToTopButton';
+import ProgressivePageEnhancements from '@/components/layout/ProgressivePageEnhancements';
 import '../globals.css';
-import ScrollAnimator from '@/components/layout/ScrollAnimator';
 
 // Language Switcher Component
 function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
@@ -98,9 +96,7 @@ export default async function LocaleLayout({
         }}
       >
         {children}
-        <ScrollAnimator />
-        <ScrollToTopButton />
-        <DeferredChatWidget />
+        <ProgressivePageEnhancements />
       </div>
     </NextIntlClientProvider>
   );

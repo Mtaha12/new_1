@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import FloatingCTA from '@/components/ui/FloatingCTA';
 
 type ContentSection = {
   title: string;
@@ -28,6 +29,7 @@ type HomepageResource = {
   title: string;
   tag?: string;
   image?: string;
+  description?: string;
 };
 
 function toArray<T>(value: unknown): T[] {
@@ -484,77 +486,14 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
           </div>
         </section>
 
-        <section
-          style={{
-            background: 'linear-gradient(180deg, #f4f7ff 0%, #f4f7ff 52%, #050b3d 52%, #050b3d 100%)',
-            padding: 'clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem) clamp(7rem, 11vw, 9rem)',
-            direction: isArabic ? 'rtl' : 'ltr'
-          }}
-        >
-          <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-            <div
-              style={{
-                background: '#fff',
-                borderRadius: '26px',
-                padding: 'clamp(3rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem)',
-                textAlign: 'center',
-                boxShadow: '0 35px 65px rgba(0, 0, 0, 0.25)',
-                transform: 'translateY(-22%)',
-                margin: '0 auto'
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: 'clamp(1.9rem, 4vw, 2.6rem)',
-                  fontWeight: 800,
-                  color: '#0a0e3d',
-                  marginBottom: '1rem'
-                }}
-              >
-                {ctaTitle}
-              </h2>
-              <p
-                style={{
-                  fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
-                  lineHeight: 1.6,
-                  marginBottom: '2rem',
-                  color: '#55617d',
-                  maxWidth: '640px',
-                  margin: '0 auto 2rem'
-                }}
-              >
-                {ctaSubtitle}
-              </p>
-              <Link
-                href={`/${currentLocale}/contact`}
-                style={{
-                  display: 'inline-block',
-                  background: 'linear-gradient(135deg, #0a53ff 0%, #3e8bff 100%)',
-                  color: '#fff',
-                  border: 'none',
-                  padding: 'clamp(0.9rem, 2vw, 1.1rem) clamp(2.4rem, 5vw, 3.2rem)',
-                  fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-                  fontWeight: 600,
-                  borderRadius: '999px',
-                  cursor: 'pointer',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  boxShadow: '0 15px 30px rgba(10, 83, 255, 0.35)',
-                  textDecoration: 'none'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 20px 35px rgba(10, 83, 255, 0.45)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 15px 30px rgba(10, 83, 255, 0.35)';
-                }}
-              >
-                {ctaButton}
-              </Link>
-            </div>
-          </div>
-        </section>
+        <FloatingCTA
+          title={ctaTitle}
+          description={ctaSubtitle}
+          primaryLabel={ctaButton}
+          primaryHref={`/${currentLocale}/contact`}
+          direction={isArabic ? 'rtl' : 'ltr'}
+          backgroundGradient="linear-gradient(180deg, #f4f7ff 0%, #f4f7ff 60%, #050b3d 60%, #050b3d 100%)"
+        />
 
       </main>
 

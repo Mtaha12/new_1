@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CSSProperties } from 'react';
+import FloatingCTA from '@/components/ui/FloatingCTA';
 
 export type HeroContent = {
   title: string;
@@ -560,68 +561,13 @@ const ServicePageLayout = ({
         </div>
       </section>
 
-      {/* CTA */}
-      <section
-        style={{
-          position: 'relative',
-          padding: '0 clamp(1.5rem, 6vw, 3rem)',
-          background: 'transparent',
-          marginBottom: '-5rem'
-        }}
-      >
-        <div style={{ ...sectionContainerStyle }}>
-          <div
-            className="fade-section"
-            style={{
-              background: '#fff',
-              borderRadius: '28px',
-              padding: 'clamp(2.8rem, 6vw, 4rem) clamp(2rem, 6vw, 3.5rem)',
-              textAlign: 'center',
-              boxShadow: '0 30px 75px rgba(5, 12, 40, 0.25)'
-            }}
-          >
-            <h3
-              style={{
-                fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-                fontWeight: 800,
-                color: COLORS.text,
-                marginBottom: '1rem'
-              }}
-            >
-              {cta.title}
-            </h3>
-            <p
-              style={{
-                fontSize: 'clamp(0.95rem, 1.6vw, 1.1rem)',
-                color: COLORS.textMuted,
-                lineHeight: 1.75,
-                maxWidth: '760px',
-                margin: '0 auto 2.2rem'
-              }}
-            >
-              {cta.description}
-            </p>
-            <Link
-              href={cta.primaryHref}
-              prefetch={false}
-              style={{
-                display: 'inline-block',
-                background: COLORS.accentBlue,
-                color: '#fff',
-                padding: '0.85rem 2.8rem',
-                borderRadius: '999px',
-                fontWeight: 700,
-                fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-                textDecoration: 'none',
-                boxShadow: '0 16px 36px rgba(19, 104, 255, 0.35)'
-              }}
-              className="glow-button"
-            >
-              {cta.primaryLabel}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <FloatingCTA
+        title={cta.title}
+        description={cta.description}
+        primaryLabel={cta.primaryLabel}
+        primaryHref={cta.primaryHref}
+        backgroundGradient="linear-gradient(180deg, #f8f9fa 0%, #f8f9fa 60%, #050b3d 60%, #050b3d 100%)"
+      />
     </main>
   );
 };
