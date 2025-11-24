@@ -14,6 +14,7 @@ type FloatingCTAProps = {
   backgroundGradient?: string;
   overlapTop?: string;
   overlapBottom?: string;
+  className?: string;
 };
 
 const DEFAULT_BACKGROUND = 'linear-gradient(180deg, #f5f8ff 0%, #f5f8ff 62%, #050b3d 62%, #050b3d 100%)';
@@ -79,7 +80,8 @@ export default function FloatingCTA({
   containerWidth,
   backgroundGradient,
   overlapTop = '2rem',
-  overlapBottom = '0rem' // POSITIVE value only
+  overlapBottom = '0rem', // POSITIVE value only
+  className = ''
 }: FloatingCTAProps) {
   const outerStyle: CSSProperties = {
     ...OUTER_BASE_STYLE,

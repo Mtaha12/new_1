@@ -206,44 +206,89 @@ export default function HomePage() {
           textAlign: 'center',
           color: '#fff',
           background: 'linear-gradient(135deg, #0a0e3d 0%, #1346a3 100%)',
-          minHeight: 'min(80vh, 720px)'
+          minHeight: 'min(80vh, 720px)',
+          // Reserve space for content to prevent layout shift
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
         }}
       >
-        {shouldPlayHeroVideo && (
-          <video
-            src="/img/herosection.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            poster="/img/bg1.jpg"
-            aria-hidden
+        {/* Background with aspect ratio container */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 0,
+          overflow: 'hidden'
+        }}>
+          {shouldPlayHeroVideo ? (
+            <video
+              src="/img/herosection.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              poster="/img/bg1.jpg"
+              aria-hidden
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: 0,
+                willChange: 'opacity',
+                // Ensure video doesn't cause layout shift
+                display: 'block',
+                aspectRatio: '16/9',
+                minWidth: '100%',
+                minHeight: '100%'
+              }}
+            />
+          ) : (
+            <Image
+              src="/img/bg1.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: 0,
+              }}
+            />
+          )}
+          <div
             style={{
               position: 'absolute',
               inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              zIndex: 0,
-              willChange: 'opacity'
+              background: 'linear-gradient(135deg, rgba(10, 14, 61, 0.92) 0%, rgba(19, 70, 163, 0.68) 100%)',
+              zIndex: 1
             }}
           />
-        )}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(135deg, rgba(10, 14, 61, 0.92) 0%, rgba(19, 70, 163, 0.68) 100%)',
-            zIndex: 1
-          }}
-        />
+        </div>
         <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <h1 style={{
             fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
             fontWeight: '700',
-            marginBottom: '1.5rem',
-            lineHeight: 1.2
+            margin: '0 auto 1.5rem',
+            lineHeight: 1.2,
+            maxWidth: '1000px',
+            // Prevent layout shift during font loading
+            minHeight: '1.2em',
+            // Reserve space for the heading
+            padding: '0 1rem',
+            // Use the CSS variable for the font family
+            fontFamily: 'var(--font-inter), sans-serif',
+            // Add smooth transition for any potential shifts
+            transition: 'opacity 0.3s ease'
           }}>
             {t('heroTitle')}
           </h1>
@@ -252,27 +297,56 @@ export default function HomePage() {
             maxWidth: '700px',
             margin: '0 auto 2.5rem',
             lineHeight: 1.7,
-            opacity: 0.9
+            opacity: 0.9,
+            // Reserve space for the paragraph
+            minHeight: '3.4em',
+            padding: '0 1rem',
+            // Font display is handled in CSS @font-face rules
           }}>
             {t('heroSubtitle')}
           </p>
-          <Link
-            href={`/${currentLocale}/contact`}
-            className="glow-button hero-cta"
-            style={{
-              display: 'inline-block',
-              background: '#00bcd4',
-              color: '#fff',
-              padding: '1rem 2.5rem',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              fontWeight: '600',
-              textDecoration: 'none',
-              boxShadow: '0 4px 15px rgba(0, 188, 212, 0.3)'
-            }}
-          >
-            {t('heroCta') || 'Get Started'}
-          </Link>
+          <div style={{
+            // Reserve space for the button
+            minHeight: '54px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Link
+              href={`/${currentLocale}/contact`}
+              className="glow-button hero-cta"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: '#00bcd4',
+                color: '#fff',
+                padding: '1rem 2.5rem',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                fontWeight: '600',
+                textDecoration: 'none',
+                boxShadow: '0 4px 15px rgba(0, 188, 212, 0.3)',
+                // Prevent button text from wrapping
+                whiteSpace: 'nowrap',
+                // Smooth hover effect
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                // Ensure button has consistent size
+                minWidth: '200px',
+                height: '54px'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 188, 212, 0.4)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 188, 212, 0.3)';
+              }}
+            >
+              {t('heroCta') || 'Get Started'}
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -1,52 +1,121 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    
+"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        sm: '100%',
+        md: '100%',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1400px',
+      },
+    },
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "var(--font-noto-arabic)", "system-ui"],
-        display: ["var(--font-inter)", "var(--font-noto-arabic)", "sans-serif"],
+        sans: ["var(--font-inter)", "var(--font-noto-sans-arabic)", "system-ui"],
+        display: ["var(--font-inter)", "var(--font-noto-sans-arabic)", "sans-serif"],
       },
       colors: {
-        // Primary brand colors
+        // Base colors
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        // Card colors
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        // UI colors
         primary: {
-          DEFAULT: '#0a0e3d',
-          light: '#69E8E1',
-          dark: '#060926',
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        // Additional brand colors
+        primary: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+          DEFAULT: '#0ea5e9',
+          light: '#38bdf8',
+          dark: '#075985',
           contrast: '#ffffff',
         },
         // Secondary brand colors
         secondary: {
-          DEFAULT: '#59078F',
-          light: '#8307FF',
-          dark: '#3D0563',
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#64748b',
+          600: '#475569',
+          700: '#334155',
+          800: '#1e293b',
+          900: '#0f172a',
+          DEFAULT: '#475569',
+          light: '#94a3b8',
+          dark: '#1e293b',
         },
         // Status colors
         success: {
-          DEFAULT: '#06C79A',
-          light: '#E6F9F4',
-          dark: '#059B7A',
+          DEFAULT: '#10b981',
+          light: '#d1fae5',
+          dark: '#059669',
         },
         warning: {
-          DEFAULT: '#F7B500',
-          light: '#FFEFCC',
-          dark: '#CC9400',
+          DEFAULT: '#f59e0b',
+          light: '#fef3c7',
+          dark: '#d97706',
         },
         error: {
-          DEFAULT: '#F53D5C',
-          light: '#FEE8EC',
-          dark: '#CC2D46',
+          DEFAULT: '#ef4444',
+          light: '#fee2e2',
+          dark: '#dc2626',
         },
         info: {
-          DEFAULT: '#0063F7',
-          light: '#E6F0FF',
-          dark: '#004EC4',
+          DEFAULT: '#3b82f6',
+          light: '#dbeafe',
+          dark: '#2563eb',
         },
-        // Neutral colors
+        // Neutral colors with better contrast
         neutral: {
           50: '#F8F9FA',
           100: '#F1F3F5',
@@ -62,24 +131,26 @@ module.exports = {
       },
       // Consistent spacing scale
       spacing: {
+        'px': '1px',
+        '0': '0px',
         '0.5': '0.125rem',
+        '1': '0.25rem',
         '1.5': '0.375rem',
+        '2': '0.5rem',
         '2.5': '0.625rem',
+        '3': '0.75rem',
         '3.5': '0.875rem',
-        '4.5': '1.125rem',
-        '5.5': '1.375rem',
-        '6.5': '1.625rem',
-        '7.5': '1.875rem',
-        '8.5': '2.125rem',
-        '9.5': '2.375rem',
-        '10.5': '2.625rem',
-        '11.5': '2.875rem',
-        '12.5': '3.125rem',
-        '13': '3.25rem',
+        '4': '1rem',
+        '5': '1.25rem',
+        '6': '1.5rem',
+        '7': '1.75rem',
+        '8': '2rem',
+        '9': '2.25rem',
+        '10': '2.5rem',
+        '11': '2.75rem',
+        '12': '3rem',
         '14': '3.5rem',
-        '15': '3.75rem',
         '16': '4rem',
-        '18': '4.5rem',
         '20': '5rem',
         '24': '6rem',
         '28': '7rem',
@@ -95,30 +166,42 @@ module.exports = {
         '72': '18rem',
         '80': '20rem',
         '96': '24rem',
+        '112': '28rem',
+        '128': '32rem',
+        '144': '36rem',
+        '160': '40rem',
+        '176': '44rem',
+        '192': '48rem',
+        '208': '52rem',
+        '224': '56rem',
+        '240': '60rem',
+        '256': '64rem',
+        '288': '72rem',
+        '320': '80rem',
+        '384': '96rem',
       },
       // Border radius scale
       borderRadius: {
-        'none': '0',
+        'none': '0px',
         'sm': '0.125rem',
-        'DEFAULT': '0.25rem',
-        'md': '0.375rem',
-        'lg': '0.5rem',
-        'xl': '0.75rem',
-        '2xl': '1rem',
-        '3xl': '1.5rem',
+        DEFAULT: '0.375rem',
+        'md': '0.5rem',
+        'lg': '0.75rem',
+        'xl': '1rem',
+        '2xl': '1.5rem',
+        '3xl': '2rem',
         'full': '9999px',
       },
       // Box shadow scale
       boxShadow: {
-        'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        'sm': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-        'DEFAULT': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        'md': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-        'lg': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-        'primary': '0 4px 14px 0 rgba(0, 118, 255, 0.39)',
+        'xs': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+        'sm': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        DEFAULT: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        'md': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        'lg': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+        'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+        '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
+        'inner': 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
         'none': 'none',
       },
       // Animation and transition
@@ -157,6 +240,8 @@ module.exports = {
   corePlugins: {
     container: false, // Disable default container
   },
+  // Add CSS variable support for dark mode
+  darkMode: ['class'],
   // Variants
   variants: {
     extend: {

@@ -21,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${notoSansArabic.variable}`} suppressHydrationWarning>
-      <body>{children}</body>
+      <body className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div className="min-h-screen flex flex-col">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
