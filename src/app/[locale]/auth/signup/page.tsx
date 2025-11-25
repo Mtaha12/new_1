@@ -17,7 +17,7 @@ export default function SignupPage() {
     if (Array.isArray(localeFromParams)) {
       return localeFromParams[0];
     }
-    return localeFromParams || pathname.split('/')[1] || 'en';
+    return localeFromParams || pathname?.split('/')?.[1] || 'en';
   }, [localeFromParams, pathname]);
   const localePrefix = `/${currentLocale}`;
   const isArabic = currentLocale === 'ar';
