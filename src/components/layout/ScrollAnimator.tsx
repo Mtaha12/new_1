@@ -18,7 +18,17 @@ export default function ScrollAnimator() {
       return;
     }
 
+    const root = document.documentElement;
     const elements = () => Array.from(document.querySelectorAll<HTMLElement>(SELECTORS));
+    const revealInView = () => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      elements().forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= viewportHeight * 0.9 && rect.bottom >= viewportHeight * -0.05) {
+          element.classList.add('is-visible');
+        }
+      });
+    };
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -28,6 +38,9 @@ export default function ScrollAnimator() {
       });
       return;
     }
+
+    root.classList.add('has-animations');
+    revealInView();
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -55,6 +68,7 @@ export default function ScrollAnimator() {
     register();
 
     const mutationObserver = new MutationObserver(() => {
+      revealInView();
       register();
     });
 
@@ -67,6 +81,7 @@ export default function ScrollAnimator() {
       mutationObserver.disconnect();
       elements().forEach((element) => observer.unobserve(element));
       observer.disconnect();
+      root.classList.remove('has-animations');
     };
   }, []);
 

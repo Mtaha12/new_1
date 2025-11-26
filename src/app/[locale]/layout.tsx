@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import LocaleHtmlAttributes from '@/components/layout/LocaleHtmlAttributes';
 import ProgressivePageEnhancements from '@/components/layout/ProgressivePageEnhancements';
+import PageLoadingOverlay from '@/components/layout/PageLoadingOverlay';
 import '../globals.css';
 
 // Language Switcher Component
@@ -96,6 +97,7 @@ export default async function LocaleLayout({
         }}
       >
         {children}
+        <PageLoadingOverlay />
         <ProgressivePageEnhancements />
       </div>
     </NextIntlClientProvider>

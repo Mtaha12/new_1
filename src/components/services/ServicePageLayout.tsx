@@ -534,27 +534,21 @@ const ServicePageLayout = ({
                       sizes="(max-width: 768px) 100vw, 320px"
                       style={{ objectFit: 'cover' }}
                     />
+                    <div className="resource-card__shade" />
+                    <div className="resource-card__copy">
+                      {resourceItem.tag ? <span className="resource-card__pill">{resourceItem.tag}</span> : null}
+                      <p className="resource-card__copy-text">{resourceItem.title}</p>
+                    </div>
                   </div>
                 </div>
               );
 
-              if (resourceItem.href) {
-                return (
-                  <Link
-                    key={resourceItem.title}
-                    href={resourceItem.href}
-                    prefetch={false}
-                    style={{ textDecoration: 'none' }}
-                  >
-                    {card}
-                  </Link>
-                );
-              }
-
-              return (
-                <div key={resourceItem.title}>
+              return resourceItem.href ? (
+                <Link key={resourceItem.title} href={resourceItem.href} prefetch={false} style={{ textDecoration: 'none' }}>
                   {card}
-                </div>
+                </Link>
+              ) : (
+                <div key={resourceItem.title}>{card}</div>
               );
             })}
           </div>

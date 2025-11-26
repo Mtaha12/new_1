@@ -1,6 +1,7 @@
 // app/layout.tsx - Root Layout (passes through to locale-specific layout)
 import './globals.css';
 import { Inter, Noto_Sans_Arabic } from 'next/font/google';
+import PageLoadingOverlay from '@/components/layout/PageLoadingOverlay';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${notoSansArabic.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
         <div className="min-h-screen flex flex-col">
+          <PageLoadingOverlay />
           {children}
         </div>
       </body>
