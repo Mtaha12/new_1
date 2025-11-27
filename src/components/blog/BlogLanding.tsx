@@ -1246,39 +1246,34 @@ export default function BlogLanding({
               }}
             >
               {(resources.length ? resources : DEFAULT_RESOURCES).map((resource, index) => {
-                const card = (
-                  <div
+                const blogHref = resource.tag ? `/blog?category=${encodeURIComponent(resource.tag)}` : '/blog';
+                
+                return (
+                  <Link 
                     key={`${resource.title}-${index}`}
-                    className="tilt-card resource-card"
-                    style={{
-                      background: '#0a0e3d',
-                      borderRadius: '18px',
-                      overflow: 'hidden',
-                      boxShadow: '0 20px 45px rgba(5, 12, 40, 0.24)',
-                      height: '250px'
-                    }}
+                    href={resource.href || blogHref}
+                    prefetch={false}
+                    style={{ textDecoration: 'none' }}
                   >
-                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                      <Image
-                        src={resource.image}
-                        alt={resource.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 320px"
-                        style={{ objectFit: 'cover' }}
-                      />
+                    <div
+                      className="resource-card tilt-card"
+                      style={{
+                        background: '#0a0e3d',
+                        boxShadow: '0 20px 45px rgba(5, 12, 40, 0.24)',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <div className="resource-card__media">
+                        <Image
+                          src={resource.image}
+                          alt={resource.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 320px"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 );
-
-                if (resource.href) {
-                  return (
-                    <Link key={resource.title} href={resource.href} style={{ textDecoration: 'none' }}>
-                      {card}
-                    </Link>
-                  );
-                }
-
-                return card;
               })}
             </div>
           </div>

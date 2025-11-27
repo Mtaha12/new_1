@@ -471,97 +471,104 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Resources Section */}
-      <section 
-        className="fade-section delay-4"
-        style={{
-          padding: 'clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
-          background: '#fff',
-          direction: isArabic ? 'rtl' : 'ltr'
+     {/* Resources Section */}
+<section 
+  className="fade-section delay-4"
+  style={{
+    padding: 'clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
+    background: '#fff',
+    direction: isArabic ? 'rtl' : 'ltr'
+  }}>
+  <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
+    <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+      <h2 style={{
+        fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
+        fontWeight: '800',
+        color: '#0a0e3d',
+        lineHeight: '1.2',
+        marginBottom: '1rem',
+        position: 'relative',
+        display: 'inline-block'
+      }}>
+        <span style={{
+          position: 'relative',
+          zIndex: 1
         }}>
-        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h2 style={{
-              fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
-              fontWeight: '800',
-              color: '#0a0e3d',
-              lineHeight: '1.2',
-              marginBottom: '1rem',
+          {t('resourcesTitle')}
+        </span>
+        <span style={{
+          position: 'absolute',
+          bottom: '-8px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '100px',
+          height: '4px',
+          background: 'linear-gradient(90deg, #1368ff, #69e8e1)',
+          borderRadius: '2px'
+        }} />
+      </h2>
+      <p style={{
+        fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)',
+        lineHeight: '1.7',
+        color: '#4a5568',
+        maxWidth: '800px',
+        margin: '0 auto',
+        fontWeight: '400'
+      }}>
+        {t('resourcesDescription')}
+      </p>
+    </div>
+    
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: isDesktop ? 'repeat(auto-fit, minmax(320px, 1fr))' : '1fr',
+      gap: '2rem'
+    }}>
+      {t.raw('resourcesCards').map((resource: any, index: number) => (
+        <Link
+          key={index}
+          href={`/${currentLocale}/blog`}
+          prefetch={false}
+          style={{ textDecoration: 'none' }}
+        >
+          <div
+            className={`resource-card tilt-card delay-${(index % 3) + 1}`}
+            style={{
+              background: '#0a0e3d',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+              transition: 'all 0.3s ease',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+            }}
+          >
+            <div style={{
               position: 'relative',
-              display: 'inline-block'
+              width: '100%',
+              aspectRatio: '16/9',
+              overflow: 'hidden'
             }}>
-              <span style={{
-                position: 'relative',
-                zIndex: 1
-              }}>
-                {t('resourcesTitle')}
-              </span>
-              <span style={{
-                position: 'absolute',
-                bottom: '-8px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '100px',
-                height: '4px',
-                background: 'linear-gradient(90deg, #1368ff, #69e8e1)',
-                borderRadius: '2px'
-              }} />
-            </h2>
-            <p style={{
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)',
-              lineHeight: '1.7',
-              color: '#4a5568',
-              maxWidth: '800px',
-              margin: '0 auto',
-              fontWeight: '400'
-            }}>
-              {t('resourcesDescription')}
-            </p>
+              <Image
+                src={resource.image || '/img/resource1.jpg'}
+                alt={resource.title}
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
           </div>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: isDesktop ? 'repeat(auto-fit, minmax(320px, 1fr))' : '1fr',
-            gap: '2rem'
-          }}>
-            {t.raw('resourcesCards').map((resource: any, index: number) => (
-              <div
-                key={index}
-                className={`resource-card tilt-card delay-${(index % 3) + 1}`}
-                style={{
-                  background: '#0a0e3d',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-                  transition: 'all 0.3s ease',
-                  cursor: 'pointer'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px)';
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
-                }}
-              >
-                <div style={{
-                  position: 'relative',
-                  width: '100%',
-                  height: '250px'
-                }}>
-                  <Image
-                    src={resource.image || '/img/resource1.jpg'}
-                    alt={resource.title}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* CTA Section */}
       <section style={{

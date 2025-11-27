@@ -558,67 +558,78 @@ export default function SolutionsOverviewPage() {
         </section>
 
         <section
-          className="fade-section delay-3"
-          style={{
-            padding: 'clamp(3.5rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 3rem) clamp(4.5rem, 10vw, 7rem)',
-            background: '#f4f7ff',
-            direction: isArabic ? 'rtl' : 'ltr'
-          }}
-        >
-          <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 'clamp(2.25rem, 6vw, 3.5rem)' }}>
-              <h2
-                style={{
-                  fontSize: 'clamp(2.1rem, 5vw, 3.1rem)',
-                  fontWeight: 800,
-                  color: '#0a0e3d',
-                  marginBottom: '0.75rem'
-                }}
-              >
-                {resourcesTitle}
-              </h2>
-              <p style={{ color: '#516074', lineHeight: 1.8, maxWidth: '720px', margin: '0 auto', fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)' }}>
-                {resourcesSubtitle}
-              </p>
-            </div>
+  className="fade-section delay-3"
+  style={{
+    padding: 'clamp(3.5rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 3rem) clamp(4.5rem, 10vw, 7rem)',
+    background: '#f4f7ff',
+    direction: isArabic ? 'rtl' : 'ltr'
+  }}
+>
+  <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
+    <div style={{ textAlign: 'center', marginBottom: 'clamp(2.25rem, 6vw, 3.5rem)' }}>
+      <h2
+        style={{
+          fontSize: 'clamp(2.1rem, 5vw, 3.1rem)',
+          fontWeight: 800,
+          color: '#0a0e3d',
+          marginBottom: '0.75rem'
+        }}
+      >
+        {resourcesTitle}
+      </h2>
+      <p style={{ color: '#516074', lineHeight: 1.8, maxWidth: '720px', margin: '0 auto', fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)' }}>
+        {resourcesSubtitle}
+      </p>
+    </div>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+        gap: 'clamp(1.5rem, 4vw, 2.5rem)'
+      }}
+    >
+      {resources.map((resource, index) => {
+        const blogHref = resource.tag ? `${localePrefix}/blog?category=${encodeURIComponent(resource.tag)}` : `${localePrefix}/blog`;
+        
+        return (
+          <Link
+            key={`${resource.title}-${index}`}
+            href={blogHref}
+            prefetch={false}
+            style={{ textDecoration: 'none' }}
+          >
             <div
+              className={`resource-card tilt-card delay-${(index % 3) + 1}`}
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-                gap: 'clamp(1.5rem, 4vw, 2.5rem)'
+                background: '#0a0e3d',
+                boxShadow: '0 22px 45px rgba(10, 14, 61, 0.22)',
+                cursor: 'pointer'
               }}
             >
-              {resources.map((resource, index) => (
-                <div
-                  key={`${resource.title}-${index}`}
-                  className={`tilt-card resource-card ${isArabic ? 'resource-card--rtl' : ''} delay-${(index % 3) + 1}`}
-                  style={{
-                    borderRadius: '20px',
-                    boxShadow: '0 22px 45px rgba(10, 14, 61, 0.22)',
-                    background: '#0a0e3d',
-                    color: '#fff',
-                    textDecoration: 'none',
-                    overflow: 'hidden'
-                  }}
-                >
-                  <div style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '250px'
-                  }}>
-                    <Image
-                      src={resource.image || '/img/resource1.jpg'}
-                      alt={resource.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 320px"
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                </div>
-              ))}
+            {/* Updated Image Container with Aspect Ratio */}
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16/9',
+              overflow: 'hidden'
+            }}>
+              <Image
+                src={resource.image || '/img/resource1.jpg'}
+                alt={resource.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 320px"
+                style={{ 
+                  objectFit: 'cover'
+                }}
+              />
             </div>
           </div>
-        </section>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
 
         <FloatingCTA
           title={ctaTitle}

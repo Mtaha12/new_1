@@ -408,84 +408,91 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
         )}
 
         <section
-          style={{
-            padding: 'clamp(3.5rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 3rem) clamp(4.5rem, 10vw, 7rem)',
-            background: '#f4f7ff',
-            direction: isArabic ? 'rtl' : 'ltr'
-          }}
-        >
-          <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 'clamp(2.25rem, 6vw, 3.5rem)' }}>
-              <h2
-                style={{
-                  fontSize: 'clamp(2.1rem, 5vw, 3.1rem)',
-                  fontWeight: 800,
-                  color: '#0a0e3d',
-                  letterSpacing: '-0.02em',
-                  marginBottom: '0.75rem'
-                }}
-              >
-                {resourcesTitle}
-              </h2>
-              <p
-                style={{
-                  color: '#516074',
-                  lineHeight: 1.8,
-                  maxWidth: '720px',
-                  margin: '0 auto',
-                  fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)'
-                }}
-              >
-                {resourcesSubtitle}
-              </p>
-            </div>
+  style={{
+    padding: 'clamp(3.5rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 3rem) clamp(4.5rem, 10vw, 7rem)',
+    background: '#f4f7ff',
+    direction: isArabic ? 'rtl' : 'ltr'
+  }}
+>
+  <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
+    <div style={{ textAlign: 'center', marginBottom: 'clamp(2.25rem, 6vw, 3.5rem)' }}>
+      <h2
+        style={{
+          fontSize: 'clamp(2.1rem, 5vw, 3.1rem)',
+          fontWeight: 800,
+          color: '#0a0e3d',
+          letterSpacing: '-0.02em',
+          marginBottom: '0.75rem'
+        }}
+      >
+        {resourcesTitle}
+      </h2>
+      <p
+        style={{
+          color: '#516074',
+          lineHeight: 1.8,
+          maxWidth: '720px',
+          margin: '0 auto',
+          fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)'
+        }}
+      >
+        {resourcesSubtitle}
+      </p>
+    </div>
 
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+        gap: 'clamp(1.5rem, 4vw, 2.5rem)'
+      }}
+    >
+      {(localizedResourcesRaw.length > 0 ? localizedResourcesRaw : homepageResources).map((resource, index) => {
+        const imageSrc = (resource as HomepageResource).image ?? (resource as { img: string }).img ?? '/img/resource1.jpg';
+        const resourceTag = (resource as HomepageResource).tag ?? (resource as { tag?: string }).tag;
+        const resourceTitle = resource.title ?? '';
+        const resourceDescription = (resource as HomepageResource).description ?? '';
+        const blogHref = resourceTag ? `/${currentLocale}/blog?category=${encodeURIComponent(resourceTag)}` : `/${currentLocale}/blog`;
+
+        return (
+          <Link
+            key={`${resourceTitle}-${index}`}
+            href={blogHref}
+            prefetch={false}
+            style={{ textDecoration: 'none' }}
+          >
             <div
+              className="resource-card tilt-card"
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-                gap: 'clamp(1.5rem, 4vw, 2.5rem)'
+                background: '#0a0e3d',
+                boxShadow: '0 22px 45px rgba(10, 14, 61, 0.25)',
+                cursor: 'pointer'
               }}
             >
-              {(localizedResourcesRaw.length > 0 ? localizedResourcesRaw : homepageResources).map((resource, index) => {
-                const imageSrc = (resource as HomepageResource).image ?? (resource as { img: string }).img ?? '/img/resource1.jpg';
-                const resourceTag = (resource as HomepageResource).tag ?? (resource as { tag?: string }).tag;
-                const resourceTitle = resource.title ?? '';
-                const resourceDescription = (resource as HomepageResource).description ?? '';
-
-                return (
-                  <div
-                    key={`${resourceTitle}-${index}`}
-                    className={`tilt-card resource-card ${isArabic ? 'resource-card--rtl' : ''} delay-${(index % 3) + 1}`}
-                    style={{
-                      borderRadius: '20px',
-                      boxShadow: '0 22px 45px rgba(10, 14, 61, 0.25)',
-                      background: '#0a0e3d',
-                      color: '#fff'
-                    }}
-                  >
-                    <div className="resource-card__media">
-                      <Image src={imageSrc} alt={resourceTitle} fill style={{ objectFit: 'cover' }} />
-                      {resourceTag && <span className="resource-card__tag">{resourceTag}</span>}
-                    </div>
-                    <div className="resource-card__body">
-                      <h3 className="resource-card__title" style={{ color: '#fff' }}>
-                        {resourceTitle}
-                      </h3>
-                      {resourceDescription && (
-                        <p style={{ margin: 0, color: 'rgba(255,255,255,0.82)', lineHeight: 1.6, fontSize: '0.95rem' }}>
-                          {resourceDescription}
-                        </p>
-                      )}
-                      <span className="resource-card__cta">{resourcesCTA}</span>
-                    </div>
-                  </div>
-                );
-              })}
+            {/* Updated Image Container with Aspect Ratio */}
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16/9',
+              overflow: 'hidden'
+            }}>
+              <Image 
+                src={imageSrc} 
+                alt={resourceTitle} 
+                fill 
+                sizes="(max-width: 768px) 100vw, 320px"
+                style={{ 
+                  objectFit: 'cover'
+                }}
+              />
             </div>
-          </div>
-        </section>
-
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
         <FloatingCTA
           title={ctaTitle}
           description={ctaSubtitle}

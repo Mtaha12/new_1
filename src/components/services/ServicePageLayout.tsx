@@ -478,83 +478,83 @@ const ServicePageLayout = ({
       ) : null}
 
       {/* Resources */}
-      <section
-        className="fade-section"
-        style={{ padding: 'clamp(3.5rem, 8vw, 6.5rem) clamp(1.5rem, 6vw, 3rem)', background: COLORS.surface }}
-      >
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h3
-            style={{
-              fontSize: 'clamp(1.9rem, 4vw, 2.6rem)',
-              fontWeight: 800,
-              color: COLORS.text,
-              textAlign: 'center',
-              marginBottom: '1rem'
-            }}
+<section
+  className="fade-section"
+  style={{ padding: 'clamp(3.5rem, 8vw, 6.5rem) clamp(1.5rem, 6vw, 3rem)', background: COLORS.surface }}
+>
+  <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    <h3
+      style={{
+        fontSize: 'clamp(1.9rem, 4vw, 2.6rem)',
+        fontWeight: 800,
+        color: COLORS.text,
+        textAlign: 'center',
+        marginBottom: '1rem'
+      }}
+    >
+      {resourcesTitle}
+    </h3>
+    <p
+      style={{
+        color: COLORS.textMuted,
+        textAlign: 'center',
+        maxWidth: '780px',
+        margin: '0 auto clamp(2.5rem, 6vw, 3.5rem)',
+        lineHeight: 1.8,
+        fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)'
+      }}
+    >
+      {resourcesIntro}
+    </p>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+        gap: 'clamp(1.75rem, 4vw, 2.5rem)'
+      }}
+    >
+      {resourcesToRender.map((resourceItem, resourceIndex) => {
+        const blogHref = resourceItem.tag ? `/blog?category=${encodeURIComponent(resourceItem.tag)}` : '/blog';
+        
+        return (
+          <Link
+            key={resourceItem.title}
+            href={resourceItem.href || blogHref}
+            prefetch={false}
+            style={{ textDecoration: 'none' }}
           >
-            {resourcesTitle}
-          </h3>
-          <p
-            style={{
-              color: COLORS.textMuted,
-              textAlign: 'center',
-              maxWidth: '780px',
-              margin: '0 auto clamp(2.5rem, 6vw, 3.5rem)',
-              lineHeight: 1.8,
-              fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)'
-            }}
-          >
-            {resourcesIntro}
-          </p>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-              gap: 'clamp(1.75rem, 4vw, 2.5rem)'
-            }}
-          >
-            {resourcesToRender.map((resourceItem, resourceIndex) => {
-              const card = (
-                <div
-                  className={`${RESOURCE_CARD_CLASS} delay-${(resourceIndex % 3) + 1}`}
-                  style={{
-                    background: '#0a0e3d',
-                    borderRadius: '18px',
-                    overflow: 'hidden',
-                    boxShadow: '0 20px 40px rgba(5, 12, 40, 0.18)',
-                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                    height: '250px'
-                  }}
-                >
-                  <div className="resource-card__media" style={{ position: 'relative', width: '100%', height: '100%' }}>
-                    <Image
-                      src={resourceItem.imageSrc}
-                      alt={resourceItem.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 320px"
-                      style={{ objectFit: 'cover' }}
-                    />
-                    <div className="resource-card__shade" />
-                    <div className="resource-card__copy">
-                      {resourceItem.tag ? <span className="resource-card__pill">{resourceItem.tag}</span> : null}
-                      <p className="resource-card__copy-text">{resourceItem.title}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-
-              return resourceItem.href ? (
-                <Link key={resourceItem.title} href={resourceItem.href} prefetch={false} style={{ textDecoration: 'none' }}>
-                  {card}
-                </Link>
-              ) : (
-                <div key={resourceItem.title}>{card}</div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
+            <div
+              className="resource-card tilt-card"
+              style={{
+                background: '#0a0e3d',
+                boxShadow: '0 20px 40px rgba(5, 12, 40, 0.18)',
+                cursor: 'pointer'
+              }}
+            >
+            {/* Updated Image Container with Aspect Ratio */}
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16/9',
+              overflow: 'hidden'
+            }}>
+              <Image
+                src={resourceItem.imageSrc}
+                alt={resourceItem.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 320px"
+                style={{ 
+                  objectFit: 'cover'
+                }}
+              />
+            </div>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
       <FloatingCTA
         title={cta.title}
         description={cta.description}

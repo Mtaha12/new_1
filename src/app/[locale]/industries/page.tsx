@@ -523,65 +523,79 @@ export default function IndustriesPage() {
 
       
       {/* Resources Section */}
-      <section style={{
-        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
-        background: '#fff',
-        direction: isArabic ? 'rtl' : 'ltr'
-      }}>
-        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-          <h2 style={{
-            fontSize: 'clamp(2rem, 5vw, 3rem)',
-            fontWeight: '800',
-            color: '#0a0e3d',
-            lineHeight: '1.2',
-            marginBottom: '1rem',
-            textAlign: 'center'
-          }}>
-            {tHome('resourcesTitle')}
-          </h2>
-          <p style={{
-            color: '#666',
-            lineHeight: '1.8',
-            maxWidth: '800px',
-            margin: '0 auto 3rem',
-            fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
-            textAlign: 'center'
-          }}>
-            {tHome('resourcesDescription')}
-          </p>
+<section style={{
+  padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
+  background: '#fff',
+  direction: isArabic ? 'rtl' : 'ltr'
+}}>
+  <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
+    <h2 style={{
+      fontSize: 'clamp(2rem, 5vw, 3rem)',
+      fontWeight: '800',
+      color: '#0a0e3d',
+      lineHeight: '1.2',
+      marginBottom: '1rem',
+      textAlign: 'center'
+    }}>
+      {tHome('resourcesTitle')}
+    </h2>
+    <p style={{
+      color: '#666',
+      lineHeight: '1.8',
+      maxWidth: '800px',
+      margin: '0 auto 3rem',
+      fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
+      textAlign: 'center'
+    }}>
+      {tHome('resourcesDescription')}
+    </p>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+      gap: '2rem'
+    }}>
+      {resourcesCards.map((resource: HomeResourceCard, index: number) => {
+        const blogHref = resource.tag ? `/${currentLocale}/blog?category=${encodeURIComponent(resource.tag)}` : `/${currentLocale}/blog`;
+        
+        return (
+          <Link
+            key={index}
+            href={blogHref}
+            prefetch={false}
+            style={{ textDecoration: 'none' }}
+          >
+            <div
+              className={`resource-card tilt-card delay-${(index % 3) + 1}`}
+              style={{
+                background: '#0a0e3d',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                cursor: 'pointer'
+              }}
+            >
+          {/* Updated Image Container with Aspect Ratio */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-            gap: '2rem'
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16/9',
+            overflow: 'hidden'
           }}>
-            {resourcesCards.map((resource: HomeResourceCard, index: number) => (
-              <div
-                key={index}
-                className={`resource-card tilt-card delay-${(index % 3) + 1}`}
-                style={{
-                  background: '#0a0e3d',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-                }}
-              >
-                <div style={{
-                  position: 'relative',
-                  width: '100%',
-                  height: '250px'
-                }}>
-                  <Image
-                    src={resource.image || '/img/resource1.jpg'}
-                    alt={resource.title}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-              </div>
-            ))}
+            <Image
+              src={resource.image || '/img/resource1.jpg'}
+              alt={resource.title}
+              fill
+              style={{ 
+                objectFit: 'cover'
+              }}
+              sizes="(max-width: 768px) 100vw, 320px"
+            />
           </div>
-        </div>
-      </section>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
 
       {/* CTA Section */}
       <section style={{

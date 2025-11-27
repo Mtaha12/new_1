@@ -927,68 +927,88 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Resources Section */}
-      <section style={{
-        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
-        background: '#fff',
-        direction: isArabic ? 'rtl' : 'ltr'
-      }}>
-        <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-          <h2 style={{
-            fontSize: 'clamp(2rem, 5vw, 3rem)',
-            fontWeight: '800',
-            color: '#0a0e3d',
-            lineHeight: '1.2',
-            marginBottom: '1rem',
-            textAlign: 'center'
-          }}>
-            {resourcesTitle}
-          </h2>
-          <p style={{
-            color: '#666',
-            lineHeight: '1.8',
-            maxWidth: '800px',
-            margin: '0 auto 3rem',
-            fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
-            textAlign: 'center'
-          }}>
-            {resourcesDescription}
-          </p>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-            gap: '2rem'
-          }}>
-            {resourcesCards.map((resource, index) => (
-              <div
-                key={index}
-                className={`resource-card tilt-card delay-${(index % 3) + 1}`}
-                style={{
-                  background: '#0a0e3d',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+     {/* Resources Section */}
+<section style={{
+  padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
+  background: '#fff',
+  direction: isArabic ? 'rtl' : 'ltr'
+}}>
+  <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
+    <h2 style={{
+      fontSize: 'clamp(2rem, 5vw, 3rem)',
+      fontWeight: '800',
+      color: '#0a0e3d',
+      lineHeight: '1.2',
+      marginBottom: '1rem',
+      textAlign: 'center'
+    }}>
+      {resourcesTitle}
+    </h2>
+    <p style={{
+      color: '#666',
+      lineHeight: '1.8',
+      maxWidth: '800px',
+      margin: '0 auto 3rem',
+      fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
+      textAlign: 'center'
+    }}>
+      {resourcesDescription}
+    </p>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+      gap: '2rem'
+    }}>
+      {resourcesCards.map((resource, index) => (
+        <Link
+          key={index}
+          href={`/${currentLocale}/blog`}
+          prefetch={false}
+          style={{ textDecoration: 'none' }}
+        >
+          <div
+            className={`tilt-card delay-${(index % 3) + 1}`}
+            style={{
+              background: '#0a0e3d',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+              transition: 'all 0.3s ease',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+            }}
+          >
+            {/* Updated Image Container with Aspect Ratio */}
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16/9',
+              overflow: 'hidden'
+            }}>
+              <Image
+                src={resource.image || '/img/resource1.jpg'}
+                alt={resource.title || 'Resource'}
+                fill
+                sizes="(max-width: 768px) 100vw, 320px"
+                style={{ 
+                  objectFit: 'cover'
                 }}
-              >
-                <div style={{
-                  position: 'relative',
-                  width: '100%',
-                  height: '250px'
-                }}>
-                  <Image
-                    src={resource.image || '/img/resource1.jpg'}
-                    alt={resource.title || 'Resource'}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 320px"
-                    style={{ objectFit: 'cover' }}
-                    priority={index < 3}
-                  />
-                </div>
-              </div>
-            ))}
+                priority={index < 3}
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* CTA Section */}
       <section style={{
