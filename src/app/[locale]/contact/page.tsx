@@ -10,14 +10,22 @@ import { usePathname } from 'next/navigation';
 import FloatingCTA from '@/components/ui/FloatingCTA';
 
 const ContactInfoCard = ({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) => (
-  <div className="text-center bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all duration-300 h-full flex flex-col items-center justify-center">
-    <div className="text-4xl mb-4 text-white">
+  <div className="group relative text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md p-8 rounded-2xl hover:from-white/25 hover:to-white/15 transition-all duration-500 h-full flex flex-col items-center justify-center border border-white/10 hover:border-white/30 shadow-xl hover:shadow-2xl hover:-translate-y-2">
+    {/* Animated background gradient on hover */}
+    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-400/0 to-purple-400/0 group-hover:from-blue-400/10 group-hover:to-purple-400/10 transition-all duration-500 pointer-events-none"></div>
+    
+    {/* Icon with enhanced styling */}
+    <div className="relative z-10 text-6xl mb-5 text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-300 transform">
       {icon}
     </div>
-    <h3 className="text-lg font-semibold mb-3 text-white">
+    
+    {/* Title with improved typography */}
+    <h3 className="relative z-10 text-xl font-bold mb-4 text-white drop-shadow-md leading-tight">
       {title}
     </h3>
-    <div className="text-indigo-100 text-sm">
+    
+    {/* Children content with better styling */}
+    <div className="relative z-10 text-indigo-100 text-sm leading-relaxed font-medium break-words">
       {children}
     </div>
   </div>
@@ -55,13 +63,22 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Information */}
-          <div className="bg-gradient-to-br from-indigo-600 to-blue-700 text-white rounded-xl shadow-xl overflow-hidden h-full border border-indigo-500/20">
-            <div className="p-6 sm:p-8">
-              <h2 className="text-3xl font-bold mb-8 text-white">
-                {t('contactInfo')}
-              </h2>
+          <div className="relative bg-gradient-to-br from-indigo-600 via-blue-600 to-purple-700 text-white rounded-2xl shadow-2xl overflow-hidden h-full border border-indigo-400/30 backdrop-blur-xl">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
+            
+            <div className="relative z-10 p-6 sm:p-10 lg:p-12">
+              {/* Header section with improved typography */}
+              <div className="mb-10">
+                <h2 className="text-4xl sm:text-5xl font-black mb-2 text-white leading-tight drop-shadow-lg">
+                  {t('contactInfo')}
+                </h2>
+                <div className="h-1 w-16 bg-gradient-to-r from-cyan-300 to-blue-300 rounded-full"></div>
+              </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Contact Info Cards Grid with enhanced layout */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
                 <ContactInfoCard 
                   icon="📍" 
                   title={t('officeLocation')}
@@ -94,22 +111,26 @@ export default function ContactPage() {
                 </ContactInfoCard>
               </div>
 
-              {/* Social Media Links */}
-              <div className="mt-12 pt-6 border-t border-indigo-400/30">
-                <h3 className="text-xl font-semibold mb-5 text-white">
+              {/* Social Media Links Section with enhanced styling */}
+              <div className="mt-12 pt-8 border-t border-white/20">
+                <h3 className="text-2xl font-bold mb-6 text-white drop-shadow-md">
                   {t('followUs')}
                 </h3>
-                <div className="flex justify-center">
+                <div className="flex justify-center gap-4">
                   <a
                     href="https://www.linkedin.com/company/thesamurai/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group"
+                    className="group relative"
                     aria-label="LinkedIn"
                   >
                     <span className="sr-only">LinkedIn</span>
-                    <div className="h-12 w-12 rounded-full bg-white/10 hover:bg-blue-600 transition-all duration-300 flex items-center justify-center group-hover:scale-110">
-                      <span className="text-xl text-white">in</span>
+                    {/* Enhanced social button with gradient and animation */}
+                    <div className="relative h-14 w-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 hover:from-blue-300 hover:to-blue-500 transition-all duration-300 flex items-center justify-center group-hover:scale-125 group-hover:shadow-2xl shadow-lg hover:shadow-blue-500/50 transform">
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 rounded-full bg-blue-300/20 blur-lg group-hover:blur-xl transition-all duration-300"></div>
+                      {/* Icon */}
+                      <span className="relative text-2xl text-white font-bold drop-shadow-lg">in</span>
                     </div>
                   </a>
                 </div>
