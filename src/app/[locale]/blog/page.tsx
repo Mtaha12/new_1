@@ -75,7 +75,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         latestPosts={latestPosts}
         resources={resources}
       />
-      <Footer />
+      
     </div>
   );
 }

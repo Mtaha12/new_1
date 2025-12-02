@@ -28,6 +28,7 @@ export default function HomePage() {
   const [isSmallViewport, setIsSmallViewport] = useState(false);
   const [isDocumentVisible, setIsDocumentVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [activeWhoCard, setActiveWhoCard] = useState<(typeof whoWeAreCards)[number] | null>(null);
   const whoWeAreCards = [
     { icon: '🔒', title: t('cybersecurityTitle'), desc: t('cybersecurityDescription') },
     { icon: '💡', title: t('itConsultationTitle'), desc: t('itConsultationDescription') }
@@ -182,6 +183,7 @@ export default function HomePage() {
         whoWeAreCards[(currentCardIndex + offset) % whoWeAreCards.length]
       )
     : [];
+  const desktopWhoCardSize = 'min(32vw, 320px)';
 
   const resourcesTitle = t('resourcesTitle');
   const resourcesDescription = t('resourcesDescription');
@@ -499,29 +501,42 @@ export default function HomePage() {
                 <div
                   key={`${card.title}-${idx}`}
                   className={`who-card tilt-card hover-glow delay-${(idx % 3) + 1}`}
+                  onClick={() => !isSmallViewport && setActiveWhoCard(card)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(event) => {
+                    if (!isSmallViewport && (event.key === 'Enter' || event.key === ' ')) {
+                      event.preventDefault();
+                      setActiveWhoCard(card);
+                    }
+                  }}
                   style={{
-                    width: isSmallViewport ? '100%' : '280px',
-                    minHeight: isSmallViewport ? 'auto' : '300px',
+                    flex: isSmallViewport ? '1 1 100%' : '0 0 auto',
+                    width: isSmallViewport ? '100%' : desktopWhoCardSize,
+                    height: isSmallViewport ? 'auto' : desktopWhoCardSize,
+                    maxWidth: isSmallViewport ? '100%' : desktopWhoCardSize,
                     background: '#fff',
                     borderRadius: '18px',
                     border: '1px solid #e6ecf5',
-                    padding: '2.25rem 2rem',
+                    padding: isSmallViewport ? '1.75rem 1.5rem' : '1.75rem',
                     boxShadow: '0 25px 40px rgba(10, 14, 61, 0.08)',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '1.25rem'
+                    gap: '1rem',
+                    overflow: isSmallViewport ? 'visible' : 'hidden',
+                    cursor: isSmallViewport ? 'default' : 'pointer'
                   }}
                 >
                   <div style={{
-                    width: '56px',
-                    height: '56px',
+                    width: '48px',
+                    height: '48px',
                     borderRadius: '18px',
                     background: 'linear-gradient(135deg, #0a0e3d 0%, #1f3a85 100%)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#69E8E1',
-                    fontSize: '1.7rem',
+                    fontSize: '1.4rem',
                     alignSelf: isArabic ? 'flex-end' : 'flex-start'
                   }}>
                     {card.icon}
@@ -529,7 +544,8 @@ export default function HomePage() {
                   <div style={{
                     flex: 1,
                     display: 'flex',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
                   }}>
                     <h3 style={{
                       fontSize: 'clamp(1.2rem, 2.2vw, 1.4rem)',
@@ -541,10 +557,14 @@ export default function HomePage() {
                     </h3>
                     <p style={{
                       color: '#4d5566',
-                      lineHeight: 1.7,
-                      fontSize: 'clamp(0.9rem, 1.3vw, 1.05rem)',
+                      lineHeight: 1.6,
+                      fontSize: 'clamp(0.9rem, 1.3vw, 1rem)',
                       margin: 0,
-                      flex: 1
+                      flex: 1,
+                      display: isSmallViewport ? 'block' : '-webkit-box',
+                      WebkitLineClamp: isSmallViewport ? 'unset' : 6,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: isSmallViewport ? 'visible' : 'hidden'
                     }}>
                       {card.desc}
                     </p>
@@ -552,6 +572,8 @@ export default function HomePage() {
                   {!isSmallViewport && (
                     <button
                       onClick={() => scrollToCard('next')}
+                      onMouseDown={(event) => event.stopPropagation()}
+                      onClickCapture={(event) => event.stopPropagation()}
                       style={{
                         alignSelf: isArabic ? 'flex-start' : 'flex-end',
                         background: 'transparent',
@@ -568,6 +590,72 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+
+            {activeWhoCard && !isSmallViewport && (
+              <div
+                onClick={() => setActiveWhoCard(null)}
+                style={{
+                  position: 'fixed',
+                  inset: 0,
+                  backgroundColor: 'rgba(10, 14, 61, 0.55)',
+                  backdropFilter: 'blur(4px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 50,
+                  padding: '1.5rem'
+                }}
+              >
+                <div
+                  onClick={(event) => event.stopPropagation()}
+                  style={{
+                    maxWidth: 'min(480px, 90vw)',
+                    width: '100%',
+                    background: '#fff',
+                    borderRadius: '20px',
+                    padding: '2rem',
+                    boxShadow: '0 35px 55px rgba(10, 14, 61, 0.25)',
+                    textAlign: isArabic ? 'right' : 'left'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <h3 style={{ margin: 0, fontSize: '1.6rem', color: '#0a0e3d' }}>{activeWhoCard.title}</h3>
+                    <button
+                      onClick={() => setActiveWhoCard(null)}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        fontSize: '1.25rem',
+                        color: '#4d5566',
+                        cursor: 'pointer',
+                        padding: '0.25rem'
+                      }}
+                      aria-label="Close"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <p style={{ color: '#4d5566', lineHeight: 1.7, fontSize: '1rem', marginBottom: '1.5rem' }}>
+                    {activeWhoCard.desc}
+                  </p>
+                  <button
+                    onClick={() => setActiveWhoCard(null)}
+                    style={{
+                      alignSelf: 'flex-end',
+                      background: '#0a0e3d',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: '10px',
+                      padding: '0.75rem 1.5rem',
+                      cursor: 'pointer',
+                      fontWeight: 600
+                    }}
+                  >
+                    {t('close', { fallback: 'Close' })}
+                  </button>
+                </div>
+              </div>
+            )}
 
             <div style={{
               position: 'absolute',
