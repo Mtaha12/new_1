@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CSSProperties } from 'react';
+import { CSSProperties, memo } from 'react';
 import FloatingCTA from '@/components/ui/FloatingCTA';
 
 export type HeroContent = {
@@ -314,6 +314,7 @@ const ServicePageLayout = ({
                       src={section.imageSrc}
                       alt={section.imageAlt ?? section.title}
                       fill
+                      loading="lazy"
                       sizes="(max-width: 768px) 100vw, 600px"
                       style={{ objectFit: 'cover' }}
                     />
@@ -364,6 +365,7 @@ const ServicePageLayout = ({
                       src={section.imageSrc}
                       alt={section.imageAlt ?? section.title}
                       fill
+                      loading="lazy"
                       sizes="(max-width: 768px) 100vw, 600px"
                       style={{ objectFit: 'cover' }}
                     />
@@ -478,13 +480,13 @@ const ServicePageLayout = ({
       ) : null}
 
       {/* Resources */}
-<section
-  className="fade-section"
-  style={{ padding: 'clamp(3.5rem, 8vw, 6.5rem) clamp(1.5rem, 6vw, 3rem)', background: COLORS.surface }}
->
-  <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-    <h3
-      style={{
+      <section
+        className="fade-section"
+        style={{ padding: 'clamp(3.5rem, 8vw, 6.5rem) clamp(1.5rem, 6vw, 3rem) 0', background: COLORS.surface }}
+      >
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h3
+            style={{
         fontSize: 'clamp(1.9rem, 4vw, 2.6rem)',
         fontWeight: 800,
         color: COLORS.text,
@@ -542,6 +544,7 @@ const ServicePageLayout = ({
                 src={resourceItem.imageSrc}
                 alt={resourceItem.title}
                 fill
+                loading="lazy"
                 sizes="(max-width: 768px) 100vw, 320px"
                 style={{ 
                   objectFit: 'cover'

@@ -146,7 +146,10 @@ export default function SolutionsOverviewPage() {
         <section
           className="parallax-wrap fade-section"
           style={{
-            background: 'linear-gradient(135deg, rgba(5, 12, 40, 0.96) 0%, rgba(12, 47, 108, 0.93) 50%, rgba(20, 103, 255, 0.78) 100%)',
+            backgroundImage: 'linear-gradient(135deg, rgba(5, 12, 40, 0.96) 0%, rgba(12, 47, 108, 0.93) 50%, rgba(20, 103, 255, 0.78) 100%), url(/img/ss12.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
             color: '#fff',
             padding: 'clamp(4.2rem, 9vw, 7rem) clamp(1.5rem, 6vw, 3.5rem)',
             position: 'relative',
@@ -241,27 +244,6 @@ export default function SolutionsOverviewPage() {
                   >
                     {secondaryCta}
                   </Link>
-                </div>
-              </div>
-              <div
-                className="tilt-card fade-section delay-2"
-                style={{ position: 'relative', minHeight: '320px', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 45px 75px rgba(5, 12, 40, 0.35)' }}
-              >
-                <Image src="/img/ss12.jpg" alt={heroTitle} fill priority sizes="(max-width: 768px) 100vw, 540px" style={{ objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,12,40,0) 0%, rgba(4,12,40,0.65) 100%)' }} />
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '1.6rem',
-                    left: isArabic ? 'unset' : '1.6rem',
-                    right: isArabic ? '1.6rem' : 'unset',
-                    color: 'rgba(255,255,255,0.9)',
-                    fontSize: '0.95rem',
-                    lineHeight: 1.6,
-                    maxWidth: 'clamp(240px, 50%, 320px)'
-                  }}
-                >
-                  {t('heroSupporting')}
                 </div>
               </div>
             </div>
@@ -558,15 +540,16 @@ export default function SolutionsOverviewPage() {
         </section>
 
         <section
-  className="fade-section delay-3"
-  style={{
-    padding: 'clamp(3.5rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 3rem) clamp(4.5rem, 10vw, 7rem)',
-    background: '#f4f7ff',
-    direction: isArabic ? 'rtl' : 'ltr'
-  }}
->
-  <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-    <div style={{ textAlign: 'center', marginBottom: 'clamp(2.25rem, 6vw, 3.5rem)' }}>
+          className="fade-section delay-3"
+          style={{
+            padding: 'clamp(2.5rem, 7vw, 5.5rem) clamp(1.5rem, 5vw, 3rem) 0',
+            background: '#f4f7ff',
+            direction: isArabic ? 'rtl' : 'ltr',
+            marginTop: '-1.5rem'
+          }}
+        >
+          <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(2.25rem, 6vw, 3.5rem)' }}>
       <h2
         style={{
           fontSize: 'clamp(2.1rem, 5vw, 3.1rem)',
@@ -630,7 +613,6 @@ export default function SolutionsOverviewPage() {
     </div>
   </div>
 </section>
-
         <FloatingCTA
           title={ctaTitle}
           description={ctaSubtitle}

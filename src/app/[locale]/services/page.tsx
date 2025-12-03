@@ -448,11 +448,10 @@ export default function ServicesPage() {
 							</div>
 						</div>
 					</section>
-
 					<section
 						className="fade-section delay-4"
 						style={{
-							padding: 'clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 6vw, 3.5rem)',
+							padding: 'clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 6vw, 3.5rem) 0',
 							background: '#fff'
 						}}
 					>
@@ -483,22 +482,23 @@ export default function ServicesPage() {
 												}}
 											>
 												{/* Updated Image Container with Aspect Ratio */}
-												<div style={{
-													position: 'relative',
-													width: '100%',
-													aspectRatio: '16/9',
-													overflow: 'hidden'
-												}}>
-													<Image
-														src={resource.image}
-														alt={resource.title}
-														fill
-														sizes="(max-width: 768px) 100vw, 320px"
-														style={{
-															objectFit: 'cover'
-														}}
-													/>
-												</div>
+											<div style={{
+												position: 'relative',
+												width: '100%',
+												aspectRatio: '16/9',
+												overflow: 'hidden'
+											}}>
+												<Image
+													src={resource.image}
+													alt={resource.title}
+													fill
+													loading="lazy"
+													sizes="(max-width: 768px) 100vw, 320px"
+													style={{
+														objectFit: 'cover'
+													}}
+												/>
+											</div>
 											</div>
 										</Link>
 									);
@@ -506,7 +506,6 @@ export default function ServicesPage() {
 							</div>
 						</div>
 					</section>
-
 					<FloatingCTA
 						title={ctaTitle}
 						description={ctaSubtitle}

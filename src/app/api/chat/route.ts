@@ -33,7 +33,7 @@ function generateFallbackResponse(message: string, locale: string): string {
     help: "I'm here to help! You can ask me about our cybersecurity services, IT consulting, pricing, or contact information.",
     services: "We specialize in: Cybersecurity Solutions, IT Consulting, Infrastructure Services, and Cloud Computing.",
     pricing: "Our pricing is customized based on your specific needs. Contact our sales team for a personalized quote.",
-    contact: "📧 Email: info@thesamurai.com\n📞 Phone: +966 50 123 4567",
+    contact: "Email: info@thesamurai.com\nPhone: +966 50 123 4567",
     thanks: "You're welcome! 😊 Is there anything else I can help you with?",
     default: "Thank you for your message! For detailed assistance, please contact our expert team directly."
   };
@@ -44,7 +44,7 @@ function generateFallbackResponse(message: string, locale: string): string {
     help: "أنا هنا للمساعدة! يمكنك أن تسألني عن خدمات الأمن السيبراني، استشارات تكنولوجيا المعلومات، الأسعار، أو معلومات الاتصال.",
     services: "نحن متخصصون في: حلول الأمن السيبراني، استشارات تكنولوجيا المعلومات، خدمات البنية التحتية، والحوسبة السحابية.",
     pricing: "أسعارنا مخصصة بناءً على احتياجاتك. اتصل بفريق المبيعات للحصول على عرض أسعار شخصي.",
-    contact: "📧 البريد: info@thesamurai.com\n📞 الهاتف: +966 50 123 4567",
+    contact: "البريد: info@thesamurai.com\nالهاتف: +966 50 123 4567",
     thanks: "على الرحب والسعة! 😊 هل هناك أي شيء آخر يمكنني مساعدتك فيه؟",
     default: "شكراً على رسالتك! للحصول على مساعدة مفصلة، يرجى الاتصال بفريق الخبراء لدينا مباشرة."
   };

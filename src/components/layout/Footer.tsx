@@ -34,19 +34,19 @@ export default function Footer() {
 
   const contactItems = [
     {
-      icon: '☎️',
+      iconSrc: '/img/phone.png',
       label: t('phoneLabel'),
       value: t('phone'),
       href: `tel:${t('phone').replace(/[^\d+]/g, '')}`
     },
     {
-      icon: '✉️',
+      iconSrc: '/img/email.png',
       label: t('emailLabel'),
       value: t('email'),
       href: `mailto:${t('email')}`
     },
     {
-      icon: '📍',
+      iconSrc: '/img/office.png',
       label: t('addressLabel'),
       value: t('address'),
       href: undefined
@@ -222,7 +222,7 @@ export default function Footer() {
               {t('contactLinks')}
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
-              {contactItems.map(({ icon, label, value, href }) => {
+              {contactItems.map(({ iconSrc, label, value, href }) => {
                 const content = (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                     <span
@@ -239,7 +239,7 @@ export default function Footer() {
                         fontSize: '1rem'
                       }}
                     >
-                      {icon}
+                      <Image src={iconSrc} alt="" width={20} height={20} style={{ width: '20px', height: '20px' }} />
                     </span>
                     <div style={{ display: 'grid', gap: '0.2rem' }}>
                       <span style={{ opacity: 0.7, fontSize: '0.85rem' }}>{label}</span>

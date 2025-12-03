@@ -16,6 +16,14 @@ export default function PartnersPage() {
   const currentLocale = pathname.split('/')[1] || 'en';
   const isArabic = currentLocale === 'ar';
   const [isDesktop, setIsDesktop] = useState(false);
+  const partnerLogos = [
+    { name: 'ForgeRock', src: '/img/partner1.png' },
+    { name: 'Microsoft Azure', src: '/img/partner2.png' },
+    { name: 'SentinelOne', src: '/img/partner3.png' },
+    { name: 'PingIdentity', src: '/img/partner4.png' },
+    { name: 'THALES', src: '/img/partner5.png' },
+    { name: 'Okta', src: '/img/partner6.png' }
+  ];
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -444,26 +452,39 @@ export default function PartnersPage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 'clamp(1rem, 2.5vw, 2.25rem)',
+                gap: 'clamp(0.75rem, 1.5vw, 1.5rem)',
                 flex: '1 1 100%',
-                padding: '0 clamp(0.5rem, 3vw, 2rem)',
-                flexWrap: 'wrap',
-                rowGap: '1rem'
+                padding: '0 clamp(0.5rem, 3vw, 1.5rem)',
+                flexWrap: 'nowrap',
+                overflowX: 'auto'
               }}
             >
-              {['ForgeRock', 'Microsoft Azure', 'SentinelOne', 'PingIdentity', 'THALES', 'okta'].map((partner, index) => (
+              {partnerLogos.map((partner, index) => (
                 <div
-                  key={partner}
+                  key={partner.name}
+                  className={`partner-chip delay-${(index % 5) + 1}`}
                   style={{
-                    color: '#ffffff',
-                    fontWeight: 600,
-                    fontSize: 'clamp(0.85rem, 1.6vw, 1.05rem)',
-                    letterSpacing: '0.06em',
-                    opacity: 0.9,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0.35rem 0.6rem',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    borderRadius: '999px',
                     animation: `fadeIn 0.5s ease-out ${index * 0.08}s backwards`
                   }}
                 >
-                  {partner}
+                  <Image
+                    src={partner.src}
+                    alt={`${partner.name} logo`}
+                    width={120}
+                    height={40}
+                    style={{
+                      height: '26px',
+                      width: 'auto',
+                      objectFit: 'contain',
+                      filter: 'brightness(0) invert(1)'
+                    }}
+                  />
                 </div>
               ))}
             </div>

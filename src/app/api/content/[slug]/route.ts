@@ -30,5 +30,3 @@ export async function PUT(request: Request, { params }: Params) {
     return NextResponse.json({ error: 'Failed to update content' }, { status: 500 });
   }
 }
-
-

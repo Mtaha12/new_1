@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
@@ -40,9 +40,18 @@ export default function HomePage() {
     { text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' }
   ];
 
+  const partnerLogos = [
+    { name: 'ForgeRock', src: '/img/partner1.png' },
+    { name: 'Microsoft Azure', src: '/img/partner2.png' },
+    { name: 'SentinelOne', src: '/img/partner3.png' },
+    { name: 'PingIdentity', src: '/img/partner4.png' },
+    { name: 'THALES', src: '/img/partner5.png' },
+    { name: 'Okta', src: '/img/partner6.png' }
+  ];
+
   const MAX_CONTAINER_WIDTH = 'min(1140px, 100%)';
 
-  const services = [
+  const services = useMemo(() => [
     {
       key: 'consulting',
       title: t('services.consulting'),
@@ -91,7 +100,7 @@ export default function HomePage() {
       icon: '⚙️',
       gradient: 'linear-gradient(150deg, #030b33 0%, #1b1b72 55%, #3db4f4 100%)'
     }
-  ];
+  ], [t, currentLocale]);
 
   useEffect(() => {
     setMounted(true);
@@ -156,13 +165,13 @@ export default function HomePage() {
     return () => window.clearTimeout(timeout);
   }, [canUseHeroVideo, isSmallViewport, isDocumentVisible]);
 
-  const scrollToCard = (direction: 'next' | 'prev') => {
+  const scrollToCard = useCallback((direction: 'next' | 'prev') => {
     if (direction === 'next') {
       setCurrentCardIndex((prev) => (prev + 1) % whoWeAreCards.length);
     } else {
       setCurrentCardIndex((prev) => (prev - 1 + whoWeAreCards.length) % whoWeAreCards.length);
     }
-  };
+  }, [whoWeAreCards.length]);
 
   if (!mounted) {
     return (
@@ -231,9 +240,9 @@ export default function HomePage() {
               loop
               muted
               playsInline
-              preload="metadata"
+              preload="none"
               poster="/img/bg1.jpg"
-              aria-hidden
+              aria-hidden={true}
               style={{
                 position: 'absolute',
                 inset: 0,
@@ -241,7 +250,7 @@ export default function HomePage() {
                 height: '100%',
                 objectFit: 'cover',
                 zIndex: 0,
-                willChange: 'opacity',
+                willChange: 'transform',
                 // Ensure video doesn't cause layout shift
                 display: 'block',
                 aspectRatio: '16/9',
@@ -256,6 +265,7 @@ export default function HomePage() {
               fill
               priority
               sizes="100vw"
+              quality={85}
               className="object-cover"
               style={{
                 position: 'absolute',
@@ -404,27 +414,39 @@ export default function HomePage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 'clamp(1rem, 2.5vw, 2.25rem)',
+                gap: 'clamp(0.75rem, 1.5vw, 1.5rem)',
                 flex: '1 1 100%',
-                padding: '0 clamp(0.5rem, 3vw, 2rem)',
-                flexWrap: 'wrap',
-                rowGap: '1rem'
+                padding: '0 clamp(0.5rem, 3vw, 1.5rem)',
+                flexWrap: 'nowrap',
+                overflowX: 'auto'
               }}
             >
-              {['ForgeRock', 'Microsoft Azure', 'SentinelOne', 'PingIdentity', 'THALES', 'okta'].map((partner, index) => (
+              {partnerLogos.map((partner, index) => (
                 <div
-                  key={partner}
+                  key={partner.name}
                   className={`partner-chip delay-${(index % 5) + 1}`}
                   style={{
-                    color: '#ffffff',
-                    fontWeight: 600,
-                    fontSize: 'clamp(0.85rem, 1.6vw, 1.05rem)',
-                    letterSpacing: '0.06em',
-                    opacity: 0.9,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0.35rem 0.6rem',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    borderRadius: '999px',
                     animation: `fadeIn 0.5s ease-out ${index * 0.08}s backwards`
                   }}
                 >
-                  {partner}
+                  <Image
+                    src={partner.src}
+                    alt={`${partner.name} logo`}
+                    width={120}
+                    height={40}
+                    style={{
+                      height: '26px',
+                      width: 'auto',
+                      objectFit: 'contain',
+                      filter: 'brightness(0) invert(1)'
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -1084,6 +1106,7 @@ export default function HomePage() {
                 src={resource.image || '/img/resource1.jpg'}
                 alt={resource.title || 'Resource'}
                 fill
+                loading={index < 3 ? 'eager' : 'lazy'}
                 sizes="(max-width: 768px) 100vw, 320px"
                 style={{ 
                   objectFit: 'cover'

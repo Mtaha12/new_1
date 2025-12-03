@@ -5,17 +5,19 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/layout/Hero';
 import { Container } from '@/components/layout/Container';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import FloatingCTA from '@/components/ui/FloatingCTA';
+import { memo, useMemo } from 'react';
 
-const ContactInfoCard = ({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) => (
+const ContactInfoCard = memo(({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) => (
   <div className="group relative text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md p-8 rounded-2xl hover:from-white/25 hover:to-white/15 transition-all duration-500 h-full flex flex-col items-center justify-center border border-white/10 hover:border-white/30 shadow-xl hover:shadow-2xl hover:-translate-y-2">
     {/* Animated background gradient on hover */}
     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-400/0 to-purple-400/0 group-hover:from-blue-400/10 group-hover:to-purple-400/10 transition-all duration-500 pointer-events-none"></div>
     
-    {/* Icon with enhanced styling */}
-    <div className="relative z-10 text-6xl mb-5 text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-300 transform">
+    {/* Icon with enhanced styling and filter for better quality */}
+    <div className="relative z-10 mb-5 group-hover:scale-110 transition-transform duration-300 transform" style={{ filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))' }}>
       {icon}
     </div>
     
@@ -29,7 +31,9 @@ const ContactInfoCard = ({ icon, title, children }: { icon: React.ReactNode; tit
       {children}
     </div>
   </div>
-);
+));
+
+ContactInfoCard.displayName = 'ContactInfoCard';
 
 export default function ContactPage() {
   const t = useTranslations('Contact');
@@ -80,14 +84,14 @@ export default function ContactPage() {
               {/* Contact Info Cards Grid with enhanced layout */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
                 <ContactInfoCard 
-                  icon="📍" 
+                  icon={<Image src="/img/office.png" alt="Office" width={64} height={64} quality={100} style={{ width: 'auto', height: 'auto' }} />}
                   title={t('officeLocation')}
                 >
                   {t('address')}
                 </ContactInfoCard>
 
                 <ContactInfoCard 
-                  icon="📞" 
+                  icon={<Image src="/img/phone.png" alt="Phone" width={64} height={64} quality={100} style={{ width: 'auto', height: 'auto', filter: 'contrast(1.1) brightness(1.05)' }} />}
                   title={t('phone')}
                 >
                   {t('phoneNumber1')}<br />
@@ -95,7 +99,7 @@ export default function ContactPage() {
                 </ContactInfoCard>
 
                 <ContactInfoCard 
-                  icon="✉️" 
+                  icon={<Image src="/img/email.png" alt="Email" width={64} height={64} quality={100} style={{ width: 'auto', height: 'auto' }} />}
                   title={t('email')}
                 >
                   {t('email1')}<br />
@@ -103,7 +107,7 @@ export default function ContactPage() {
                 </ContactInfoCard>
 
                 <ContactInfoCard 
-                  icon="🕐" 
+                  icon={<Image src="/img/office.png" alt="Hours" width={64} height={64} quality={100} style={{ width: 'auto', height: 'auto' }} />}
                   title={t('businessHours')}
                 >
                   {t('workingHours')}<br />
@@ -152,6 +156,7 @@ export default function ContactPage() {
             loading="lazy"
             title="Office Location"
             className="opacity-90 hover:opacity-100 transition-opacity duration-300"
+            aria-label="Google Maps showing office location"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-indigo-50/50 to-transparent pointer-events-none"></div>
         </div>

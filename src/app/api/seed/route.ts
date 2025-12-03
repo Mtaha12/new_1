@@ -43,5 +43,3 @@ export async function POST() {
     return NextResponse.json({ error: 'Failed to seed content' }, { status: 500 });
   }
 }
-
-

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
+import { memo, useMemo } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import FloatingCTA from '@/components/ui/FloatingCTA';
@@ -328,6 +329,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
                     src={section.image.src}
                     alt={section.image.alt}
                     fill
+                    loading={index === 0 ? 'eager' : 'lazy'}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     style={{ objectFit: 'cover' }}
                     priority={index === 0}
@@ -408,14 +410,14 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
         )}
 
         <section
-  style={{
-    padding: 'clamp(3.5rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 3rem) clamp(4.5rem, 10vw, 7rem)',
-    background: '#f4f7ff',
-    direction: isArabic ? 'rtl' : 'ltr'
-  }}
->
-  <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-    <div style={{ textAlign: 'center', marginBottom: 'clamp(2.25rem, 6vw, 3.5rem)' }}>
+          style={{
+            padding: 'clamp(3.5rem, 9vw, 6.5rem) clamp(1.5rem, 5vw, 3rem) 0',
+            background: '#f4f7ff',
+            direction: isArabic ? 'rtl' : 'ltr'
+          }}
+        >
+          <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(2.25rem, 6vw, 3.5rem)' }}>
       <h2
         style={{
           fontSize: 'clamp(2.1rem, 5vw, 3.1rem)',
