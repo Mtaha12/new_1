@@ -41,19 +41,19 @@ export default function DevSecOpsPage() {
       title: tConsulting('infrastructure'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/infrastructure`,
-      icon: '🏗️'
+      icon: '/icons/Group 2.svg'
     },
     {
       title: tConsulting('resourcing'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/resourcing`,
-      icon: '👥'
+      icon: '/icons/Group 3.svg'
     },
     {
       title: tConsulting('managedIT'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/managed-it`,
-      icon: '⚙️'
+      icon: '/icons/Group 5.svg'
     }
   ];
 

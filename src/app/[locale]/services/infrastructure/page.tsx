@@ -60,19 +60,19 @@ export default function InfrastructurePage() {
       title: tConsulting('consulting'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/consulting`,
-      icon: '📊'
+      icon: '/icons/Group 1 (1).svg'
     },
     {
       title: tConsulting('managedIT'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/managed-it`,
-      icon: '⚙️'
+      icon: '/icons/Group 5.svg'
     },
     {
       title: tConsulting('devsecops'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/devsecops`,
-      icon: '🔧'
+      icon: '/icons/Group 6 (1).svg'
     }
   ];
 

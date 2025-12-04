@@ -7,6 +7,124 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import Icon from '@/components/ui/Icon';
+
+// Memoized components for better performance
+const ServiceCard = memo(({ service, isArabic }: { service: any; isArabic: boolean }) => (
+  <Link
+    href={service.href}
+    prefetch={false}
+    className="service-card service-card--home"
+    style={{
+      background: service.gradient,
+      padding: '2.2rem',
+      borderRadius: '22px',
+      color: '#fff',
+      boxShadow: '0 24px 45px rgba(4, 11, 38, 0.35)',
+      position: 'relative',
+      textDecoration: 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1.5rem'
+    }}
+  >
+    <div style={{
+      width: '70px',
+      height: '70px',
+      borderRadius: '22px',
+      background: 'rgba(255,255,255,0.15)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)'
+    }}>
+      <Image src={service.svgIcon} alt={service.title + ' icon'} width={40} height={40} style={{ width: 40, height: 40 }} />
+    </div>
+    <div>
+      <h3 style={{
+        fontSize: 'clamp(1.25rem, 2.4vw, 1.45rem)',
+        fontWeight: 700,
+        marginBottom: '0.75rem'
+      }}>
+        {service.title}
+      </h3>
+      <p style={{
+        color: 'rgba(255,255,255,0.85)',
+        lineHeight: 1.8,
+        fontSize: 'clamp(0.92rem, 1.4vw, 1.05rem)'
+      }}>
+        {service.desc}
+      </p>
+    </div>
+    <span style={{
+      alignSelf: 'flex-end',
+      marginTop: 'auto',
+      width: '40px',
+      height: '40px',
+      borderRadius: '50%',
+      background: 'rgba(255,255,255,0.18)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#69E8E1',
+      fontSize: '1.2rem',
+      boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)'
+    }}>
+      {isArabic ? '←' : '→'}
+    </span>
+  </Link>
+));
+
+ServiceCard.displayName = 'ServiceCard';
+
+const ResourceCard = memo(({ resource, index, currentLocale }: { resource: any; index: number; currentLocale: string }) => (
+  <Link
+    href={`/${currentLocale}/blog`}
+    prefetch={false}
+    style={{ textDecoration: 'none' }}
+  >
+    <div
+      className={`tilt-card delay-${(index % 3) + 1}`}
+      style={{
+        background: '#0a0e3d',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+        transition: 'all 0.3s ease',
+        cursor: 'pointer'
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-8px)';
+        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+      }}
+    >
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        aspectRatio: '16/9',
+        overflow: 'hidden'
+      }}>
+        <Image
+          src={resource.image || '/img/resource1.jpg'}
+          alt={resource.title || 'Resource'}
+          fill
+          loading={index < 3 ? 'eager' : 'lazy'}
+          sizes="(max-width: 768px) 100vw, 320px"
+          style={{ 
+            objectFit: 'cover'
+          }}
+          priority={index < 3}
+        />
+      </div>
+    </div>
+  </Link>
+));
+
+ResourceCard.displayName = 'ResourceCard';
 
 type HomeResourceCard = {
   title: string;
@@ -30,15 +148,14 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false);
   const [activeWhoCard, setActiveWhoCard] = useState<(typeof whoWeAreCards)[number] | null>(null);
   const whoWeAreCards = [
-    { icon: '🔒', title: t('cybersecurityTitle'), desc: t('cybersecurityDescription') },
-    { icon: '💡', title: t('itConsultationTitle'), desc: t('itConsultationDescription') }
+    { svgIcon: '/icons/Group 1.svg', title: t('cybersecurityTitle'), desc: t('cybersecurityDescription') },
+    { svgIcon: '/icons/Group 8.svg', title: t('itConsultationTitle'), desc: t('itConsultationDescription') }
   ];
 
-  const blogData = [
-    { text: 'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an un.' },
-    { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-    { text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' }
-  ];
+  const blogData = useMemo(() => {
+    const carousel = t.raw('blogCarousel') as { quotes: Array<{ text: string; attribution?: string }> };
+    return carousel?.quotes || [{ text: '', attribution: '' }];
+  }, [t]);
 
   const partnerLogos = [
     { name: 'ForgeRock', src: '/img/partner1.png' },
@@ -57,7 +174,7 @@ export default function HomePage() {
       title: t('services.consulting'),
       desc: t('services.consultingDesc'),
       href: `/${currentLocale}/services/consulting`,
-      icon: '🤝',
+      svgIcon: '/icons/Group 1 (1).svg',
       gradient: 'linear-gradient(150deg, #030b2c 0%, #0b2b63 55%, #0fa1c6 100%)'
     },
     {
@@ -65,7 +182,7 @@ export default function HomePage() {
       title: t('services.infrastructure'),
       desc: t('services.infrastructureDesc'),
       href: `/${currentLocale}/services/infrastructure`,
-      icon: '🧠',
+      svgIcon: '/icons/Group 2.svg',
       gradient: 'linear-gradient(150deg, #040b33 0%, #1c1b6f 50%, #601cbe 100%)'
     },
     {
@@ -73,7 +190,7 @@ export default function HomePage() {
       title: t('services.resourcing'),
       desc: t('services.resourcingDesc'),
       href: `/${currentLocale}/services/resourcing`,
-      icon: '🛡️',
+      svgIcon: '/icons/Group 3.svg',
       gradient: 'linear-gradient(150deg, #02102f 0%, #0d3870 55%, #0fa68b 100%)'
     },
     {
@@ -81,7 +198,7 @@ export default function HomePage() {
       title: t('services.training'),
       desc: t('services.trainingDesc'),
       href: `/${currentLocale}/services/training`,
-      icon: '🧪',
+      svgIcon: '/icons/Group 4.svg',
       gradient: 'linear-gradient(150deg, #040d30 0%, #122d6a 55%, #7b1f9d 100%)'
     },
     {
@@ -89,7 +206,7 @@ export default function HomePage() {
       title: t('services.managed'),
       desc: t('services.managedDesc'),
       href: `/${currentLocale}/services/managed-it`,
-      icon: '🧰',
+      svgIcon: '/icons/Group 5.svg',
       gradient: 'linear-gradient(150deg, #020824 0%, #172a5a 50%, #f5b642 100%)'
     },
     {
@@ -97,7 +214,7 @@ export default function HomePage() {
       title: t('services.devsecops'),
       desc: t('services.devsecopsDesc'),
       href: `/${currentLocale}/services/devsecops`,
-      icon: '⚙️',
+      svgIcon: '/icons/Group 6 (1).svg',
       gradient: 'linear-gradient(150deg, #030b33 0%, #1b1b72 55%, #3db4f4 100%)'
     }
   ], [t, currentLocale]);
@@ -557,11 +674,9 @@ export default function HomePage() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#69E8E1',
-                    fontSize: '1.4rem',
                     alignSelf: isArabic ? 'flex-end' : 'flex-start'
                   }}>
-                    {card.icon}
+                    <Image src={card.svgIcon} alt={card.title + ' icon'} width={32} height={32} style={{ width: 32, height: 32 }} />
                   </div>
                   <div style={{
                     flex: 1,
@@ -641,6 +756,9 @@ export default function HomePage() {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <div style={{ width: 32, height: 32, marginRight: '0.5rem' }}>
+                      <Image src={activeWhoCard.svgIcon} alt={activeWhoCard.title + ' icon'} width={32} height={32} style={{ width: 32, height: 32 }} />
+                    </div>
                     <h3 style={{ margin: 0, fontSize: '1.6rem', color: '#0a0e3d' }}>{activeWhoCard.title}</h3>
                     <button
                       onClick={() => setActiveWhoCard(null)}
@@ -811,6 +929,10 @@ export default function HomePage() {
               src="/img/cybersolution.jpg"
               alt="Cybersecurity Solutions"
               fill
+              priority={false}
+              loading="lazy"
+              quality={85}
+              sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: 'cover' }}
             />
           </div>
@@ -868,70 +990,7 @@ export default function HomePage() {
             gap: '2.25rem'
           }}>
             {services.map((service) => (
-              <Link
-                key={service.key}
-                href={service.href}
-                prefetch={false}
-                className="service-card service-card--home"
-                style={{
-                  background: service.gradient,
-                  padding: '2.2rem',
-                  borderRadius: '22px',
-                  color: '#fff',
-                  boxShadow: '0 24px 45px rgba(4, 11, 38, 0.35)',
-                  position: 'relative',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1.5rem'
-                }}
-              >
-                <div style={{
-                  width: '70px',
-                  height: '70px',
-                  borderRadius: '22px',
-                  background: 'rgba(255,255,255,0.15)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '2rem',
-                  boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)'
-                }}>
-                  {service.icon}
-                </div>
-                <div>
-                  <h3 style={{
-                    fontSize: 'clamp(1.25rem, 2.4vw, 1.45rem)',
-                    fontWeight: 700,
-                    marginBottom: '0.75rem'
-                  }}>
-                    {service.title}
-                  </h3>
-                  <p style={{
-                    color: 'rgba(255,255,255,0.85)',
-                    lineHeight: 1.8,
-                    fontSize: 'clamp(0.92rem, 1.4vw, 1.05rem)'
-                  }}>
-                    {service.desc}
-                  </p>
-                </div>
-                <span style={{
-                  alignSelf: 'flex-end',
-                  marginTop: 'auto',
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.18)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#69E8E1',
-                  fontSize: '1.2rem',
-                  boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)'
-                }}>
-                  {isArabic ? '←' : '→'}
-                </span>
-              </Link>
+              <ServiceCard key={service.key} service={service} isArabic={isArabic} />
             ))}
           </div>
         </div>
@@ -998,9 +1057,9 @@ export default function HomePage() {
                 color: '#666', 
                 fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)',
                 margin: 0,
-                fontStyle: 'italic'
+                fontWeight: 600
               }}>
-                Lorem ipsum is simply dummy text<br />of the printing and type
+                {blogData[currentBlogIndex]?.attribution || ''}
               </p>
             </div>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -1031,6 +1090,10 @@ export default function HomePage() {
               src="/img/corevalue.jpg"
               alt="Core Values"
               fill
+              priority={false}
+              loading="lazy"
+              quality={85}
+              sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: 'cover' }}
             />
           </div>
@@ -1070,52 +1133,7 @@ export default function HomePage() {
       gap: '2rem'
     }}>
       {resourcesCards.map((resource, index) => (
-        <Link
-          key={index}
-          href={`/${currentLocale}/blog`}
-          prefetch={false}
-          style={{ textDecoration: 'none' }}
-        >
-          <div
-            className={`tilt-card delay-${(index % 3) + 1}`}
-            style={{
-              background: '#0a0e3d',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
-            }}
-          >
-            {/* Updated Image Container with Aspect Ratio */}
-            <div style={{
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '16/9',
-              overflow: 'hidden'
-            }}>
-              <Image
-                src={resource.image || '/img/resource1.jpg'}
-                alt={resource.title || 'Resource'}
-                fill
-                loading={index < 3 ? 'eager' : 'lazy'}
-                sizes="(max-width: 768px) 100vw, 320px"
-                style={{ 
-                  objectFit: 'cover'
-                }}
-                priority={index < 3}
-              />
-            </div>
-          </div>
-        </Link>
+        <ResourceCard key={index} resource={resource} index={index} currentLocale={currentLocale} />
       ))}
     </div>
   </div>

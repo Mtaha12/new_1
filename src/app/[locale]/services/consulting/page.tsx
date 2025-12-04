@@ -59,19 +59,19 @@ export default function ConsultingPage() {
       title: t('infrastructure'),
       description: t('serviceDesc'),
       href: `/${currentLocale}/services/infrastructure`,
-      icon: '🏗️'
+      icon: '/icons/Group 2.svg'
     },
     {
       title: t('resourcing'),
       description: t('serviceDesc'),
       href: `/${currentLocale}/services/resourcing`,
-      icon: '👥'
+      icon: '/icons/Group 3.svg'
     },
     {
       title: t('training'),
       description: t('serviceDesc'),
       href: `/${currentLocale}/services/training`,
-      icon: '🎓'
+      icon: '/icons/Group 4.svg'
     }
   ];
 

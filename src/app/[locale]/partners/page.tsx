@@ -543,66 +543,37 @@ export default function PartnersPage() {
           key={index}
           href={`/${currentLocale}/blog`}
           prefetch={false}
-          style={{ textDecoration: 'none' }}
+          className={`tilt-card delay-${(index % 3) + 1}`}
+          style={{
+            textDecoration: 'none',
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16/9',
+            overflow: 'hidden',
+            borderRadius: '20px',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+            cursor: 'pointer',
+            display: 'block',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-8px)';
+            e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+          }}
         >
-          <div
-            className={`resource-card tilt-card delay-${(index % 3) + 1}`}
-            style={{
-              background: '#0a0e3d',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer'
+          <Image
+            src={`/img/resource${index}.jpg`}
+            alt={`Resource ${index}`}
+            fill
+            style={{ 
+              objectFit: 'cover'
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
-            }}
-          >
-            {/* Image Container with Aspect Ratio */}
-            <div style={{
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '16/9',
-              overflow: 'hidden'
-            }}>
-              <Image
-                src={`/img/resource${index}.jpg`}
-                alt={`Resource ${index}`}
-                fill
-                style={{ 
-                  objectFit: 'cover'
-                }}
-                sizes="(max-width: 768px) 100vw, 320px"
-              />
-              {/* Overlay for Better Visual Appeal */}
-              <div style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                background: 'linear-gradient(transparent 0%, rgba(10, 14, 61, 0.8) 100%)',
-                padding: '1.5rem',
-                zIndex: 2
-              }}>
-                <p style={{
-                  color: '#fff',
-                  fontSize: 'clamp(1rem, 1.8vw, 1.1rem)',
-                  fontWeight: '600',
-                  lineHeight: '1.4',
-                  margin: 0,
-                  textAlign: 'center'
-                }}>
-                  
-                </p>
-              </div>
-            </div>
-          </div>
+            sizes="(max-width: 768px) 100vw, 320px"
+          />
         </Link>
       ))}
     </div>

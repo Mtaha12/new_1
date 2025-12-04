@@ -59,19 +59,19 @@ export default function TrainingPage() {
       title: tConsulting('resourcing'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/resourcing`,
-      icon: '👥'
+      icon: '/icons/Group 3.svg'
     },
     {
       title: tConsulting('managedIT'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/managed-it`,
-      icon: '⚙️'
+      icon: '/icons/Group 5.svg'
     },
     {
       title: tConsulting('devsecops'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/devsecops`,
-      icon: '🔧'
+      icon: '/icons/Group 6 (1).svg'
     }
   ];
 

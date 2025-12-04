@@ -266,6 +266,9 @@ const ServicePageLayout = ({
                       src={section.fullWidthImage.src}
                       alt={section.fullWidthImage.alt}
                       fill
+                      priority={index < 2}
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      quality={85}
                       sizes="(max-width: 768px) 100vw, 1100px"
                       style={{ objectFit: 'cover' }}
                     />
@@ -314,7 +317,9 @@ const ServicePageLayout = ({
                       src={section.imageSrc}
                       alt={section.imageAlt ?? section.title}
                       fill
-                      loading="lazy"
+                      priority={index < 2}
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      quality={85}
                       sizes="(max-width: 768px) 100vw, 600px"
                       style={{ objectFit: 'cover' }}
                     />
@@ -365,7 +370,9 @@ const ServicePageLayout = ({
                       src={section.imageSrc}
                       alt={section.imageAlt ?? section.title}
                       fill
-                      loading="lazy"
+                      priority={index < 2}
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      quality={85}
                       sizes="(max-width: 768px) 100vw, 600px"
                       style={{ objectFit: 'cover' }}
                     />
@@ -438,7 +445,7 @@ const ServicePageLayout = ({
                     }}
                     aria-hidden
                   >
-                    {service.icon || `0${cardIndex + 1}`}
+                    {service.icon ? <Image src={service.icon} alt="" width={36} height={36} style={{ width: 36, height: 36 }} /> : `0${cardIndex + 1}`}
                   </div>
                   <div>
                     <h4
@@ -523,35 +530,31 @@ const ServicePageLayout = ({
             key={resourceItem.title}
             href={resourceItem.href || blogHref}
             prefetch={false}
-            style={{ textDecoration: 'none' }}
-          >
-            <div
-              className="resource-card tilt-card"
-              style={{
-                background: '#0a0e3d',
-                boxShadow: '0 20px 40px rgba(5, 12, 40, 0.18)',
-                cursor: 'pointer'
-              }}
-            >
-            {/* Updated Image Container with Aspect Ratio */}
-            <div style={{
+            className="tilt-card"
+            style={{
+              textDecoration: 'none',
               position: 'relative',
               width: '100%',
               aspectRatio: '16/9',
-              overflow: 'hidden'
-            }}>
-              <Image
-                src={resourceItem.imageSrc}
-                alt={resourceItem.title}
-                fill
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, 320px"
-                style={{ 
-                  objectFit: 'cover'
-                }}
-              />
-            </div>
-            </div>
+              overflow: 'hidden',
+              borderRadius: '20px',
+              boxShadow: '0 20px 40px rgba(5, 12, 40, 0.18)',
+              cursor: 'pointer',
+              display: 'block'
+            }}
+          >
+            <Image
+              src={resourceItem.imageSrc}
+              alt={resourceItem.title}
+              fill
+              priority={false}
+              loading="lazy"
+              quality={85}
+              sizes="(max-width: 768px) 100vw, 320px"
+              style={{ 
+                objectFit: 'cover'
+              }}
+            />
           </Link>
         );
       })}

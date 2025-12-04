@@ -7,6 +7,7 @@ import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import FloatingCTA from '@/components/ui/FloatingCTA';
+import Icon from '@/components/ui/Icon';
 
 const MAX_CONTAINER_WIDTH = 'min(1140px, 100%)';
 
@@ -94,47 +95,47 @@ export default function SolutionsOverviewPage() {
   const solutionMedia: Record<string, { image: string; badge: string; accent: string }> = {
     'ai-security': {
       image: '/img/ss7.jpg',
-      badge: '🤖',
+      badge: 'ai',
       accent: 'linear-gradient(135deg, rgba(9, 31, 90, 0.82) 0%, rgba(20, 122, 220, 0.88) 100%)'
     },
     'identity-management': {
       image: '/img/ss4.jpg',
-      badge: '🪪',
+      badge: 'identity',
       accent: 'linear-gradient(135deg, rgba(8, 25, 70, 0.82) 0%, rgba(16, 104, 160, 0.82) 100%)'
     },
     'zero-trust': {
       image: '/img/ss2.jpg',
-      badge: '🛡️',
+      badge: 'shield',
       accent: 'linear-gradient(135deg, rgba(7, 31, 95, 0.85) 0%, rgba(52, 187, 197, 0.82) 100%)'
     },
     'cloud-security': {
       image: '/img/ss3.jpg',
-      badge: '☁️',
+      badge: 'cloud',
       accent: 'linear-gradient(135deg, rgba(6, 24, 84, 0.85) 0%, rgba(57, 135, 255, 0.82) 100%)'
     },
     'network-security': {
       image: '/img/ss10.jpg',
-      badge: '🌐',
+      badge: 'network',
       accent: 'linear-gradient(135deg, rgba(5, 20, 82, 0.82) 0%, rgba(105, 232, 225, 0.8) 100%)'
     },
     'endpoint-security': {
       image: '/img/ss6.jpg',
-      badge: '💻',
+      badge: 'laptop',
       accent: 'linear-gradient(135deg, rgba(4, 16, 66, 0.82) 0%, rgba(62, 169, 219, 0.82) 100%)'
     },
     'vulnerability-management': {
       image: '/img/ss5.jpg',
-      badge: '⭐',
+      badge: 'target',
       accent: 'linear-gradient(135deg, rgba(8, 28, 78, 0.82) 0%, rgba(55, 165, 245, 0.82) 100%)'
     },
     'policy-security-awareness': {
       image: '/img/ss8.jpg',
-      badge: '📘',
+      badge: 'book',
       accent: 'linear-gradient(135deg, rgba(10, 35, 90, 0.82) 0%, rgba(120, 145, 255, 0.82) 100%)'
     },
     'email-security-migrations': {
       image: '/img/ss9.jpg',
-      badge: '✉️',
+      badge: 'email',
       accent: 'linear-gradient(135deg, rgba(6, 32, 88, 0.82) 0%, rgba(74, 200, 230, 0.82) 100%)'
     }
   };
@@ -297,14 +298,12 @@ export default function SolutionsOverviewPage() {
                         height: '56px',
                         borderRadius: '14px',
                         background: '#0a0e3d',
-                        color: '#69E8E1',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '1.6rem'
+                        justifyContent: 'center'
                       }}
                     >
-                      {pillar.icon}
+                      <Icon name={pillar.icon} size={28} color="#69E8E1" />
                     </div>
                   )}
                   <h3
@@ -355,7 +354,7 @@ export default function SolutionsOverviewPage() {
               {solutions.map((solution, index) => {
                 const media = solutionMedia[solution.id] ?? {
                   image: '/img/ss2.jpg',
-                  badge: '⭐',
+                  badge: 'star',
                   accent: 'linear-gradient(135deg, rgba(10,15,70,0.85) 0%, rgba(14,58,120,0.8) 100%)'
                 };
                 return (
@@ -385,12 +384,10 @@ export default function SolutionsOverviewPage() {
                           background: 'rgba(255,255,255,0.22)',
                           display: 'flex',
                           alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '1.8rem',
-                          color: '#fff'
+                          justifyContent: 'center'
                         }}
                       >
-                        {media.badge}
+                        <Icon name={media.badge} size={28} color="#fff" />
                       </div>
                     </div>
                     <div style={{ padding: 'clamp(1.8rem, 5vw, 2.2rem)', display: 'grid', gap: '1rem', flex: 1 }}>
@@ -485,7 +482,7 @@ export default function SolutionsOverviewPage() {
                       fontWeight: 700
                     }}
                   >
-                    {step.icon ?? index + 1}
+                    {step.icon ? <Icon name={step.icon} size={26} color="#69E8E1" /> : index + 1}
                   </div>
                   <div style={{ display: 'grid', gap: '0.4rem' }}>
                     <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0a0e3d', margin: 0 }}>{step.title}</h3>
@@ -579,34 +576,28 @@ export default function SolutionsOverviewPage() {
             key={`${resource.title}-${index}`}
             href={blogHref}
             prefetch={false}
-            style={{ textDecoration: 'none' }}
-          >
-            <div
-              className={`resource-card tilt-card delay-${(index % 3) + 1}`}
-              style={{
-                background: '#0a0e3d',
-                boxShadow: '0 22px 45px rgba(10, 14, 61, 0.22)',
-                cursor: 'pointer'
-              }}
-            >
-            {/* Updated Image Container with Aspect Ratio */}
-            <div style={{
+            className={`tilt-card delay-${(index % 3) + 1}`}
+            style={{
+              textDecoration: 'none',
               position: 'relative',
               width: '100%',
               aspectRatio: '16/9',
-              overflow: 'hidden'
-            }}>
-              <Image
-                src={resource.image || '/img/resource1.jpg'}
-                alt={resource.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 320px"
-                style={{ 
-                  objectFit: 'cover'
-                }}
-              />
-            </div>
-          </div>
+              overflow: 'hidden',
+              borderRadius: '20px',
+              boxShadow: '0 22px 45px rgba(10, 14, 61, 0.22)',
+              cursor: 'pointer',
+              display: 'block'
+            }}
+          >
+            <Image
+              src={resource.image || '/img/resource1.jpg'}
+              alt={resource.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 320px"
+              style={{ 
+                objectFit: 'cover'
+              }}
+            />
           </Link>
         );
       })}

@@ -529,41 +529,34 @@ export default function AboutPage() {
           key={index}
           href={`/${currentLocale}/blog`}
           prefetch={false}
-          style={{ textDecoration: 'none' }}
+          className={`tilt-card delay-${(index % 3) + 1}`}
+          style={{
+            textDecoration: 'none',
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16/9',
+            overflow: 'hidden',
+            borderRadius: '20px',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+            cursor: 'pointer',
+            display: 'block',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-8px)';
+            e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+          }}
         >
-          <div
-            className={`resource-card tilt-card delay-${(index % 3) + 1}`}
-            style={{
-              background: '#0a0e3d',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
-            }}
-          >
-            <div style={{
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '16/9',
-              overflow: 'hidden'
-            }}>
-              <Image
-                src={resource.image || '/img/resource1.jpg'}
-                alt={resource.title}
-                fill
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
-          </div>
+          <Image
+            src={resource.image || '/img/resource1.jpg'}
+            alt={resource.title}
+            fill
+            style={{ objectFit: 'cover' }}
+          />
         </Link>
       ))}
     </div>

@@ -7,6 +7,7 @@ import { usePathname, useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import FloatingCTA from '@/components/ui/FloatingCTA';
+import Icon from '@/components/ui/Icon';
 
 type Pillar = {
 	icon?: string;
@@ -61,15 +62,15 @@ export default function ServicesPage() {
 		return `${localePrefix}${normalized}`;
 	};
 
-	const serviceMedia: Record<string, { image: string; badge: string; accent: string }> = {
-		consulting: { image: '/img/s1.jpg', badge: '🤝', accent: 'linear-gradient(135deg, rgba(9, 31, 90, 0.85) 0%, rgba(19, 70, 163, 0.8) 100%)' },
-		infrastructure: { image: '/img/s5.jpg', badge: '🏗️', accent: 'linear-gradient(135deg, rgba(8, 25, 70, 0.85) 0%, rgba(15, 98, 160, 0.8) 100%)' },
-		resourcing: { image: '/img/s8.jpg', badge: '🛡️', accent: 'linear-gradient(135deg, rgba(7, 31, 95, 0.85) 0%, rgba(45, 214, 198, 0.8) 100%)' },
-		training: { image: '/img/s6.jpg', badge: '🧪', accent: 'linear-gradient(135deg, rgba(5, 20, 82, 0.85) 0%, rgba(102, 224, 255, 0.8) 100%)' },
-		'managed-it': { image: '/img/s9.jpg', badge: '🧰', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' },
-		devsecops: { image: '/img/s11.jpg', badge: '⚙️', accent: 'linear-gradient(135deg, rgba(11, 31, 96, 0.65) 0%, rgba(105, 232, 225, 0.4) 100%)' },
-		managed: { image: '/img/s9.jpg', badge: '🧰', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' },
-		managedIt: { image: '/img/s9.jpg', badge: '🧰', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' }
+	const serviceMedia: Record<string, { image: string; svgIcon: string; accent: string }> = {
+		consulting: { image: '/img/s1.jpg', svgIcon: '/icons/Group 1 (1).svg', accent: 'linear-gradient(135deg, rgba(9, 31, 90, 0.85) 0%, rgba(19, 70, 163, 0.8) 100%)' },
+		infrastructure: { image: '/img/s5.jpg', svgIcon: '/icons/Group 2.svg', accent: 'linear-gradient(135deg, rgba(8, 25, 70, 0.85) 0%, rgba(15, 98, 160, 0.8) 100%)' },
+		resourcing: { image: '/img/s8.jpg', svgIcon: '/icons/Group 3.svg', accent: 'linear-gradient(135deg, rgba(7, 31, 95, 0.85) 0%, rgba(45, 214, 198, 0.8) 100%)' },
+		training: { image: '/img/s6.jpg', svgIcon: '/icons/Group 4.svg', accent: 'linear-gradient(135deg, rgba(5, 20, 82, 0.85) 0%, rgba(102, 224, 255, 0.8) 100%)' },
+		'managed-it': { image: '/img/s9.jpg', svgIcon: '/icons/Group 5.svg', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' },
+		devsecops: { image: '/img/s11.jpg', svgIcon: '/icons/Group 6 (1).svg', accent: 'linear-gradient(135deg, rgba(11, 31, 96, 0.65) 0%, rgba(105, 232, 225, 0.4) 100%)' },
+		managed: { image: '/img/s9.jpg', svgIcon: '/icons/Group 5.svg', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' },
+		managedIt: { image: '/img/s9.jpg', svgIcon: '/icons/Group 5.svg', accent: 'linear-gradient(135deg, rgba(4, 13, 60, 0.85) 0%, rgba(61, 169, 219, 0.78) 100%)' }
 	};
 
 	const curatedResources = [
@@ -101,7 +102,10 @@ export default function ServicesPage() {
 					<section
 						className="parallax-wrap fade-section"
 						style={{
-							background: 'linear-gradient(135deg, rgba(4, 12, 40, 0.96) 0%, rgba(12, 47, 108, 0.9) 55%, rgba(19, 104, 255, 0.78) 100%)',
+							backgroundImage: 'linear-gradient(135deg, rgba(4, 12, 40, 0.92) 0%, rgba(12, 47, 108, 0.88) 55%, rgba(19, 104, 255, 0.75) 100%), url(/img/s7.jpg)',
+							backgroundSize: 'cover',
+							backgroundPosition: 'center',
+							backgroundRepeat: 'no-repeat',
 							padding: 'clamp(4rem, 9vw, 7rem) clamp(1.5rem, 6vw, 3.5rem)',
 							color: '#fff',
 							position: 'relative',
@@ -117,91 +121,82 @@ export default function ServicesPage() {
 							}}
 						/>
 						<div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-							<div className="fade-section delay-1" style={{ display: 'grid', gap: 'clamp(2rem, 5vw, 3rem)', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', alignItems: 'center' }}>
-								<div>
-									<h1
+							<div className="fade-section delay-1" style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}>
+								<h1
+									style={{
+										fontSize: 'clamp(2.4rem, 6vw, 3.8rem)',
+										fontWeight: 800,
+										marginBottom: '1.25rem',
+										lineHeight: 1.1
+									}}
+								>
+									{heroTitle}
+								</h1>
+								<p
+									className="fade-section delay-2"
+									style={{
+										fontSize: 'clamp(1rem, 1.8vw, 1.15rem)',
+										lineHeight: 1.8,
+										opacity: 0.92,
+										marginBottom: '1.5rem'
+									}}
+								>
+									{heroSubtitle}
+								</p>
+								<p
+									className="fade-section delay-3"
+									style={{
+										fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)',
+										opacity: 0.85,
+										lineHeight: 1.7,
+										marginBottom: '2.5rem'
+									}}
+								>
+									{heroSupporting}
+								</p>
+								<div
+									className="fade-section delay-4"
+									style={{
+										display: 'flex',
+										flexWrap: 'wrap',
+										gap: '1rem',
+										justifyContent: 'center'
+									}}
+								>
+									<Link
+										className="glow-button hero-cta delay-1"
+										href={buildHref(primaryCtaHref)}
+										prefetch={false}
 										style={{
-											fontSize: 'clamp(2.4rem, 6vw, 3.8rem)',
-											fontWeight: 800,
-											marginBottom: '1.25rem',
-											lineHeight: 1.1
+											background: '#69E8E1',
+											color: '#0a0e3d',
+											padding: 'clamp(0.85rem, 2vw, 1.05rem) clamp(2.2rem, 4vw, 3rem)',
+											borderRadius: '30px',
+											fontWeight: 700,
+											fontSize: 'clamp(0.9rem, 1.5vw, 1rem)',
+											textDecoration: 'none',
+											boxShadow: '0 15px 38px rgba(105, 232, 225, 0.25)'
 										}}
 									>
-										{heroTitle}
-									</h1>
-									<p
-										className="fade-section delay-2"
+										{primaryCta}
+									</Link>
+									<Link
+										className="glow-button hero-cta delay-2"
+										href={buildHref(secondaryCtaHref)}
+										prefetch={false}
 										style={{
-											fontSize: 'clamp(1rem, 1.8vw, 1.15rem)',
-											lineHeight: 1.8,
-											opacity: 0.92,
-											marginBottom: '1.5rem'
+											background: 'transparent',
+											color: '#fff',
+											border: '2px solid rgba(255,255,255,0.68)',
+											padding: 'clamp(0.85rem, 2vw, 1.05rem) clamp(2.2rem, 4vw, 3rem)',
+											borderRadius: '30px',
+											fontWeight: 600,
+											fontSize: 'clamp(0.9rem, 1.5vw, 1rem)',
+											textDecoration: 'none'
 										}}
 									>
-										{heroSubtitle}
-									</p>
-									<p
-										className="fade-section delay-3"
-										style={{
-											fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)',
-											opacity: 0.85,
-											lineHeight: 1.7,
-											marginBottom: '2.5rem'
-										}}
-									>
-										{heroSupporting}
-									</p>
-									<div
-										className="fade-section delay-4"
-										style={{
-											display: 'flex',
-											flexWrap: 'wrap',
-											gap: '1rem',
-											justifyContent: 'flex-start'
-										}}
-									>
-										<Link
-											className="glow-button hero-cta delay-1"
-											href={buildHref(primaryCtaHref)}
-											prefetch={false}
-											style={{
-												background: '#69E8E1',
-												color: '#0a0e3d',
-												padding: 'clamp(0.85rem, 2vw, 1.05rem) clamp(2.2rem, 4vw, 3rem)',
-												borderRadius: '30px',
-												fontWeight: 700,
-												fontSize: 'clamp(0.9rem, 1.5vw, 1rem)',
-												textDecoration: 'none',
-												boxShadow: '0 15px 38px rgba(105, 232, 225, 0.25)'
-											}}
-										>
-											{primaryCta}
-										</Link>
-										<Link
-											className="glow-button hero-cta delay-2"
-											href={buildHref(secondaryCtaHref)}
-											prefetch={false}
-											style={{
-												background: 'transparent',
-												color: '#fff',
-												border: '2px solid rgba(255,255,255,0.68)',
-												padding: 'clamp(0.85rem, 2vw, 1.05rem) clamp(2.2rem, 4vw, 3rem)',
-												borderRadius: '30px',
-												fontWeight: 600,
-												fontSize: 'clamp(0.9rem, 1.5vw, 1rem)',
-												textDecoration: 'none'
-											}}
-										>
-											{secondaryCta}
-										</Link>
-									</div>
-								</div>
-								<div className="tilt-card fade-section delay-2" style={{ position: 'relative', minHeight: '320px', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 45px 75px rgba(5, 12, 40, 0.35)' }}>
-									<Image src="/img/s7.jpg" alt={heroTitle} fill priority sizes="(max-width: 768px) 100vw, 540px" style={{ objectFit: 'cover' }} />
-									<div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,12,40,0) 0%, rgba(4,12,40,0.65) 100%)' }} />
-									<div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem', color: 'rgba(255,255,255,0.9)', fontSize: '0.95rem', lineHeight: 1.6 }}>
-										{supportTitle}
-									</div>
+										{secondaryCta}
+									</Link>
 								</div>
 							</div>
 						</div>
@@ -253,15 +248,13 @@ export default function ServicesPage() {
 													height: '56px',
 													borderRadius: '14px',
 													background: '#0a0e3d',
-													color: '#69E8E1',
 													display: 'flex',
 													alignItems: 'center',
 													justifyContent: 'center',
-													fontSize: '1.6rem',
 													marginBottom: '1.25rem'
 												}}
 											>
-												{pillar.icon}
+												<Icon name={pillar.icon} size={28} color="#69E8E1" />
 											</div>
 										)}
 										<h3
@@ -313,9 +306,9 @@ export default function ServicesPage() {
 											gap: '1.1rem'
 										}}
 									>
-										<div style={{ width: '52px', height: '52px', borderRadius: '16px', background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.7rem' }}>
-											{serviceMedia[service.id]?.badge ?? '⭐'}
-										</div>
+									<div style={{ width: '52px', height: '52px', borderRadius: '16px', background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+										<Image src={serviceMedia[service.id]?.svgIcon ?? '/icons/Group 1 (1).svg'} alt={service.title + ' icon'} width={32} height={32} style={{ width: 32, height: 32 }} />
+									</div>
 										<div>
 											<h4 style={{ fontSize: 'clamp(1.05rem, 2vw, 1.3rem)', fontWeight: 700, marginBottom: '0.4rem' }}>{service.title}</h4>
 											<p style={{ color: 'rgba(255,255,255,0.82)', lineHeight: 1.6, fontSize: 'clamp(0.85rem, 1.4vw, 0.98rem)', margin: 0 }}>
@@ -390,13 +383,16 @@ export default function ServicesPage() {
 												src={serviceMedia[service.id]?.image ?? '/img/s2.jpg'}
 												alt={service.title}
 												fill
+												priority={index < 3}
+												loading={index < 3 ? 'eager' : 'lazy'}
+												quality={85}
 												sizes="(max-width: 768px) 100vw, 420px"
 												style={{ objectFit: 'cover' }}
 											/>
 											<div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,12,40,0) 30%, rgba(4,12,40,0.7) 100%)' }} />
-											<div style={{ position: 'absolute', top: '1.1rem', left: '1.2rem', width: '54px', height: '54px', borderRadius: '16px', background: 'rgba(255,255,255,0.22)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.9rem', color: '#fff' }}>
-												{serviceMedia[service.id]?.badge ?? '🌐'}
-											</div>
+								<div style={{ position: 'absolute', top: '1.1rem', left: '1.2rem', width: '54px', height: '54px', borderRadius: '16px', background: 'rgba(255,255,255,0.22)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+									<Image src={serviceMedia[service.id]?.svgIcon ?? '/icons/Group 1 (1).svg'} alt={service.title + ' icon'} width={32} height={32} style={{ width: 32, height: 32 }} />
+								</div>
 										</div>
 										<div style={{ padding: 'clamp(1.8rem, 5vw, 2.2rem)', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
 											<h3 style={{ fontSize: 'clamp(1.2rem, 2.1vw, 1.45rem)', fontWeight: 800, color: '#0a0e3d', marginBottom: '0.35rem' }}>
@@ -471,35 +467,31 @@ export default function ServicesPage() {
 											key={resource.title}
 											href={blogHref}
 											prefetch={false}
-											style={{ textDecoration: 'none' }}
-										>
-											<div
-												className={`resource-card tilt-card delay-${(index % 3) + 1}`}
-												style={{
-													background: '#0a0e3d',
-													boxShadow: '0 20px 40px rgba(5, 12, 40, 0.18)',
-													cursor: 'pointer'
-												}}
-											>
-												{/* Updated Image Container with Aspect Ratio */}
-											<div style={{
+											className={`tilt-card delay-${(index % 3) + 1}`}
+											style={{
+												textDecoration: 'none',
 												position: 'relative',
 												width: '100%',
 												aspectRatio: '16/9',
-												overflow: 'hidden'
-											}}>
-												<Image
-													src={resource.image}
-													alt={resource.title}
-													fill
-													loading="lazy"
-													sizes="(max-width: 768px) 100vw, 320px"
-													style={{
-														objectFit: 'cover'
-													}}
-												/>
-											</div>
-											</div>
+												overflow: 'hidden',
+												borderRadius: '20px',
+												boxShadow: '0 20px 40px rgba(5, 12, 40, 0.18)',
+												cursor: 'pointer',
+												display: 'block'
+											}}
+										>
+											<Image
+												src={resource.image}
+												alt={resource.title}
+												fill
+												loading="lazy"
+												priority={false}
+												quality={85}
+												sizes="(max-width: 768px) 100vw, 320px"
+												style={{
+													objectFit: 'cover'
+												}}
+											/>
 										</Link>
 									);
 								})}

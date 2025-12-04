@@ -461,34 +461,28 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
             key={`${resourceTitle}-${index}`}
             href={blogHref}
             prefetch={false}
-            style={{ textDecoration: 'none' }}
-          >
-            <div
-              className="resource-card tilt-card"
-              style={{
-                background: '#0a0e3d',
-                boxShadow: '0 22px 45px rgba(10, 14, 61, 0.25)',
-                cursor: 'pointer'
-              }}
-            >
-            {/* Updated Image Container with Aspect Ratio */}
-            <div style={{
+            className="tilt-card"
+            style={{
+              textDecoration: 'none',
               position: 'relative',
               width: '100%',
               aspectRatio: '16/9',
-              overflow: 'hidden'
-            }}>
-              <Image 
-                src={imageSrc} 
-                alt={resourceTitle} 
-                fill 
-                sizes="(max-width: 768px) 100vw, 320px"
-                style={{ 
-                  objectFit: 'cover'
-                }}
-              />
-            </div>
-            </div>
+              overflow: 'hidden',
+              borderRadius: '20px',
+              boxShadow: '0 22px 45px rgba(10, 14, 61, 0.25)',
+              cursor: 'pointer',
+              display: 'block'
+            }}
+          >
+            <Image 
+              src={imageSrc} 
+              alt={resourceTitle} 
+              fill 
+              sizes="(max-width: 768px) 100vw, 320px"
+              style={{ 
+                objectFit: 'cover'
+              }}
+            />
           </Link>
         );
       })}

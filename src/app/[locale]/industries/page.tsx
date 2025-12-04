@@ -562,23 +562,19 @@ export default function IndustriesPage() {
             key={index}
             href={blogHref}
             prefetch={false}
-            style={{ textDecoration: 'none' }}
+            className={`tilt-card delay-${(index % 3) + 1}`}
+            style={{
+              textDecoration: 'none',
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16/9',
+              overflow: 'hidden',
+              borderRadius: '20px',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+              cursor: 'pointer',
+              display: 'block'
+            }}
           >
-            <div
-              className={`resource-card tilt-card delay-${(index % 3) + 1}`}
-              style={{
-                background: '#0a0e3d',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-                cursor: 'pointer'
-              }}
-            >
-          {/* Updated Image Container with Aspect Ratio */}
-          <div style={{
-            position: 'relative',
-            width: '100%',
-            aspectRatio: '16/9',
-            overflow: 'hidden'
-          }}>
             <Image
               src={resource.image || '/img/resource1.jpg'}
               alt={resource.title}
@@ -588,8 +584,6 @@ export default function IndustriesPage() {
               }}
               sizes="(max-width: 768px) 100vw, 320px"
             />
-          </div>
-            </div>
           </Link>
         );
       })}

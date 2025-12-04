@@ -60,19 +60,19 @@ export default function ResourcingPage() {
       title: tConsulting('consulting'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/consulting`,
-      icon: '📊'
+      icon: '/icons/Group 1 (1).svg'
     },
     {
       title: tConsulting('training'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/training`,
-      icon: '🎓'
+      icon: '/icons/Group 4.svg'
     },
     {
       title: tConsulting('devsecops'),
       description: tConsulting('serviceDesc'),
       href: `/${currentLocale}/services/devsecops`,
-      icon: '🔧'
+      icon: '/icons/Group 6 (1).svg'
     }
   ];
 

@@ -87,16 +87,19 @@
     "blogCarousel": {
       "quotes": [
         {
-          "text": "See how fusion teams choreograph AI incident response drills that compress dwell time and build executive confidence."
+          "text": "The SamurAI transformed our security posture with AI-driven insights. Their proactive approach reduced our incident response time by 60%, and their team provided exceptional guidance throughout the transformation.",
+          "attribution": "Enterprise Client"
         },
         {
-          "text": "Discover zero-trust quick wins that harden legacy estates without derailing transformation roadmaps."
+          "text": "Partnering with The SamurAI gave us the confidence to scale our operations globally. Their comprehensive solutions and expert consulting aligned perfectly with our business growth strategy.",
+          "attribution": "Fortune 500 Company"
         },
         {
-          "text": "Learn how leaders operationalize governance dashboards that turn resilience metrics into board-level storytelling."
+          "text": "What impressed us most was The SamurAI's ability to understand our unique challenges and deliver tailored solutions. Their team went above and beyond to ensure our success.",
+          "attribution": "Technology Industry Leader"
         }
       ],
-      "spotlight": "Explore the blog for fresh perspectives on automation, zero trust, and pragmatic resilience from The SamurAI field teams."
+      "spotlight": "Join industry leaders who trust The SamurAI to protect their digital assets and drive business resilience."
     },
     "partnersTitle": "Partners",
     "partnersHeadline": "Protect your business, secure your future, and become a part of The SamurAI family",
@@ -373,7 +376,7 @@
             "Join forces with us at The SamurAI to unlock the potential of AI to safeguard your sensitive information, detect potential threats, and fortify your digital presence.",
             "Our advanced AI solution enhances your cybersecurity posture, ensuring you stay one step ahead in the ongoing arms race against cybercriminals."
           ],
-          "image": { "src": "/img/ss1.png", "alt": "Security specialists reviewing AI risk dashboards" }
+          "image": { "src": "/img/ss1.jpg", "alt": "Security specialists reviewing AI risk dashboards" }
         },
         {
           "title": "Fortify Your Digital Realm",
@@ -1810,3 +1813,4 @@
     "ctaButton": "Plan a Strategy Session"
   }
 }
+
