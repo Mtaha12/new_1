@@ -1200,6 +1200,7 @@
     "projects": "Projects",
     "blog": "Blog",
     "partners": "Partners",
+    "terms": "Terms & Conditions",
     "faq": "FAQ & Terms",
     "welcomeBack": "Welcome back!",
     "aiSecurity": "AI Security for LLMs",
@@ -1405,6 +1406,74 @@
     ],
     "resourcesTitle": "Recommended resources",
     "resourcesSubtitle": "Share these guides with stakeholders to accelerate approvals and readiness.",
+    "resourcesCards": [
+      {
+        "title": "Zero-Trust Launch Checklist",
+        "tag": "Guide",
+        "image": "/img/resource1.jpg",
+        "href": "/resources/zero-trust"
+      },
+      {
+        "title": "Executive Brief: Cyber Workforce Readiness",
+        "tag": "Brief",
+        "image": "/img/resource2.jpg",
+        "href": "/resources/workforce"
+      },
+      {
+        "title": "Managed SOC Operating Model",
+        "tag": "Playbook",
+        "image": "/img/resource3.jpg",
+        "href": "/resources/managed-soc"
+      }
+    ],
+    "ctaTitle": "Need clarity on a security initiative?",
+    "ctaSubtitle": "We tailor FAQs, legal clauses, and operating models to your industry so teams can move forward with confidence.",
+    "ctaPrimary": "Schedule a call",
+    "ctaPrimaryHref": "contact?topic=services",
+    "ctaSecondary": "Read customer stories",
+    "ctaSecondaryHref": "case-studies"
+  },
+  "TermsPage": {
+    "heroEyebrow": "Legal & Trust",
+    "heroTitle": "Terms & conditions you can rely on",
+    "heroSubtitle": "We document everything from project scope to data retention so your teams stay aligned at every checkpoint.",
+    "heroSupporting": "These guidelines reflect how The SamurAI safeguards information, collaborates with clients, and keeps engagements measurable.",
+    "primaryCta": "Schedule a call",
+    "primaryCtaHref": "contact?topic=services",
+    "secondaryCta": "Download policy overview",
+    "secondaryCtaHref": "/resources/cybersecurity-services-2025",
+    "badgeHighlights": [
+      "Transparent SLAs",
+      "Zero-trust data handling",
+      "Audit-ready reporting"
+    ],
+    "termsTitle": "Core terms & guardrails",
+    "termsSubtitle": "Clear language, mutual accountability, and security-first controls keep programs on track.",
+    "termsSections": [
+      {
+        "title": "Engagement scope",
+        "items": [
+          "Statements of work outline deliverables, sprint milestones, and acceptance criteria approved by both parties.",
+          "Change requests are submitted through the governance portal and prioritized during alignment checkpoints."
+        ]
+      },
+      {
+        "title": "Data handling",
+        "items": [
+          "Customer data is segmented inside zero-trust project spaces with MFA, least-privilege roles, and audit logging.",
+          "Sensitive evidence is retained only for the duration defined in the contract, then securely deleted using NIST-compliant procedures."
+        ]
+      },
+      {
+        "title": "Service levels",
+        "items": [
+          "Critical incidents receive a first-responder acknowledgement within 15 minutes via the rapid response desk.",
+          "Weekly governance reports summarize effort burn, risks, and upcoming decisions for executive sponsors."
+        ]
+      }
+    ],
+    "resourcesTitle": "Helpful resources",
+    "resourcesSubtitle": "Share these assets with legal, procurement, and security leads to accelerate sign-off.",
     "resourcesCards": [
       {
         "title": "Zero-Trust Launch Checklist",

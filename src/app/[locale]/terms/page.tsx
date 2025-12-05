@@ -3,19 +3,16 @@
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import FloatingCTA from '@/components/ui/FloatingCTA';
-import Icon from '@/components/ui/Icon';
 import { useTranslations } from 'next-intl';
 import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
 
 const MAX_CONTAINER_WIDTH = 'min(1140px, 100%)';
 
-type FaqItem = {
-  icon?: string;
-  question: string;
-  answer: string;
+type TermsSection = {
+  title: string;
+  items: string[];
 };
 
 type ResourceCard = {
@@ -25,8 +22,8 @@ type ResourceCard = {
   href?: string;
 };
 
-export default function FAQPage() {
-  const t = useTranslations('FAQPage');
+export default function TermsPage() {
+  const t = useTranslations('TermsPage');
   const pathname = usePathname() ?? '/en';
   const params = useParams<{ locale?: string }>();
   const localeFromParams = params?.locale;
@@ -54,9 +51,9 @@ export default function FAQPage() {
   const secondaryCta = t('secondaryCta');
   const secondaryCtaHref = t('secondaryCtaHref');
   const badgeHighlights = (t.raw('badgeHighlights') as string[]) || [];
-  const faqTitle = t('faqTitle');
-  const faqSubtitle = t('faqSubtitle');
-  const faqItems = (t.raw('faqItems') as FaqItem[]) || [];
+  const termsTitle = t('termsTitle');
+  const termsSubtitle = t('termsSubtitle');
+  const termsSections = (t.raw('termsSections') as TermsSection[]) || [];
   const resourcesTitle = t('resourcesTitle');
   const resourcesSubtitle = t('resourcesSubtitle');
   const resourcesCards = (t.raw('resourcesCards') as ResourceCard[]) || [];
@@ -66,11 +63,6 @@ export default function FAQPage() {
   const ctaPrimaryHref = t('ctaPrimaryHref');
   const ctaSecondary = t('ctaSecondary');
   const ctaSecondaryHref = t('ctaSecondaryHref');
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggleQuestion = (index: number) => {
-    setOpenIndex((previous) => (previous === index ? null : index));
-  };
 
   return (
     <div style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -199,116 +191,57 @@ export default function FAQPage() {
         <section
           className="fade-section"
           style={{
+            background: '#f4f7ff',
             padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 6vw, 3.5rem)'
           }}
         >
           <div style={{ maxWidth: MAX_CONTAINER_WIDTH, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 'clamp(2rem, 6vw, 3.25rem)' }}>
-              <p style={{ color: '#3b4a6b', fontWeight: 600, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>{faqTitle}</p>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(2rem, 5vw, 3rem)' }}>
+              <p style={{ color: '#516074', fontWeight: 600, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>{termsTitle}</p>
               <h2
                 style={{
                   fontSize: 'clamp(2rem, 4.5vw, 2.6rem)',
                   fontWeight: 800,
                   color: '#0a0e3d',
-                  marginBottom: '0.85rem'
+                  marginBottom: '0.75rem'
                 }}
               >
-                {faqSubtitle}
+                {termsSubtitle}
               </h2>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-              {faqItems.map((item, index) => {
-                const isOpen = openIndex === index;
-                return (
-                  <div
-                    key={item.question}
-                    className={`fade-section delay-${(index % 4) + 1}`}
-                    style={{
-                      background: '#fff',
-                      borderRadius: '18px',
-                      border: '1px solid rgba(10,14,61,0.08)',
-                      boxShadow: '0 18px 35px rgba(10, 14, 61, 0.05)',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => toggleQuestion(index)}
-                      aria-expanded={isOpen}
-                      style={{
-                        width: '100%',
-                        background: 'transparent',
-                        border: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '1.25rem 1.5rem',
-                        cursor: 'pointer',
-                        gap: '1rem'
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', textAlign: 'left' }}>
-                        {item.icon ? (
-                          <span
-                            aria-hidden
-                            style={{
-                              width: '44px',
-                              height: '44px',
-                              borderRadius: '12px',
-                              background: 'rgba(105, 232, 225, 0.15)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center'
-                            }}
-                          >
-                            <Icon name={item.icon} size={24} color="#0a0e3d" />
-                          </span>
-                        ) : null}
-                        <span
-                          style={{
-                            fontSize: 'clamp(1rem, 2vw, 1.15rem)',
-                            fontWeight: 600,
-                            color: '#0a0e3d'
-                          }}
-                        >
-                          {item.question}
-                        </span>
-                      </div>
-                      <span
-                        aria-hidden
-                        style={{
-                          transition: 'transform 0.25s ease',
-                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                          color: '#0a0e3d'
-                        }}
-                      >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <polyline points="6 9 12 15 18 9" />
-                        </svg>
-                      </span>
-                    </button>
-                    <div
-                      style={{
-                        maxHeight: isOpen ? '380px' : '0px',
-                        overflow: 'hidden',
-                        transition: 'max-height 0.3s ease, opacity 0.3s ease',
-                        opacity: isOpen ? 1 : 0
-                      }}
-                    >
-                      <p
-                        style={{
-                          padding: '0 1.5rem 1.5rem',
-                          color: '#4d5566',
-                          lineHeight: 1.7,
-                          marginTop: 0
-                        }}
-                      >
-                        {item.answer}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+                gap: 'clamp(1.5rem, 4vw, 2.5rem)'
+              }}
+            >
+              {termsSections.map((section, index) => (
+                <div
+                  key={section.title}
+                  className={`gradient-border rise-in delay-${(index % 4) + 1}`}
+                  style={{
+                    background: '#fff',
+                    borderRadius: '20px',
+                    padding: '2rem',
+                    border: '1px solid rgba(10,14,61,0.08)',
+                    boxShadow: '0 18px 40px rgba(10, 14, 61, 0.08)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem'
+                  }}
+                >
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 750, color: '#0a0e3d' }}>{section.title}</h3>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '0.75rem' }}>
+                    {section.items.map((item) => (
+                      <li key={item} style={{ color: '#4d5566', lineHeight: 1.6, display: 'flex', gap: '0.6rem' }}>
+                        <span style={{ color: '#69E8E1' }}>•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -376,7 +309,7 @@ export default function FAQPage() {
           primaryHref={buildHref(ctaPrimaryHref)}
           secondaryLabel={ctaSecondary}
           secondaryHref={buildHref(ctaSecondaryHref)}
-          backgroundGradient="linear-gradient(180deg, #f8f9fa 0%, #f8f9fa 60%, #050b3d 60%, #050b3d 100%)"
+          backgroundGradient="linear-gradient(180deg, #f8fbff 0%, #f8fbff 60%, #050b3d 60%, #050b3d 100%)"
         />
       </main>
       <Footer />
