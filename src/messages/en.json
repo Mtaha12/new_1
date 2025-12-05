@@ -1200,6 +1200,7 @@
     "projects": "Projects",
     "blog": "Blog",
     "partners": "Partners",
+    "faq": "FAQ & Terms",
     "welcomeBack": "Welcome back!",
     "aiSecurity": "AI Security for LLMs",
     "identityManagement": "Identity & Access Management",
@@ -1338,6 +1339,98 @@
         "slug": "zero-trust-quick-wins-legacy-environments"
       }
     ]
+  },
+  "FAQPage": {
+    "heroEyebrow": "FAQ & Terms",
+    "heroTitle": "Answers that keep your security roadmap moving",
+    "heroSubtitle": "From onboarding to incident response, get clarity on how The SamurAI protects your data, executes engagements, and keeps teams aligned.",
+    "heroSupporting": "Transparent policies, measurable SLAs, and seasoned experts mean you always know what to expect at every phase of the partnership.",
+    "primaryCta": "Talk to a strategist",
+    "primaryCtaHref": "contact?topic=faq",
+    "secondaryCta": "Download program overview",
+    "secondaryCtaHref": "/resources/cybersecurity-services-2025",
+    "badgeHighlights": [
+      "24/7 response desk",
+      "ISO 27001 & SOC 2 aligned",
+      "Humans + automation"
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faqSubtitle": "Short, practical answers to the topics customers raise before launching engagements.",
+    "faqItems": [
+      {
+        "icon": "shield",
+        "question": "How fast can your team engage during an incident?",
+        "answer": "Our rapid response desk assembles a cross-functional pod within 30 minutes. For existing customers, we follow the jointly defined escalation matrix and activate containment playbooks immediately."
+      },
+      {
+        "icon": "cloud",
+        "question": "What compliance frameworks do you align with?",
+        "answer": "We operate under ISO 27001, SOC 2 Type II, and regional data residency requirements. Project documentation, audit trails, and access controls are enforced through the same governance platform used by our delivery teams."
+      },
+      {
+        "icon": "users",
+        "question": "Can we integrate your specialists with our in-house squads?",
+        "answer": "Yes. We embed blended teams, co-own sprint ceremonies, and provide knowledge-transfer checkpoints so internal squads can sustain outcomes once the engagement closes."
+      },
+      {
+        "icon": "book",
+        "question": "How are changes or new requirements handled?",
+        "answer": "All scope adjustments are logged through the engagement portal, estimated within two business days, and prioritized during the weekly governance review with your stakeholders."
+      }
+    ],
+    "termsTitle": "Terms & conditions that protect both teams",
+    "termsSubtitle": "These principles govern how we safeguard information, deliver services, and collaborate with customers worldwide.",
+    "termsSections": [
+      {
+        "title": "Engagement scope",
+        "items": [
+          "Statements of work outline deliverables, sprint milestones, and acceptance criteria approved by both parties.",
+          "Change requests are submitted through the governance portal and prioritized during alignment checkpoints."
+        ]
+      },
+      {
+        "title": "Data handling",
+        "items": [
+          "Customer data is segmented inside zero-trust project spaces with MFA, least-privilege roles, and audit logging.",
+          "Sensitive evidence is retained only for the duration defined in the contract, then securely deleted using NIST-compliant procedures."
+        ]
+      },
+      {
+        "title": "Service levels",
+        "items": [
+          "Critical incidents receive a first-responder acknowledgement within 15 minutes via the rapid response desk.",
+          "Weekly governance reports summarize effort burn, risks, and upcoming decisions for executive sponsors."
+        ]
+      }
+    ],
+    "resourcesTitle": "Recommended resources",
+    "resourcesSubtitle": "Share these guides with stakeholders to accelerate approvals and readiness.",
+    "resourcesCards": [
+      {
+        "title": "Zero-Trust Launch Checklist",
+        "tag": "Guide",
+        "image": "/img/resource1.jpg",
+        "href": "/resources/zero-trust"
+      },
+      {
+        "title": "Executive Brief: Cyber Workforce Readiness",
+        "tag": "Brief",
+        "image": "/img/resource2.jpg",
+        "href": "/resources/workforce"
+      },
+      {
+        "title": "Managed SOC Operating Model",
+        "tag": "Playbook",
+        "image": "/img/resource3.jpg",
+        "href": "/resources/managed-soc"
+      }
+    ],
+    "ctaTitle": "Need clarity on a security initiative?",
+    "ctaSubtitle": "We tailor FAQs, legal clauses, and operating models to your industry so teams can move forward with confidence.",
+    "ctaPrimary": "Schedule a call",
+    "ctaPrimaryHref": "contact?topic=services",
+    "ctaSecondary": "Read customer stories",
+    "ctaSecondaryHref": "case-studies"
   },
   "ServicesPage": {
     "description": "Activate end-to-end cybersecurity and infrastructure expertise tailored to your organization.",

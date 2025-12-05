@@ -17,7 +17,7 @@ type FloatingCTAProps = {
   className?: string;
 };
 
-const DEFAULT_BACKGROUND = 'linear-gradient(180deg, #f5f8ff 0%, #f5f8ff 62%, #050b3d 62%, #050b3d 100%)';
+const DEFAULT_BACKGROUND = 'linear-gradient(180deg, #f8fbff 0%, #f8fbff 60%, #050b3d 60%, #050b3d 100%)';
 
 const OUTER_BASE_STYLE: CSSProperties = {
   position: 'relative',
@@ -27,12 +27,12 @@ const OUTER_BASE_STYLE: CSSProperties = {
 };
 
 const CARD_STYLE: CSSProperties = {
-  background: 'linear-gradient(180deg, #eef4ff 0%, #dfeaff 100%)',
+  background: 'linear-gradient(180deg, #f2f7ff 0%, #deeaff 100%)',
   borderRadius: '30px',
   padding: 'clamp(3rem, 6vw, 4rem) clamp(2rem, 6vw, 3.5rem)',
   textAlign: 'center',
   boxShadow: '0 32px 64px rgba(5, 12, 40, 0.22)',
-  border: '1px solid rgba(19, 104, 255, 0.12)',
+  border: '1px solid rgba(34, 109, 255, 0.15)',
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   position: 'relative',
   zIndex: 1001
