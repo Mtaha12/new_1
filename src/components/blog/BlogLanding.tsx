@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { CSSProperties, FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import Footer from '@/components/layout/Footer';
 import FloatingCTA from '@/components/ui/FloatingCTA';
+import styles from './BlogLanding.module.css';
 
 type BlogPost = {
   id: number;
@@ -90,7 +91,7 @@ type AdminFormState = {
   slug: string;
 };
 
-const ADMIN_EMAIL = 'mtaha2004.22.2@gmail.com';
+const ADMIN_EMAIL = 'admin@thesamurai.com';
 const NORMALIZED_ADMIN_EMAIL = ADMIN_EMAIL.toLowerCase();
 
 const adminStorageKey = (locale: string) => `samurai-blog-admin-${locale}`;
@@ -134,12 +135,30 @@ const buttonStyle: CSSProperties = {
   boxShadow: '0 12px 24px rgba(56, 189, 248, 0.25)'
 };
 
+const primaryButtonStyle: CSSProperties = {
+  background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
+  color: '#0f172a',
+  padding: '0.65rem 1.5rem',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 600,
+  fontSize: '0.95rem',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  boxShadow: '0 4px 12px rgba(56, 189, 248, 0.3)'
+};
+
 const subduedButtonStyle: CSSProperties = {
-  ...buttonStyle,
   background: 'rgba(105, 232, 225, 0.14)',
   color: '#69E8E1',
-  boxShadow: 'none',
-  border: '1px solid rgba(105, 232, 225, 0.35)'
+  padding: '0.65rem 1.5rem',
+  borderRadius: '8px',
+  border: '1px solid rgba(105, 232, 225, 0.35)',
+  fontWeight: 600,
+  fontSize: '0.95rem',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  boxShadow: 'none'
 };
 
 export default function BlogLanding({
@@ -228,6 +247,12 @@ export default function BlogLanding({
         const parsed = JSON.parse(stored) as { email?: string } | null;
         const email = parsed?.email?.toLowerCase() ?? '';
         const adminMatch = email.length > 0 && email === NORMALIZED_ADMIN_EMAIL;
+
+        console.log('🔍 Admin Check:', {
+          storedEmail: email,
+          adminEmail: NORMALIZED_ADMIN_EMAIL,
+          isMatch: adminMatch
+        });
 
         setIsAuthenticated(email.length > 0);
         setIsAdmin(adminMatch);
@@ -461,8 +486,307 @@ export default function BlogLanding({
           gap: '1.25rem'
         }}
       >
-        {/* Admin controls content remains the same */}
-        {/* ... keep the existing admin panel code ... */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Blog Admin Panel</h2>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => { resetForm(); setPanelOpen(!panelOpen); }}
+              style={{
+                ...primaryButtonStyle,
+                padding: '0.65rem 1.25rem',
+                fontSize: '0.95rem'
+              }}
+            >
+              {panelOpen ? 'Close Panel' : 'Add New Post'}
+            </button>
+            <button
+              type="button"
+              onClick={handleLogout}
+              style={{
+                ...subduedButtonStyle,
+                padding: '0.65rem 1.25rem',
+                fontSize: '0.95rem'
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+
+        {panelOpen && (
+          <div
+            style={{
+              background: 'rgba(255,255,255,0.08)',
+              borderRadius: '12px',
+              padding: '1.5rem',
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}
+          >
+            <h3 style={{ fontSize: '1.15rem', marginBottom: '1.25rem', fontWeight: 600 }}>
+              {editingIndex ? 'Edit Post' : 'Create New Post'}
+            </h3>
+            <form onSubmit={handleManagePost} style={{ display: 'grid', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.9 }}>List</label>
+                  <select
+                    value={formState.list}
+                    onChange={(e) => setFormState({ ...formState, list: e.target.value as 'featuredPosts' | 'latestPosts' })}
+                    title="Select blog post list"
+                    className={styles.adminSelect}
+                  >
+                    <option value="latestPosts" className={styles.adminSelectOption}>Latest Posts</option>
+                    <option value="featuredPosts" className={styles.adminSelectOption}>Featured Posts</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.9 }}>Category</label>
+                  <input
+                    type="text"
+                    value={formState.category}
+                    onChange={(e) => setFormState({ ...formState, category: e.target.value })}
+                    placeholder="e.g., Cybersecurity"
+                    style={{
+                      width: '100%',
+                      padding: '0.65rem',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      background: 'rgba(255,255,255,0.05)',
+                      color: '#fff',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.9 }}>Title *</label>
+                <input
+                  type="text"
+                  value={formState.title}
+                  onChange={(e) => setFormState({ ...formState, title: e.target.value })}
+                  required
+                  placeholder="Enter post title"
+                  style={{
+                    width: '100%',
+                    padding: '0.65rem',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    background: 'rgba(255,255,255,0.05)',
+                    color: '#fff',
+                    fontSize: '0.95rem'
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.9 }}>Excerpt *</label>
+                <textarea
+                  value={formState.excerpt}
+                  onChange={(e) => setFormState({ ...formState, excerpt: e.target.value })}
+                  required
+                  rows={3}
+                  placeholder="Brief description of the post"
+                  style={{
+                    width: '100%',
+                    padding: '0.65rem',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    background: 'rgba(255,255,255,0.05)',
+                    color: '#fff',
+                    fontSize: '0.95rem',
+                    fontFamily: 'inherit',
+                    resize: 'vertical'
+                  }}
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.9 }}>Date</label>
+                  <input
+                    type="text"
+                    value={formState.date}
+                    onChange={(e) => setFormState({ ...formState, date: e.target.value })}
+                    placeholder="e.g., Dec 8, 2024"
+                    style={{
+                      width: '100%',
+                      padding: '0.65rem',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      background: 'rgba(255,255,255,0.05)',
+                      color: '#fff',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.9 }}>Read Time</label>
+                  <input
+                    type="text"
+                    value={formState.readTime}
+                    onChange={(e) => setFormState({ ...formState, readTime: e.target.value })}
+                    placeholder="e.g., 5 min read"
+                    style={{
+                      width: '100%',
+                      padding: '0.65rem',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      background: 'rgba(255,255,255,0.05)',
+                      color: '#fff',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.9 }}>Slug</label>
+                  <input
+                    type="text"
+                    value={formState.slug}
+                    onChange={(e) => setFormState({ ...formState, slug: e.target.value })}
+                    placeholder="auto-generated"
+                    style={{
+                      width: '100%',
+                      padding: '0.65rem',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      background: 'rgba(255,255,255,0.05)',
+                      color: '#fff',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+              </div>
+
+              {formError && (
+                <div style={{ padding: '0.75rem', background: 'rgba(239,68,68,0.2)', borderRadius: '8px', color: '#fca5a5', fontSize: '0.9rem' }}>
+                  {formError}
+                </div>
+              )}
+
+              {formSuccess && (
+                <div style={{ padding: '0.75rem', background: 'rgba(34,197,94,0.2)', borderRadius: '8px', color: '#86efac', fontSize: '0.9rem' }}>
+                  {formSuccess}
+                </div>
+              )}
+
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                <button
+                  type="submit"
+                  style={{
+                    ...primaryButtonStyle,
+                    padding: '0.75rem 1.5rem',
+                    fontSize: '0.95rem'
+                  }}
+                >
+                  {editingIndex ? 'Update Post' : 'Add Post'}
+                </button>
+                {editingIndex && (
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    style={{
+                      ...subduedButtonStyle,
+                      padding: '0.75rem 1.5rem',
+                      fontSize: '0.95rem'
+                    }}
+                  >
+                    Cancel
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
+        )}
+
+        <div style={{ display: 'grid', gap: '1.5rem' }}>
+          {[
+            { title: 'Featured Posts', list: 'featuredPosts' as const, posts: featured },
+            { title: 'Latest Posts', list: 'latestPosts' as const, posts: latest }
+          ].map((section) => (
+            <div key={section.list}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', fontWeight: 600 }}>{section.title} ({section.posts.length})</h3>
+              <div style={{ display: 'grid', gap: '0.75rem' }}>
+                {section.posts.map((post, index) => (
+                  <div
+                    key={post.id}
+                    style={{
+                      background: 'rgba(255,255,255,0.06)',
+                      borderRadius: '10px',
+                      padding: '1rem',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      gap: '1rem',
+                      flexWrap: 'wrap'
+                    }}
+                  >
+                    <div style={{ flex: 1, minWidth: '250px' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.35rem' }}>
+                        <span style={{
+                          fontSize: '0.75rem',
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: '4px',
+                          background: 'rgba(105,232,225,0.2)',
+                          color: '#69e8e1',
+                          fontWeight: 600
+                        }}>
+                          {post.category}
+                        </span>
+                        <span style={{ fontSize: '0.8rem', opacity: 0.6 }}>{post.date}</span>
+                        <span style={{ fontSize: '0.8rem', opacity: 0.6 }}>•</span>
+                        <span style={{ fontSize: '0.8rem', opacity: 0.6 }}>{post.readTime}</span>
+                      </div>
+                      <h4 style={{ fontSize: '1rem', fontWeight: 600, margin: '0.5rem 0' }}>{post.title}</h4>
+                      <p style={{ fontSize: '0.85rem', opacity: 0.75, margin: 0, lineHeight: 1.5 }}>{post.excerpt}</p>
+                      <p style={{ fontSize: '0.75rem', opacity: 0.5, margin: '0.5rem 0 0', fontStyle: 'italic' }}>/{post.slug}</p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <button
+                        type="button"
+                        onClick={() => handleEdit(section.list, index)}
+                        style={{
+                          ...primaryButtonStyle,
+                          padding: '0.5rem 1rem',
+                          fontSize: '0.85rem'
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(section.list, index)}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          fontSize: '0.85rem',
+                          borderRadius: '8px',
+                          border: 'none',
+                          background: 'rgba(239,68,68,0.2)',
+                          color: '#fca5a5',
+                          cursor: 'pointer',
+                          fontWeight: 600,
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.background = 'rgba(239,68,68,0.3)';
+                          e.currentTarget.style.color = '#fff';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.background = 'rgba(239,68,68,0.2)';
+                          e.currentTarget.style.color = '#fca5a5';
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

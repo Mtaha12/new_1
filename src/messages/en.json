@@ -1973,6 +1973,126 @@
     "ctaTitle": "Ready to Strengthen Your Cybersecurity?",
     "ctaDescription": "Partner with specialists who orchestrate people, process, and platforms into one resilient defense.",
     "ctaButton": "Plan a Strategy Session"
+  },
+  "CompanyPage": {
+    "hero": {
+      "title": "Vision & Promise",
+      "subtitle": "Your Strategic Partners in Cybersecurity Excellence"
+    },
+    "vision": {
+      "title": "Vision",
+      "subtitle": "What Do We Do",
+      "para1": "We're not just vendors, we're your strategic partners.",
+      "para2": "We've seen the struggle. We understand the complex landscape of cybersecurity tools. We take pride in our proficiency with top-notch industry solutions and a discerning ability to find the perfect match for your specific requirements.",
+      "para3": "With our help, you can streamline your cyber defense strategies, and craft a unified front against cyber threats. No more battling compatibility issues or drowning in ambiguous data when you're faced with a purchasing decision.",
+      "para4": "Your business is at risk every year as new cybersecurity threats emerge. There is no immunity in the world of security breaches."
+    },
+    "whatWeDo": {
+      "title": "What We Do",
+      "strategicResourcing": {
+        "title": "Strategic Resourcing",
+        "description": "We assess your needs, recommend the right tools, and optimize your security budget, ensuring you get the best value for every penny you spend."
+      },
+      "expertGuidance": {
+        "title": "Expert Guidance",
+        "description": "SamurAI cybersecurity gurus are your trusted advisors, helping you navigate the ever-changing threat landscape and choose the best defense strategies."
+      },
+      "licenseManagement": {
+        "title": "License Management",
+        "description": "We handle software licenses, making sure you follow rules and get the most from your cybersecurity investments."
+      },
+      "seamlessSupplyChain": {
+        "title": "Seamless Supply Chain",
+        "description": "Use a just-in-time system for cybersecurity solutions, making sure they arrive on time and don't cost you a fortune."
+      },
+      "installationNegotiation": {
+        "title": "Installation and Negotiation",
+        "description": "Beyond just selling, our team helps install products and negotiates with businesses for the best use of cybersecurity solutions."
+      }
+    },
+    "roi": {
+      "title": "And what about ROI?",
+      "description": "We're all about quantifiable results. Our integrated approach doesn't just make your security posture stronger – it makes your business better. Reduced downtime, faster incident response, and optimized resource allocation translate to tangible cost savings and improved operational efficiency. Just ask our previous customers who've already ditched the tool fragmentation trap and saved millions."
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Us",
+      "description": "Every recommendation, every integration, and every strategic move that we make is driven by one objective: MAXIMIZING YOUR SECURITY ROI. You're not just investing in tools, you're investing in peace of mind. We don't sell our software, so our focus is solely on your success."
+    },
+    "promise": {
+      "title": "Promise",
+      "subtitle": "How We Do It",
+      "para1": "Digital threats lurk in the shadows, waiting to pounce. Your defenses need to be more than a patchwork of tools; they need to be an impenetrable fortress. Now, let's unveil SamurAI's strategies used to combat evolving cyber threats and how we can help build your impregnable fortress – brick by strategically integrated brick.",
+      "finalStatement": "Remember, we don't offer our own software, we offer peace of mind. We're your partner in building a fortress, not just selling bricks. Don't settle for fragmented defenses. Let us help you build a unified fortress."
+    },
+    "howWeDo": {
+      "title": "How We Do It",
+      "partnering": {
+        "title": "Partnering",
+        "description": "We team up with industry leaders, handpicking the perfect tools for your unique needs. We aren't just pushing brands. We will help you access a diverse range of top-tier cybersecurity products that align with your unique business requirements."
+      },
+      "research": {
+        "title": "Research",
+        "description": "Our labs don't just test tools, they push them to the limit, finding weaknesses and collaborating with vendors to forge even stronger solutions."
+      },
+      "matchmaking": {
+        "title": "Matchmaking Products",
+        "description": "We're more than just order-takers. We analyze your vulnerabilities, understand your goals, and then, match you with the tools that fit like a glove, not just the ones with the flashiest names."
+      },
+      "testing": {
+        "title": "Testing",
+        "description": "Before recommending any product, we rigorously test its capabilities. Our hands-on approach ensures that the cybersecurity solutions we offer are reliable, effective, and meet our stringent standards. Think penetration testing, vulnerability assessments, and ongoing tuning to keep your defenses sharp and your data safe."
+      },
+      "refinement": {
+        "title": "Refinement",
+        "description": "Continuous improvement is our mantra. We don't believe in \"good enough.\" Based on real-world feedback and evolving threats, we relentlessly refine your defenses, tightening every bolt, and ensuring your fortress stands strong against any attack. All of your cybersecurity measures will be fully optimized and attack-ready at all times."
+      }
+    },
+    "resources": {
+      "title": "Resources",
+      "description": "Access research, playbooks, and threat intelligence shaped by The SamurAI practitioners."
+    },
+    "cta": {
+      "title": "Ready to Build Your Impregnable Fortress?",
+      "description": "Partner with strategic experts who understand your unique needs and deliver tailored cybersecurity solutions.",
+      "button": "Start Your Journey"
+    },
+    "tabs": {
+      "company": "Company",
+      "code": "Code"
+    },
+    "code": {
+      "title": "Our Commitment to Code Excellence",
+      "subtitle": "Philosophy & Standards",
+      "para1": "At The SamurAI, our commitment to code excellence goes beyond just functionality. We believe that every line of code we write is a reflection of our dedication to quality, security, and the success of the projects we undertake.",
+      "para2": "From initial architecture and design to implementation and maintenance, we apply rigorous standards and best practices to ensure our solutions are robust, scalable, and built for the future.",
+      "approach": {
+        "title": "Our Approach",
+        "cleanCode": {
+          "title": "Clean Code",
+          "description": "We write code that is readable, maintainable, and follows industry best practices, making it easy for teams to collaborate and evolve the solution over time."
+        },
+        "securityFirst": {
+          "title": "Security First",
+          "description": "Security is integrated into every stage of development. We conduct thorough code reviews, vulnerability assessments, and penetration testing to ensure your solutions are fortified against threats."
+        },
+        "performance": {
+          "title": "Performance Optimization",
+          "description": "We optimize every component for speed and efficiency, ensuring your applications deliver exceptional user experiences while maintaining system stability under load."
+        },
+        "scalability": {
+          "title": "Scalability",
+          "description": "Our solutions are designed to grow with your business. We architect systems that can seamlessly scale to handle increased demand without compromising quality or reliability."
+        },
+        "maintainability": {
+          "title": "Maintainability",
+          "description": "We create solutions with long-term maintenance in mind, using clear documentation, modular design, and comprehensive testing to ensure smooth operations and easy updates."
+        }
+      },
+      "promise": {
+        "title": "Our Code Promise",
+        "description": "We promise to deliver solutions that are not only functionally correct but are built with care, security, and long-term success in mind. Your code is your competitive advantage, and we treat it that way."
+      }
+    }
   }
 }
 

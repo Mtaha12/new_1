@@ -1,0 +1,179 @@
+/* Company & Code page reusable styles */
+
+/* Root container direction */
+.company-root {
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* Hero section */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+  color: #fff;
+  min-height: min(80vh, 720px);
+}
+.hero-bg-gradient {
+  background: linear-gradient(135deg, rgba(10, 14, 61, 0.95) 0%, rgba(19, 70, 163, 0.85) 60%, rgba(105,232,225,0.6) 100%);
+}
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 14, 61, 0.85) 0%, rgba(19, 70, 163, 0.75) 60%, rgba(105,232,225,0.35) 100%);
+  z-index: 1;
+}
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 1rem;
+  opacity: 0.98;
+  font-weight: 300;
+}
+.hero-pills {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.hero-pill {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* Container max width */
+.container-max {
+  max-width: min(1140px, 100%);
+  margin: 0 auto;
+}
+
+/* Position helpers */
+.absolute-fill {
+  position: absolute;
+  inset: 0;
+}
+.z-0 { z-index: 0; }
+.z-1 { z-index: 1; }
+.z-2 { z-index: 2; }
+
+/* Gradient separators */
+.separator-thin {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(19,104,255,0.25), rgba(105,232,225,0.25));
+}
+.separator-ultra-thin {
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(19,104,255,0.2), rgba(105,232,225,0.2));
+}
+
+/* What We Do section */
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #0a0e3d;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 2.5rem;
+}
+.card-glass {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(19,104,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(248,250,252,0.95) 100%);
+  box-shadow: 0 12px 30px rgba(10,14,61,0.08);
+  padding: 2.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-glass:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 42px rgba(10,14,61,0.15);
+}
+.card-glow {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(105,232,225,0.18) 0%, rgba(19,104,255,0.12) 60%, transparent 70%);
+  border-radius: 50%;
+}
+.icon-tile {
+  width: 74px;
+  height: 74px;
+  background: linear-gradient(135deg, #69E8E1 0%, #1368ff 100%);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.8rem;
+  font-size: 2rem;
+  color: #fff;
+  transition: transform 0.25s ease;
+}
+.icon-tile:hover { transform: scale(1.06); }
+/* Smaller card grid variant */
+.cards-grid-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 2rem;
+}
+
+/* Resources grid variant */
+.cards-grid-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 2rem;
+}
+
+/* Resource card link */
+
+
+/* CTA button */
+.cta-button {
+  display: inline-block;
+  background: #1368ff;
+  color: #fff;
+  border: none;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(2rem, 5vw, 3rem);
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(19, 104, 255, 0.3);
+  text-decoration: none;
+}
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(19, 104, 255, 0.4);
+}
+
+/* Padding helpers */
+.section-padding {
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem);
+}
+.section-padding-sm {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem);
+}
+.cta-padding {
+  padding: clamp(3rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem);
+}

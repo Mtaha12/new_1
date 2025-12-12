@@ -20,6 +20,7 @@ export default function Footer() {
     { label: navT('faq'), href: `/${currentLocale}/faq` },
     { label: navT('terms'), href: `/${currentLocale}/terms` },
     { label: navT('contact'), href: `/${currentLocale}/contact` },
+    { label: 'Company & Code', href: `/${currentLocale}/company` },
     { label: navT('login'), href: `/${currentLocale}/auth/login` },
     { label: navT('signup'), href: `/${currentLocale}/auth/signup` }
   ];

@@ -74,12 +74,12 @@ async function generateGeminiResponse(message: string, locale: string): Promise<
     ? `أنت مساعد ذكي لشركة The Samurai المتخصصة في الأمن السيبراني وحلول تكنولوجيا المعلومات في المملكة العربية السعودية. أجب بإيجاز وبشكل محترف وودود.`
     : `You are an AI assistant for The Samurai, a cybersecurity and IT solutions company in Saudi Arabia. Respond briefly, professionally and friendly.`;
 
-  // Use the available Gemini 2.0 models
+  // Use the latest stable Gemini models (2.0 and 2.5)
   const endpoints = [
-    'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent',
+    'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent',
     'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash-001:generateContent',
-    'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash-lite:generateContent',
     'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash-lite-001:generateContent',
+    'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent',
   ];
 
   for (const endpoint of endpoints) {
@@ -121,19 +121,19 @@ async function generateGeminiResponse(message: string, locale: string): Promise<
     }
   }
 
-  throw new Error('All Gemini 2.0 endpoints failed');
+  throw new Error('All Gemini endpoints failed - using fallback AI');
 }
 
 // Main AI Response Generator
 async function generateAIResponse(message: string, locale: string): Promise<string> {
-  // Try Gemini 2.0 models first
+  // Try Gemini API
   try {
-    console.info('🚀 Attempting Gemini 2.0 API...');
+    console.info('🚀 Attempting Gemini API (2.5/2.0 Flash)...');
     const response = await generateGeminiResponse(message, locale);
-    console.info('✅ Gemini 2.0 API call successful!');
+    console.info('✅ Gemini API call successful!');
     return response;
   } catch (error) {
-    console.error('❌ All Gemini 2.0 endpoints failed, using fallback');
+    console.warn('⚠️ Gemini API failed, using intelligent fallback');
     return generateFallbackResponse(message, locale);
   }
 }
@@ -157,7 +157,7 @@ export async function POST(request: NextRequest) {
     const ipAddress = forwardedFor ? forwardedFor.split(',')[0] : 'unknown';
     const sessionId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-    console.info('💬 Handling chat request with Gemini 2.0 models');
+    console.info('💬 Handling chat request');
 
     // Generate AI response
     const response = await generateAIResponse(message.trim(), locale);

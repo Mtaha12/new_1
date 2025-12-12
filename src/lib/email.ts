@@ -183,6 +183,7 @@ function createTransporter() {
   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
   const port = parseInt(process.env.SMTP_PORT || '587', 10);
   const secure = port === 465; // true for 465, false otherwise
+  const smtpPassword = process.env.SMTP_PASSWORD || process.env.SMTP_PASS;
 
   const debug = process.env.SMTP_DEBUG === 'true';
 
@@ -192,7 +193,7 @@ function createTransporter() {
     port,
     secure,
     user: process.env.SMTP_USER,
-    hasPassword: !!process.env.SMTP_PASSWORD,
+    hasPassword: !!smtpPassword,
     debug
   });
 
@@ -202,7 +203,7 @@ function createTransporter() {
     secure,
     auth: {
       user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
+      pass: smtpPassword,
     },
     tls: {
       rejectUnauthorized: false
@@ -220,12 +221,13 @@ export async function sendEmail(options: EmailOptions) {
     // Use SMTP_USER as fallback for from email (like the test file)
     const fromEmail = process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER;
     const fromName = process.env.SMTP_FROM_NAME || process.env.NEXT_PUBLIC_SITE_NAME || 'The Samurai';
+    const smtpPassword = process.env.SMTP_PASSWORD || process.env.SMTP_PASS;
 
     if (!fromEmail) {
       throw new Error('No SMTP from email available. Set SMTP_FROM_EMAIL or SMTP_USER');
     }
 
-    if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
+    if (!process.env.SMTP_USER || !smtpPassword) {
       throw new Error('SMTP_USER or SMTP_PASSWORD is not set in environment variables');
     }
 

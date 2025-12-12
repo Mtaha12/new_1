@@ -91,7 +91,16 @@ export default function ContactPage() {
                 </ContactInfoCard>
 
                 <ContactInfoCard 
-                  icon={<Image src="/img/phone.png" alt="Phone" width={64} height={64} quality={100} style={{ width: 'auto', height: 'auto', filter: 'contrast(1.1) brightness(1.05)' }} />}
+                  icon={(
+                    <Image
+                      src="/img/phone_2.png"
+                      alt="Phone"
+                      width={76}
+                      height={76}
+                      quality={100}
+                      style={{ width: '76px', height: '76px' }}
+                    />
+                  )}
                   title={t('phone')}
                 >
                   {t('phoneNumber1')}<br />

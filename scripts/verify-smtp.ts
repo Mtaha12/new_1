@@ -13,22 +13,26 @@ interface SmtpError extends Error {
 }
 
 async function testEmail() {
-  console.log('Testing email with configuration:');
-  console.log(`SMTP User: ${process.env.SMTP_USER}`);
-  console.log(`SMTP Host: smtp.gmail.com:587`);
+  const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+  const smtpPort = parseInt(process.env.SMTP_PORT || '587', 10);
+  const smtpPassword = process.env.SMTP_PASSWORD || process.env.SMTP_PASS;
   
-  if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
+  console.log('Testing email with configuration:');
+  console.log(`SMTP Host: ${smtpHost}:${smtpPort}`);
+  console.log(`SMTP User: ${process.env.SMTP_USER}`);
+  
+  if (!process.env.SMTP_USER || !smtpPassword) {
     console.error('❌ Error: SMTP_USER or SMTP_PASSWORD is not set in .env.local');
     process.exit(1);
   }
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpPort === 465,
     auth: {
       user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
+      pass: smtpPassword,
     },
     tls: {
       rejectUnauthorized: false
@@ -43,14 +47,15 @@ async function testEmail() {
     console.log('✅ Server is ready to send emails');
 
     console.log('\nSending test email...');
+    const fromEmail = process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER;
     const info = await transporter.sendMail({
-      from: `"Test Sender" <${process.env.SMTP_USER}>`,
-      to: process.env.SMTP_USER,
+      from: `"Test Sender" <${fromEmail}>`,
+      to: fromEmail,
       subject: 'Test Email from The Samurai',
-      text: 'This is a test email sent using Nodemailer with Gmail App Password.',
+      text: 'This is a test email sent using Nodemailer with SendGrid.',
       html: `
         <h1>Test Email from The Samurai</h1>
-        <p>This is a test email sent using Nodemailer with Gmail App Password.</p>
+        <p>This is a test email sent using Nodemailer with SendGrid.</p>
         <p>If you're seeing this, the email configuration is working correctly!</p>
       `
     });
